@@ -61,7 +61,7 @@ export default function VaibhavStudioSection() {
           </div>
         </div>
 
-        {/* Horizontal 3-Element Layout: HOW (Left) - Card (Center) - VAIBHAV (Right) */}
+        {/* Horizontal 3-Element Layout: HOW (Left, shifted up) - Card (Center) - VAIBHAV (Right, shifted down with reduced opacity) */}
         <div
           style={{
             display: 'flex',
@@ -72,12 +72,13 @@ export default function VaibhavStudioSection() {
             flexWrap: 'nowrap',
           }}
         >
-          {/* Left: HOW */}
+          {/* Left: HOW (Moved little up) */}
           <div
             style={{
               flex: 1,
               textAlign: 'left',
               userSelect: 'none',
+              transform: 'translateY(-28px)',
             }}
           >
             <h2
@@ -135,8 +136,8 @@ export default function VaibhavStudioSection() {
               }}
             >
               <img
-                src="/frames/ezgif-frame-001.jpg"
-                alt="Featured frame 001"
+                src="/assets/me.png"
+                alt="Vaibhav portrait"
                 style={{
                   width: '100%',
                   height: '100%',
@@ -157,12 +158,13 @@ export default function VaibhavStudioSection() {
             </div>
           </div>
 
-          {/* Right: VAIBHAV */}
+          {/* Right: VAIBHAV (Moved little down & reduced opacity) */}
           <div
             style={{
               flex: 1.4,
               textAlign: 'right',
               userSelect: 'none',
+              transform: 'translateY(28px)',
             }}
           >
             <h2
@@ -171,10 +173,10 @@ export default function VaibhavStudioSection() {
                 fontWeight: 900,
                 lineHeight: 0.9,
                 letterSpacing: '-0.05em',
-                color: '#fff',
+                color: 'rgba(255, 255, 255, 0.38)',
                 textTransform: 'uppercase',
                 margin: 0,
-                textShadow: '0 4px 40px rgba(0,0,0,0.5)',
+                textShadow: '0 4px 40px rgba(0,0,0,0.3)',
               }}
             >
               VAIBHAV
