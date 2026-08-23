@@ -14,7 +14,7 @@ const SERVICES = [
   { num: '01', label: 'Brand Strategy' },
   { num: '02', label: 'Brand Identity Design' },
   { num: '03', label: 'Packaging Design' },
-  { num: '04', label: 'Creative Direction' },
+  { num: '04', label: 'Creative Design' },
 ];
 
 function getResponsiveScrollVh() {
@@ -97,7 +97,7 @@ function Hero() {
               margin: 0,
             }}
           >
-            Vaibhav<br />Director
+            Vaibhav<br />Designer
           </h1>
         </div>
 

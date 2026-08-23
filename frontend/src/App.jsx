@@ -7,7 +7,7 @@ import DesignPage from './pages/DesignPage';
  *
  * Routes:
  *   /         → DevPage   (CS/developer portfolio — default root)
- *   /design   → DesignPage (personal brand / creative director mode)
+ *   /design   → DesignPage (personal brand / designer mode)
  */
 export default function App() {
   return (

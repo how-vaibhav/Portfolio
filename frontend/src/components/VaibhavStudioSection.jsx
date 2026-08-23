@@ -65,7 +65,7 @@ export default function VaibhavStudioSection() {
                 fontWeight: 400,
               }}
             >
-              Vaibhav is a Creative Director building scalable digital experiences and high-impact products for modern brands.
+              Vaibhav is a Creative Designer building scalable digital experiences and high-impact products for modern brands.
             </p>
           </div>
         </div>

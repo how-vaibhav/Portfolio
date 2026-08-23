@@ -19,7 +19,7 @@ const PROJECT_CARDS = [
     gradient: 'linear-gradient(145deg, #141414 0%, #262626 100%)',
     overlay: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%)',
     label: 'Product Design',
-    tag: 'Creative Direction',
+    tag: 'Creative Design',
   },
   {
     gradient: 'linear-gradient(145deg, #1a1a1a 0%, #323232 100%)',
