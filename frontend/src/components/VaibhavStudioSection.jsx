@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function VaibhavStudioSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section
       id="studio"
@@ -9,7 +18,7 @@ export default function VaibhavStudioSection() {
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-        padding: '90px 48px 100px',
+        padding: isMobile ? '64px 20px 72px' : '90px 48px 100px',
         position: 'relative',
         zIndex: 10,
         overflow: 'hidden',
@@ -30,18 +39,18 @@ export default function VaibhavStudioSection() {
           style={{
             display: 'flex',
             justifyContent: 'flex-end',
-            marginBottom: '28px',
+            marginBottom: isMobile ? '20px' : '28px',
           }}
         >
-          <div style={{ maxWidth: '280px', textAlign: 'right' }}>
+          <div style={{ maxWidth: isMobile ? '100%' : '280px', textAlign: 'right' }}>
             <span
               style={{
-                fontSize: '12px',
+                fontSize: '11px',
                 fontWeight: 800,
                 letterSpacing: '0.08em',
                 color: '#fff',
                 display: 'block',
-                marginBottom: '6px',
+                marginBottom: '4px',
                 textTransform: 'uppercase',
               }}
             >
@@ -49,8 +58,8 @@ export default function VaibhavStudioSection() {
             </span>
             <p
               style={{
-                fontSize: '13px',
-                lineHeight: 1.6,
+                fontSize: isMobile ? '12px' : '13px',
+                lineHeight: 1.5,
                 color: 'rgba(255, 255, 255, 0.65)',
                 margin: 0,
                 fontWeight: 400,
@@ -61,29 +70,31 @@ export default function VaibhavStudioSection() {
           </div>
         </div>
 
-        {/* Horizontal 3-Element Layout: HOW (Left, shifted up) - Card (Center) - VAIBHAV (Right, shifted down with reduced opacity) */}
+        {/* Horizontal 3-Element Layout: HOW - Card - VAIBHAV */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '24px',
+            gap: isMobile ? '10px' : '24px',
             width: '100%',
             flexWrap: 'nowrap',
           }}
         >
-          {/* Left: HOW (Moved little up) */}
+          {/* Left: HOW */}
           <div
             style={{
               flex: 1,
               textAlign: 'left',
               userSelect: 'none',
-              transform: 'translateY(-28px)',
+              transform: isMobile ? 'translateY(-12px)' : 'translateY(-28px)',
             }}
           >
             <h2
               style={{
-                fontSize: 'clamp(56px, 10.5vw, 155px)',
+                fontSize: isMobile
+                  ? 'clamp(36px, 12vw, 68px)'
+                  : 'clamp(56px, 10.5vw, 155px)',
                 fontWeight: 900,
                 lineHeight: 0.9,
                 letterSpacing: '-0.05em',
@@ -97,13 +108,17 @@ export default function VaibhavStudioSection() {
             </h2>
           </div>
 
-          {/* Center: Featured ezgif-frame-001 Card */}
+          {/* Center: Featured Card */}
           <div
             style={{
-              width: 'clamp(190px, 21vw, 290px)',
-              height: 'clamp(260px, 29vw, 390px)',
-              borderRadius: '22px',
-              padding: '6px',
+              width: isMobile
+                ? 'clamp(120px, 34vw, 200px)'
+                : 'clamp(190px, 21vw, 290px)',
+              height: isMobile
+                ? 'clamp(165px, 46vw, 280px)'
+                : 'clamp(260px, 29vw, 390px)',
+              borderRadius: isMobile ? '16px' : '22px',
+              padding: isMobile ? '4px' : '6px',
               background:
                 'linear-gradient(145deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.08) 45%, rgba(255,255,255,0.5) 100%)',
               boxShadow:
@@ -129,7 +144,7 @@ export default function VaibhavStudioSection() {
               style={{
                 width: '100%',
                 height: '100%',
-                borderRadius: '16px',
+                borderRadius: isMobile ? '12px' : '16px',
                 overflow: 'hidden',
                 position: 'relative',
                 background: '#0a0a0a',
@@ -145,7 +160,6 @@ export default function VaibhavStudioSection() {
                   display: 'block',
                 }}
               />
-              {/* Subtle glass reflection highlight */}
               <div
                 style={{
                   position: 'absolute',
@@ -158,18 +172,20 @@ export default function VaibhavStudioSection() {
             </div>
           </div>
 
-          {/* Right: VAIBHAV (Moved little down & reduced opacity) */}
+          {/* Right: VAIBHAV */}
           <div
             style={{
               flex: 1.4,
               textAlign: 'right',
               userSelect: 'none',
-              transform: 'translateY(28px)',
+              transform: isMobile ? 'translateY(12px)' : 'translateY(28px)',
             }}
           >
             <h2
               style={{
-                fontSize: 'clamp(52px, 9.5vw, 140px)',
+                fontSize: isMobile
+                  ? 'clamp(34px, 11vw, 64px)'
+                  : 'clamp(52px, 9.5vw, 140px)',
                 fontWeight: 900,
                 lineHeight: 0.9,
                 letterSpacing: '-0.05em',
