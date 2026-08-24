@@ -17,14 +17,14 @@
 
 ---
 
-## 🌟 Key Features
+##  Key Features
 
-### 🔀 Dual-Mode Architecture
+###  Dual-Mode Architecture
 - **`</> Dev Mode` (`/`)**: A clean, distraction-free environment tailored for technical recruiters, software engineering showcases, and computer science projects.
 - **`✦ Design Mode` (`/design`)**: An editorial-grade creative studio experience showcasing brand identity, design strategy, and interactive case studies.
 - **Radial Clip-Path Transition**: A GPU-accelerated cinematic reveal transition that smoothly switches between modes without full page reloads.
 
-### ⚡ Ultra-Optimized Canvas Scroll Engine
+### Ultra-Optimized Canvas Scroll Engine
 - **Hardware-Accelerated Scrubbing**: Frame-by-frame scroll animation rendered to HTML5 `<canvas>` via `createImageBitmap` and `requestAnimationFrame`.
 - **Dynamic DPR & Mobile Scaling**: Automatically calibrates Device Pixel Ratio (`1.0` on mobile, `1.25` on tablet, `1.5` on desktop) to eliminate GPU texture thrashing and reduce mobile memory overhead by ~65%.
 - **Adaptive Concurrency & Priority Queue**: Loads visible and nearby frames first using a localized radius queue with intelligent CDN caching headers.
@@ -32,7 +32,7 @@
 
 ---
 
-## 📁 Repository Structure
+##  Repository Structure
 
 ```text
 Portfolio/
@@ -79,7 +79,7 @@ Portfolio/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - **Node.js**: `v18.0.0` or later
@@ -117,7 +117,7 @@ npm run dev:backend
 
 ---
 
-## 🛠️ Production Build & Deployment
+## Production Build & Deployment
 
 ### Local Production Build
 ```bash
@@ -134,7 +134,7 @@ This builds the client bundle into `frontend/dist` with minification, CSS purgin
 
 ---
 
-## 🎨 Tech Stack & Tooling
+##  Tech Stack & Tooling
 
 | Layer | Technology |
 |---|---|
@@ -149,5 +149,5 @@ This builds the client bundle into `frontend/dist` with minification, CSS purgin
 
 ---
 
-## 📄 License
+##  License
 This project is open source and available under the [MIT License](LICENSE).
