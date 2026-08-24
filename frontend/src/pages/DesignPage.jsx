@@ -8,6 +8,10 @@ import AboutSection from '../components/AboutSection';
 import EducationSection from '../components/EducationSection';
 import ContactScaleSection from '../components/ContactScaleSection';
 import { DesignNavbar } from '../components/Navbar/Navbar';
+import {
+  ScrollVelocityContainer,
+  ScrollVelocityRow,
+} from '../components/ui/scroll-based-velocity';
 
 const ORANGE = '#E84419';
 
@@ -58,130 +62,100 @@ function Hero() {
         maxWidth: '1440px',
         margin: '0 auto',
         width: '100%',
+        boxSizing: 'border-box',
       }}
     >
-      {/* Upper row: Headline + Tagline */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: isMobile ? 'column' : 'row',
-          justifyContent: 'space-between',
-          alignItems: isMobile ? 'flex-start' : 'flex-start',
-          gap: isMobile ? '16px' : '32px',
-        }}
-      >
-        {/* Left: Headline */}
-        <div>
-          <p
-            style={{
-              fontSize: isMobile ? '13px' : '15px',
-              fontWeight: 500,
-              color: 'rgba(255,255,255,0.7)',
-              marginBottom: isMobile ? '6px' : '10px',
-              letterSpacing: '0.02em',
-            }}
-          >
-            Hey, I'm
-          </p>
-          <h1
-            style={{
-              fontSize: isMobile
-                ? 'clamp(48px, 13vw, 76px)'
-                : isTablet
-                ? 'clamp(64px, 9vw, 96px)'
-                : 'clamp(76px, 8.5vw, 128px)',
-              fontWeight: 900,
-              lineHeight: 0.88,
-              letterSpacing: '-0.045em',
-              color: '#fff',
-              textShadow: '0 2px 40px rgba(0,0,0,0.6)',
-              margin: 0,
-            }}
-          >
-            Vaibhav<br />Designer
-          </h1>
-        </div>
-
-        {/* Right: Tagline */}
-        <div
+      {/* Top Tagline */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <span
           style={{
-            maxWidth: isMobile ? '100%' : '320px',
-            textAlign: isMobile ? 'left' : 'right',
-            paddingTop: isMobile ? '0' : '8px',
+            display: 'inline-block',
+            width: '6px',
+            height: '6px',
+            borderRadius: '50%',
+            background: ORANGE,
+          }}
+        />
+        <span
+          style={{
+            fontSize: isMobile ? '10px' : '11px',
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: 'rgba(255,255,255,0.7)',
+            fontWeight: 600,
           }}
         >
-          <p
-            style={{
-              fontSize: isMobile ? '16px' : '19px',
-              fontWeight: 700,
-              lineHeight: 1.35,
-              color: '#fff',
-              marginBottom: isMobile ? '6px' : '12px',
-              textShadow: '0 2px 20px rgba(0,0,0,0.5)',
-              margin: 0,
-            }}
-          >
-            Great design should<br style={{ display: isMobile ? 'none' : 'inline' }} /> feel invisible.
-          </p>
-          <p
-            style={{
-              fontSize: isMobile ? '12px' : '13px',
-              color: 'rgba(255,255,255,0.6)',
-              lineHeight: 1.6,
-              margin: isMobile ? '4px 0 0' : 0,
-            }}
-          >
-            From logo to language, I build brands that connect and convert.
-          </p>
-        </div>
+          Creative Developer & Designer
+        </span>
       </div>
 
-      {/* Services bar — 2x2 grid on mobile, 4-column on desktop */}
-      <div
-        style={{
-          display: isMobile ? 'grid' : 'flex',
-          gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : undefined,
-          gap: isMobile ? '12px 16px' : '0',
-          paddingTop: isMobile ? '16px' : '22px',
-          borderTop: '1px solid rgba(255,255,255,0.14)',
-          marginTop: isMobile ? '20px' : '0',
-        }}
-      >
-        {SERVICES.map((s, i) => (
-          <div
-            key={s.num}
+      {/* Center Giant Display Headline */}
+      <div style={{ my: 'auto', padding: isMobile ? '16px 0' : '24px 0' }}>
+        <h1
+          style={{
+            fontFamily: "'Bebas Neue', 'Syne', sans-serif",
+            fontSize: isMobile
+              ? 'clamp(46px, 14vw, 76px)'
+              : isTablet
+              ? 'clamp(70px, 11vw, 110px)'
+              : 'clamp(90px, 10.5vw, 148px)',
+            lineHeight: 0.88,
+            letterSpacing: '0.02em',
+            color: '#ffffff',
+            margin: 0,
+            textTransform: 'uppercase',
+          }}
+        >
+          VAIBHAV
+          <br />
+          <span
             style={{
-              flex: isMobile ? undefined : 1,
-              paddingRight: isMobile ? '0' : '20px',
-              borderRight:
-                !isMobile && i < SERVICES.length - 1
-                  ? '1px solid rgba(255,255,255,0.1)'
-                  : 'none',
-              paddingLeft: !isMobile && i > 0 ? '20px' : '0',
+              WebkitTextStroke: '1.5px rgba(255,255,255,0.45)',
+              color: 'transparent',
             }}
           >
+            STUDIO
+          </span>
+        </h1>
+      </div>
+
+      {/* Bottom Service Badges Row */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile
+            ? 'repeat(2, 1fr)'
+            : isTablet
+            ? 'repeat(4, 1fr)'
+            : 'repeat(4, 1fr)',
+          gap: isMobile ? '8px' : '14px',
+          borderTop: '1px solid rgba(255,255,255,0.12)',
+          paddingTop: isMobile ? '12px' : '18px',
+        }}
+      >
+        {SERVICES.map((s) => (
+          <div key={s.num} style={{ display: 'flex', flexDirection: 'column' }}>
             <span
               style={{
+                fontFamily: 'monospace',
+                fontSize: '10px',
                 color: ORANGE,
-                fontSize: isMobile ? '10px' : '11px',
                 fontWeight: 700,
-                letterSpacing: '0.04em',
+                marginBottom: '2px',
               }}
             >
-              #{s.num}
+              {s.num}
             </span>
-            <p
+            <span
               style={{
-                fontSize: isMobile ? '11px' : '12px',
-                color: 'rgba(255,255,255,0.75)',
-                marginTop: '3px',
-                fontWeight: 500,
-                margin: '3px 0 0',
-                whiteSpace: isMobile ? 'normal' : 'nowrap',
+                fontSize: isMobile ? '11px' : '13px',
+                fontWeight: 600,
+                color: 'rgba(255,255,255,0.85)',
+                lineHeight: 1.2,
               }}
             >
               {s.label}
-            </p>
+            </span>
           </div>
         ))}
       </div>
@@ -189,7 +163,77 @@ function Hero() {
   );
 }
 
-/* ─── Design Page ────────────────────────────────────────── */
+/* ─── Creative Velocity Marquee ───────────────────────────────── */
+function DesignVelocityTicker() {
+  return (
+    <div
+      style={{
+        padding: '36px 0',
+        background: '#050A0F',
+        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        overflow: 'hidden',
+        position: 'relative',
+        zIndex: 20,
+      }}
+    >
+      <ScrollVelocityContainer>
+        <ScrollVelocityRow
+          baseVelocity={12}
+          direction={1}
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 'clamp(38px, 6vw, 68px)',
+            letterSpacing: '0.04em',
+            textTransform: 'uppercase',
+            color: '#ffffff',
+            paddingBottom: '8px',
+          }}
+        >
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '28px', paddingRight: '28px' }}>
+            <span>BRAND IDENTITY</span>
+            <span style={{ color: ORANGE }}>✦</span>
+            <span>PACKAGING DESIGN</span>
+            <span style={{ color: ORANGE }}>✦</span>
+            <span style={{ WebkitTextStroke: '1px rgba(255,255,255,0.5)', color: 'transparent' }}>
+              CREATIVE DIRECTION
+            </span>
+            <span style={{ color: ORANGE }}>✦</span>
+            <span>DIGITAL EXPERIENCES</span>
+            <span style={{ color: ORANGE }}>✦</span>
+          </span>
+        </ScrollVelocityRow>
+
+        <ScrollVelocityRow
+          baseVelocity={12}
+          direction={-1}
+          style={{
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: 'clamp(38px, 6vw, 68px)',
+            letterSpacing: '0.04em',
+            textTransform: 'uppercase',
+            color: 'rgba(255, 255, 255, 0.8)',
+          }}
+        >
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '28px', paddingRight: '28px' }}>
+            <span style={{ color: ORANGE }}>3D VISUALIZATION</span>
+            <span style={{ color: ORANGE }}>✦</span>
+            <span>STRATEGY & ARCHITECTURE</span>
+            <span style={{ color: ORANGE }}>✦</span>
+            <span style={{ WebkitTextStroke: '1px rgba(255,255,255,0.5)', color: 'transparent' }}>
+              BESPOKE TYPOGRAPHY
+            </span>
+            <span style={{ color: ORANGE }}>✦</span>
+            <span>GLOBAL CLIENTS</span>
+            <span style={{ color: ORANGE }}>✦</span>
+          </span>
+        </ScrollVelocityRow>
+      </ScrollVelocityContainer>
+    </div>
+  );
+}
+
+/* ─── Main Design Page Export ────────────────────────────────── */
 export default function DesignPage() {
   const [scrollVh, setScrollVh] = useState(getResponsiveScrollVh);
 
@@ -229,6 +273,10 @@ export default function DesignPage() {
         {/* Content sections */}
         <WelcomeSection />
         <VaibhavStudioSection />
+        
+        {/* Scroll-Based Velocity Marquee */}
+        <DesignVelocityTicker />
+
         <CreativeProjectsSection />
         <IntroductionSection />
         <AboutSection />

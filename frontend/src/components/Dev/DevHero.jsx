@@ -1,363 +1,400 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './dev.css';
 
-const TERMINAL_SEQUENCE = [
-  { type: 'prompt', text: '$ whoami',                                  delay: 500  },
-  { type: 'output', text: 'vaibhav — full-stack developer & cs student', delay: 1100 },
-  { type: 'prompt', text: '$ ls ./projects',                            delay: 1900 },
-  { type: 'output', text: 'eMineral-pass/   govaid/   log-detector/',   delay: 2500 },
-  { type: 'prompt', text: '$ git log --oneline -3',                     delay: 3300 },
-  { type: 'output', text: 'a3f1c9e eMineral Pass — production deployed ✓', delay: 3900 },
-  { type: 'output', text: '7b2d4a1 GovAid — citizen welfare portal',    delay: 4200 },
-  { type: 'output', text: 'd8e2f3c LOG Detector — security CLI tool',   delay: 4500 },
-  { type: 'prompt', text: '$ npm start',                                delay: 5200 },
-  { type: 'success', text: '✓ Portfolio ready. Available for work 🚀',  delay: 5800 },
-];
-
-const SOCIALS = [
-  { label: 'GitHub',   href: 'https://github.com/how-vaibhav', icon: '⌥' },
-  { label: 'LinkedIn', href: '#',                               icon: '⇋' },
-  { label: 'Email',    href: 'mailto:vaibhav10505@gmail.com',   icon: '✉' },
-];
-
-function StatPill({ num, label }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-      <span className="dev-stat-num" style={{
-        fontSize: 'clamp(22px, 3vw, 32px)',
-        fontWeight: 800,
-        letterSpacing: '-0.04em',
-        color: '#fff',
-      }}>{num}</span>
-      <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-        {label}
-      </span>
-    </div>
-  );
-}
-
 export default function DevHero() {
-  const [lines, setLines] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
-  const heroRef = useRef(null);
 
   useEffect(() => {
-    const check = () => {
-      setIsMobile(window.innerWidth < 640);
-      setIsTablet(window.innerWidth >= 640 && window.innerWidth < 1024);
+    const handleResize = () => {
+      const w = window.innerWidth;
+      setIsMobile(w < 768);
+      setIsTablet(w >= 768 && w < 1080);
     };
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  // Animate hero elements in
-  useEffect(() => {
-    const el = heroRef.current;
-    if (!el) return;
-    const targets = el.querySelectorAll('[data-hero-animate]');
-    targets.forEach((t, i) => {
-      setTimeout(() => {
-        t.style.opacity = '1';
-        t.style.transform = 'translateY(0) translateX(0)';
-      }, 100 + i * 120);
-    });
-  }, []);
-
-  // Type terminal lines
-  useEffect(() => {
-    const timers = TERMINAL_SEQUENCE.map((line) =>
-      setTimeout(() => setLines((prev) => [...prev, line]), line.delay)
-    );
-    return () => timers.forEach(clearTimeout);
-  }, []);
-
-  const baseAnimStyle = {
-    opacity: 0,
-    transform: 'translateY(25px)',
-    transition: 'opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1)',
-  };
 
   return (
     <section
-      ref={heroRef}
+      id="home"
       style={{
         minHeight: '100vh',
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
-        alignItems: isMobile ? 'flex-start' : 'center',
-        justifyContent: 'space-between',
-        padding: isMobile
-          ? '110px 24px 80px'
-          : isTablet
-          ? '110px 40px 90px'
-          : '100px 64px 100px',
-        gap: isMobile ? '48px' : '40px',
+        paddingTop: isMobile ? '88px' : '110px',
+        paddingBottom: '0px',
+        paddingLeft: isMobile ? '20px' : isTablet ? '36px' : '64px',
+        paddingRight: isMobile ? '20px' : isTablet ? '36px' : '64px',
         position: 'relative',
-        maxWidth: '1440px',
-        margin: '0 auto',
-        width: '100%',
-        boxSizing: 'border-box',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        background: '#080808',
       }}
     >
-      {/* ── Left: Identity ── */}
-      <div style={{ flex: '1 1 0', minWidth: 0, display: 'flex', flexDirection: 'column', gap: '0' }}>
+      {/* Background ambient lighting */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `
+            radial-gradient(circle at 75% 35%, rgba(37, 85, 255, 0.15) 0%, transparent 55%),
+            radial-gradient(circle at 20% 70%, rgba(204, 255, 0, 0.05) 0%, transparent 45%)
+          `,
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      />
 
-        {/* Available badge */}
+      <div
+        style={{
+          maxWidth: '1380px',
+          margin: '0 auto',
+          width: '100%',
+          position: 'relative',
+          zIndex: 2,
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : isTablet ? '1fr 1fr' : '1.15fr 0.85fr',
+          gap: isMobile ? '32px' : '36px',
+          alignItems: 'flex-end',
+        }}
+      >
+        {/* ========================================================= */}
+        {/* LEFT COLUMN: 4-Dot Matrix + Bold Headline + Subtitle + CTAs */}
+        {/* ========================================================= */}
         <div
-          data-hero-animate
           style={{
-            ...baseAnimStyle,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '10px',
-            background: 'rgba(16,185,129,0.08)',
-            border: '1px solid rgba(16,185,129,0.25)',
-            borderRadius: '999px',
-            padding: '7px 16px 7px 12px',
-            width: 'fit-content',
-            marginBottom: '28px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            zIndex: 10,
+            paddingBottom: isMobile ? '20px' : '60px',
           }}
         >
-          <span className="dev-pulse-dot" />
-          <span style={{ fontSize: '12px', fontWeight: 600, color: '#10b981', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-            Available for Work
-          </span>
-        </div>
-
-        {/* Name */}
-        <h1
-          data-hero-animate
-          className="dev-hero-name"
-          style={{
-            ...baseAnimStyle,
-            fontSize: 'clamp(62px, 10vw, 136px)',
-            fontWeight: 900,
-            color: '#fff',
-            marginBottom: isMobile ? '16px' : '20px',
-          }}
-        >
-          VAIBHAV<br />TIWARI
-        </h1>
-
-        {/* Role line */}
-        <p
-          data-hero-animate
-          style={{
-            ...baseAnimStyle,
-            fontSize: isMobile ? '16px' : '20px',
-            color: 'rgba(255,255,255,0.55)',
-            fontWeight: 400,
-            letterSpacing: '-0.01em',
-            marginBottom: '36px',
-            lineHeight: 1.5,
-          }}
-        >
-          Full-Stack Developer &amp; Designer&nbsp;
-          <span style={{ color: 'rgba(255,255,255,0.25)' }}>·</span>&nbsp;
-          CS Student
-        </p>
-
-        {/* CTA buttons */}
-        <div
-          data-hero-animate
-          style={{ ...baseAnimStyle, display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '36px' }}
-        >
-          <a
-            href="#dev-projects"
-            className="dev-btn-primary"
+          {/* Top 4-pixel square matrix icon (2x2) */}
+          <div
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              background: '#E84419',
-              color: '#fff',
-              borderRadius: '999px',
-              padding: isMobile ? '12px 22px' : '14px 28px',
-              fontSize: isMobile ? '13px' : '14px',
-              fontWeight: 700,
-              letterSpacing: '-0.01em',
-              textDecoration: 'none',
-              border: 'none',
-              cursor: 'pointer',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 6px)',
+              gap: '6px',
+              marginBottom: isMobile ? '18px' : '24px',
             }}
           >
-            View Projects
-            <span style={{ fontSize: '16px' }}>↓</span>
-          </a>
-          <a
-            href="#dev-contact"
-            className="dev-btn-secondary"
+            <span style={{ width: '6px', height: '6px', background: '#ffffff', display: 'block' }} />
+            <span style={{ width: '6px', height: '6px', background: '#ffffff', display: 'block' }} />
+            <span style={{ width: '6px', height: '6px', background: '#ffffff', display: 'block' }} />
+            <span style={{ width: '6px', height: '6px', background: '#ffffff', display: 'block' }} />
+          </div>
+
+          {/* Massive Multi-line Industrial Headline */}
+          <h1
             style={{
-              display: 'inline-flex', alignItems: 'center', gap: '8px',
-              background: 'rgba(255,255,255,0.05)',
-              color: 'rgba(255,255,255,0.85)',
-              borderRadius: '999px',
-              padding: isMobile ? '12px 22px' : '14px 28px',
-              fontSize: isMobile ? '13px' : '14px',
-              fontWeight: 600,
-              letterSpacing: '-0.01em',
-              textDecoration: 'none',
-              border: '1px solid rgba(255,255,255,0.12)',
-              cursor: 'pointer',
+              fontFamily: "'Archivo Black', 'Inter', -apple-system, sans-serif",
+              fontSize: isMobile
+                ? 'clamp(46px, 13.2vw, 68px)'
+                : isTablet
+                ? 'clamp(54px, 7.2vw, 80px)'
+                : 'clamp(68px, 6.8vw, 110px)',
+              fontWeight: 900,
+              lineHeight: 0.89,
+              letterSpacing: '-0.045em',
+              textTransform: 'uppercase',
+              margin: 0,
+              marginBottom: '26px',
             }}
           >
-            Get in Touch
-            <span style={{ fontSize: '16px' }}>→</span>
-          </a>
-        </div>
-
-        {/* Social links */}
-        <div
-          data-hero-animate
-          style={{ ...baseAnimStyle, display: 'flex', gap: '24px', flexWrap: 'wrap' }}
-        >
-          {SOCIALS.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              className="dev-social-link dev-underline"
-              target={s.href.startsWith('http') ? '_blank' : undefined}
-              rel="noopener noreferrer"
+            <span style={{ display: 'block', color: '#ffffff' }}>I DESIGN.</span>
+            <span style={{ display: 'block', color: '#ffffff' }}>I CODE.</span>
+            <span
               style={{
-                fontSize: '13px',
-                fontWeight: 500,
-                color: 'rgba(255,255,255,0.45)',
-                letterSpacing: '0.02em',
-                textDecoration: 'none',
+                display: 'block',
+                color: '#2555FF',
+                textShadow: '0 0 50px rgba(37, 85, 255, 0.6)',
               }}
             >
-              {s.label}
+              I ELEVATE
+            </span>
+            <span style={{ display: 'block', color: '#ffffff' }}>BRANDS.</span>
+          </h1>
+
+          {/* Subtitle */}
+          <p
+            style={{
+              fontSize: isMobile ? '14px' : '15.5px',
+              color: 'rgba(255, 255, 255, 0.72)',
+              maxWidth: '460px',
+              lineHeight: 1.55,
+              margin: '0 0 32px 0',
+              fontWeight: 400,
+            }}
+          >
+            Creative Developer crafting bold digital experiences that are fast, functional and unforgettable.
+          </p>
+
+          {/* Action Buttons Row */}
+          <div
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '14px',
+              alignItems: 'center',
+            }}
+          >
+            {/* VIEW MY WORK ↗ */}
+            <a
+              href="#work"
+              style={{
+                background: '#CCFF00',
+                color: '#000000',
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 900,
+                fontSize: '13px',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+                padding: '14px 28px',
+                borderRadius: '3px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                textDecoration: 'none',
+                boxShadow: '0 4px 24px rgba(204, 255, 0, 0.35)',
+                transition: 'all 0.25s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(204, 255, 0, 0.55)';
+                e.currentTarget.style.background = '#d8ff1a';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 4px 24px rgba(204, 255, 0, 0.35)';
+                e.currentTarget.style.background = '#CCFF00';
+              }}
+            >
+              VIEW MY WORK ↗
             </a>
-          ))}
+
+            {/* AVAILABLE FOR FREELANCE */}
+            <div
+              style={{
+                background: '#000000',
+                color: '#ffffff',
+                fontFamily: "'Inter', sans-serif",
+                fontWeight: 800,
+                fontSize: '12px',
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                padding: '14px 24px',
+                borderRadius: '3px',
+                border: '1px solid rgba(255, 255, 255, 0.18)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                userSelect: 'none',
+              }}
+            >
+              AVAILABLE FOR FREELANCE
+            </div>
+          </div>
         </div>
 
-        {/* Stats — mobile below socials, desktop at bottom */}
-        {isMobile && (
-          <div style={{ display: 'flex', gap: '32px', marginTop: '40px', paddingTop: '32px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-            <StatPill num="3"   label="Projects Shipped" />
-            <StatPill num="10+" label="Tech Stacks" />
-            <StatPill num="2025" label="Year Started" />
-          </div>
-        )}
-      </div>
-
-      {/* ── Right: Terminal mock ── */}
-      {!isMobile && (
+        {/* ========================================================= */}
+        {/* RIGHT COLUMN: Layered Dynamic Chevron + Lime Brush "X" + Person Cutout */}
+        {/* ========================================================= */}
         <div
-          data-hero-animate
           style={{
-            ...baseAnimStyle,
-            opacity: 0,
-            transform: 'translateX(30px)',
-            flex: isTablet ? '0 0 340px' : '0 0 440px',
-            transition: 'opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)',
-            transitionDelay: '0.5s',
+            position: 'relative',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            minHeight: isMobile ? '460px' : isTablet ? '560px' : '650px',
+            width: '100%',
           }}
         >
-          {/* Terminal window */}
-          <div style={{
-            background: '#0D1117',
-            border: '1px solid rgba(255,255,255,0.1)',
-            borderRadius: '14px',
-            overflow: 'hidden',
-            boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
-          }}>
-            {/* Title bar */}
-            <div style={{
-              background: '#161B22',
-              padding: '13px 16px',
+          {/* 1. LAYER: Solid Electric Cobalt Blue Geometric Chevron (#2555FF) */}
+          <div
+            style={{
+              position: 'absolute',
+              top: isMobile ? '5%' : '8%',
+              left: isMobile ? '2%' : '8%',
+              right: isMobile ? '2%' : '0%',
+              bottom: '0%',
+              background: '#2555FF',
+              clipPath: 'polygon(32% 0%, 100% 0%, 75% 100%, 0% 100%)',
+              zIndex: 1,
+              opacity: 0.98,
+              boxShadow: '0 0 100px rgba(37, 85, 255, 0.55)',
+            }}
+          />
+
+          {/* 2. LAYER: Neon Lime Textured Cyber Brush "X" Cross Graphic */}
+          <div
+            style={{
+              position: 'absolute',
+              top: isMobile ? '10%' : '12%',
+              right: isMobile ? '-10px' : '-20px',
+              width: isMobile ? '240px' : isTablet ? '320px' : '400px',
+              height: isMobile ? '260px' : isTablet ? '340px' : '420px',
+              zIndex: 2,
+              pointerEvents: 'none',
+            }}
+          >
+            <svg viewBox="0 0 300 300" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="0" stdDeviation="14" flood-color="#CCFF00" flood-opacity="0.85" />
+                </filter>
+              </defs>
+
+              {/* Arm 1: Top-Left to Bottom-Right */}
+              <line
+                x1="35"
+                y1="35"
+                x2="265"
+                y2="265"
+                stroke="#CCFF00"
+                strokeWidth="58"
+                strokeLinecap="square"
+                filter="url(#neonGlow)"
+              />
+
+              {/* Arm 2: Top-Right to Bottom-Left */}
+              <line
+                x1="265"
+                y1="35"
+                x2="35"
+                y2="265"
+                stroke="#CCFF00"
+                strokeWidth="58"
+                strokeLinecap="square"
+                filter="url(#neonGlow)"
+              />
+
+              {/* Subtle architectural notch cuts */}
+              <line x1="24" y1="24" x2="60" y2="60" stroke="#080808" strokeWidth="10" />
+              <line x1="240" y1="240" x2="276" y2="276" stroke="#080808" strokeWidth="10" />
+              <line x1="245" y1="25" x2="275" y2="55" stroke="#080808" strokeWidth="10" />
+            </svg>
+          </div>
+
+          {/* 3. LAYER: Transparent Person Portrait (a.png) Positioned in Foreground */}
+          <div
+            style={{
+              position: 'relative',
+              zIndex: 3,
+              width: isMobile ? '320px' : isTablet ? '400px' : '480px',
+              maxWidth: '100%',
               display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              borderBottom: '1px solid rgba(255,255,255,0.06)',
-            }}>
-              <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#FF5F56', display: 'block' }} />
-              <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#FFBD2E', display: 'block' }} />
-              <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#27C93F', display: 'block' }} />
-              <span style={{ marginLeft: '10px', fontSize: '12px', color: 'rgba(255,255,255,0.35)', fontFamily: 'monospace' }}>
-                vaibhav@portfolio — zsh
-              </span>
+              alignItems: 'flex-end',
+              justifyContent: 'center',
+            }}
+          >
+            <img
+              src="/assets/vaibhav-hero.png"
+              alt="Vaibhav — Creative Developer"
+              style={{
+                width: '100%',
+                height: 'auto',
+                maxHeight: isMobile ? '430px' : isTablet ? '530px' : '620px',
+                objectFit: 'contain',
+                objectPosition: 'bottom center',
+                display: 'block',
+                filter: 'contrast(1.1) brightness(1.02) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8))',
+              }}
+            />
+          </div>
+
+          {/* 4. LAYER: Badges, Reticle Target, Slashes, and Globe Decals */}
+          {/* Top-Right: Target Reticle + Stacked Uppercase Labels */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '0px',
+              right: isMobile ? '0px' : '-16px',
+              zIndex: 5,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              textAlign: 'right',
+              gap: '6px',
+            }}
+          >
+            {/* Target Reticle SVG */}
+            <div
+              style={{
+                width: '26px',
+                height: '26px',
+                marginBottom: '4px',
+                color: '#ffffff',
+              }}
+            >
+              <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="8" strokeOpacity="0.8" />
+                <line x1="12" y1="2" x2="12" y2="6" />
+                <line x1="12" y1="18" x2="12" y2="22" />
+                <line x1="2" y1="12" x2="6" y2="12" />
+                <line x1="18" y1="12" x2="22" y2="12" />
+                <circle cx="12" cy="12" r="2" fill="currentColor" />
+              </svg>
             </div>
 
-            {/* Terminal body */}
-            <div style={{
-              padding: '20px 22px',
-              fontFamily: "'JetBrains Mono', 'Fira Code', 'Courier New', monospace",
-              fontSize: isTablet ? '12px' : '13px',
-              lineHeight: '1.9',
-              minHeight: '260px',
-            }}>
-              {lines.map((line, i) => (
-                <div key={i} style={{
-                  color: line.type === 'prompt'  ? '#58a6ff'
-                       : line.type === 'success' ? '#3fb950'
-                       : '#c9d1d9',
-                  opacity: 0,
-                  animation: `devFadeIn 0.3s ease forwards`,
-                  animationDelay: '0s',
-                }}>
-                  {line.text}
-                </div>
-              ))}
-              {lines.length < TERMINAL_SEQUENCE.length && (
-                <span className="dev-cursor">▌</span>
-              )}
+            {/* 3-Line Technical Badges */}
+            <div
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: isMobile ? '9px' : '11px',
+                fontWeight: 800,
+                letterSpacing: '0.1em',
+                lineHeight: 1.35,
+                color: 'rgba(255, 255, 255, 0.92)',
+                textTransform: 'uppercase',
+              }}
+            >
+              <div>UI/UX FOCUSED</div>
+              <div>PERFORMANCE DRIVEN</div>
+              <div>PIXEL PERFECT</div>
             </div>
           </div>
 
-          {/* Stats below terminal */}
-          <div style={{
-            display: 'flex',
-            gap: '0',
-            marginTop: '20px',
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.07)',
-            borderRadius: '12px',
-            overflow: 'hidden',
-          }}>
-            {[
-              { num: '3',    label: 'Projects Shipped' },
-              { num: '10+',  label: 'Tech Stacks' },
-              { num: '2025', label: 'Year Started' },
-            ].map((s, i) => (
-              <div key={i} style={{
-                flex: 1,
-                padding: '18px 16px',
-                borderRight: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
-                textAlign: 'center',
-              }}>
-                <div className="dev-stat-num" style={{ fontSize: '22px', fontWeight: 800, letterSpacing: '-0.04em', color: '#fff' }}>
-                  {s.num}
-                </div>
-                <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase', letterSpacing: '0.07em', marginTop: '3px' }}>
-                  {s.label}
-                </div>
-              </div>
-            ))}
+          {/* Middle-Right: Slashes Hatch Graphic */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '40%',
+              right: isMobile ? '-8px' : '-32px',
+              zIndex: 5,
+              fontFamily: 'monospace',
+              fontSize: '18px',
+              fontWeight: 900,
+              letterSpacing: '0.15em',
+              color: 'rgba(255, 255, 255, 0.45)',
+              transform: 'rotate(-4deg)',
+              userSelect: 'none',
+            }}
+          >
+            ///////
+          </div>
+
+          {/* Bottom-Right: Wireframe Globe SVG */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '15%',
+              right: isMobile ? '0px' : '-24px',
+              zIndex: 5,
+              width: '28px',
+              height: '28px',
+              color: 'rgba(255, 255, 255, 0.75)',
+            }}
+          >
+            <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
           </div>
         </div>
-      )}
-
-      {/* Scroll indicator */}
-      {!isMobile && (
-        <div className="dev-scroll-indicator" style={{
-          position: 'absolute',
-          bottom: '36px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '6px',
-          color: 'rgba(255,255,255,0.25)',
-          fontSize: '11px',
-          letterSpacing: '0.1em',
-          textTransform: 'uppercase',
-        }}>
-          <span>Scroll</span>
-          <span style={{ fontSize: '20px' }}>↓</span>
-        </div>
-      )}
+      </div>
     </section>
   );
 }
