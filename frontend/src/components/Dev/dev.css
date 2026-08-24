@@ -1,0 +1,257 @@
+/* ============================================================
+   Dev Page — Shared Animation & Interaction System
+   ============================================================ */
+
+/* --- Scroll Reveal --- */
+.dev-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dev-reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dev-reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dev-reveal-scale {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dev-reveal.is-visible,
+.dev-reveal-left.is-visible,
+.dev-reveal-right.is-visible,
+.dev-reveal-scale.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Stagger delays --- */
+.dev-d1 { transition-delay: 0.05s; }
+.dev-d2 { transition-delay: 0.15s; }
+.dev-d3 { transition-delay: 0.25s; }
+.dev-d4 { transition-delay: 0.35s; }
+.dev-d5 { transition-delay: 0.45s; }
+.dev-d6 { transition-delay: 0.55s; }
+.dev-d7 { transition-delay: 0.65s; }
+.dev-d8 { transition-delay: 0.75s; }
+.dev-d9 { transition-delay: 0.85s; }
+
+/* --- Cursor Blink --- */
+@keyframes dev-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+.dev-cursor {
+  animation: dev-blink 1s step-end infinite;
+  color: #58a6ff;
+}
+
+/* --- Marquee --- */
+@keyframes dev-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.dev-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: dev-marquee 40s linear infinite;
+}
+.dev-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* --- Project card hover lift --- */
+.dev-project-card {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.45s ease,
+              border-color 0.3s ease;
+  will-change: transform;
+}
+.dev-project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+}
+.dev-project-card:hover .dev-proj-overlay {
+  opacity: 1;
+}
+
+/* --- Project image overlay reveal --- */
+.dev-proj-overlay {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* --- Image zoom on hover --- */
+.dev-img-wrap {
+  overflow: hidden;
+}
+.dev-img-wrap img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dev-img-wrap:hover img {
+  transform: scale(1.07);
+}
+
+/* --- Skill tag hover --- */
+.dev-skill-tag {
+  transition: background 0.25s ease, color 0.25s ease,
+              transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+}
+.dev-skill-tag:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* --- Social link hover --- */
+.dev-social-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+.dev-social-link:hover {
+  transform: translateY(-3px);
+}
+
+/* --- Underline draw on hover --- */
+.dev-underline {
+  position: relative;
+  display: inline-block;
+}
+.dev-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dev-underline:hover::after {
+  width: 100%;
+}
+
+/* --- CTA buttons --- */
+.dev-btn-primary {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+.dev-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(232, 68, 25, 0.4);
+}
+.dev-btn-secondary {
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.dev-btn-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* --- Pulsing dot (availability badge) --- */
+@keyframes dev-pulse-ring {
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.dev-pulse-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  flex-shrink: 0;
+}
+.dev-pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #10b981;
+  animation: dev-pulse-ring 2s ease-out infinite;
+}
+
+/* --- Scroll indicator bounce --- */
+@keyframes dev-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50%       { transform: translateY(8px); opacity: 1; }
+}
+.dev-scroll-indicator {
+  animation: dev-bounce 2.2s ease-in-out infinite;
+}
+
+/* --- Copy button --- */
+.dev-copy-btn {
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+.dev-copy-btn:hover {
+  transform: scale(1.05);
+}
+
+/* --- Stat number hover --- */
+.dev-stat-num {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.dev-stat-num:hover {
+  transform: scale(1.1);
+  color: #E84419;
+}
+
+/* --- Section number accent --- */
+.dev-section-accent {
+  background: linear-gradient(135deg, #E84419, #ff6b35);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Hero name gradient --- */
+.dev-hero-name {
+  line-height: 0.88;
+  letter-spacing: -0.05em;
+}
+
+/* --- Divider line draw --- */
+.dev-divider-line {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dev-divider-line.is-visible {
+  transform: scaleX(1);
+}
+
+/* --- Project tech tag --- */
+.dev-tech-tag {
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.dev-tech-tag:hover {
+  transform: scale(1.06);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .dev-hide-mobile { display: none !important; }
+}
+@media (min-width: 769px) {
+  .dev-hide-desktop { display: none !important; }
+}
+@media (max-width: 1024px) {
+  .dev-hide-tablet { display: none !important; }
+}

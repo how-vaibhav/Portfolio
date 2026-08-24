@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CanvasScrollAnimation from '../components/CanvasScrollAnimation';
 import VaibhavStudioSection from '../components/VaibhavStudioSection';
+import CreativeProjectsSection from '../components/CreativeProjectsSection';
 import WelcomeSection from '../components/WelcomeSection';
 import IntroductionSection from '../components/IntroductionSection';
 import AboutSection from '../components/AboutSection';
@@ -228,6 +229,7 @@ export default function DesignPage() {
         {/* Content sections */}
         <WelcomeSection />
         <VaibhavStudioSection />
+        <CreativeProjectsSection />
         <IntroductionSection />
         <AboutSection />
         <EducationSection />
