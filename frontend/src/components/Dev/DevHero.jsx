@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './dev.css';
+import { Ripple } from '../ui/ripple';
 
 export default function DevHero() {
   const [isMobile, setIsMobile] = useState(false);
@@ -174,26 +175,54 @@ export default function DevHero() {
               VIEW MY WORK ↗
             </a>
 
-            {/* AVAILABLE FOR FREELANCE */}
+            {/* AVAILABLE FOR FREELANCE with ripple behind it */}
             <div
               style={{
-                background: '#000000',
-                color: '#ffffff',
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 800,
-                fontSize: '12px',
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                padding: '14px 24px',
-                borderRadius: '3px',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
+                position: 'relative',
                 display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                userSelect: 'none',
+                borderRadius: '3px',
+                overflow: 'hidden',
               }}
             >
-              AVAILABLE FOR FREELANCE
+              <Ripple
+                mainCircleSize={50}
+                mainCircleOpacity={0.25}
+                numCircles={5}
+                color="#22C55E"
+              />
+              <div
+                style={{
+                  background: '#000000',
+                  color: '#ffffff',
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: 800,
+                  fontSize: '12px',
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  padding: '14px 24px',
+                  borderRadius: '3px',
+                  border: '1px solid rgba(255, 255, 255, 0.18)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  userSelect: 'none',
+                  position: 'relative',
+                  zIndex: 2,
+                }}
+              >
+                <span
+                  style={{
+                    width: '7px',
+                    height: '7px',
+                    borderRadius: '50%',
+                    background: '#22C55E',
+                    boxShadow: '0 0 8px #22C55E',
+                    display: 'inline-block',
+                    flexShrink: 0,
+                  }}
+                />
+                AVAILABLE FOR FREELANCE
+              </div>
             </div>
           </div>
         </div>

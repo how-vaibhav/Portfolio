@@ -1,5 +1,6 @@
 import React from 'react';
 import './dev.css';
+import { Ripple } from '../ui/ripple';
 
 export default function DevContactCta() {
   return (
@@ -16,7 +17,15 @@ export default function DevContactCta() {
         overflow: 'hidden',
       }}
     >
-      <div style={{ maxWidth: '1360px', margin: '0 auto' }}>
+      {/* ── Ripple Effect behind the CTA ── */}
+      <Ripple
+        mainCircleSize={240}
+        mainCircleOpacity={0.2}
+        numCircles={7}
+        color="#CCFF00"
+      />
+
+      <div style={{ maxWidth: '1360px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
         {/* Main CTA 2-Column Row */}
         <div
           style={{
@@ -31,7 +40,7 @@ export default function DevContactCta() {
           <div>
             <h2
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: "'Archivo Black', 'Inter', sans-serif",
                 fontSize: 'clamp(44px, 6vw, 76px)',
                 fontWeight: 900,
                 lineHeight: 0.95,
@@ -77,8 +86,18 @@ export default function DevContactCta() {
               flexDirection: 'column',
               gap: '20px',
               boxShadow: '0 16px 40px rgba(0, 0, 0, 0.5)',
+              position: 'relative',
+              overflow: 'hidden',
             }}
           >
+            {/* Small accent ripple inside the contact card */}
+            <Ripple
+              mainCircleSize={100}
+              mainCircleOpacity={0.18}
+              numCircles={5}
+              color="#2555FF"
+            />
+
             {/* Email */}
             <a
               href="mailto:vaibhav10505@gmail.com"
@@ -91,6 +110,8 @@ export default function DevContactCta() {
                 fontSize: '14px',
                 fontWeight: 600,
                 transition: 'color 0.2s',
+                position: 'relative',
+                zIndex: 2,
               }}
               onMouseEnter={(e) => (e.currentTarget.style.color = '#CCFF00')}
               onMouseLeave={(e) => (e.currentTarget.style.color = '#ffffff')}
@@ -99,14 +120,34 @@ export default function DevContactCta() {
               <span>vaibhav10505@gmail.com</span>
             </a>
 
-            {/* Phone/Connect */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', color: 'rgba(255,255,255,0.8)', fontSize: '14px' }}>
+            {/* Connect */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                color: 'rgba(255,255,255,0.8)',
+                fontSize: '14px',
+                position: 'relative',
+                zIndex: 2,
+              }}
+            >
               <span style={{ fontSize: '18px', color: '#CCFF00' }}>📞</span>
               <span>Schedule a Meeting / Call</span>
             </div>
 
             {/* Location */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', color: 'rgba(255,255,255,0.8)', fontSize: '14px' }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                color: 'rgba(255,255,255,0.8)',
+                fontSize: '14px',
+                position: 'relative',
+                zIndex: 2,
+              }}
+            >
               <span style={{ fontSize: '18px', color: '#CCFF00' }}>📍</span>
               <span>Worldwide / Remote</span>
             </div>
@@ -125,6 +166,8 @@ export default function DevContactCta() {
                 textTransform: 'uppercase',
                 borderTop: '1px solid rgba(255, 255, 255, 0.1)',
                 paddingTop: '16px',
+                position: 'relative',
+                zIndex: 2,
               }}
             >
               <span style={{ fontSize: '18px' }}>🚀</span>
@@ -145,20 +188,8 @@ export default function DevContactCta() {
             gap: '16px',
           }}
         >
-          {/* Brand */}
-          <div
-            style={{
-              fontWeight: 900,
-              fontSize: '16px',
-              letterSpacing: '-0.03em',
-              textTransform: 'uppercase',
-              display: 'flex',
-              gap: '2px',
-            }}
-          >
-            <span>DEV/</span>
-            <span style={{ color: '#CCFF00' }}>PIXEL</span>
-          </div>
+          {/* Brand — intentionally blank */}
+          <div style={{ width: '80px' }} />
 
           {/* Copyright */}
           <div style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.4)', fontWeight: 500 }}>

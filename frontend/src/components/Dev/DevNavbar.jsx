@@ -62,24 +62,16 @@ export default function DevNavbar() {
         transition: 'all 0.3s ease',
       }}
     >
-      {/* Brand Logo */}
+      {/* Brand — intentionally blank */}
       <a
         href="#home"
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '2px',
           textDecoration: 'none',
-          color: '#ffffff',
-          fontWeight: 900,
-          fontSize: '18px',
-          letterSpacing: '-0.03em',
-          textTransform: 'uppercase',
+          width: '80px',
         }}
-      >
-        <span>DEV/</span>
-        <span style={{ color: '#CCFF00' }}>PIXEL</span>
-      </a>
+      />
 
       {/* Center Nav Links (Desktop) */}
       {!isMobile && (

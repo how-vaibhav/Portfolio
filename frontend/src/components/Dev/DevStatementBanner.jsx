@@ -1,5 +1,6 @@
 import React from 'react';
 import { MorphingText } from '../ui/morphing-text';
+import { Ripple } from '../ui/ripple';
 
 export default function DevStatementBanner() {
   const MORPH_TEXTS = [
@@ -13,30 +14,54 @@ export default function DevStatementBanner() {
   return (
     <section
       style={{
-        padding: '70px 20px',
-        background: '#0a0a0d',
-        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-        textAlign: 'center',
+        padding: '80px 20px',
         position: 'relative',
         overflow: 'hidden',
+        textAlign: 'center',
+        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        minHeight: '380px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      {/* Ambient background glow */}
+      {/* ── Background: Footer Banner Image ── */}
       <div
         style={{
           position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '500px',
-          height: '240px',
-          background: 'radial-gradient(circle, rgba(204, 255, 0, 0.08) 0%, transparent 70%)',
-          pointerEvents: 'none',
+          inset: 0,
+          backgroundImage: 'url(/assets/footer-banner.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center center',
+          backgroundRepeat: 'no-repeat',
+          filter: 'brightness(0.25) contrast(1.1) saturate(0.4)',
+          zIndex: 0,
         }}
       />
 
-      <div style={{ maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+      {/* Dark overlay gradient for readability */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(180deg, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.35) 50%, rgba(8,8,8,0.65) 100%)',
+          zIndex: 1,
+        }}
+      />
+
+      {/* Ripple emanating from center behind morphing text */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 2 }}>
+        <Ripple
+          mainCircleSize={160}
+          mainCircleOpacity={0.18}
+          numCircles={6}
+          color="#CCFF00"
+        />
+      </div>
+
+      {/* Content layer above everything */}
+      <div style={{ maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 3 }}>
         {/* Top small label */}
         <div
           style={{
@@ -46,6 +71,7 @@ export default function DevStatementBanner() {
             textTransform: 'uppercase',
             color: '#CCFF00',
             marginBottom: '16px',
+            textShadow: '0 0 20px rgba(204, 255, 0, 0.6)',
           }}
         >
           ✦ SYSTEM CORE PRINCIPLE
@@ -58,7 +84,7 @@ export default function DevStatementBanner() {
             fontSize: 'clamp(20px, 3vw, 32px)',
             fontWeight: 800,
             letterSpacing: '-0.02em',
-            color: 'rgba(255, 255, 255, 0.6)',
+            color: 'rgba(255, 255, 255, 0.7)',
             margin: '0 0 12px 0',
             textTransform: 'uppercase',
           }}
@@ -76,6 +102,7 @@ export default function DevStatementBanner() {
               letterSpacing: '-0.04em',
               color: '#ffffff',
               height: '100%',
+              textShadow: '0 2px 30px rgba(0,0,0,0.8)',
             }}
           />
         </div>
@@ -84,10 +111,11 @@ export default function DevStatementBanner() {
         <p
           style={{
             fontSize: '14px',
-            color: 'rgba(255, 255, 255, 0.65)',
+            color: 'rgba(255, 255, 255, 0.75)',
             maxWidth: '540px',
             margin: '0 auto',
             lineHeight: 1.6,
+            textShadow: '0 1px 12px rgba(0,0,0,0.9)',
           }}
         >
           Engineering high-throughput systems, government-grade encryption, and hardware-accelerated 60fps web experiences.
