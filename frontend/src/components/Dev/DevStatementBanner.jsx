@@ -14,19 +14,19 @@ export default function DevStatementBanner() {
   return (
     <section
       style={{
-        padding: '80px 20px',
+        padding: '90px 20px',
         position: 'relative',
         overflow: 'hidden',
         textAlign: 'center',
-        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-        minHeight: '380px',
+        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+        minHeight: '440px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
-      {/* ── Background: Footer Banner Image ── */}
+      {/* ── Background Layer: Banner Image ── */}
       <div
         style={{
           position: 'absolute',
@@ -35,43 +35,63 @@ export default function DevStatementBanner() {
           backgroundSize: 'cover',
           backgroundPosition: 'center center',
           backgroundRepeat: 'no-repeat',
-          filter: 'brightness(0.25) contrast(1.1) saturate(0.4)',
+          filter: 'contrast(1.05) brightness(0.9)',
           zIndex: 0,
         }}
       />
 
-      {/* Dark overlay gradient for readability */}
+      {/* ── Creative Blur & Soft Ambient Vignette Overlay (Low Intensity) ── */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'linear-gradient(180deg, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.35) 50%, rgba(8,8,8,0.65) 100%)',
+          background: `
+            linear-gradient(180deg, rgba(8, 8, 8, 0.6) 0%, rgba(8, 8, 8, 0.15) 30%, rgba(8, 8, 8, 0.15) 70%, rgba(8, 8, 8, 0.6) 100%),
+            radial-gradient(ellipse at center, rgba(8, 8, 8, 0.1) 0%, rgba(8, 8, 8, 0.45) 100%)
+          `,
+          backdropFilter: 'blur(2.5px)',
+          WebkitBackdropFilter: 'blur(2.5px)',
           zIndex: 1,
         }}
       />
 
-      {/* Ripple emanating from center behind morphing text */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 2 }}>
+      {/* Ripple effect */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none' }}>
         <Ripple
-          mainCircleSize={160}
-          mainCircleOpacity={0.18}
+          mainCircleSize={180}
+          mainCircleOpacity={0.2}
           numCircles={6}
           color="#CCFF00"
         />
       </div>
 
-      {/* Content layer above everything */}
-      <div style={{ maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 3 }}>
+      {/* Content layer */}
+      <div
+        style={{
+          maxWidth: '960px',
+          margin: '0 auto',
+          position: 'relative',
+          zIndex: 3,
+          padding: '24px 20px',
+        }}
+      >
         {/* Top small label */}
         <div
           style={{
+            display: 'inline-block',
             fontSize: '11px',
-            fontWeight: 800,
+            fontWeight: 900,
             letterSpacing: '0.16em',
             textTransform: 'uppercase',
             color: '#CCFF00',
+            background: 'rgba(0, 0, 0, 0.65)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            padding: '6px 16px',
+            borderRadius: '4px',
+            border: '1px solid rgba(204, 255, 0, 0.35)',
             marginBottom: '16px',
-            textShadow: '0 0 20px rgba(204, 255, 0, 0.6)',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.5)',
           }}
         >
           ✦ SYSTEM CORE PRINCIPLE
@@ -81,12 +101,13 @@ export default function DevStatementBanner() {
         <h3
           style={{
             fontFamily: "'Inter', sans-serif",
-            fontSize: 'clamp(20px, 3vw, 32px)',
-            fontWeight: 800,
+            fontSize: 'clamp(20px, 3.2vw, 34px)',
+            fontWeight: 900,
             letterSpacing: '-0.02em',
-            color: 'rgba(255, 255, 255, 0.7)',
-            margin: '0 0 12px 0',
+            color: '#ffffff',
+            margin: '0 0 14px 0',
             textTransform: 'uppercase',
+            textShadow: '0 2px 18px rgba(0, 0, 0, 0.95), 0 0 24px rgba(0, 0, 0, 0.8)',
           }}
         >
           WE DON'T JUST WRITE CODE.
@@ -102,7 +123,7 @@ export default function DevStatementBanner() {
               letterSpacing: '-0.04em',
               color: '#ffffff',
               height: '100%',
-              textShadow: '0 2px 30px rgba(0,0,0,0.8)',
+              textShadow: '0 4px 24px rgba(0, 0, 0, 1), 0 0 30px rgba(0, 0, 0, 0.9)',
             }}
           />
         </div>
@@ -110,12 +131,19 @@ export default function DevStatementBanner() {
         {/* Bottom descriptive caption */}
         <p
           style={{
-            fontSize: '14px',
-            color: 'rgba(255, 255, 255, 0.75)',
-            maxWidth: '540px',
+            fontSize: '14.5px',
+            fontWeight: 600,
+            color: '#ffffff',
+            maxWidth: '560px',
             margin: '0 auto',
             lineHeight: 1.6,
-            textShadow: '0 1px 12px rgba(0,0,0,0.9)',
+            background: 'rgba(0, 0, 0, 0.6)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            padding: '10px 20px',
+            borderRadius: '6px',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.6)',
           }}
         >
           Engineering high-throughput systems, government-grade encryption, and hardware-accelerated 60fps web experiences.
