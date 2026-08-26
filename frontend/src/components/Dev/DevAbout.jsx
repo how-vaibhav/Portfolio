@@ -48,7 +48,7 @@ export default function DevAbout() {
           position: 'relative',
         }}>
           <img
-            src="/assets/me.png"
+            src="/assets/intro-portrait.jpg"
             alt="Vaibhav Tiwari"
             style={{
               width: '100%',

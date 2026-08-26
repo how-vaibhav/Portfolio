@@ -151,7 +151,7 @@ export default function VaibhavStudioSection() {
               }}
             >
               <img
-                src="/assets/me.png"
+                src="/assets/intro-portrait.jpg"
                 alt="Vaibhav portrait"
                 style={{
                   width: '100%',

@@ -23,7 +23,7 @@ const PROJECTS = [
   },
   {
     id: 3,
-    src: '/assets/me.png',
+    src: '/assets/intro-portrait.jpg',
     title: 'Creative Direction',
     category: 'Layout & Growth',
     number: '003',
