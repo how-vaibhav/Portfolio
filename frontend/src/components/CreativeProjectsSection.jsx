@@ -5,7 +5,7 @@ const ORANGE = '#E84419';
 const PROJECTS = [
   {
     id: 1,
-    src: '/assets/intro-portrait.jpg',
+    src: '/assets/photo-intro-portrait.jpg',
     title: 'Brand Identity',
     category: 'Strategy & Planning',
     number: '001',
@@ -14,7 +14,7 @@ const PROJECTS = [
   },
   {
     id: 2,
-    src: '/assets/education-work.jpg',
+    src: '/assets/photo-study-desk.jpg',
     title: 'Product Design',
     category: 'Design & Development',
     number: '002',
@@ -23,7 +23,7 @@ const PROJECTS = [
   },
   {
     id: 3,
-    src: '/assets/intro-portrait.jpg',
+    src: '/assets/photo-intro-portrait.jpg',
     title: 'Creative Direction',
     category: 'Layout & Growth',
     number: '003',
@@ -32,7 +32,7 @@ const PROJECTS = [
   },
   {
     id: 4,
-    src: '/assets/education-lifestyle.jpg',
+    src: '/assets/photo-coding-lifestyle.jpg',
     title: 'Packaging Design',
     category: 'Brand Strategy',
     number: '004',
@@ -41,7 +41,7 @@ const PROJECTS = [
   },
   {
     id: 5,
-    src: '/assets/intro-portrait.jpg',
+    src: '/assets/photo-intro-portrait.jpg',
     title: 'Visual Systems',
     category: 'Ongoing Support',
     number: '005',

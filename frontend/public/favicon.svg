@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Dark background -->
+  <rect width="64" height="64" rx="12" fill="#080808"/>
+  <!-- Lime accent top-left bracket -->
+  <path d="M14 18 L14 12 L20 12" stroke="#CCFF00" stroke-width="3.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+  <!-- Lime accent bottom-right bracket -->
+  <path d="M50 46 L50 52 L44 52" stroke="#CCFF00" stroke-width="3.5" stroke-linecap="square" stroke-linejoin="miter" fill="none"/>
+  <!-- Bold "V" monogram -->
+  <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle"
+    font-family="'Arial Black', 'Arial', sans-serif"
+    font-size="28"
+    font-weight="900"
+    fill="#ffffff"
+    letter-spacing="-1">V</text>
+  <!-- Lime underline accent -->
+  <rect x="24" y="50" width="16" height="2.5" rx="1" fill="#CCFF00"/>
+</svg>

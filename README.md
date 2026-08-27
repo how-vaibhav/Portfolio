@@ -1,67 +1,75 @@
-# Vaibhav - Portfolio & Creative Engineering Studio
-
 <div align="center">
 
-  ![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-  ![Vite](https://img.shields.io/badge/Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-  ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-  ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-  ![Express](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
-  ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Vaibhav Portfolio Banner](frontend/public/assets/footer-banner.png)
 
-  <p align="center">
-    A high-performance, dual-mode portfolio system engineered for technical software engineering recruiters, full-stack architecture showcases, and creative design clients.
-  </p>
+# Vaibhav · Portfolio
+
+
+<p align="center">
+  <img src="https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Framer_Motion-EE4B6A?style=for-the-badge&logo=framer&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" />
+</p>
+
+**A high-performance, production-grade portfolio engineered for technical depth and visual impact.**  
+Built with React 18, Framer Motion physics, and a hardware-accelerated canvas engine.
+
+[**→ Live Site**](https://how-vaibhav.vercel.app)
 
 </div>
 
 ---
 
-## Architectural Overview
+## Overview
 
-This portfolio operates on a dual-mode foundation, allowing immediate contextual switching between a high-density Developer and Systems Engineering experience and a curated Editorial Design Studio experience.
+This portfolio is a monorepo containing a React frontend and a Node.js/Express backend. It is engineered around three core pillars:
 
-### Dual-Mode Architecture
-
-- **Developer Mode (`/`)**: A dark cyber-industrial environment focusing on full-stack architecture, security engineering, interactive dashboard case studies, technical skills, and experience timelines.
-- **Design Studio Mode (`/design`)**: An editorial visual experience showcasing brand identity, design strategy, typography systems, and interactive creative media.
-- **Radial Clip-Path Engine**: A GPU-accelerated mode toggle utilizing radial clip-path geometry to smoothly transition between viewports without page reloads or layout shifts.
+1. **Performance First** — Hardware-accelerated canvas for frame scrubbing, GPU-composited animations, DPR-aware rendering, and aggressive CDN caching.
+2. **Neo-Brutalist Aesthetics** — A high-contrast dark design system with lime (`#CCFF00`) and blue (`#2555FF`) accents, heavy typography, and deliberate visual tension.
+3. **Developer Experience** — A clean monorepo structure with clearly-named assets, reusable UI primitives, and a consistent responsive system via a shared `useResponsive` hook.
 
 ---
 
-## Core Systems & Features
+## Modes
 
-### 1. Hardware-Accelerated Canvas Scroll Engine
-- **Frame-by-Frame Scrubbing**: 60fps image sequencing rendered to HTML5 `<canvas>` via `createImageBitmap` and `requestAnimationFrame`.
-- **Dynamic DPR Scaling**: Calibrates Device Pixel Ratio dynamically (1.0 on mobile, 1.25 on tablet, 1.5 on desktop) to prevent GPU texture overhead and reduce mobile memory consumption by 65%.
-- **Adaptive Concurrency & Priority Queue**: Loads visible and neighboring frames first using localized radius queues with aggressive CDN cache control headers.
-- **Mobile Address Bar Resize Shield**: Ignores spurious window height updates caused by mobile browser address bar collapse, preventing unnecessary canvas buffer re-allocations.
+### 🖥 Developer Mode — `v1` · *Live*
+The primary portfolio experience at `/`. A dark, cyber-industrial showcase of full-stack engineering work, system architecture, and technical projects.
 
-### 2. Motion & Interactive Components
-- **Scroll-Based Velocity Marquee**: Text tracks powered by spring physics (`motion/react`) that dynamically accelerate and decelerate based on active scroll velocity.
-- **Morphing Text Component**: SVG matrix threshold filters and Gaussian blur fractions executing real-time fluid word transformations without heavy external dependencies.
-- **Concentric Ripple Pulses**: CSS-driven infinite harmonic ripple waves layered behind headline focal points and status indicators.
+**Highlights:**
+- Pixel image reveal animation on the hero section (grayscale → color)
+- Scroll-driven parallax on the Tools & Stack banner
+- Spring-physics-based Framer Motion card animations throughout
+- Dual-direction infinite tech marquee with 30+ tools
+- Timeline-based career experience section
+
+### 🎨 Design Studio Mode — `v2` · *Under Development*
+Accessible at `/design`. The second version of the portfolio — a curated editorial experience for design clients and creative collaborators.
+
+> **Design Mode is Portfolio v2**, currently under active development. It will feature an editorial visual identity, brand case studies, typography systems, and interactive creative media.
 
 ---
 
-## Featured Engineering Projects
+## Featured Projects
 
 ### eMineral Pass
-- **Domain**: Government-Compliant Mineral Logistics SaaS
-- **Stack**: Next.js, TypeScript, Supabase, PostgreSQL, Tailwind CSS
-- **Key Architecture**: End-to-end authorization engine built under Uttar Pradesh Minerals Rules 2018. Features real-time cryptographically signed QR verification, bilingual PDF permit generation (English and Devanagari Hindi), automated royalty calculation, and role-based audit logs.
-- **Live URL**: https://www.mineraltrack.shop/
+- **Domain:** Government-Compliant Mineral Logistics SaaS  
+- **Stack:** Next.js, TypeScript, Supabase, PostgreSQL, Tailwind CSS  
+- **Architecture:** End-to-end authorization engine compliant with UP Minerals Rules 2018. Real-time cryptographically signed QR verification, bilingual PDF permit generation (English + Devanagari Hindi), automated royalty calculation, and role-based audit logs.  
+- **Live:** https://www.mineraltrack.shop/
 
 ### GovAid Sikkim
-- **Domain**: Citizen Welfare Scheme Discovery & Evaluation Engine
-- **Stack**: Django 5, Python 3.12, Tailwind CSS, PostgreSQL
-- **Key Architecture**: Centralized welfare scheme evaluation engine for citizens across Sikkim. Implements Verhoeff algorithm Aadhaar checksum verification, field-level Fernet symmetric encryption for sensitive demographic data, and rule-based qualification pipelines.
-- **Live URL**: https://govaid-5n3k.onrender.com/
+- **Domain:** Citizen Welfare Scheme Discovery & Evaluation Engine  
+- **Stack:** Django 5, Python 3.12, PostgreSQL, Tailwind CSS  
+- **Architecture:** Centralized welfare scheme evaluation engine. Verhoeff algorithm Aadhaar checksum verification, field-level Fernet symmetric encryption for sensitive demographic data, rule-based qualification pipelines.  
+- **Live:** https://govaid-5n3k.onrender.com/
 
 ### LOG Detector
-- **Domain**: Cyber Forensics & Threat Timeline Analyzer
-- **Stack**: Python 3.8+, Shannon Entropy Engine, Rich CLI, Flask, React
-- **Key Architecture**: High-throughput parallel log forensic tool capable of processing large server logs in seconds. Computes Shannon entropy baselines to identify obfuscated payloads and correlates anomalous events against 5-stage cyber kill-chains.
+- **Domain:** Cyber Forensics & Threat Timeline Analyzer  
+- **Stack:** Python 3.8+, Shannon Entropy Engine, Rich CLI, Flask, React  
+- **Architecture:** High-throughput parallel log forensic tool processing large server logs in seconds. Computes Shannon entropy baselines to identify obfuscated payloads and correlates anomalous events against 5-stage cyber kill-chains.
 
 ---
 
@@ -69,61 +77,71 @@ This portfolio operates on a dual-mode foundation, allowing immediate contextual
 
 ```text
 Portfolio/
-├── frontend/                     # Client-Side Application (Vite + React 18)
+├── frontend/                        # Client-Side App (Vite + React 18)
 │   ├── public/
-│   │   ├── assets/               # Static showcase graphics and hero imagery
-│   │   ├── frames/               # Sequenced animation frame assets
-│   │   └── favicon.svg           # Custom geometric brand monogram
+│   │   ├── assets/
+│   │   │   ├── vaibhav-hero-cutout.png         # Hero section subject cutout (PNG)
+│   │   │   ├── footer-banner.png               # Tools section background banner
+│   │   │   ├── photo-intro-portrait.jpg        # About/intro portrait
+│   │   │   ├── photo-coding-lifestyle.jpg      # Lifestyle coding photo
+│   │   │   ├── photo-study-desk.jpg            # Study desk environment photo
+│   │   │   ├── project-govaid-screenshot.png   # GovAid project screenshot
+│   │   │   ├── project-logdetector-screenshot.png  # LOG Detector screenshot
+│   │   │   └── project-emineral-screenshot.png # eMineral Pass screenshot
+│   │   ├── frames/                             # Canvas scroll animation frames (001–199)
+│   │   └── favicon.svg                         # Custom V monogram brand favicon
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Dev/              # Developer mode section components
-│   │   │   │   ├── DevNavbar.jsx
-│   │   │   │   ├── DevHero.jsx
-│   │   │   │   ├── DevVelocityTicker.jsx
-│   │   │   │   ├── DevFeaturedWork.jsx
-│   │   │   │   ├── DevCaseStudies.jsx
-│   │   │   │   ├── DevStatementBanner.jsx
-│   │   │   │   ├── DevToolsStack.jsx
-│   │   │   │   ├── DevExperience.jsx
-│   │   │   │   ├── DevTestimonials.jsx
-│   │   │   │   ├── DevContactCta.jsx
-│   │   │   │   └── dev.css
+│   │   │   ├── Dev/                            # Developer mode section components
+│   │   │   │   ├── DevNavbar.jsx               # Fixed top nav with animated active pill
+│   │   │   │   ├── DevHero.jsx                 # Hero: pixel reveal, spring parallax
+│   │   │   │   ├── DevFeaturedWork.jsx         # Scroll-animated project cards
+│   │   │   │   ├── DevToolsStack.jsx           # Marquee + parallax banner
+│   │   │   │   ├── DevExperience.jsx           # Career timeline
+│   │   │   │   ├── DevTestimonials.jsx         # Social proof section
+│   │   │   │   ├── DevContactCta.jsx           # Footer & call-to-action
+│   │   │   │   ├── useResponsive.js            # Centralized breakpoint hook
+│   │   │   │   ├── useReveal.js                # Intersection Observer reveal hook
+│   │   │   │   └── dev.css                     # Dev mode design tokens & animations
 │   │   │   ├── Navbar/
-│   │   │   │   └── Navbar.jsx    # Shared navigation layouts
-│   │   │   ├── ui/               # Reusable Magic UI motion components
-│   │   │   │   ├── morphing-text.jsx
-│   │   │   │   ├── ripple.jsx
-│   │   │   │   └── scroll-based-velocity.jsx
-│   │   │   ├── CanvasScrollAnimation.jsx  # High-performance canvas engine
-│   │   │   ├── ModeToggle.jsx    # Dual-mode switcher with radial wipe
-│   │   │   ├── VaibhavStudioSection.jsx
+│   │   │   │   └── Navbar.jsx                  # Shared design-mode navigation
+│   │   │   ├── ui/                             # Reusable Motion UI primitives
+│   │   │   │   ├── marquee.jsx                 # Infinite scroll marquee
+│   │   │   │   ├── morphing-text.jsx           # SVG blur/threshold word morph
+│   │   │   │   ├── pixel-image.jsx             # Pixel grid reveal animation
+│   │   │   │   ├── ripple.jsx                  # Concentric CSS ripple pulse
+│   │   │   │   └── scroll-based-velocity.jsx   # Velocity-aware scroll marquee
+│   │   │   ├── AboutSection.jsx
+│   │   │   ├── CanvasScrollAnimation.jsx       # 60fps frame-scrubbing canvas engine
+│   │   │   ├── ContactScaleSection.jsx
 │   │   │   ├── CreativeProjectsSection.jsx
+│   │   │   ├── EducationSection.jsx
+│   │   │   ├── IntroductionSection.jsx
+│   │   │   ├── ModeToggle.jsx                  # Radial clip-path mode switcher
+│   │   │   ├── VaibhavStudioSection.jsx
 │   │   │   └── WelcomeSection.jsx
+│   │   ├── lib/
+│   │   │   └── utils.js                        # Utility helpers (cn, clsx)
 │   │   ├── pages/
-│   │   │   ├── DevPage.jsx       # Root developer portfolio
-│   │   │   └── DesignPage.jsx    # Creative studio portfolio
-│   │   ├── App.jsx               # Client-side routing configuration
-│   │   ├── index.css             # Tailwind v4 and global design tokens
+│   │   │   ├── DevPage.jsx                     # Developer portfolio page (v1)
+│   │   │   └── DesignPage.jsx                  # Design studio page (v2 — WIP)
+│   │   ├── App.jsx                             # Client-side routing
+│   │   ├── index.css                           # Global design tokens
 │   │   └── main.jsx
-│   ├── index.html
+│   ├── index.html                              # Asset preloads, fonts, meta
 │   ├── package.json
-│   ├── vercel.json               # SPA rewrites & CDN cache headers
 │   └── vite.config.js
-├── backend/                      # Node.js and Express API Service
+├── backend/                         # Node.js / Express API Service
 │   ├── src/
 │   │   ├── routes/
-│   │   │   └── index.js          # REST API endpoints and health checks
-│   │   └── server.js             # Express server setup and middleware
+│   │   │   └── index.js             # REST endpoints & health checks
+│   │   └── server.js                # Express setup & middleware
 │   ├── .env.example
 │   └── package.json
-├── Projects/                     # Project technical documentation and specifications
-│   ├── README.md                 # eMineral Pass technical spec
-│   ├── README(1).md              # GovAid technical spec
-│   └── README(2).md              # LOG Detector technical spec
-├── .gitattributes                # Consistent LF line-ending normalization
-├── .gitignore                    # Professional monorepo ignore rules
-├── package.json                  # Root workspace runner
-├── vercel.json                   # Root deployment and SPA routing config
+├── .gitattributes                   # LF line-ending normalization
+├── .gitignore
+├── package.json                     # Root workspace runner
+├── vercel.json                      # Root SPA routing & deployment config
 └── README.md
 ```
 
@@ -132,73 +150,72 @@ Portfolio/
 ## Getting Started
 
 ### Prerequisites
-- Node.js: v18.0.0 or later
-- npm: v9.0.0 or later
+- **Node.js:** v18.0.0+
+- **npm:** v9.0.0+
 
-### 1. Clone the Repository
+### 1. Clone
 ```bash
 git clone https://github.com/how-vaibhav/Portfolio.git
 cd Portfolio
 ```
 
-### 2. Install Dependencies
-Install all workspace dependencies from the root directory:
+### 2. Install
 ```bash
 npm install
 ```
 
-### 3. Run Development Server
-Start both the frontend and backend services concurrently:
+### 3. Develop
+Start frontend and backend concurrently:
 ```bash
 npm run dev
 ```
+| Service | URL |
+|---|---|
+| Frontend | http://localhost:5173 |
+| Design Mode | http://localhost:5173/design |
+| Backend API | http://localhost:5001 |
 
-- Frontend: http://localhost:5173 (or `/design`)
-- Backend API: http://localhost:5001
-
-To run workspaces independently:
+Run independently:
 ```bash
-# Frontend only
-npm run dev:frontend
-
-# Backend only
-npm run dev:backend
+npm run dev:frontend   # Frontend only
+npm run dev:backend    # Backend only
 ```
 
 ---
 
-## Production Build & Deployment
+## Deployment
+
+### Vercel (Recommended)
+1. Import this repository into [Vercel](https://vercel.com).
+2. The bundled `vercel.json` handles:
+   - **SPA Routing:** Rewrites `/`, `/design`, and all subroutes to `/index.html`.
+   - **Immutable Caching:** `Cache-Control: public, max-age=31536000, immutable` on all static frames and images via Vercel Edge CDN.
+3. Every push to `main` triggers an automatic production deployment.
 
 ### Local Production Build
 ```bash
 npm run build
 ```
-Compiles the application into `frontend/dist` with minification, CSS purging, and asset optimization.
-
-### Deploying to Vercel
-1. Import this repository into Vercel.
-2. The included `vercel.json` configurations manage:
-   - SPA Routing: Rewrites all direct routes (`/`, `/design`) to `/index.html`.
-   - Immutable Asset Caching: Sets `Cache-Control: public, max-age=31536000, immutable` for static frames and images on Vercel Edge CDN.
-3. Every push to `main` triggers an automatic production build and deployment.
+Outputs to `frontend/dist` with full minification, CSS purging, and asset fingerprinting.
 
 ---
 
-## Tech Stack & Tooling
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Core Framework | React 18, React DOM |
+| Framework | React 18, React DOM |
 | Build Tool | Vite 6 |
 | Routing | React Router v7 |
-| Styling | Tailwind CSS v4, Vanilla CSS Design System |
-| Motion & Physics | Motion (motion/react), SVG Threshold Filters |
-| Typography | Archivo Black, Inter, Bebas Neue, Fira Code, Syne |
-| Animation Engine | HTML5 Canvas 2D (createImageBitmap, rAF) |
-| Backend Runtime | Node.js, Express.js, CORS |
-| Cloud Deployment | Vercel Edge Network |
+| Styling | Vanilla CSS, Tailwind CSS v4 |
+| Animation | Framer Motion (`motion/react`), SVG Threshold Filters |
+| Canvas Engine | HTML5 Canvas 2D (`createImageBitmap`, `requestAnimationFrame`) |
+| Typography | Archivo Black, Inter, Bebas Neue, Fira Code, Syne, Lobster Two, Caveat |
+| Backend | Node.js, Express.js, CORS |
+| Deployment | Vercel Edge Network |
 
 ---
 
 ## License
-This project is open source and available under the [MIT License](LICENSE).
+
+Open source under the [MIT License](LICENSE).

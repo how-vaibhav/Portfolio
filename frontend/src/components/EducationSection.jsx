@@ -99,7 +99,7 @@ export default function EducationSection() {
               }}
             >
               <img
-                src="/assets/education-work.jpg"
+                src="/assets/photo-study-desk.jpg"
                 alt="Workspace and laptop"
                 style={{
                   width: '100%',
@@ -131,7 +131,7 @@ export default function EducationSection() {
               }}
             >
               <img
-                src="/assets/education-lifestyle.jpg"
+                src="/assets/photo-coding-lifestyle.jpg"
                 alt="Architectural entrance"
                 style={{
                   width: '100%',

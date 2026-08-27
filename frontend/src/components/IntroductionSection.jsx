@@ -50,7 +50,7 @@ export default function IntroductionSection() {
             }}
           >
             <img
-              src="/assets/intro-portrait.jpg"
+              src="/assets/photo-intro-portrait.jpg"
               alt="Lars Peeters portrait"
               style={{
                 width: '100%',
