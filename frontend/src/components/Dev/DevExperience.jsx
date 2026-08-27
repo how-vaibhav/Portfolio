@@ -150,11 +150,11 @@ export default function DevExperience() {
           </div>
         </div>
 
-        {/* 2-Column Responsive Layout */}
+        {/* Full-width Responsive Layout */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : '1fr 340px',
+            gridTemplateColumns: '1fr',
             gap: '32px',
             alignItems: 'stretch',
           }}
@@ -374,84 +374,6 @@ export default function DevExperience() {
               })}
             </div>
           </div>
-
-          {/* Right Column: Giant 5+ Experience Card with Interactive Live State */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            style={{
-              background: '#CCFF00',
-              color: '#000000',
-              borderRadius: '16px',
-              padding: 'clamp(28px, 4vw, 36px)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              position: 'relative',
-              overflow: 'hidden',
-              clipPath:
-                'polygon(0 0, 100% 0, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0 100%)',
-              boxShadow: '0 20px 50px rgba(204, 255, 0, 0.25)',
-              minHeight: '280px',
-            }}
-          >
-            <div>
-              {/* Giant 5+ */}
-              <div
-                style={{
-                  fontFamily: "'Archivo Black', 'Inter', sans-serif",
-                  fontSize: 'clamp(64px, 7vw, 92px)',
-                  fontWeight: 900,
-                  lineHeight: 0.85,
-                  letterSpacing: '-0.06em',
-                  marginBottom: '14px',
-                }}
-              >
-                5+
-              </div>
-
-              {/* Title Badge */}
-              <div
-                style={{
-                  fontSize: '13px',
-                  fontWeight: 900,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  lineHeight: 1.3,
-                  marginBottom: '20px',
-                }}
-              >
-                YEARS OF CONTINUOUS ENGINEERING & CREATIVE BUILDING
-              </div>
-            </div>
-
-            {/* Quick Metrics Breakdown */}
-            <div
-              style={{
-                borderTop: '2px solid rgba(0, 0, 0, 0.2)',
-                paddingTop: '16px',
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '12px',
-              }}
-            >
-              <div>
-                <div style={{ fontSize: '18px', fontWeight: 900, lineHeight: 1 }}>100%</div>
-                <div style={{ fontSize: '9px', fontWeight: 800, textTransform: 'uppercase', opacity: 0.75 }}>
-                  Gov-Grade Security
-                </div>
-              </div>
-
-              <div>
-                <div style={{ fontSize: '18px', fontWeight: 900, lineHeight: 1 }}>60 FPS</div>
-                <div style={{ fontSize: '9px', fontWeight: 800, textTransform: 'uppercase', opacity: 0.75 }}>
-                  Canvas Performance
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>

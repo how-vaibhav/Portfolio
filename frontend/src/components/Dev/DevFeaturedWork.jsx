@@ -1,280 +1,313 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import './dev.css';
 
-const FEATURED_PROJECTS = [
+const PROJECTS = [
   {
     id: 'emineral',
+    num: '01',
     title: 'eMINERAL',
-    displayTitle: 'SPARK / eMINERAL',
-    subtitle: 'SaaS Platform',
-    bg: '#2563EB',
-    textColor: '#ffffff',
-    tagBg: '#000000',
-    tagText: '#ffffff',
+    tag: 'SaaS Platform',
+    accent: '#2555FF',
     image: '/assets/eMineral Pass.png',
     url: 'https://www.mineraltrack.shop/',
-    desc: 'Gov-compliant mineral transport permit authorization with QR verification.',
+    desc: 'Gov-compliant mineral transport permit with QR verification & real-time tracking.',
+    year: '2026',
   },
   {
     id: 'govaid',
+    num: '02',
     title: 'GOVAID',
-    displayTitle: 'NEXORA / GOVAID',
-    subtitle: 'GovTech Portal',
-    bg: '#141416',
-    textColor: '#ffffff',
-    tagBg: 'rgba(255,255,255,0.1)',
-    tagText: '#ffffff',
+    tag: 'GovTech Portal',
+    accent: '#CCFF00',
     image: '/assets/GovAid.png',
     url: 'https://govaid-5n3k.onrender.com/',
-    desc: 'Centralized welfare scheme evaluation engine with Fernet encryption.',
+    desc: 'Welfare scheme evaluation engine with Fernet encryption & eligibility scoring.',
+    year: '2025',
   },
   {
     id: 'logdetector',
+    num: '03',
     title: 'LOG DETECT',
-    displayTitle: 'VELOCE / LOG DETECTOR',
-    subtitle: 'Security & Forensics',
-    bg: '#0F0F12',
-    textColor: '#ffffff',
-    tagBg: 'rgba(255,255,255,0.1)',
-    tagText: '#ffffff',
+    tag: 'Security & Forensics',
+    accent: '#FF4D4D',
     image: '/assets/Log Detector.png',
-    url: '#case-studies',
-    desc: 'Multiprocessed security log analyzer with Shannon entropy & Kill-Chain.',
+    url: 'https://github.com/SkylerOnRadio/log-checker',
+    desc: 'Multiprocessed log analyzer using Shannon entropy & MITRE Kill-Chain mapping.',
+    year: '2026',
   },
 ];
 
+/* ─── Single card with stripe-reveal ─────────────── */
+function ProjectCard({ p, i, isMobile }) {
+  const ref = useRef(null);
+
+  /* Scroll progress: starts when card enters bottom of viewport, ends mid-screen */
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start 0.95', 'start 0.45'],
+  });
+
+  /* Spring-smooth the raw scroll progress so animation feels silky */
+  const smooth = useSpring(scrollYProgress, { stiffness: 80, damping: 22, restDelta: 0.001 });
+
+  /* Stripe: scaleX 1→0, origin right, so it peels away rightward */
+  const stripeScale = useTransform(smooth, [0, 0.75], [1, 0]);
+
+  /* Card fade + lift */
+  const cardOpacity = useTransform(smooth, [0, 0.2], [0, 1]);
+  const cardY       = useTransform(smooth, [0, 1], [24, 0]);
+
+  const isEven = i % 2 === 0;
+  const tabColor = p.accent === '#CCFF00' ? '#080808' : '#ffffff';
+
+  return (
+    <div ref={ref} style={{ position: 'relative', overflow: 'hidden' }}>
+
+      {/* Stripe cover — peels away as card enters view */}
+      <motion.div
+        style={{
+          position: 'absolute', inset: 0, zIndex: 3,
+          background: p.accent,
+          scaleX: stripeScale,
+          transformOrigin: 'right',
+          pointerEvents: 'none',
+          willChange: 'transform',
+        }}
+      />
+
+      {/* The card */}
+      <motion.a
+        href={p.url}
+        target={p.url.startsWith('http') ? '_blank' : '_self'}
+        rel="noopener noreferrer"
+        style={{
+          display: 'flex',
+          flexDirection: isMobile ? 'column' : (isEven ? 'row' : 'row-reverse'),
+          textDecoration: 'none',
+          background: '#0c0c0e',
+          border: '1px solid rgba(255,255,255,0.06)',
+          minHeight: '172px',
+          position: 'relative',
+          overflow: 'hidden',
+          opacity: cardOpacity,
+          y: cardY,
+          willChange: 'transform, opacity',
+        }}
+        whileHover={{ borderColor: 'rgba(255,255,255,0.16)', transition: { duration: 0.25 } }}
+      >
+        {/* Number tab */}
+        <div style={{
+          position: 'absolute',
+          top: 0, bottom: isMobile ? 'auto' : 0,
+          left: isMobile ? 0 : (isEven ? 0 : 'auto'),
+          right: isMobile ? 'auto' : (isEven ? 'auto' : 0),
+          width: isMobile ? 'auto' : '40px',
+          padding: isMobile ? '6px 12px' : 0,
+          background: p.accent,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          writingMode: isMobile ? 'horizontal-tb' : 'vertical-rl',
+          fontFamily: "'Archivo Black', sans-serif",
+          fontSize: '10px',
+          fontWeight: 900,
+          letterSpacing: '0.18em',
+          color: tabColor,
+          userSelect: 'none',
+          zIndex: 4,
+          flexShrink: 0,
+        }}>
+          {p.num}
+        </div>
+
+        {/* Image block */}
+        <div style={{
+          flex: isMobile ? 'auto' : '0 0 240px',
+          height: isMobile ? '180px' : 'auto',
+          overflow: 'hidden',
+          marginLeft: isMobile ? 0 : (isEven ? '40px' : 0),
+          marginRight: isMobile ? 0 : (isEven ? 0 : '40px'),
+          position: 'relative',
+          background: '#000',
+        }}>
+          <motion.img
+            src={p.image}
+            alt={p.title}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              display: 'block',
+            }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } }}
+          />
+          {/* Very subtle bottom-only vignette so image reads clearly */}
+          <div style={{
+            position: 'absolute', inset: 0, pointerEvents: 'none',
+            background: 'linear-gradient(to bottom, transparent 55%, rgba(12,12,14,0.55) 100%)',
+          }} />
+          {/* Year chip on image */}
+          <div style={{
+            position: 'absolute', top: 10, left: 10,
+            background: 'rgba(0,0,0,0.6)',
+            backdropFilter: 'blur(6px)',
+            padding: '2px 9px',
+            fontSize: '9px', fontWeight: 800, letterSpacing: '0.1em',
+            color: 'rgba(255,255,255,0.55)',
+            border: '1px solid rgba(255,255,255,0.08)',
+          }}>
+            {p.year}
+          </div>
+        </div>
+
+        {/* Text body */}
+        <div style={{
+          flex: 1,
+          padding: '20px 22px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          gap: '8px',
+        }}>
+          {/* Tag row */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+            <span style={{
+              fontSize: '10px', fontWeight: 800,
+              letterSpacing: '0.12em', textTransform: 'uppercase',
+              color: p.accent,
+              display: 'flex', alignItems: 'center', gap: '6px',
+            }}>
+              <span style={{
+                width: 5, height: 5, borderRadius: '50%',
+                background: p.accent, display: 'inline-block',
+                boxShadow: `0 0 6px ${p.accent}`,
+              }} />
+              {p.tag}
+            </span>
+
+            {/* Arrow — always visible, no footer needed */}
+            <motion.span
+              style={{
+                fontSize: '16px', color: p.accent, fontWeight: 900,
+                display: 'inline-block',
+              }}
+              whileHover={{ x: 3, y: -3, transition: { duration: 0.2 } }}
+            >
+              ↗
+            </motion.span>
+          </div>
+
+          {/* Title */}
+          <h3 style={{
+            fontFamily: "'Archivo Black', sans-serif",
+            fontSize: '23px', fontWeight: 900, letterSpacing: '-0.035em',
+            textTransform: 'uppercase', margin: 0,
+            color: '#ffffff', lineHeight: 1.05,
+          }}>
+            {p.title}
+          </h3>
+
+          {/* Description */}
+          <p style={{
+            fontSize: '12.5px',
+            color: 'rgba(255,255,255,0.4)',
+            lineHeight: 1.65,
+            margin: 0,
+          }}>
+            {p.desc}
+          </p>
+        </div>
+      </motion.a>
+    </div>
+  );
+}
+
+/* ─── Section ─────────────────────────────────────── */
 export default function DevFeaturedWork() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 860);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section
       id="work"
       style={{
-        paddingTop: '60px',
-        paddingBottom: '80px',
-        paddingLeft: 'clamp(20px, 4.5vw, 64px)',
-        paddingRight: 'clamp(20px, 4.5vw, 64px)',
+        padding: 'clamp(60px, 8vw, 100px) clamp(20px, 5vw, 80px)',
         background: '#080808',
+        position: 'relative',
       }}
     >
-      <div style={{ maxWidth: '1360px', margin: '0 auto' }}>
-        {/* Section Header */}
-        <div
+      {/* Notebook ruled lines */}
+      <div className="dev-notebook-lines" />
+
+      <div style={{ maxWidth: '1200px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '28px',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-            paddingBottom: '16px',
+            display: 'flex', justifyContent: 'space-between',
+            alignItems: 'flex-end', marginBottom: '40px',
           }}
         >
-          <span
-            style={{
-              fontSize: '12px',
-              fontWeight: 800,
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
-              color: '#ffffff',
-            }}
-          >
-            FEATURED WORK
-          </span>
+          <div>
+            <div style={{
+              fontSize: '11px', fontWeight: 800, letterSpacing: '0.14em',
+              textTransform: 'uppercase', color: '#CCFF00', marginBottom: '8px',
+              display: 'flex', alignItems: 'center', gap: '8px',
+            }}>
+              <span style={{ width: 18, height: 1.5, background: '#CCFF00', display: 'inline-block' }} />
+              Selected Work
+            </div>
+            <h2 style={{
+              fontFamily: "'Archivo Black', sans-serif",
+              fontSize: 'clamp(26px, 3.5vw, 44px)',
+              fontWeight: 900, letterSpacing: '-0.04em',
+              textTransform: 'uppercase', color: '#ffffff',
+              margin: 0, lineHeight: 1,
+            }}>
+              Featured{' '}
+              <span style={{ WebkitTextStroke: '1.5px #2555FF', color: 'transparent' }}>
+                Projects
+              </span>
+            </h2>
+          </div>
 
           <a
-            href="#case-studies"
+            href="https://github.com/how-vaibhav?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
-              fontSize: '11px',
-              fontWeight: 800,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: '#CCFF00',
-              textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'opacity 0.2s',
+              fontSize: '10px', fontWeight: 800, letterSpacing: '0.1em',
+              textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)',
+              textDecoration: 'none', paddingBottom: '2px',
+              borderBottom: '1px solid rgba(255,255,255,0.1)',
+              transition: 'color 0.2s, border-color 0.2s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.8')}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+            onMouseEnter={e => { e.currentTarget.style.color = '#CCFF00'; e.currentTarget.style.borderBottomColor = '#CCFF00'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.1)'; }}
           >
-            SEE ALL PROJECTS ↗
+            All Projects ↗
           </a>
-        </div>
+        </motion.div>
 
-        {/* 4 Cards Grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '20px',
-          }}
-        >
-          {FEATURED_PROJECTS.map((p) => {
-            const isOutlier = p.id === 'canvas';
-
-            return (
-              <a
-                key={p.id}
-                href={p.url}
-                target={p.url.startsWith('http') ? '_blank' : '_self'}
-                rel="noopener noreferrer"
-                className="dev-hover-card"
-                style={{
-                  background: p.bg,
-                  color: p.textColor,
-                  borderRadius: '12px',
-                  padding: '24px',
-                  minHeight: '340px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  textDecoration: 'none',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  border: isOutlier ? 'none' : '1px solid rgba(255, 255, 255, 0.08)',
-                  boxShadow: isOutlier
-                    ? '0 12px 30px rgba(204, 255, 0, 0.25)'
-                    : '0 12px 30px rgba(0, 0, 0, 0.5)',
-                }}
-              >
-                {/* Card Title */}
-                <div>
-                  <h3
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '28px',
-                      fontWeight: 900,
-                      letterSpacing: '-0.04em',
-                      textTransform: 'uppercase',
-                      margin: 0,
-                      color: p.textColor,
-                    }}
-                  >
-                    {p.title}
-                  </h3>
-                </div>
-
-                {/* Center Image or Metric Graphic */}
-                <div
-                  style={{
-                    flex: 1,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '16px 0',
-                    position: 'relative',
-                  }}
-                >
-                  {p.image ? (
-                    <div
-                      style={{
-                        width: '100%',
-                        height: '140px',
-                        borderRadius: '8px',
-                        overflow: 'hidden',
-                        position: 'relative',
-                        background: '#000000',
-                      }}
-                    >
-                      <img
-                        src={p.image}
-                        alt={p.title}
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                          display: 'block',
-                          transition: 'transform 0.4s ease',
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    /* Neon Outlier Metric Card */
-                    <div
-                      style={{
-                        width: '100%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flex-start',
-                        gap: '12px',
-                      }}
-                    >
-                      {/* Metric Pill */}
-                      <div
-                        style={{
-                          background: '#000000',
-                          color: '#CCFF00',
-                          fontWeight: 900,
-                          fontSize: '18px',
-                          padding: '6px 14px',
-                          borderRadius: '6px',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '6px',
-                        }}
-                      >
-                        {p.metric}
-                      </div>
-
-                      {/* Geometric Blocks */}
-                      <div
-                        style={{
-                          display: 'grid',
-                          gridTemplateColumns: 'repeat(4, 1fr)',
-                          gap: '4px',
-                          width: '100%',
-                        }}
-                      >
-                        {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-                          <div
-                            key={n}
-                            style={{
-                              height: '14px',
-                              background: n > 5 ? 'rgba(0,0,0,0.15)' : '#000000',
-                              borderRadius: '2px',
-                            }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Bottom Row Tag & Arrow */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    borderTop: isOutlier
-                      ? '1px solid rgba(0,0,0,0.15)'
-                      : '1px solid rgba(255,255,255,0.12)',
-                    paddingTop: '14px',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: '12px',
-                      fontWeight: 700,
-                      letterSpacing: '0.04em',
-                      color: isOutlier ? '#000000' : 'rgba(255,255,255,0.7)',
-                    }}
-                  >
-                    {p.subtitle}
-                  </span>
-
-                  <span
-                    style={{
-                      fontSize: '14px',
-                      fontWeight: 900,
-                      color: isOutlier ? '#000000' : '#ffffff',
-                    }}
-                  >
-                    ↗
-                  </span>
-                </div>
-              </a>
-            );
-          })}
+        {/* Cards */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+          {PROJECTS.map((p, i) => <ProjectCard key={p.id} p={p} i={i} isMobile={isMobile} />)}
         </div>
       </div>
     </section>

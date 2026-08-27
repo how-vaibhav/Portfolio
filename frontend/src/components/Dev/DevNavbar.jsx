@@ -37,7 +37,6 @@ export default function DevNavbar() {
   const navLinks = [
     { label: 'HOME', href: '#home', id: 'home' },
     { label: 'WORK', href: '#work', id: 'work' },
-    { label: 'CASE STUDIES', href: '#case-studies', id: 'case-studies' },
     { label: 'TOOLS', href: '#tools', id: 'tools' },
     { label: 'EXPERIENCE', href: '#experience', id: 'experience' },
     { label: 'CONTACT', href: '#contact', id: 'contact' },
@@ -51,15 +50,16 @@ export default function DevNavbar() {
         left: 0,
         right: 0,
         zIndex: 100,
-        background: isScrolled ? 'rgba(8, 8, 8, 0.92)' : 'rgba(8, 8, 8, 0.65)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-        padding: isMobile ? '14px 20px' : '18px 48px',
+        background: isScrolled ? 'rgba(4, 4, 4, 0.65)' : 'transparent',
+        backdropFilter: isScrolled ? 'blur(24px) saturate(180%)' : 'none',
+        WebkitBackdropFilter: isScrolled ? 'blur(24px) saturate(180%)' : 'none',
+        borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid transparent',
+        boxShadow: isScrolled ? '0 10px 30px rgba(0,0,0,0.4)' : 'none',
+        padding: isMobile ? (isScrolled ? '12px 20px' : '16px 20px') : (isScrolled ? '14px 48px' : '24px 48px'),
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        transition: 'all 0.3s ease',
+        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
       {/* Brand — intentionally blank */}
@@ -73,47 +73,57 @@ export default function DevNavbar() {
         }}
       />
 
-      {/* Center Nav Links (Desktop) */}
-      {!isMobile && (
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
-          {navLinks.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              style={{
-                fontSize: '12px',
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: activeSection === item.id ? '#CCFF00' : 'rgba(255, 255, 255, 0.7)',
-                textDecoration: 'none',
-                transition: 'color 0.2s ease',
-                position: 'relative',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color =
-                  activeSection === item.id ? '#CCFF00' : 'rgba(255, 255, 255, 0.7)')
-              }
-            >
-              {item.label}
-              {activeSection === item.id && (
-                <span
-                  style={{
-                    position: 'absolute',
-                    bottom: '-6px',
-                    left: 0,
-                    right: 0,
-                    height: '2px',
-                    background: '#CCFF00',
-                    borderRadius: '1px',
-                  }}
-                />
-              )}
-            </a>
-          ))}
-        </nav>
-      )}
+      {/* Center Nav Links (Scrollable on Mobile) */}
+      <nav 
+        className="dev-hide-scrollbar"
+        style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: isMobile ? '20px' : '32px',
+          overflowX: 'auto',
+          WebkitOverflowScrolling: 'touch',
+          maxWidth: isMobile ? 'calc(100vw - 160px)' : 'none',
+          padding: isMobile ? '0 10px' : 0,
+        }}
+      >
+        {navLinks.map((item) => (
+          <a
+            key={item.label}
+            href={item.href}
+            style={{
+              fontSize: '12px',
+              fontWeight: 700,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: activeSection === item.id ? '#CCFF00' : 'rgba(255, 255, 255, 0.7)',
+              textDecoration: 'none',
+              transition: 'color 0.2s ease',
+              position: 'relative',
+              whiteSpace: 'nowrap',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.color =
+                activeSection === item.id ? '#CCFF00' : 'rgba(255, 255, 255, 0.7)')
+            }
+          >
+            {item.label}
+            {activeSection === item.id && (
+              <span
+                style={{
+                  position: 'absolute',
+                  bottom: '-6px',
+                  left: 0,
+                  right: 0,
+                  height: '2px',
+                  background: '#CCFF00',
+                  borderRadius: '1px',
+                }}
+              />
+            )}
+          </a>
+        ))}
+      </nav>
 
       {/* Right Side: Mode Switcher */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>

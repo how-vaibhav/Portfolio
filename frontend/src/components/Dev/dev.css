@@ -150,6 +150,35 @@
   }
 }
 
+/* Hide scrollbars for horizontally scrollable areas */
+.dev-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.dev-hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ── Notebook lines background ─────────────────── */
+.dev-notebook-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    /* Red margin line */
+    linear-gradient(to right, transparent 56px, rgba(255, 77, 77, 0.12) 56px, rgba(255, 77, 77, 0.12) 58px, transparent 58px),
+    /* Horizontal ruled lines */
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 31px,
+      rgba(255, 255, 255, 0.04) 31px,
+      rgba(255, 255, 255, 0.04) 32px
+    );
+}
+
+
 .dev-marquee-content {
   display: inline-block;
   animation: devMarquee 25s linear infinite;
@@ -165,3 +194,26 @@
   50%       { opacity: 0.4; transform: scale(0.7); }
 }
 
+/* GPU-composited ring spins — no JS, zero layout cost */
+.dev-spin-ring {
+  animation: devSpinCW 14s linear infinite;
+}
+.dev-spin-ring-reverse {
+  animation: devSpinCCW 20s linear infinite;
+}
+@keyframes devSpinCW  { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes devSpinCCW { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
+/* Shimmer on the blue "I ELEVATE" block */
+.dev-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.18) 50%, transparent 100%);
+  animation: devShimmer 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes devShimmer {
+  0%   { transform: translateX(-100%); }
+  40%  { transform: translateX(200%); }
+  100% { transform: translateX(200%); }
+}

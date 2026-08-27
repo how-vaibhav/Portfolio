@@ -2,7 +2,6 @@ import React from 'react';
 import DevNavbar from '../components/Dev/DevNavbar';
 import DevHero from '../components/Dev/DevHero';
 import DevFeaturedWork from '../components/Dev/DevFeaturedWork';
-import DevStatementBanner from '../components/Dev/DevStatementBanner';
 import DevToolsStack from '../components/Dev/DevToolsStack';
 import DevExperience from '../components/Dev/DevExperience';
 import DevTestimonials from '../components/Dev/DevTestimonials';
@@ -24,9 +23,6 @@ export default function DevPage() {
 
       {/* Featured Work Grid */}
       <DevFeaturedWork />
-
-      {/* Morphing Text Statement Banner */}
-      <DevStatementBanner />
 
       {/* Tools & Stack Grid */}
       <DevToolsStack />

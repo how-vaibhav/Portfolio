@@ -143,35 +143,44 @@ function TechCard({ item }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{
-        width: '165px',
+        width: '180px',
         flexShrink: 0,
-        background: isHovered ? '#16161c' : '#101014',
-        border: isHovered ? `1px solid ${item.border}` : '1px solid rgba(255, 255, 255, 0.08)',
-        borderRadius: '10px',
-        padding: '12px 14px',
+        background: isHovered
+          ? 'linear-gradient(180deg, rgba(30, 30, 38, 0.6) 0%, rgba(20, 20, 28, 0.85) 100%)'
+          : 'linear-gradient(180deg, rgba(20, 20, 26, 0.35) 0%, rgba(12, 12, 16, 0.65) 100%)',
+        backdropFilter: 'blur(24px) saturate(150%)',
+        WebkitBackdropFilter: 'blur(24px) saturate(150%)',
+        border: '1px solid',
+        borderColor: isHovered ? item.border : 'rgba(255, 255, 255, 0.06)',
+        borderTopColor: isHovered ? item.border : 'rgba(255, 255, 255, 0.15)', // Rim light effect
+        borderRadius: '16px',
+        padding: '14px 18px',
         display: 'flex',
         alignItems: 'center',
-        gap: '12px',
+        gap: '14px',
         cursor: 'pointer',
-        boxShadow: isHovered ? `0 8px 24px ${item.bg}` : '0 4px 14px rgba(0,0,0,0.3)',
-        transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
-        transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+        boxShadow: isHovered
+          ? `0 20px 40px ${item.bg}, inset 0 1px 1px rgba(255,255,255,0.2)`
+          : '0 10px 30px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.08)',
+        transform: isHovered ? 'translateY(-4px) scale(1.03)' : 'translateY(0) scale(1)',
+        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
       }}
     >
-      {/* Official Vector Logo */}
+      {/* Official Vector Logo Box */}
       <div
         style={{
-          width: '32px',
-          height: '32px',
+          width: '38px',
+          height: '38px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0,
-          background: isHovered ? item.bg : 'rgba(255, 255, 255, 0.03)',
-          borderRadius: '6px',
-          padding: '5px',
-          border: `1px solid ${isHovered ? item.border : 'rgba(255, 255, 255, 0.06)'}`,
-          transition: 'all 0.2s ease',
+          background: isHovered ? item.bg : 'rgba(255, 255, 255, 0.02)',
+          borderRadius: '10px',
+          padding: '6px',
+          border: `1px solid ${isHovered ? item.border : 'rgba(255, 255, 255, 0.04)'}`,
+          transition: 'all 0.4s ease',
+          boxShadow: isHovered ? `0 0 15px ${item.bg}` : 'none',
         }}
       >
         <img
@@ -181,7 +190,8 @@ function TechCard({ item }) {
             width: '100%',
             height: '100%',
             objectFit: 'contain',
-            filter: isHovered ? 'drop-shadow(0 0 6px rgba(255,255,255,0.4))' : 'none',
+            filter: isHovered ? 'drop-shadow(0 0 8px rgba(255,255,255,0.6))' : 'none',
+            transition: 'filter 0.4s ease',
           }}
           loading="lazy"
         />
@@ -191,9 +201,9 @@ function TechCard({ item }) {
       <span
         style={{
           fontFamily: "'Inter', sans-serif",
-          fontSize: '13px',
+          fontSize: '14.5px',
           fontWeight: 800,
-          color: isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.9)',
+          color: isHovered ? '#ffffff' : 'rgba(255, 255, 255, 0.75)',
           letterSpacing: '-0.02em',
           whiteSpace: 'nowrap',
           overflow: 'hidden',
@@ -211,88 +221,87 @@ export default function DevToolsStack() {
     <section
       id="tools"
       style={{
-        paddingTop: '32px',
-        paddingBottom: '10px',
-        background: '#080808',
         position: 'relative',
+        borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+        background: '#040404',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         overflow: 'hidden',
       }}
     >
+      {/* Banner image dictates the exact height of the section so it is NEVER cropped */}
+      <img
+        src="/assets/footer-banner.png"
+        alt="Tools and Stack Background"
+        aria-hidden="true"
+        style={{
+          display: 'block',
+          width: '100%',
+          height: 'auto',
+          objectFit: 'contain',
+          filter: 'contrast(1.15) brightness(0.7) saturate(1.2)',
+          zIndex: 0,
+        }}
+      />
+
+      {/* Overlay gradient to ensure slight contrast but preserve image visibility */}
       <div
         style={{
-          maxWidth: '1360px',
-          margin: '0 auto',
-          paddingLeft: 'clamp(20px, 4.5vw, 64px)',
-          paddingRight: 'clamp(20px, 4.5vw, 64px)',
+          position: 'absolute',
+          inset: 0,
+          background: `
+            linear-gradient(180deg,
+              rgba(4,4,4,0.4) 0%,
+              transparent 20%,
+              transparent 80%,
+              rgba(4,4,4,0.4) 100%
+            )
+          `,
+          zIndex: 1,
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Content wrapper layered exactly over the image */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          gap: '30px',
+          paddingBottom: 'clamp(20px, 5vw, 60px)',
         }}
       >
-        {/* Section Header */}
+        {/* Marquee Rows Overlay */}
+
+        {/* Dual-Direction Infinite Magic UI Marquee with Edge Gradient Masks */}
         <div
           style={{
-            fontSize: '12px',
-            fontWeight: 900,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: '#ffffff',
-            marginBottom: '20px',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-            paddingBottom: '14px',
+            position: 'relative',
+            width: '100%',
+            overflow: 'hidden',
           }}
         >
-          TOOLS & STACK
-        </div>
-      </div>
-
-      {/* Dual-Direction Infinite Magic UI Marquee with Edge Gradient Masks */}
-      <div
-        style={{
-          position: 'relative',
-          width: '100%',
-          overflow: 'hidden',
-        }}
-      >
-        {/* Left Edge Gradient Fade Mask */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            left: 0,
-            width: 'clamp(30px, 6vw, 100px)',
-            background: 'linear-gradient(to right, #080808 25%, transparent 100%)',
-            zIndex: 10,
-            pointerEvents: 'none',
-          }}
-        />
-
-        {/* Right Edge Gradient Fade Mask */}
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            right: 0,
-            width: 'clamp(30px, 6vw, 100px)',
-            background: 'linear-gradient(to left, #080808 25%, transparent 100%)',
-            zIndex: 10,
-            pointerEvents: 'none',
-          }}
-        />
-
-        {/* Row 1 — Languages & Core Frameworks (Left to Right) */}
-        <Marquee duration={28} pauseOnHover={true} gap="12px" repeat={4}>
+          {/* Row 1 — Languages & Core Frameworks (Left to Right) */}
+        <Marquee duration={35} pauseOnHover={false} gap="24px" repeat={4}>
           {ROW_1_STACK.map((item) => (
             <TechCard key={item.name} item={item} />
           ))}
         </Marquee>
 
         {/* Row 2 — Backend, Databases & DevOps (Right to Left / Reverse) */}
-        <div style={{ marginTop: '10px' }}>
-          <Marquee duration={30} reverse={true} pauseOnHover={true} gap="12px" repeat={4}>
+        <div style={{ marginTop: '24px' }}>
+          <Marquee duration={40} reverse={true} pauseOnHover={false} gap="24px" repeat={4}>
             {ROW_2_STACK.map((item) => (
               <TechCard key={item.name} item={item} />
             ))}
           </Marquee>
+        </div>
         </div>
       </div>
     </section>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import './dev.css';
 
@@ -241,6 +241,14 @@ function PhysicsTestimonialCard({ item, index, progress, isHovered, onHover, onL
 export default function DevTestimonials() {
   const containerRef = useRef(null);
   const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 860);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Active continuous scroll progression through the section
   const { scrollYProgress } = useScroll({
@@ -287,26 +295,30 @@ export default function DevTestimonials() {
       />
 
       {/* Floating Sparkle Stars */}
-      <SparkleStar
-        size={26}
-        color="#CCFF00"
-        style={{ position: 'absolute', top: '100px', left: '7%', opacity: 0.7 }}
-      />
-      <SparkleStar
-        size={30}
-        color="#FF70A6"
-        style={{ position: 'absolute', top: '160px', right: '8%', opacity: 0.8 }}
-      />
-      <SparkleStar
-        size={22}
-        color="#70D6FF"
-        style={{ position: 'absolute', bottom: '90px', left: '12%', opacity: 0.6 }}
-      />
-      <SparkleStar
-        size={26}
-        color="#FFFFFF"
-        style={{ position: 'absolute', bottom: '130px', right: '10%', opacity: 0.7 }}
-      />
+      {!isMobile && (
+        <>
+          <SparkleStar
+            size={26}
+            color="#CCFF00"
+            style={{ position: 'absolute', top: '100px', left: '7%', opacity: 0.7 }}
+          />
+          <SparkleStar
+            size={30}
+            color="#FF70A6"
+            style={{ position: 'absolute', top: '160px', right: '8%', opacity: 0.8 }}
+          />
+          <SparkleStar
+            size={22}
+            color="#70D6FF"
+            style={{ position: 'absolute', bottom: '90px', left: '12%', opacity: 0.6 }}
+          />
+          <SparkleStar
+            size={26}
+            color="#FFFFFF"
+            style={{ position: 'absolute', bottom: '130px', right: '10%', opacity: 0.7 }}
+          />
+        </>
+      )}
 
       <div style={{ maxWidth: '1360px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
         {/* Section Header */}
