@@ -47,33 +47,12 @@ The primary portfolio experience at `/`. A dark, cyber-industrial showcase of fu
 - Dual-direction infinite tech marquee with 30+ tools
 - Timeline-based career experience section
 
-### 🎨 Design Studio Mode — `v2` · *Under Development*
+### Design Studio Mode — `v2` · *Under Development*
 Accessible at `/design`. The second version of the portfolio — a curated editorial experience for design clients and creative collaborators.
 
 > **Design Mode is Portfolio v2**, currently under active development. It will feature an editorial visual identity, brand case studies, typography systems, and interactive creative media.
 
----
 
-## Featured Projects
-
-### eMineral Pass
-- **Domain:** Government-Compliant Mineral Logistics SaaS  
-- **Stack:** Next.js, TypeScript, Supabase, PostgreSQL, Tailwind CSS  
-- **Architecture:** End-to-end authorization engine compliant with UP Minerals Rules 2018. Real-time cryptographically signed QR verification, bilingual PDF permit generation (English + Devanagari Hindi), automated royalty calculation, and role-based audit logs.  
-- **Live:** https://www.mineraltrack.shop/
-
-### GovAid Sikkim
-- **Domain:** Citizen Welfare Scheme Discovery & Evaluation Engine  
-- **Stack:** Django 5, Python 3.12, PostgreSQL, Tailwind CSS  
-- **Architecture:** Centralized welfare scheme evaluation engine. Verhoeff algorithm Aadhaar checksum verification, field-level Fernet symmetric encryption for sensitive demographic data, rule-based qualification pipelines.  
-- **Live:** https://govaid-5n3k.onrender.com/
-
-### LOG Detector
-- **Domain:** Cyber Forensics & Threat Timeline Analyzer  
-- **Stack:** Python 3.8+, Shannon Entropy Engine, Rich CLI, Flask, React  
-- **Architecture:** High-throughput parallel log forensic tool processing large server logs in seconds. Computes Shannon entropy baselines to identify obfuscated payloads and correlates anomalous events against 5-stage cyber kill-chains.
-
----
 
 ## Repository Structure
 
