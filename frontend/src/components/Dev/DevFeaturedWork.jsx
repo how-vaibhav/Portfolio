@@ -124,13 +124,13 @@ function ProjectCard({ p, i, isMobile }) {
 
         {/* Image block */}
         <div style={{
-          flex: isMobile ? 'auto' : '0 0 240px',
-          height: isMobile ? '180px' : 'auto',
+          flex: isMobile ? 'auto' : '0 0 340px', // Widened to better fit 16:9 screenshots
+          height: isMobile ? '200px' : 'auto',
           overflow: 'hidden',
           marginLeft: isMobile ? 0 : (isEven ? '40px' : 0),
           marginRight: isMobile ? 0 : (isEven ? 0 : '40px'),
           position: 'relative',
-          background: '#000',
+          background: '#0c0c0e', // Match card background to hide letterboxing
         }}>
           <motion.img
             src={p.image}
@@ -138,7 +138,7 @@ function ProjectCard({ p, i, isMobile }) {
             style={{
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
+              objectFit: 'contain', // Ensures the screenshot is completely visible
               objectPosition: 'center',
               display: 'block',
             }}
@@ -192,16 +192,30 @@ function ProjectCard({ p, i, isMobile }) {
               {p.tag}
             </span>
 
-            {/* Arrow — always visible, no footer needed */}
-            <motion.span
+            {/* Professional Circular Arrow Icon */}
+            <motion.div
               style={{
-                fontSize: '16px', color: p.accent, fontWeight: 900,
-                display: 'inline-block',
+                width: '32px', height: '32px',
+                borderRadius: '50%',
+                border: `1px solid rgba(255, 255, 255, 0.15)`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#fff',
+                background: 'rgba(255, 255, 255, 0.03)',
               }}
-              whileHover={{ x: 3, y: -3, transition: { duration: 0.2 } }}
+              whileHover={{ 
+                background: p.accent, 
+                color: '#000',
+                borderColor: p.accent,
+                scale: 1.1,
+                rotate: 45,
+                transition: { duration: 0.25, ease: 'easeOut' }
+              }}
             >
-              ↗
-            </motion.span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </motion.div>
           </div>
 
           {/* Title */}
@@ -241,7 +255,7 @@ export default function DevFeaturedWork() {
     <section
       id="work"
       style={{
-        padding: 'clamp(60px, 8vw, 100px) clamp(20px, 5vw, 80px)',
+        padding: 'clamp(40px, 5vw, 60px) clamp(20px, 5vw, 80px)',
         background: '#080808',
         position: 'relative',
       }}

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { Marquee } from '../ui/marquee';
 import { PixelImage } from '../ui/pixel-image';
 import useResponsive from './useResponsive';
@@ -220,6 +221,20 @@ function TechCard({ item }) {
 
 export default function DevToolsStack() {
   const { isMobile } = useResponsive();
+  const ref = useRef(null);
+
+  // Advanced Parallax Effect
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+
+  // Banner image slightly scales and moves down while scrolling down
+  const bannerY = useTransform(scrollYProgress, [0, 1], ['-12%', '12%']);
+  const bannerScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
+  
+  // Marquee overlay moves up in opposition for a dynamic 3D feel
+  const marqueeY = useTransform(scrollYProgress, [0, 1], ['8%', '-8%']);
 
   useEffect(() => {
     // Only necessary internal effects
@@ -228,6 +243,7 @@ export default function DevToolsStack() {
   return (
     <section
       id="tools"
+      ref={ref}
       style={{
         position: 'relative',
         borderTop: '1px solid rgba(255, 255, 255, 0.05)',
@@ -255,18 +271,23 @@ export default function DevToolsStack() {
             opacity: 0, /* Hide the original but keep it for layout height */
           }}
         />
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <motion.div style={{ 
+          position: 'absolute', inset: 0, zIndex: 0,
+          y: isMobile ? 0 : bannerY, 
+          scale: isMobile ? 1 : bannerScale,
+          transformOrigin: 'center center'
+        }}>
           <PixelImage 
             src="/assets/footer-banner.png" 
             customGrid={{ rows: 3, cols: 12 }} 
             pixelFadeInDuration={800}
             colorRevealDelay={1200}
           />
-        </div>
+        </motion.div>
       </div>
 
       {/* Content wrapper layered exactly over the image on desktop, below on mobile */}
-      <div
+      <motion.div
         style={{
           position: isMobile ? 'relative' : 'absolute',
           inset: 0,
@@ -277,6 +298,7 @@ export default function DevToolsStack() {
           paddingBottom: isMobile ? '40px' : 'clamp(20px, 5vw, 60px)',
           paddingTop: isMobile ? '40px' : '0',
           width: '100%',
+          y: isMobile ? 0 : marqueeY, // Opposing parallax effect only on desktop
         }}
       >
         {/* Marquee Rows Overlay */}
@@ -305,7 +327,7 @@ export default function DevToolsStack() {
           </Marquee>
         </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

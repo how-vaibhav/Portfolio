@@ -70,7 +70,7 @@ export default function DevNavbar() {
           alignItems: 'center',
           transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
           width: isMobile ? '92%' : 'auto', // Keep it bounded on mobile
-          maxWidth: '500px',
+          maxWidth: '700px', // Increased from 500px to prevent flexbox center clipping
         }}
       >
         <nav 
@@ -81,6 +81,7 @@ export default function DevNavbar() {
             justifyContent: isMobile ? 'space-between' : 'center',
             width: '100%',
             gap: isMobile ? '2px' : '8px',
+            padding: '0 4px', // Add breathing room to prevent container clipping
             overflowX: 'auto',
             WebkitOverflowScrolling: 'touch',
           }}
@@ -93,6 +94,11 @@ export default function DevNavbar() {
                 href={item.href}
                 style={{
                   position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0, // Prevent flexbox from squishing the pill and ruining the curve
+                  overflow: 'hidden', // Guarantee perfect pill clipping
                   padding: isMobile ? '10px 14px' : '10px 24px',
                   fontSize: isMobile ? '11px' : '13px',
                   fontWeight: 900,
@@ -100,7 +106,7 @@ export default function DevNavbar() {
                   textTransform: 'uppercase',
                   color: isActive ? '#080808' : 'rgba(255, 255, 255, 0.65)',
                   textDecoration: 'none',
-                  borderRadius: '100px',
+                  borderRadius: 9999,
                   transition: 'color 0.3s ease',
                   zIndex: 1,
                   whiteSpace: 'nowrap',
@@ -122,7 +128,7 @@ export default function DevNavbar() {
                       right: 0,
                       bottom: 0,
                       background: '#CCFF00',
-                      borderRadius: '100px',
+                      borderRadius: 9999,
                       zIndex: -1,
                     }}
                     transition={{
