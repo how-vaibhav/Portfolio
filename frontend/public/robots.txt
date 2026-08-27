@@ -5,7 +5,7 @@ Allow: /
 Disallow: /design
 
 # Sitemap location
-Sitemap: https://how-vaibhav.vercel.app/sitemap.xml
+Sitemap: https://www.howvaibhav.in/sitemap.xml
 
 # Allow all major crawlers explicitly
 User-agent: Googlebot

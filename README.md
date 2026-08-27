@@ -17,7 +17,9 @@
 **A high-performance, production-grade portfolio engineered for technical depth and visual impact.**  
 Built with React 18, Framer Motion physics, and a hardware-accelerated canvas engine.
 
-[**→ Live Site**](https://how-vaibhav.vercel.app)
+[**→ Live Site**](https://www.howvaibhav.in)
+
+![Version](https://img.shields.io/badge/version-1.3.0-CCFF00?style=flat-square&labelColor=080808) &nbsp; ![Status](https://img.shields.io/badge/v1%20Dev%20Mode-Live-brightgreen?style=flat-square&labelColor=080808) &nbsp; ![Status](https://img.shields.io/badge/v2%20Design%20Mode-In%20Development-orange?style=flat-square&labelColor=080808)
 
 </div>
 
