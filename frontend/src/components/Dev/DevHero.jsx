@@ -71,7 +71,7 @@ export default function DevHero() {
     <section
       id="home"
       style={{
-        minHeight: '100vh',
+        minHeight: isMobile ? 'auto' : '100vh',
         paddingTop: isMobile ? '72px' : '112px',
         paddingBottom: 0,
         paddingLeft:  isMobile ? '24px' : isTablet ? '44px' : '80px',

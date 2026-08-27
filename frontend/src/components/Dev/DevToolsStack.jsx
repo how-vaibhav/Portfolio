@@ -235,10 +235,10 @@ export default function DevToolsStack() {
         borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
         background: '#040404',
         display: 'flex',
+        flexDirection: isMobile ? 'column' : 'row',
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        minHeight: isMobile ? '500px' : 'auto', // Give space for Marquees on mobile
       }}
     >
       {/* Banner image dictates the exact height on desktop, but covers on mobile to prevent squishing */}
@@ -249,28 +249,26 @@ export default function DevToolsStack() {
         style={{
           display: 'block',
           width: '100%',
-          height: isMobile ? '100%' : 'auto',
-          position: isMobile ? 'absolute' : 'relative',
-          inset: 0,
-          objectFit: isMobile ? 'cover' : 'contain',
+          height: 'auto',
+          position: isMobile ? 'relative' : 'relative',
+          objectFit: 'contain',
           objectPosition: 'center',
           zIndex: 0,
         }}
       />
 
-
-
-      {/* Content wrapper layered exactly over the image */}
+      {/* Content wrapper layered exactly over the image on desktop, below on mobile */}
       <div
         style={{
-          position: 'absolute',
+          position: isMobile ? 'relative' : 'absolute',
           inset: 0,
           zIndex: 2,
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'flex-end',
-          gap: '30px',
-          paddingBottom: 'clamp(20px, 5vw, 60px)',
+          justifyContent: isMobile ? 'center' : 'flex-end',
+          paddingBottom: isMobile ? '40px' : 'clamp(20px, 5vw, 60px)',
+          paddingTop: isMobile ? '40px' : '0',
+          width: '100%',
         }}
       >
         {/* Marquee Rows Overlay */}
