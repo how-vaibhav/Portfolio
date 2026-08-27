@@ -1,72 +1,56 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import useResponsive from './useResponsive';
 import './dev.css';
 
 const TESTIMONIALS_DATA = [
   {
     id: 1,
-    rating: 5,
-    quote:
-      'Working with Vaibhav was an absolute game changer. The eMineral Pass platform was delivered with rock-solid QR verification and government-grade security.',
-    author: 'Daniel K.',
-    role: 'Operations Lead, Mineral Track',
+    rating: 4.5,
+    quote: "Honestly blown away by his design sense. He took our rough ideas and turned them into something that just looks and feels incredible to use.",
+    author: 'Yasir Khan',
+    role: 'Logistics Business Owner',
     bg: '#CCFF00',
     textColor: '#080808',
     starColor: '#080808',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
-    // Dynamic physics ranges: [start (unscrolled), settled (in-view)]
-    startRotate: -18,
-    endRotate: -6,
-    startX: -80,
-    startY: 90,
+    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=80',
+    startRotate: -45,
+    endRotate: 0,
+    startX: -400,
+    startY: 250,
+    startScale: 0.5,
   },
   {
     id: 2,
-    rating: 5,
-    quote:
-      "He's not just a developer, he's a true systems problem solver. The scheme evaluation algorithms and Fernet encryption were flawless and lightning fast.",
-    author: 'Sophia M.',
-    role: 'Product Lead, GovAid Portal',
+    rating: 4,
+    quote: "Vaibhav is the guy you call when you need something that won't crash. He built our entire system from scratch and it hasn't dropped a single request.",
+    author: 'Amrit Pal',
+    role: 'Doctor / Clinic Owner',
     bg: '#FF70A6',
     textColor: '#080808',
     starColor: '#080808',
-    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
-    startRotate: 16,
-    endRotate: 5,
-    startX: 60,
-    startY: 110,
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
+    startRotate: 30,
+    endRotate: 0,
+    startX: 0,
+    startY: 350,
+    startScale: 0.4,
   },
   {
     id: 3,
-    rating: 5,
-    quote:
-      'Clean code, clear communication, and outstanding execution. The multiprocessed Python log analyzer processed gigabytes in seconds. Extraordinary engineer.',
-    author: 'Alex R.',
-    role: 'Principal Architect, Security Ops',
+    rating: 4.5,
+    quote: "Super easy to work with and knows backend architecture inside out. The platform he delivered is fast, secure, and we haven't had to worry about a thing.",
+    author: 'Amrit Pal Singh',
+    role: 'Cafe Owner',
     bg: '#FFFFFF',
     textColor: '#080808',
     starColor: '#080808',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
-    startRotate: -14,
-    endRotate: -4,
-    startX: -50,
-    startY: 130,
-  },
-  {
-    id: 4,
-    rating: 5,
-    quote:
-      'The 60fps canvas engine and responsive animations he built gave our platform an ultra-premium feel. Conversion rates increased by 40% immediately.',
-    author: 'Vikram S.',
-    role: 'Co-Founder, Veloce Labs',
-    bg: '#70D6FF',
-    textColor: '#080808',
-    starColor: '#080808',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
-    startRotate: 20,
-    endRotate: 6,
-    startX: 80,
-    startY: 100,
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80',
+    startRotate: 45,
+    endRotate: 0,
+    startX: 400,
+    startY: 200,
+    startScale: 0.5,
   },
 ];
 
@@ -95,8 +79,8 @@ function PhysicsTestimonialCard({ item, index, progress, isHovered, onHover, onL
   const cardRotate = useTransform(progress, [0, 1], [item.startRotate, item.endRotate]);
   const cardX = useTransform(progress, [0, 1], [item.startX, 0]);
   const cardY = useTransform(progress, [0, 1], [item.startY, 0]);
-  const cardScale = useTransform(progress, [0, 1], [0.82, 1]);
-  const cardOpacity = useTransform(progress, [0, 0.4, 1], [0.2, 0.85, 1]);
+  const cardScale = useTransform(progress, [0, 1], [item.startScale || 0.5, 1]);
+  const cardOpacity = useTransform(progress, [0, 0.6, 1], [0, 0.9, 1]);
 
   return (
     <motion.div
@@ -148,74 +132,91 @@ function PhysicsTestimonialCard({ item, index, progress, isHovered, onHover, onL
             ? '12px 12px 0px #000000, 0 24px 50px rgba(0, 0, 0, 0.8)'
             : '6px 6px 0px #000000',
           transition: 'box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        <div>
+        {/* Giant Background Quote Mark */}
+        <div style={{
+          position: 'absolute',
+          top: '-20px',
+          right: '10px',
+          fontSize: '180px',
+          fontFamily: "'Georgia', serif",
+          color: '#000000',
+          opacity: 0.04,
+          lineHeight: 1,
+          pointerEvents: 'none',
+          zIndex: 0,
+        }}>
+          "
+        </div>
+
+        <div style={{ position: 'relative', zIndex: 1 }}>
           {/* 5-Star Rating Row */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '4px',
-              marginBottom: '16px',
-              fontSize: '18px',
+              marginBottom: '20px',
+              fontSize: '20px',
               color: item.starColor,
               letterSpacing: '2px',
             }}
           >
-            {Array.from({ length: item.rating }).map((_, i) => (
+            {Array.from({ length: Math.floor(item.rating) }).map((_, i) => (
               <span key={i}>★</span>
             ))}
+            {item.rating % 1 !== 0 && (
+              <span style={{ position: 'relative', display: 'inline-block' }}>
+                <span style={{ color: 'rgba(0,0,0,0.15)' }}>★</span>
+                <span style={{ position: 'absolute', left: 0, top: 0, overflow: 'hidden', width: '50%', color: item.starColor }}>★</span>
+              </span>
+            )}
           </div>
 
           {/* Testimonial Quote */}
-          <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '14px',
-              fontWeight: 600,
-              lineHeight: 1.6,
-              color: item.textColor,
-              margin: '0 0 20px 0',
-              letterSpacing: '-0.01em',
-            }}
-          >
-            "{item.quote}"
-          </p>
+          <div style={{
+            borderLeft: `3.5px solid ${item.textColor}`,
+            paddingLeft: '18px',
+            margin: '0 0 32px 0',
+          }}>
+            <p
+              style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: '26px',
+                fontWeight: 600,
+                lineHeight: 1.4,
+                color: item.textColor,
+                margin: 0,
+                letterSpacing: '0em',
+              }}
+            >
+              "{item.quote}"
+            </p>
+          </div>
         </div>
 
-        {/* Author Row with Avatar and Divider */}
+        {/* Author Row with Divider */}
         <div
           style={{
-            borderTop: '1.5px solid rgba(0, 0, 0, 0.15)',
-            paddingTop: '14px',
+            borderTop: `2px solid ${item.textColor}`,
+            paddingTop: '16px',
             display: 'flex',
             alignItems: 'center',
-            gap: '12px',
+            justifyContent: 'space-between',
           }}
         >
-          <img
-            src={item.avatar}
-            alt={item.author}
-            style={{
-              width: '38px',
-              height: '38px',
-              borderRadius: '50%',
-              objectFit: 'cover',
-              border: '2px solid #000000',
-              flexShrink: 0,
-            }}
-            loading="lazy"
-          />
-
           <div>
             <div
               style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '13.5px',
+                fontFamily: "'Archivo Black', 'Inter', sans-serif",
+                fontSize: '15px',
                 fontWeight: 900,
                 color: item.textColor,
-                letterSpacing: '-0.01em',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
               }}
             >
               {item.author}
@@ -224,13 +225,21 @@ function PhysicsTestimonialCard({ item, index, progress, isHovered, onHover, onL
             <div
               style={{
                 fontSize: '11px',
-                fontWeight: 700,
-                color: 'rgba(0, 0, 0, 0.65)',
-                marginTop: '2px',
+                fontWeight: 800,
+                color: item.textColor,
+                opacity: 0.7,
+                marginTop: '4px',
+                letterSpacing: '0.05em',
+                textTransform: 'uppercase',
               }}
             >
               {item.role}
             </div>
+          </div>
+          
+          {/* Decorative Brutalist Cross */}
+          <div style={{ fontSize: '20px', fontWeight: 900, color: item.textColor, lineHeight: 1 }}>
+            +
           </div>
         </div>
       </div>
@@ -240,20 +249,14 @@ function PhysicsTestimonialCard({ item, index, progress, isHovered, onHover, onL
 
 export default function DevTestimonials() {
   const containerRef = useRef(null);
+  const { isMobile } = useResponsive();
   const [hoveredIdx, setHoveredIdx] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 860);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   // Active continuous scroll progression through the section
+  // Changed offset to 'end 60%' to snap into alignment slightly earlier while scrolling down
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 90%', 'end 40%'],
+    offset: ['start 95%', 'end 65%'],
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
@@ -349,7 +352,7 @@ export default function DevTestimonials() {
           >
             <span>✦ CLIENT TESTIMONIALS</span>
             <span style={{ color: 'rgba(255, 255, 255, 0.4)' }}>|</span>
-            <span style={{ color: '#ffffff' }}>5.0 RATED</span>
+            <span style={{ color: '#ffffff' }}>4.5 RATED</span>
           </div>
 
           <h2

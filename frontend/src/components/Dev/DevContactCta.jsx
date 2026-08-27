@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import useResponsive from './useResponsive';
 import './dev.css';
 
 export default function DevContactCta() {
   const [emailHovered, setEmailHovered] = useState(false);
   const [phoneHovered, setPhoneHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 860);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const { isMobile } = useResponsive();
 
   return (
     <footer
@@ -138,20 +133,6 @@ export default function DevContactCta() {
                 <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.38)', margin: 0, lineHeight: 1.5 }}>
                   Architectural consultations, client projects, full-stack engineering.
                 </p>
-              </div>
-              {/* Live indicator */}
-              <div style={{
-                display: 'flex', alignItems: 'center', gap: '6px',
-                background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.25)',
-                padding: '4px 10px', borderRadius: '20px', flexShrink: 0,
-              }}>
-                <span style={{
-                  width: 6, height: 6, borderRadius: '50%', background: '#22C55E',
-                  display: 'inline-block',
-                  boxShadow: '0 0 0 0 rgba(34,197,94,0.6)',
-                  animation: 'devPulse 2s ease-in-out infinite',
-                }} />
-                <span style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.1em', color: '#22C55E' }}>ONLINE</span>
               </div>
             </div>
 

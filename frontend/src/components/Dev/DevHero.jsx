@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, animate } from 'motion/react';
+import useResponsive from './useResponsive';
 import './dev.css';
 
 /* ─── Counter (runs once on mount) ─────────────── */
@@ -25,8 +26,7 @@ const lineV   = { hidden: { y: '105%', opacity: 0, skewY: 4 }, visible: { y: 0, 
 const fadeV   = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } } };
 
 export default function DevHero() {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isTablet, setIsTablet] = useState(false);
+  const { isMobile, isTablet } = useResponsive();
 
   /* ── Spring parallax — only 2 source values, all transforms are cheap */
   const rawX = useMotionValue(0);
@@ -42,27 +42,21 @@ export default function DevHero() {
   const imgX  = useTransform(sx, v => v * 0.1);
   const imgY  = useTransform(sy, v => v * 0.1);
 
-  const projects = useCountUp(12, 0.9);
-  const clients  = useCountUp(8, 1.1);
-  const years    = useCountUp(3, 1.3);
+  const projects = useCountUp(10, 0.9);
+  const clients  = useCountUp(5, 1.1);
+  const years    = useCountUp(5, 1.3);
 
-  /* Throttled mousemove — only fires at most every 16ms (60fps cap) */
+  /* requestAnimationFrame throttled mousemove to cap at 60fps and avoid main-thread blocking */
   const onMouseMove = useCallback((e) => {
-    rawX.set((e.clientX / window.innerWidth  - 0.5) * 28);
-    rawY.set((e.clientY / window.innerHeight - 0.5) * 28);
+    requestAnimationFrame(() => {
+      rawX.set((e.clientX / window.innerWidth  - 0.5) * 28);
+      rawY.set((e.clientY / window.innerHeight - 0.5) * 28);
+    });
   }, [rawX, rawY]);
 
   useEffect(() => {
-    const resize = () => {
-      const w = window.innerWidth;
-      setIsMobile(w < 768);
-      setIsTablet(w >= 768 && w < 1080);
-    };
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
     window.addEventListener('mousemove', onMouseMove, { passive: true });
     return () => {
-      window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouseMove);
     };
   }, [onMouseMove]);
@@ -71,9 +65,9 @@ export default function DevHero() {
     <section
       id="home"
       style={{
-        minHeight: isMobile ? 'auto' : '100vh',
+        minHeight: (isMobile || isTablet) ? 'auto' : '100vh',
         paddingTop: isMobile ? '72px' : '112px',
-        paddingBottom: 0,
+        paddingBottom: (isMobile || isTablet) ? '64px' : 0,
         paddingLeft:  isMobile ? '24px' : isTablet ? '44px' : '80px',
         paddingRight: isMobile ? '24px' : isTablet ? '44px' : '80px',
         position: 'relative',
@@ -116,11 +110,11 @@ export default function DevHero() {
       <div style={{
         maxWidth: '1400px', margin: '0 auto', width: '100%',
         position: 'relative', zIndex: 2,
-        display: 'flex', flexDirection: isMobile ? 'column' : 'row',
+        display: 'flex', flexDirection: (isMobile || isTablet) ? 'column' : 'row',
         alignItems: 'center', justifyContent: 'space-between',
-        gap: isMobile ? '32px' : 0,
+        gap: (isMobile || isTablet) ? '48px' : 0,
         paddingBottom: isMobile ? '32px' : 0,
-        minHeight: isMobile ? 'auto' : 'calc(100vh - 112px)',
+        minHeight: (isMobile || isTablet) ? 'auto' : 'calc(100vh - 112px)',
       }}>
 
         {/* ══ LEFT: Text ══════════════════ */}
@@ -162,13 +156,25 @@ export default function DevHero() {
               textTransform: 'uppercase', margin: 0, color: '#ffffff',
             }}
           >
-            {['I DESIGN.', 'I CODE.'].map(text => (
-              <div key={text} style={{ overflow: 'hidden' }}>
-                <motion.div variants={lineV}>{text}</motion.div>
+            {['I DESIGN.', 'I CODE.'].map((text, idx) => (
+              <div key={text} style={{ overflow: 'hidden', paddingRight: '20px' }}>
+                <motion.div 
+                  variants={lineV}
+                  style={{ display: 'inline-block', cursor: 'default', transformOrigin: 'left center' }}
+                  whileHover={{ 
+                    color: 'transparent', 
+                    WebkitTextStroke: isMobile ? '1px #ffffff' : '2px #ffffff',
+                    x: isMobile ? 8 : 15,
+                    skewX: -8,
+                    transition: { duration: 0.2, ease: 'easeOut' }
+                  }}
+                >
+                  {text}
+                </motion.div>
               </div>
             ))}
 
-            <div style={{ overflow: 'hidden', marginTop: '14px', marginBottom: '14px' }}>
+            <div style={{ overflow: 'hidden', marginTop: '14px', marginBottom: '4px', paddingRight: '20px' }}>
               <motion.div
                 variants={lineV}
                 style={{
@@ -176,7 +182,14 @@ export default function DevHero() {
                   padding: '5px 20px', marginLeft: '-4px',
                   border: '1.5px solid rgba(255,255,255,0.18)',
                   boxShadow: '10px 10px 0px rgba(204,255,0,0.9)',
-                  position: 'relative', overflow: 'hidden',
+                  position: 'relative', overflow: 'hidden', cursor: 'default'
+                }}
+                whileHover={{
+                  scale: 1.05,
+                  rotate: -2,
+                  boxShadow: '15px 15px 0px rgba(255,112,166,1)',
+                  background: '#1A3FCC',
+                  transition: { type: 'spring', stiffness: 300, damping: 15 }
                 }}
               >
                 {/* Shimmer — CSS animation, zero JS */}
@@ -185,8 +198,30 @@ export default function DevHero() {
               </motion.div>
             </div>
 
-            <div style={{ overflow: 'hidden' }}>
-              <motion.div variants={lineV}>BRANDS.</motion.div>
+            <div style={{ overflow: 'hidden', paddingTop: '8px', paddingRight: '20px' }}>
+              <motion.div 
+                variants={lineV}
+                style={{ 
+                  fontFamily: "'Lobster Two', cursive", 
+                  fontStyle: 'italic', 
+                  textTransform: 'none', 
+                  color: '#CCFF00', 
+                  fontSize: isMobile ? '56px' : isTablet ? '84px' : '110px',
+                  lineHeight: 0.9,
+                  letterSpacing: '0',
+                  display: 'inline-block',
+                  cursor: 'default',
+                  transformOrigin: 'left center'
+                }}
+                whileHover={{
+                  rotate: 2,
+                  scale: 1.05,
+                  color: '#FF70A6',
+                  transition: { type: 'spring', stiffness: 300, damping: 15 }
+                }}
+              >
+                Brands.
+              </motion.div>
             </div>
           </motion.h1>
 
@@ -343,10 +378,10 @@ export default function DevHero() {
               style={{
                 width: '100%', height: '100%',
                 objectFit: 'cover',
-                objectPosition: '20% bottom',
-                /* Removed expensive feConvolveMatrix SVG filter.
-                   Using only composited CSS filters (GPU-friendly) */
-                filter: 'grayscale(100%) contrast(1.1) drop-shadow(0 0 50px rgba(0,0,0,1)) drop-shadow(14px 0px 0px rgba(37,85,255,0.55))',
+                objectPosition: 'center top',
+                transform: isMobile ? 'scale(1.5) translateY(10%)' : 'scale(1.7) translateY(15%)',
+                /* Optimized CSS filters: Removed expensive 50px blur drop-shadow. */
+                filter: 'grayscale(100%) contrast(1.1) drop-shadow(14px 0px 0px rgba(37,85,255,0.55))',
               }}
             />
           </motion.div>

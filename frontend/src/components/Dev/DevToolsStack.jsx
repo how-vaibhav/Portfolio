@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Marquee } from '../ui/marquee';
+import useResponsive from './useResponsive';
 import './dev.css';
 
 // Exact tech stack from README with official vector icons and branding
@@ -217,13 +218,10 @@ function TechCard({ item }) {
 }
 
 export default function DevToolsStack() {
-  const [isMobile, setIsMobile] = useState(false);
+  const { isMobile } = useResponsive();
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 860);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    // Only necessary internal effects
   }, []);
 
   return (

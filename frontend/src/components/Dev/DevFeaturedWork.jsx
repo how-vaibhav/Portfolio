@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import useResponsive from './useResponsive';
 import './dev.css';
 
 const PROJECTS = [
@@ -230,13 +231,10 @@ function ProjectCard({ p, i, isMobile }) {
 
 /* ─── Section ─────────────────────────────────────── */
 export default function DevFeaturedWork() {
-  const [isMobile, setIsMobile] = useState(false);
+  const { isMobile } = useResponsive();
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 860);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    // Only necessary internal effects
   }, []);
 
   return (

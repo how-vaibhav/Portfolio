@@ -1,36 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import ModeToggle from '../ModeToggle';
+import { motion } from 'framer-motion';
+import useResponsive from './useResponsive';
+// import ModeToggle from '../ModeToggle';
 
 export default function DevNavbar() {
+  const { isMobile } = useResponsive();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 960);
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 30);
-      
-      const sections = ['home', 'work', 'case-studies', 'about', 'experience', 'contact'];
-      for (const s of sections) {
-        const el = document.getElementById(s);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
-            setActiveSection(s);
-            break;
-          }
-        }
-      }
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 30);
 
-    handleResize();
     handleScroll();
-    window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll, { passive: true });
+
+    const sections = ['home', 'work', 'tools', 'experience', 'contact'];
+    
+    // IntersectionObserver for tracking active section without layout thrashing
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '-30% 0px -60% 0px', // Triggers when section hits the upper middle
+      }
+    );
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
     return () => {
-      window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
     };
   }, []);
 
@@ -38,100 +46,126 @@ export default function DevNavbar() {
     { label: 'HOME', href: '#home', id: 'home' },
     { label: 'WORK', href: '#work', id: 'work' },
     { label: 'TOOLS', href: '#tools', id: 'tools' },
-    { label: 'EXPERIENCE', href: '#experience', id: 'experience' },
+    { label: 'EXP', href: '#experience', id: 'experience' },
     { label: 'CONTACT', href: '#contact', id: 'contact' },
   ];
 
   return (
-    <header
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        background: isScrolled ? 'rgba(4, 4, 4, 0.65)' : 'transparent',
-        backdropFilter: isScrolled ? 'blur(24px) saturate(180%)' : 'none',
-        WebkitBackdropFilter: isScrolled ? 'blur(24px) saturate(180%)' : 'none',
-        borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid transparent',
-        boxShadow: isScrolled ? '0 10px 30px rgba(0,0,0,0.4)' : 'none',
-        padding: isMobile ? (isScrolled ? '12px 20px' : '16px 20px') : (isScrolled ? '14px 48px' : '24px 48px'),
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-      }}
-    >
-      {/* Brand — intentionally blank */}
-      {!isMobile && (
-        <a
-          href="#home"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            textDecoration: 'none',
-            width: '80px',
-          }}
-        />
-      )}
-
-      {/* Center Nav Links (Scrollable on Mobile) */}
-      <nav 
-        className="dev-hide-scrollbar"
-        style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: isMobile ? '24px' : '32px',
-          overflowX: 'auto',
-          WebkitOverflowScrolling: 'touch',
-          maxWidth: isMobile ? 'calc(100vw - 80px)' : 'none',
-          padding: isMobile ? '4px 0' : 0,
-          marginRight: isMobile ? 'auto' : 0,
+    <>
+      <header
+        style={{
+          position: 'fixed',
+          top: isMobile ? 16 : 32,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 100,
+          background: isScrolled ? 'rgba(8, 8, 8, 0.8)' : '#080808',
+          backdropFilter: isScrolled ? 'blur(16px)' : 'none',
+          WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'none',
+          border: isScrolled ? '2px solid rgba(204,255,0,0.3)' : '2px solid #CCFF00',
+          boxShadow: isScrolled ? '0 10px 40px rgba(0,0,0,0.5)' : (isMobile ? '3px 3px 0 #000' : '6px 6px 0 #000'),
+          borderRadius: '100px',
+          padding: '6px 8px',
+          display: 'flex',
+          alignItems: 'center',
+          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+          width: isMobile ? '92%' : 'auto', // Keep it bounded on mobile
+          maxWidth: '500px',
         }}
       >
-        {navLinks.map((item) => (
-          <a
-            key={item.label}
-            href={item.href}
-            style={{
-              fontSize: '12px',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: activeSection === item.id ? '#CCFF00' : 'rgba(255, 255, 255, 0.7)',
-              textDecoration: 'none',
-              transition: 'color 0.2s ease',
-              position: 'relative',
-              whiteSpace: 'nowrap',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.color =
-                activeSection === item.id ? '#CCFF00' : 'rgba(255, 255, 255, 0.7)')
-            }
-          >
-            {item.label}
-            {activeSection === item.id && (
-              <span
+        <nav 
+          className="dev-hide-scrollbar"
+          style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: isMobile ? 'space-between' : 'center',
+            width: '100%',
+            gap: isMobile ? '2px' : '8px',
+            overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch',
+          }}
+        >
+          {navLinks.map((item) => {
+            const isActive = activeSection === item.id;
+            return (
+              <a
+                key={item.label}
+                href={item.href}
                 style={{
-                  position: 'absolute',
-                  bottom: '-6px',
-                  left: 0,
-                  right: 0,
-                  height: '2px',
-                  background: '#CCFF00',
-                  borderRadius: '1px',
+                  position: 'relative',
+                  padding: isMobile ? '10px 14px' : '10px 24px',
+                  fontSize: isMobile ? '11px' : '13px',
+                  fontWeight: 900,
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  color: isActive ? '#080808' : 'rgba(255, 255, 255, 0.65)',
+                  textDecoration: 'none',
+                  borderRadius: '100px',
+                  transition: 'color 0.3s ease',
+                  zIndex: 1,
+                  whiteSpace: 'nowrap',
                 }}
-              />
-            )}
-          </a>
-        ))}
-      </nav>
+                onMouseEnter={(e) => {
+                  if (!isActive) e.currentTarget.style.color = '#ffffff';
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) e.currentTarget.style.color = 'rgba(255, 255, 255, 0.65)';
+                }}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="dev-nav-pill"
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      background: '#CCFF00',
+                      borderRadius: '100px',
+                      zIndex: -1,
+                    }}
+                    transition={{
+                      type: 'tween',
+                      ease: 'circOut',
+                      duration: 0.25,
+                    }}
+                  />
+                )}
+                <span style={{ position: 'relative', zIndex: 2 }}>{item.label}</span>
+              </a>
+            );
+          })}
+        </nav>
+      </header>
 
-      {/* Right Side: Mode Switcher */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+      {/* Independent Mode Toggle floating at the top right - HIDING UNTIL DESIGN PAGE IS READY
+      <div 
+        style={{ 
+          position: 'fixed', 
+          top: isMobile ? 16 : 32, 
+          right: isMobile ? 16 : 32, 
+          zIndex: 100,
+          background: '#080808',
+          border: '2px solid rgba(255,255,255,0.1)',
+          borderRadius: '50%',
+          padding: '6px',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'all 0.3s ease',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = '#CCFF00';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+        }}
+      >
         <ModeToggle />
       </div>
-    </header>
+      */}
+    </>
   );
 }
