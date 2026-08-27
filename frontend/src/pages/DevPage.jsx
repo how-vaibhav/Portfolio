@@ -2,7 +2,6 @@ import React from 'react';
 import DevNavbar from '../components/Dev/DevNavbar';
 import DevHero from '../components/Dev/DevHero';
 import DevFeaturedWork from '../components/Dev/DevFeaturedWork';
-import DevCaseStudies from '../components/Dev/DevCaseStudies';
 import DevStatementBanner from '../components/Dev/DevStatementBanner';
 import DevToolsStack from '../components/Dev/DevToolsStack';
 import DevExperience from '../components/Dev/DevExperience';

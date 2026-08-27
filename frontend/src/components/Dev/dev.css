@@ -149,3 +149,19 @@
     flex-direction: column !important;
   }
 }
+
+.dev-marquee-content {
+  display: inline-block;
+  animation: devMarquee 25s linear infinite;
+}
+
+@keyframes devMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes devPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
