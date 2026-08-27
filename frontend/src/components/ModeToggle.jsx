@@ -10,6 +10,14 @@ export default function ModeToggle() {
   const { pathname } = useLocation();
   const isDesign = pathname === '/design';
   const [animating, setAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 860);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleToggle = () => {
     if (animating) return;
@@ -83,33 +91,33 @@ export default function ModeToggle() {
     >
       {/* Dev pill */}
       <span style={{
-        padding: '7px 16px',
+        padding: isMobile ? '7px 12px' : '7px 16px',
         borderRadius: '999px',
         fontSize: '12px',
         fontWeight: 700,
         letterSpacing: '0.01em',
         display: 'flex',
         alignItems: 'center',
-        gap: '6px',
+        gap: isMobile ? '0' : '6px',
         transition: 'background 0.3s, color 0.3s',
         background: !isDesign ? 'rgba(255,255,255,0.14)' : 'transparent',
         color: !isDesign ? '#fff' : 'rgba(255,255,255,0.4)',
         whiteSpace: 'nowrap',
       }}>
         <span style={{ fontSize: '11px', fontFamily: 'monospace', letterSpacing: '-0.03em' }}>&lt;/&gt;</span>
-        Dev
+        {!isMobile && <span>Dev</span>}
       </span>
 
       {/* Design pill */}
       <span style={{
-        padding: '7px 16px',
+        padding: isMobile ? '7px 12px' : '7px 16px',
         borderRadius: '999px',
         fontSize: '12px',
         fontWeight: 700,
         letterSpacing: '0.01em',
         display: 'flex',
         alignItems: 'center',
-        gap: '6px',
+        gap: isMobile ? '0' : '6px',
         transition: 'background 0.3s, color 0.3s',
         background: isDesign ? 'rgba(232,68,25,0.85)' : 'transparent',
         color: isDesign ? '#fff' : 'rgba(255,255,255,0.4)',
@@ -117,7 +125,7 @@ export default function ModeToggle() {
         boxShadow: isDesign ? '0 2px 12px rgba(232,68,25,0.4)' : 'none',
       }}>
         <span style={{ fontSize: '13px' }}>✦</span>
-        Design
+        {!isMobile && <span>Design</span>}
       </span>
     </button>
   );

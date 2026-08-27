@@ -63,15 +63,17 @@ export default function DevNavbar() {
       }}
     >
       {/* Brand — intentionally blank */}
-      <a
-        href="#home"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          textDecoration: 'none',
-          width: '80px',
-        }}
-      />
+      {!isMobile && (
+        <a
+          href="#home"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            textDecoration: 'none',
+            width: '80px',
+          }}
+        />
+      )}
 
       {/* Center Nav Links (Scrollable on Mobile) */}
       <nav 
@@ -79,11 +81,12 @@ export default function DevNavbar() {
         style={{ 
           display: 'flex', 
           alignItems: 'center', 
-          gap: isMobile ? '20px' : '32px',
+          gap: isMobile ? '24px' : '32px',
           overflowX: 'auto',
           WebkitOverflowScrolling: 'touch',
-          maxWidth: isMobile ? 'calc(100vw - 160px)' : 'none',
-          padding: isMobile ? '0 10px' : 0,
+          maxWidth: isMobile ? 'calc(100vw - 80px)' : 'none',
+          padding: isMobile ? '4px 0' : 0,
+          marginRight: isMobile ? 'auto' : 0,
         }}
       >
         {navLinks.map((item) => (
