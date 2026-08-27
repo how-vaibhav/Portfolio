@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Marquee } from '../ui/marquee';
 import './dev.css';
 
@@ -217,6 +217,15 @@ function TechCard({ item }) {
 }
 
 export default function DevToolsStack() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 860);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section
       id="tools"
@@ -229,9 +238,10 @@ export default function DevToolsStack() {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
+        minHeight: isMobile ? '500px' : 'auto', // Give space for Marquees on mobile
       }}
     >
-      {/* Banner image dictates the exact height of the section so it is NEVER cropped */}
+      {/* Banner image dictates the exact height on desktop, but covers on mobile to prevent squishing */}
       <img
         src="/assets/footer-banner.png"
         alt="Tools and Stack Background"
@@ -239,30 +249,16 @@ export default function DevToolsStack() {
         style={{
           display: 'block',
           width: '100%',
-          height: 'auto',
-          objectFit: 'contain',
-          filter: 'contrast(1.15) brightness(0.7) saturate(1.2)',
+          height: isMobile ? '100%' : 'auto',
+          position: isMobile ? 'absolute' : 'relative',
+          inset: 0,
+          objectFit: isMobile ? 'cover' : 'contain',
+          objectPosition: 'center',
           zIndex: 0,
         }}
       />
 
-      {/* Overlay gradient to ensure slight contrast but preserve image visibility */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: `
-            linear-gradient(180deg,
-              rgba(4,4,4,0.4) 0%,
-              transparent 20%,
-              transparent 80%,
-              rgba(4,4,4,0.4) 100%
-            )
-          `,
-          zIndex: 1,
-          pointerEvents: 'none',
-        }}
-      />
+
 
       {/* Content wrapper layered exactly over the image */}
       <div

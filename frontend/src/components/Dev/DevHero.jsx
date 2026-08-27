@@ -72,7 +72,7 @@ export default function DevHero() {
       id="home"
       style={{
         minHeight: '100vh',
-        paddingTop: isMobile ? '96px' : '112px',
+        paddingTop: isMobile ? '72px' : '112px',
         paddingBottom: 0,
         paddingLeft:  isMobile ? '24px' : isTablet ? '44px' : '80px',
         paddingRight: isMobile ? '24px' : isTablet ? '44px' : '80px',
@@ -118,8 +118,8 @@ export default function DevHero() {
         position: 'relative', zIndex: 2,
         display: 'flex', flexDirection: isMobile ? 'column' : 'row',
         alignItems: 'center', justifyContent: 'space-between',
-        gap: isMobile ? '48px' : 0,
-        paddingBottom: isMobile ? '60px' : 0,
+        gap: isMobile ? '32px' : 0,
+        paddingBottom: isMobile ? '32px' : 0,
         minHeight: isMobile ? 'auto' : 'calc(100vh - 112px)',
       }}>
 
@@ -157,7 +157,7 @@ export default function DevHero() {
             variants={stagger} initial="hidden" animate="visible"
             style={{
               fontFamily: "'Archivo Black', 'Inter', sans-serif",
-              fontSize: isMobile ? '46px' : isTablet ? '64px' : '88px',
+              fontSize: isMobile ? '40px' : isTablet ? '64px' : '88px',
               fontWeight: 900, lineHeight: 0.9, letterSpacing: '-0.04em',
               textTransform: 'uppercase', margin: 0, color: '#ffffff',
             }}
@@ -222,36 +222,13 @@ export default function DevHero() {
             ))}
           </motion.div>
 
-          {/* Scroll hint */}
-          <motion.div
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-            transition={{ delay: 1.8, duration: 0.8 }}
-            style={{
-              marginTop: '48px', display: 'flex', alignItems: 'center', gap: '14px',
-              color: 'rgba(255,255,255,0.32)', fontSize: '10px', fontWeight: 800,
-              letterSpacing: '0.14em', textTransform: 'uppercase',
-            }}
-          >
-            <div style={{
-              width: '22px', height: '36px',
-              border: '2px solid rgba(255,255,255,0.16)',
-              borderRadius: '11px', display: 'flex', justifyContent: 'center', paddingTop: '5px',
-            }}>
-              <motion.div
-                animate={{ y: [0, 8, 0], opacity: [1, 0.2, 1] }}
-                transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-                style={{ width: 3, height: 7, background: '#CCFF00', borderRadius: 2 }}
-              />
-            </div>
-            Scroll to explore
-          </motion.div>
         </div>
 
         {/* ══ RIGHT: Image + Geometry ═════ */}
         <div style={{
           flex: '1 1 48%', position: 'relative', display: 'flex',
           justifyContent: 'center', alignItems: 'flex-end',
-          minHeight: isMobile ? '540px' : isTablet ? '680px' : '100%',
+          minHeight: isMobile ? '440px' : isTablet ? '680px' : '100%',
           alignSelf: 'stretch', width: '100%',
         }}>
 
@@ -405,28 +382,6 @@ export default function DevHero() {
             </div>
           </motion.div>
 
-          {/* Floating tech labels */}
-          {[
-            { label: 'REACT',  top: '12%', right: isMobile ? '5%' : '-2%', delay: 1.3, color: '#61DAFB' },
-            { label: 'PYTHON', top: '55%', right: isMobile ? '0%' : '-8%', delay: 1.5, color: '#CCFF00' },
-            { label: 'Frontend / Backend', top: isMobile ? '85%' : '75%', left: isMobile ? '0%' : '-5%', delay: 1.5, color: '#ffffff' },
-          ].map(({ label, top, right, left, delay, color }) => (
-            <motion.div
-              key={label}
-              initial={{ opacity: 0, x: 18 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay, duration: 0.55, ease: [0.16,1,0.3,1] }}
-              style={{
-                position: 'absolute', top, right, left, zIndex: 8,
-                fontFamily: 'monospace', fontSize: '10px', fontWeight: 900,
-                letterSpacing: '0.15em', color, textTransform: 'uppercase',
-                display: 'flex', alignItems: 'center', gap: '6px', whiteSpace: 'nowrap',
-              }}
-            >
-              <div style={{ width: 4, height: 4, borderRadius: '50%', background: color, boxShadow: `0 0 6px ${color}` }} />
-              {label}
-            </motion.div>
-          ))}
         </div>
       </div>
     </section>
