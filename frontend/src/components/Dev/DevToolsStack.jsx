@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Marquee } from '../ui/marquee';
+import { PixelImage } from '../ui/pixel-image';
 import useResponsive from './useResponsive';
 import './dev.css';
 
@@ -240,20 +241,29 @@ export default function DevToolsStack() {
       }}
     >
       {/* Banner image dictates the exact height on desktop, but covers on mobile to prevent squishing */}
-      <img
-        src="/assets/footer-banner.png"
-        alt="Tools and Stack Background"
-        aria-hidden="true"
-        style={{
-          display: 'block',
-          width: '100%',
-          height: 'auto',
-          position: isMobile ? 'relative' : 'relative',
-          objectFit: 'contain',
-          objectPosition: 'center',
-          zIndex: 0,
-        }}
-      />
+      <div style={{ position: 'relative', width: '100%', display: 'flex' }}>
+        <img
+          src="/assets/footer-banner.png"
+          alt="Tools and Stack Background"
+          aria-hidden="true"
+          style={{
+            display: 'block',
+            width: '100%',
+            height: 'auto',
+            objectFit: 'contain',
+            objectPosition: 'center',
+            opacity: 0, /* Hide the original but keep it for layout height */
+          }}
+        />
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <PixelImage 
+            src="/assets/footer-banner.png" 
+            customGrid={{ rows: 3, cols: 12 }} 
+            pixelFadeInDuration={800}
+            colorRevealDelay={1200}
+          />
+        </div>
+      </div>
 
       {/* Content wrapper layered exactly over the image on desktop, below on mobile */}
       <div

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, animate } from 'motion/react';
+import { PixelImage } from '../ui/pixel-image';
 import useResponsive from './useResponsive';
 import './dev.css';
 
@@ -358,7 +359,7 @@ export default function DevHero() {
             ///////
           </motion.div>
 
-          {/* Photo */}
+          {/* Photo with advanced Pixel Reveal effect */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -370,19 +371,17 @@ export default function DevHero() {
               pointerEvents: 'none',
               x: imgX, y: imgY,
               willChange: 'transform',
+              transform: isMobile ? 'scale(2.1) translateY(20%)' : isTablet ? 'scale(2.2) translateY(22%)' : 'scale(2.5) translateY(25%)',
+              /* Crucial Optimization: Apply the heavy shadow to the merged composition container, 
+                 not the 64 individual pixel image grid elements */
+              filter: 'drop-shadow(14px 0px 0px rgba(37,85,255,0.55))',
             }}
           >
-            <img
-              src="/assets/vaibhav-hero-cutout.png"
-              alt="Vaibhav"
-              style={{
-                width: '100%', height: '100%',
-                objectFit: 'cover',
-                objectPosition: 'center top',
-                transform: isMobile ? 'scale(1.5) translateY(10%)' : 'scale(1.7) translateY(15%)',
-                /* Optimized CSS filters: Removed expensive 50px blur drop-shadow. */
-                filter: 'grayscale(100%) contrast(1.1) drop-shadow(14px 0px 0px rgba(37,85,255,0.55))',
-              }}
+            <PixelImage 
+              src="/assets/vaibhav-hero-cutout.png" 
+              grid="6x4" 
+              pixelFadeInDuration={800}
+              colorRevealDelay={1000}
             />
           </motion.div>
 
