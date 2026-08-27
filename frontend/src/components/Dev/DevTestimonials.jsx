@@ -74,13 +74,22 @@ function SparkleStar({ size = 22, color = '#CCFF00', style = {} }) {
 }
 
 // Single Scroll-Bound Physics Card
-function PhysicsTestimonialCard({ item, index, progress, isHovered, onHover, onLeave }) {
+function PhysicsTestimonialCard({ item, index, progress, isHovered, onHover, onLeave, isMobile }) {
+  // Constrain wild physics on mobile to prevent overlapping unreadable text
+  const mStartX = item.startX > 0 ? 30 : item.startX < 0 ? -30 : 0;
+  const mStartY = 60;
+  const mStartRotate = item.startRotate * 0.15;
+
+  const actualStartX = isMobile ? mStartX : item.startX;
+  const actualStartY = isMobile ? mStartY : item.startY;
+  const actualStartRotate = isMobile ? mStartRotate : item.startRotate;
+
   // Continuous scroll-linked transformations
-  const cardRotate = useTransform(progress, [0, 1], [item.startRotate, item.endRotate]);
-  const cardX = useTransform(progress, [0, 1], [item.startX, 0]);
-  const cardY = useTransform(progress, [0, 1], [item.startY, 0]);
-  const cardScale = useTransform(progress, [0, 1], [item.startScale || 0.5, 1]);
-  const cardOpacity = useTransform(progress, [0, 0.6, 1], [0, 0.9, 1]);
+  const cardRotate = useTransform(progress, [0, 1], [actualStartRotate, item.endRotate]);
+  const cardX = useTransform(progress, [0, 1], [actualStartX, 0]);
+  const cardY = useTransform(progress, [0, 1], [actualStartY, 0]);
+  const cardScale = useTransform(progress, [0, 1], [isMobile ? 0.9 : (item.startScale || 0.5), 1]);
+  const cardOpacity = useTransform(progress, [0, 0.6, 1], [isMobile ? 0.5 : 0, 0.9, 1]);
 
   return (
     <motion.div
@@ -401,6 +410,7 @@ export default function DevTestimonials() {
               isHovered={hoveredIdx === item.id}
               onHover={() => setHoveredIdx(item.id)}
               onLeave={() => setHoveredIdx(null)}
+              isMobile={isMobile}
             />
           ))}
         </div>
