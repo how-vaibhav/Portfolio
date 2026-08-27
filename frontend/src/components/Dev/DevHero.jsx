@@ -29,7 +29,7 @@ export default function DevHero() {
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
-        background: '#080808',
+        background: '#ffffff',
       }}
     >
       {/* Background ambient lighting */}
@@ -80,10 +80,10 @@ export default function DevHero() {
               marginBottom: isMobile ? '18px' : '24px',
             }}
           >
-            <span style={{ width: '6px', height: '6px', background: '#ffffff', display: 'block' }} />
-            <span style={{ width: '6px', height: '6px', background: '#ffffff', display: 'block' }} />
-            <span style={{ width: '6px', height: '6px', background: '#ffffff', display: 'block' }} />
-            <span style={{ width: '6px', height: '6px', background: '#ffffff', display: 'block' }} />
+            <span style={{ width: '6px', height: '6px', background: '#080808', display: 'block' }} />
+            <span style={{ width: '6px', height: '6px', background: '#080808', display: 'block' }} />
+            <span style={{ width: '6px', height: '6px', background: '#080808', display: 'block' }} />
+            <span style={{ width: '6px', height: '6px', background: '#080808', display: 'block' }} />
           </div>
 
           {/* Massive Multi-line Industrial Headline */}
@@ -103,25 +103,25 @@ export default function DevHero() {
               marginBottom: '26px',
             }}
           >
-            <span style={{ display: 'block', color: '#ffffff' }}>I DESIGN.</span>
-            <span style={{ display: 'block', color: '#ffffff' }}>I CODE.</span>
+            <span style={{ display: 'block', color: '#080808' }}>I DESIGN.</span>
+            <span style={{ display: 'block', color: '#080808' }}>I CODE.</span>
             <span
               style={{
                 display: 'block',
                 color: '#2555FF',
-                textShadow: '0 0 50px rgba(37, 85, 255, 0.6)',
+                textShadow: 'none',
               }}
             >
               I ELEVATE
             </span>
-            <span style={{ display: 'block', color: '#ffffff' }}>BRANDS.</span>
+            <span style={{ display: 'block', color: '#080808' }}>BRANDS.</span>
           </h1>
 
           {/* Subtitle */}
           <p
             style={{
               fontSize: isMobile ? '14px' : '15.5px',
-              color: 'rgba(255, 255, 255, 0.72)',
+              color: 'rgba(8, 8, 8, 0.72)',
               maxWidth: '460px',
               lineHeight: 1.55,
               margin: '0 0 32px 0',
@@ -224,7 +224,7 @@ export default function DevHero() {
             }}
           >
             <img
-              src="/assets/vaibhav-hero.png"
+              src="/assets/vaibhav-hero-cutout.png"
               alt="Vaibhav — Creative Developer"
               style={{
                 width: '100%',
@@ -233,7 +233,7 @@ export default function DevHero() {
                 objectFit: 'contain',
                 objectPosition: 'bottom center',
                 display: 'block',
-                filter: 'contrast(1.1) brightness(1.02) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8))',
+                filter: 'grayscale(100%) contrast(1.3) brightness(0.9) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4))',
               }}
             />
           </div>
@@ -259,7 +259,7 @@ export default function DevHero() {
                 width: '26px',
                 height: '26px',
                 marginBottom: '4px',
-                color: '#ffffff',
+                color: '#080808',
               }}
             >
               <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" strokeWidth="2">
@@ -280,7 +280,7 @@ export default function DevHero() {
                 fontWeight: 800,
                 letterSpacing: '0.1em',
                 lineHeight: 1.35,
-                color: 'rgba(255, 255, 255, 0.92)',
+                color: 'rgba(8, 8, 8, 0.92)',
                 textTransform: 'uppercase',
               }}
             >
@@ -301,7 +301,7 @@ export default function DevHero() {
               fontSize: '18px',
               fontWeight: 900,
               letterSpacing: '0.15em',
-              color: 'rgba(255, 255, 255, 0.45)',
+              color: 'rgba(8, 8, 8, 0.45)',
               transform: 'rotate(-4deg)',
               userSelect: 'none',
             }}
@@ -318,7 +318,7 @@ export default function DevHero() {
               zIndex: 5,
               width: '28px',
               height: '28px',
-              color: 'rgba(255, 255, 255, 0.75)',
+              color: 'rgba(8, 8, 8, 0.75)',
             }}
           >
             <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" strokeWidth="1.5">

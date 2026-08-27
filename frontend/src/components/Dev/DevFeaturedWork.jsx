@@ -41,20 +41,6 @@ const FEATURED_PROJECTS = [
     url: '#case-studies',
     desc: 'Multiprocessed security log analyzer with Shannon entropy & Kill-Chain.',
   },
-  {
-    id: 'canvas',
-    title: 'OUTLIER',
-    displayTitle: 'OUTLIER / CANVAS',
-    subtitle: 'Interactive Engine',
-    bg: '#CCFF00',
-    textColor: '#000000',
-    tagBg: '#000000',
-    tagText: '#CCFF00',
-    image: null,
-    metric: '↑ 240%',
-    url: '/design',
-    desc: 'Hardware-accelerated 60fps frame scrubbing canvas engine.',
-  },
 ];
 
 export default function DevFeaturedWork() {

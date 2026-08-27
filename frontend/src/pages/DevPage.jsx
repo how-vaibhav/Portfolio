@@ -26,9 +26,6 @@ export default function DevPage() {
       {/* Featured Work Grid */}
       <DevFeaturedWork />
 
-      {/* Case Studies Section with Interactive Widget */}
-      <DevCaseStudies />
-
       {/* Morphing Text Statement Banner */}
       <DevStatementBanner />
 
