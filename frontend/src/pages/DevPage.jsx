@@ -1,7 +1,6 @@
 import React from 'react';
 import DevNavbar from '../components/Dev/DevNavbar';
 import DevHero from '../components/Dev/DevHero';
-import DevVelocityTicker from '../components/Dev/DevVelocityTicker';
 import DevFeaturedWork from '../components/Dev/DevFeaturedWork';
 import DevCaseStudies from '../components/Dev/DevCaseStudies';
 import DevStatementBanner from '../components/Dev/DevStatementBanner';
@@ -23,9 +22,6 @@ export default function DevPage() {
 
       {/* Hero Section */}
       <DevHero />
-
-      {/* Scroll-Based Velocity Marquee */}
-      <DevVelocityTicker />
 
       {/* Featured Work Grid */}
       <DevFeaturedWork />

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './dev.css';
-import { Ripple } from '../ui/ripple';
 
 export default function DevHero() {
   const [isMobile, setIsMobile] = useState(false);
@@ -131,100 +130,6 @@ export default function DevHero() {
           >
             Creative Developer crafting bold digital experiences that are fast, functional and unforgettable.
           </p>
-
-          {/* Action Buttons Row */}
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: '14px',
-              alignItems: 'center',
-            }}
-          >
-            {/* VIEW MY WORK ↗ */}
-            <a
-              href="#work"
-              style={{
-                background: '#CCFF00',
-                color: '#000000',
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: 900,
-                fontSize: '13px',
-                letterSpacing: '0.04em',
-                textTransform: 'uppercase',
-                padding: '14px 28px',
-                borderRadius: '3px',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                textDecoration: 'none',
-                boxShadow: '0 4px 24px rgba(204, 255, 0, 0.35)',
-                transition: 'all 0.25s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(204, 255, 0, 0.55)';
-                e.currentTarget.style.background = '#d8ff1a';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 4px 24px rgba(204, 255, 0, 0.35)';
-                e.currentTarget.style.background = '#CCFF00';
-              }}
-            >
-              VIEW MY WORK ↗
-            </a>
-
-            {/* AVAILABLE FOR FREELANCE with ripple behind it */}
-            <div
-              style={{
-                position: 'relative',
-                display: 'inline-flex',
-                borderRadius: '3px',
-                overflow: 'hidden',
-              }}
-            >
-              <Ripple
-                mainCircleSize={50}
-                mainCircleOpacity={0.25}
-                numCircles={5}
-                color="#22C55E"
-              />
-              <div
-                style={{
-                  background: '#000000',
-                  color: '#ffffff',
-                  fontFamily: "'Inter', sans-serif",
-                  fontWeight: 800,
-                  fontSize: '12px',
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
-                  padding: '14px 24px',
-                  borderRadius: '3px',
-                  border: '1px solid rgba(255, 255, 255, 0.18)',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  userSelect: 'none',
-                  position: 'relative',
-                  zIndex: 2,
-                }}
-              >
-                <span
-                  style={{
-                    width: '7px',
-                    height: '7px',
-                    borderRadius: '50%',
-                    background: '#22C55E',
-                    boxShadow: '0 0 8px #22C55E',
-                    display: 'inline-block',
-                    flexShrink: 0,
-                  }}
-                />
-                AVAILABLE FOR FREELANCE
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* ========================================================= */}

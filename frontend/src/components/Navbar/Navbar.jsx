@@ -121,41 +121,9 @@ export function DevNavbar() {
         </nav>
       )}
 
-      {/* Right Side: Mode Switcher + CTA Button */}
+      {/* Right Side: Mode Switcher */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
         <ModeToggle />
-
-        <a
-          href="#contact"
-          style={{
-            background: '#CCFF00',
-            color: '#000000',
-            fontWeight: 800,
-            fontSize: isMobile ? '11px' : '12px',
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase',
-            padding: isMobile ? '9px 14px' : '10px 20px',
-            borderRadius: '4px',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '6px',
-            textDecoration: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            boxShadow: '0 4px 18px rgba(204, 255, 0, 0.3)',
-            transition: 'all 0.2s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 6px 24px rgba(204, 255, 0, 0.5)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 18px rgba(204, 255, 0, 0.3)';
-          }}
-        >
-          LET'S BUILD ↗
-        </a>
       </div>
     </header>
   );
