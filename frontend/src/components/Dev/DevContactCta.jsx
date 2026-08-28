@@ -149,9 +149,14 @@ export default function DevContactCta() {
                     background: emailHovered ? 'rgba(204,255,0,0.15)' : 'rgba(204,255,0,0.07)',
                     border: `2px solid ${emailHovered ? '#CCFF00' : 'rgba(204,255,0,0.25)'}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '18px', transition: 'all 0.25s ease',
+                    transition: 'all 0.25s ease',
                   }}
-                >✉</motion.div>
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={emailHovered ? '#CCFF00' : 'rgba(255,255,255,0.8)'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: 'stroke 0.25s ease' }}>
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </motion.div>
                 <div>
                   <div style={{
                     fontSize: '9px', fontWeight: 900, letterSpacing: '0.16em',
@@ -160,9 +165,9 @@ export default function DevContactCta() {
                     marginBottom: '5px', transition: 'color 0.25s ease',
                   }}>EMAIL ADDRESS</div>
                   <div style={{
-                    fontFamily: "'Archivo Black', sans-serif",
-                    fontSize: isMobile ? '12px' : '14px', fontWeight: 900,
-                    color: '#ffffff', letterSpacing: '-0.02em',
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: isMobile ? '13px' : '15px', fontWeight: 600,
+                    color: '#ffffff', letterSpacing: '0em',
                     overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '210px',
                   }}>howvaibhav@gmail.com</div>
                 </div>
@@ -206,9 +211,13 @@ export default function DevContactCta() {
                     background: phoneHovered ? 'rgba(37,85,255,0.2)' : 'rgba(37,85,255,0.07)',
                     border: `2px solid ${phoneHovered ? '#2555FF' : 'rgba(37,85,255,0.3)'}`,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '18px', transition: 'all 0.25s ease',
+                    transition: 'all 0.25s ease',
                   }}
-                >📞</motion.div>
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={phoneHovered ? '#2555FF' : 'rgba(255,255,255,0.8)'} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transition: 'stroke 0.25s ease' }}>
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </motion.div>
                 <div>
                   <div style={{
                     fontSize: '9px', fontWeight: 900, letterSpacing: '0.16em',
@@ -217,9 +226,9 @@ export default function DevContactCta() {
                     marginBottom: '5px', transition: 'color 0.25s ease',
                   }}>DIRECT PHONE / CALL</div>
                   <div style={{
-                    fontFamily: "'Archivo Black', sans-serif",
-                    fontSize: '14px', fontWeight: 900,
-                    color: '#ffffff', letterSpacing: '-0.02em',
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '15px', fontWeight: 600,
+                    color: '#ffffff', letterSpacing: '0em',
                   }}>+91 6387636285</div>
                 </div>
               </div>

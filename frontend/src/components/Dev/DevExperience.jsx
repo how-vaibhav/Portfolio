@@ -18,7 +18,7 @@ const TIMELINE_DATA = [
     role: 'Frontend Engineering',
     tag: 'Client-Side Logic',
     desc: 'Transitioned into software engineering, architecting high-performance, responsive user interfaces and robust interactive systems.',
-    skills: ['UI Architecture', 'ES6+ Engineering', 'Responsive Systems', 'Version Control'],
+    skills: ['UI Architecture', 'Responsive Systems'],
     highlightColor: '#FF70A6', // Pink
     threshold: 0.35,
   },

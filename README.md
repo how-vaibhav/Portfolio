@@ -17,9 +17,9 @@
 **A high-performance, production-grade portfolio engineered for technical depth and visual impact.**  
 Built with React 18, Framer Motion physics, and a hardware-accelerated canvas engine.
 
-[**→ Live Site**](https://www.howvaibhav.in)
+[**Live Site**](https://www.howvaibhav.in)
 
-![Version](https://img.shields.io/badge/version-1.3.0-CCFF00?style=flat-square&labelColor=080808) &nbsp; ![Status](https://img.shields.io/badge/v1%20Dev%20Mode-Live-brightgreen?style=flat-square&labelColor=080808) &nbsp; ![Status](https://img.shields.io/badge/v2%20Design%20Mode-In%20Development-orange?style=flat-square&labelColor=080808)
+![Version](https://img.shields.io/badge/version-1.3.0-CCFF00?style=flat-square&labelColor=080808) &nbsp; ![Status](https://img.shields.io/badge/v1%20Dev%20Mode-Live-brightgreen?style=flat-square&labelColor=080808)
 
 </div>
 
@@ -29,29 +29,23 @@ Built with React 18, Framer Motion physics, and a hardware-accelerated canvas en
 
 This portfolio is a monorepo containing a React frontend and a Node.js/Express backend. It is engineered around three core pillars:
 
-1. **Performance First** — Hardware-accelerated canvas for frame scrubbing, GPU-composited animations, DPR-aware rendering, and aggressive CDN caching.
-2. **Neo-Brutalist Aesthetics** — A high-contrast dark design system with lime (`#CCFF00`) and blue (`#2555FF`) accents, heavy typography, and deliberate visual tension.
-3. **Developer Experience** — A clean monorepo structure with clearly-named assets, reusable UI primitives, and a consistent responsive system via a shared `useResponsive` hook.
+1. **Performance First** -- Hardware-accelerated canvas for frame scrubbing, GPU-composited animations, DPR-aware rendering, and aggressive CDN caching.
+2. **Neo-Brutalist Aesthetics** -- A high-contrast dark design system with lime (`#CCFF00`) and blue (`#2555FF`) accents, heavy typography, and deliberate visual tension.
+3. **Developer Experience** -- A clean monorepo structure with clearly-named assets, reusable UI primitives, and a consistent responsive system via a shared `useResponsive` hook.
 
 ---
 
 ## Modes
 
-### 🖥 Developer Mode — `v1` · *Live*
+### Developer Mode -- `v1`
 The primary portfolio experience at `/`. A dark, cyber-industrial showcase of full-stack engineering work, system architecture, and technical projects.
 
 **Highlights:**
-- Pixel image reveal animation on the hero section (grayscale → color)
+- Pixel image reveal animation on the hero section
 - Scroll-driven parallax on the Tools & Stack banner
 - Spring-physics-based Framer Motion card animations throughout
 - Dual-direction infinite tech marquee with 30+ tools
 - Timeline-based career experience section
-
-### Design Studio Mode — `v2` · *Under Development*
-Accessible at `/design`. The second version of the portfolio — a curated editorial experience for design clients and creative collaborators.
-
-> **Design Mode is Portfolio v2**, currently under active development. It will feature an editorial visual identity, brand case studies, typography systems, and interactive creative media.
-
 
 
 ## Repository Structure
