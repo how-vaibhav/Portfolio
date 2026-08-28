@@ -23,8 +23,8 @@ function useCountUp(target, delay = 0) {
 
 /* ─── Motion variants (defined outside component so no re-alloc) */
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.13, delayChildren: 0.3 } } };
-const lineV   = { hidden: { y: '105%', opacity: 0, skewY: 4 }, visible: { y: 0, opacity: 1, skewY: 0, transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] } } };
-const fadeV   = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } } };
+const lineV = { hidden: { y: '105%', opacity: 0, skewY: 4 }, visible: { y: 0, opacity: 1, skewY: 0, transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] } } };
+const fadeV = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } } };
 
 export default function DevHero() {
   const { isMobile, isTablet } = useResponsive();
@@ -40,17 +40,17 @@ export default function DevHero() {
   const rectY = useTransform(sy, v => v * 0.35);
   const circX = useTransform(sx, v => v * -0.6);
   const circY = useTransform(sy, v => v * -0.6);
-  const imgX  = useTransform(sx, v => v * 0.1);
-  const imgY  = useTransform(sy, v => v * 0.1);
+  const imgX = useTransform(sx, v => v * 0.1);
+  const imgY = useTransform(sy, v => v * 0.1);
 
   const projects = useCountUp(10, 0.9);
-  const clients  = useCountUp(5, 1.1);
-  const years    = useCountUp(5, 1.3);
+  const clients = useCountUp(5, 1.1);
+  const years = useCountUp(5, 1.3);
 
   /* requestAnimationFrame throttled mousemove to cap at 60fps and avoid main-thread blocking */
   const onMouseMove = useCallback((e) => {
     requestAnimationFrame(() => {
-      rawX.set((e.clientX / window.innerWidth  - 0.5) * 28);
+      rawX.set((e.clientX / window.innerWidth - 0.5) * 28);
       rawY.set((e.clientY / window.innerHeight - 0.5) * 28);
     });
   }, [rawX, rawY]);
@@ -69,7 +69,7 @@ export default function DevHero() {
         minHeight: (isMobile || isTablet) ? 'auto' : '85vh',
         paddingTop: isMobile ? '72px' : '112px',
         paddingBottom: (isMobile || isTablet) ? '64px' : 0,
-        paddingLeft:  isMobile ? '24px' : isTablet ? '44px' : '80px',
+        paddingLeft: isMobile ? '24px' : isTablet ? '44px' : '80px',
         paddingRight: isMobile ? '24px' : isTablet ? '44px' : '80px',
         position: 'relative',
         overflow: 'hidden',
@@ -159,11 +159,11 @@ export default function DevHero() {
           >
             {['I DESIGN.', 'I CODE.'].map((text, idx) => (
               <div key={text} style={{ overflow: 'hidden', paddingRight: '20px' }}>
-                <motion.div 
+                <motion.div
                   variants={lineV}
                   style={{ display: 'inline-block', cursor: 'default', transformOrigin: 'left center' }}
-                  whileHover={{ 
-                    color: 'transparent', 
+                  whileHover={{
+                    color: 'transparent',
                     WebkitTextStroke: isMobile ? '1px #ffffff' : '2px #ffffff',
                     x: isMobile ? 8 : 15,
                     skewX: -8,
@@ -200,13 +200,13 @@ export default function DevHero() {
             </div>
 
             <div style={{ overflow: 'hidden', paddingTop: '8px', paddingRight: '20px' }}>
-              <motion.div 
+              <motion.div
                 variants={lineV}
-                style={{ 
-                  fontFamily: "'Lobster Two', cursive", 
-                  fontStyle: 'italic', 
-                  textTransform: 'none', 
-                  color: '#CCFF00', 
+                style={{
+                  fontFamily: "'Lobster Two', cursive",
+                  fontStyle: 'italic',
+                  textTransform: 'none',
+                  color: '#CCFF00',
                   fontSize: isMobile ? '56px' : isTablet ? '84px' : '110px',
                   lineHeight: 0.9,
                   letterSpacing: '0',
@@ -237,8 +237,8 @@ export default function DevHero() {
           >
             {[
               { val: projects, label: 'Projects' },
-              { val: clients,  label: 'Clients'  },
-              { val: years,    label: 'Yrs Exp'  },
+              { val: clients, label: 'Clients' },
+              { val: years, label: 'Yrs Exp' },
             ].map(({ val, label }) => (
               <motion.div key={label} variants={fadeV} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <span style={{
@@ -288,7 +288,7 @@ export default function DevHero() {
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.9, delay: 0.5, ease: [0.16,1,0.3,1] }}
+            transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             style={{
               position: 'absolute', bottom: '12%', left: isMobile ? '-2%' : '3%',
               width: isMobile ? '150px' : '210px', height: isMobile ? '150px' : '210px',
@@ -322,7 +322,7 @@ export default function DevHero() {
           <motion.div
             initial={{ scale: 0, rotate: 45, opacity: 0 }}
             animate={{ scale: 1, rotate: 0, opacity: 1 }}
-            transition={{ duration: 0.65, ease: [0.16,1,0.3,1], delay: 0.6 }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
             style={{ position: 'absolute', top: '4%', left: '3%', zIndex: 5, willChange: 'transform' }}
           >
             <svg width="52" height="52" viewBox="0 0 100 100">
@@ -343,21 +343,23 @@ export default function DevHero() {
             {'{ }'}
           </motion.div>
 
-          {/* Slash marks */}
-          <motion.div
-            initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            style={{
-              position: 'absolute', top: '36%', right: '-6%', zIndex: 4,
-              fontFamily: 'monospace', fontSize: '28px', fontWeight: 900,
-              color: 'rgba(255,255,255,0.12)', transform: 'rotate(-10deg)',
-              userSelect: 'none', lineHeight: 0.8,
-            }}
-          >
+          {/* Slash marks — hidden on tablet to prevent right-side overflow */}
+          {!isTablet && (
+            <motion.div
+              initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1, duration: 0.5 }}
+              style={{
+                position: 'absolute', top: '36%', right: '-6%', zIndex: 4,
+                fontFamily: 'monospace', fontSize: '28px', fontWeight: 900,
+                color: 'rgba(255,255,255,0.12)', transform: 'rotate(-10deg)',
+                userSelect: 'none', lineHeight: 0.8,
+              }}
+            >
             ///////
-            <br/>
+              <br />
             ///////
-          </motion.div>
+            </motion.div>
+          )}
 
           {/* Photo with advanced Pixel Reveal effect */}
           <motion.div
@@ -371,15 +373,15 @@ export default function DevHero() {
               pointerEvents: 'none',
               x: imgX, y: imgY,
               willChange: 'transform',
-              transform: isMobile ? 'scale(2.1) translateY(20%)' : isTablet ? 'scale(2.2) translateY(22%)' : 'scale(2.5) translateY(25%)',
+              transform: isMobile ? 'scale(2.1) translateY(20%)' : isTablet ? 'scale(1.8) translateY(18%)' : 'scale(2.5) translateY(25%)',
               /* Crucial Optimization: Apply the heavy shadow to the merged composition container, 
                  not the 64 individual pixel image grid elements */
               filter: 'drop-shadow(14px 0px 0px rgba(37,85,255,0.55))',
             }}
           >
-            <PixelImage 
-              src="/assets/vaibhav-hero-cutout.png" 
-              grid="6x4" 
+            <PixelImage
+              src="/assets/vaibhav-hero-cutout.png"
+              grid="6x4"
               pixelFadeInDuration={800}
               colorRevealDelay={1000}
             />

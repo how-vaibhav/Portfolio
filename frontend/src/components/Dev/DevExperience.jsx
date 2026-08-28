@@ -27,7 +27,7 @@ const TIMELINE_DATA = [
     role: 'Systems Architecture',
     tag: 'Architecture & Security',
     desc: 'Architected enterprise platforms, implementing advanced encryption, forensic analyzers, and scalable databases.',
-    skills: ['System Architecture', 'Django 5', 'Security Analysis', 'PostgreSQL'],
+    skills: ['System Architecture', 'Django 5', 'Security Analysis'],
     highlightColor: '#70D6FF', // Cyan
     threshold: 0.55,
   },
@@ -36,7 +36,7 @@ const TIMELINE_DATA = [
     role: 'Freelance Developer',
     tag: 'Client Work',
     desc: 'Delivered high-performance web projects and client portfolios, focusing on UI/UX and full-stack solutions.',
-    skills: ['React', 'Next.js', 'Tailwind', 'Supabase'],
+    skills: ['React', 'Next.js', 'Supabase'],
     highlightColor: '#CCFF00', // Lime
     threshold: 0.75,
   },
@@ -45,7 +45,7 @@ const TIMELINE_DATA = [
     role: 'Independent Creator',
     tag: 'Active Now',
     desc: 'Working on my placement journey and actively building the personal brand HowVaibhav.',
-    skills: ['SaaS Architecture', 'Cloud Deployment', 'Personal Branding'],
+    skills: ['SaaS Architecture', 'Personal Branding'],
     highlightColor: '#FF70A6', // Pink
     threshold: 0.9,
     isActive: true,
@@ -54,7 +54,7 @@ const TIMELINE_DATA = [
 
 export default function DevExperience() {
   const sectionRef = useRef(null);
-  const { isMobile } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const [activeIdx, setActiveIdx] = useState(4); // Default to last
 
   // Track scroll progression through the experience section
@@ -227,8 +227,8 @@ export default function DevExperience() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: isMobile ? '1fr' : 'repeat(5, 1fr)',
-                gap: isMobile ? '24px' : '16px',
+                gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(3, 1fr)' : 'repeat(5, 1fr)',
+                gap: isMobile ? '24px' : isTablet ? '20px' : '16px',
                 position: 'relative',
                 zIndex: 2,
               }}
@@ -262,7 +262,7 @@ export default function DevExperience() {
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'flex-start',
-                      minHeight: isMobile ? 'auto' : '360px',
+                      minHeight: isMobile ? 'auto' : isTablet ? 'auto' : '360px',
                       // Harsh Solid Shadows in Neon Colors
                       boxShadow: isSelected ? `8px 8px 0px ${item.highlightColor}, 0 20px 40px rgba(0,0,0,0.6)` : 'none',
                       position: 'relative',

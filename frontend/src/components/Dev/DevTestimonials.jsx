@@ -245,11 +245,7 @@ function PhysicsTestimonialCard({ item, index, progress, isHovered, onHover, onL
               {item.role}
             </div>
           </div>
-          
-          {/* Decorative Brutalist Cross */}
-          <div style={{ fontSize: '20px', fontWeight: 900, color: item.textColor, lineHeight: 1 }}>
-            +
-          </div>
+
         </div>
       </div>
     </motion.div>
@@ -258,7 +254,7 @@ function PhysicsTestimonialCard({ item, index, progress, isHovered, onHover, onL
 
 export default function DevTestimonials() {
   const containerRef = useRef(null);
-  const { isMobile } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
   const [hoveredIdx, setHoveredIdx] = useState(null);
 
   // Active continuous scroll progression through the section
@@ -388,7 +384,7 @@ export default function DevTestimonials() {
               lineHeight: 1.6,
             }}
           >
-            Direct testimonials from startup founders, product directors, and security architects.
+            Real feedback from real clients — a logistics owner, a clinic, and a café that trusted me with their work.
           </p>
         </motion.div>
 
@@ -396,7 +392,7 @@ export default function DevTestimonials() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
             gap: '32px 24px',
             alignItems: 'stretch',
           }}

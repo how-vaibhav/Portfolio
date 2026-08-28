@@ -40,7 +40,7 @@ const PROJECTS = [
 ];
 
 /* ─── Single card with stripe-reveal ─────────────── */
-function ProjectCard({ p, i, isMobile }) {
+function ProjectCard({ p, i, isMobile, isTablet }) {
   const ref = useRef(null);
 
   /* Scroll progress: starts when card enters bottom of viewport, ends mid-screen */
@@ -124,7 +124,7 @@ function ProjectCard({ p, i, isMobile }) {
 
         {/* Image block */}
         <div style={{
-          flex: isMobile ? 'auto' : '0 0 340px', // Widened to better fit 16:9 screenshots
+          flex: isMobile ? 'auto' : isTablet ? '0 0 260px' : '0 0 340px', // Narrower on tablet to fit
           height: isMobile ? '200px' : 'auto',
           overflow: 'hidden',
           marginLeft: isMobile ? 0 : (isEven ? '40px' : 0),
@@ -151,7 +151,9 @@ function ProjectCard({ p, i, isMobile }) {
           }} />
           {/* Year chip on image */}
           <div style={{
-            position: 'absolute', top: 10, left: 10,
+            position: 'absolute', 
+            top: 10, 
+            right: 10,
             background: 'rgba(0,0,0,0.6)',
             backdropFilter: 'blur(6px)',
             padding: '2px 9px',
@@ -245,7 +247,7 @@ function ProjectCard({ p, i, isMobile }) {
 
 /* ─── Section ─────────────────────────────────────── */
 export default function DevFeaturedWork() {
-  const { isMobile } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
 
   useEffect(() => {
     // Only necessary internal effects
@@ -319,7 +321,7 @@ export default function DevFeaturedWork() {
 
         {/* Cards */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-          {PROJECTS.map((p, i) => <ProjectCard key={p.id} p={p} i={i} isMobile={isMobile} />)}
+          {PROJECTS.map((p, i) => <ProjectCard key={p.id} p={p} i={i} isMobile={isMobile} isTablet={isTablet} />)}
         </div>
       </div>
     </section>

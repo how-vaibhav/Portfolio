@@ -6,7 +6,7 @@ import './dev.css';
 export default function DevContactCta() {
   const [emailHovered, setEmailHovered] = useState(false);
   const [phoneHovered, setPhoneHovered] = useState(false);
-  const { isMobile } = useResponsive();
+  const { isMobile, isTablet } = useResponsive();
 
   return (
     <footer
@@ -41,8 +41,8 @@ export default function DevContactCta() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '48px',
+            gridTemplateColumns: isMobile ? '1fr' : isTablet ? '1fr 1fr' : 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: isMobile ? '32px' : '48px',
             alignItems: 'center',
             marginBottom: '72px',
           }}
@@ -86,164 +86,157 @@ export default function DevContactCta() {
             </div>
           </div>
 
-          {/* Right: Premium Contact Hub */}
-          <div
+          {/* Right: Neo-Brutalist Contact Hub */}
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              background: 'linear-gradient(145deg, #0e0e14 0%, #0a0a10 100%)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              borderRadius: '20px',
-              padding: 'clamp(24px, 3.5vw, 38px)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '18px',
-              boxShadow: '0 24px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.06)',
-              position: 'relative',
+              background: '#0a0a0c',
+              border: '2px solid rgba(255,255,255,0.1)',
+              borderTop: '3px solid #CCFF00',
+              borderRadius: '2px',
               overflow: 'hidden',
+              boxShadow: '7px 7px 0px rgba(204,255,0,0.2)',
+              position: 'relative',
             }}
           >
-            {/* Corner glow */}
-            <div style={{
-              position: 'absolute', top: 0, right: 0,
-              width: '180px', height: '180px',
-              background: 'radial-gradient(circle at top right, rgba(37,85,255,0.18), transparent 70%)',
-              pointerEvents: 'none',
-            }} />
-            <div style={{
-              position: 'absolute', bottom: 0, left: 0,
-              width: '120px', height: '120px',
-              background: 'radial-gradient(circle at bottom left, rgba(204,255,0,0.08), transparent 70%)',
-              pointerEvents: 'none',
-            }} />
-
             {/* Header */}
             <div style={{
-              borderBottom: '1px solid rgba(255,255,255,0.07)',
-              paddingBottom: '16px',
-              display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between',
+              padding: '22px 28px 18px',
+              borderBottom: '1px solid rgba(255,255,255,0.06)',
+              display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px',
             }}>
               <div>
                 <div style={{
-                  fontSize: '10px', fontWeight: 900, letterSpacing: '0.18em',
-                  textTransform: 'uppercase', color: '#CCFF00', marginBottom: '6px',
-                  display: 'flex', alignItems: 'center', gap: '7px',
+                  fontSize: '9px', fontWeight: 900, letterSpacing: '0.22em',
+                  textTransform: 'uppercase', color: '#CCFF00', marginBottom: '8px',
+                  display: 'flex', alignItems: 'center', gap: '8px',
                 }}>
-                  <span style={{ width: 14, height: 1.5, background: '#CCFF00', display: 'inline-block' }} />
+                  <span style={{ width: 18, height: 2, background: '#CCFF00', display: 'inline-block', flexShrink: 0 }} />
                   DIRECT COMMUNICATION
                 </div>
-                <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.38)', margin: 0, lineHeight: 1.5 }}>
-                  Architectural consultations, client projects, full-stack engineering.
-                </p>
               </div>
+
+
             </div>
 
-            {/* Email card */}
-            <a
-              href="mailto:vaibhav10505@gmail.com?subject=Project%20Inquiry%20%2F%20Collaboration"
+            {/* Email row */}
+            <motion.a
+              href="mailto:howvaibhav@gmail.com?subject=Project%20Inquiry%20%2F%20Collaboration"
+              className="dev-contact-row"
               onMouseEnter={() => setEmailHovered(true)}
               onMouseLeave={() => setEmailHovered(false)}
+              whileHover={{ x: 3 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 28 }}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 flexWrap: isMobile ? 'wrap' : 'nowrap',
-                gap: isMobile ? '14px' : '0',
-                padding: '18px 20px',
-                background: emailHovered
-                  ? 'linear-gradient(135deg, rgba(204,255,0,0.08), rgba(204,255,0,0.03))'
-                  : 'rgba(255,255,255,0.03)',
-                border: emailHovered ? '1px solid rgba(204,255,0,0.4)' : '1px solid rgba(255,255,255,0.07)',
-                borderRadius: '14px',
+                gap: isMobile ? '14px' : '12px',
+                padding: '20px 28px',
+                borderBottom: '1px solid rgba(255,255,255,0.06)',
                 textDecoration: 'none',
-                boxShadow: emailHovered ? '0 8px 32px rgba(204,255,0,0.12), inset 0 1px 0 rgba(204,255,0,0.1)' : 'none',
-                transform: emailHovered ? 'translateY(-3px)' : 'translateY(0)',
-                transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
-                position: 'relative', overflow: 'hidden',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{
-                  width: '46px', height: '46px', borderRadius: '12px', flexShrink: 0,
-                  background: emailHovered ? 'rgba(204,255,0,0.18)' : 'rgba(204,255,0,0.08)',
-                  border: `1px solid ${emailHovered ? 'rgba(204,255,0,0.5)' : 'rgba(204,255,0,0.2)'}`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '20px', transition: 'all 0.3s ease',
-                  boxShadow: emailHovered ? '0 0 20px rgba(204,255,0,0.2)' : 'none',
-                }}>
-                  ✉
-                </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+                <motion.div
+                  whileHover={{ scale: 1.08, rotate: -4 }}
+                  style={{
+                    width: '44px', height: '44px', flexShrink: 0,
+                    background: emailHovered ? 'rgba(204,255,0,0.15)' : 'rgba(204,255,0,0.07)',
+                    border: `2px solid ${emailHovered ? '#CCFF00' : 'rgba(204,255,0,0.25)'}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '18px', transition: 'all 0.25s ease',
+                  }}
+                >✉</motion.div>
                 <div>
                   <div style={{
-                    fontSize: '10px', fontWeight: 800, letterSpacing: '0.1em',
-                    textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', marginBottom: '4px',
+                    fontSize: '9px', fontWeight: 900, letterSpacing: '0.16em',
+                    textTransform: 'uppercase',
+                    color: emailHovered ? '#CCFF00' : 'rgba(255,255,255,0.3)',
+                    marginBottom: '5px', transition: 'color 0.25s ease',
                   }}>EMAIL ADDRESS</div>
                   <div style={{
-                    fontSize: '14px', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.01em',
-                  }}>vaibhav10505@gmail.com</div>
+                    fontFamily: "'Archivo Black', sans-serif",
+                    fontSize: isMobile ? '12px' : '14px', fontWeight: 900,
+                    color: '#ffffff', letterSpacing: '-0.02em',
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '210px',
+                  }}>howvaibhav@gmail.com</div>
                 </div>
               </div>
-              <div style={{
-                fontSize: '10px', fontWeight: 900, letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                color: emailHovered ? '#000' : '#CCFF00',
-                background: emailHovered ? '#CCFF00' : 'rgba(204,255,0,0.1)',
-                padding: '7px 14px', borderRadius: '8px',
-                border: '1px solid rgba(204,255,0,0.3)',
-                transition: 'all 0.25s ease', flexShrink: 0,
-                boxShadow: emailHovered ? '0 4px 16px rgba(204,255,0,0.3)' : 'none',
-              }}>COMPOSE ↗</div>
-            </a>
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                style={{
+                  fontSize: '10px', fontWeight: 900, letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: emailHovered ? '#080808' : '#CCFF00',
+                  background: emailHovered ? '#CCFF00' : 'transparent',
+                  padding: '9px 16px',
+                  border: '2px solid #CCFF00',
+                  transition: 'all 0.22s ease', flexShrink: 0,
+                  cursor: 'pointer',
+                }}
+              >COMPOSE ↗</motion.div>
+            </motion.a>
 
-            {/* Phone card */}
-            <a
+            {/* Phone row */}
+            <motion.a
               href="tel:+916387636285"
+              className="dev-contact-row dev-contact-row--blue"
               onMouseEnter={() => setPhoneHovered(true)}
               onMouseLeave={() => setPhoneHovered(false)}
+              whileHover={{ x: 3 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 28 }}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
                 flexWrap: isMobile ? 'wrap' : 'nowrap',
-                gap: isMobile ? '14px' : '0',
-                padding: '18px 20px',
-                background: phoneHovered
-                  ? 'linear-gradient(135deg, rgba(37,85,255,0.1), rgba(37,85,255,0.04))'
-                  : 'rgba(255,255,255,0.03)',
-                border: phoneHovered ? '1px solid rgba(37,85,255,0.45)' : '1px solid rgba(255,255,255,0.07)',
-                borderRadius: '14px',
+                gap: isMobile ? '14px' : '12px',
+                padding: '20px 28px',
                 textDecoration: 'none',
-                boxShadow: phoneHovered ? '0 8px 32px rgba(37,85,255,0.15), inset 0 1px 0 rgba(37,85,255,0.1)' : 'none',
-                transform: phoneHovered ? 'translateY(-3px)' : 'translateY(0)',
-                transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{
-                  width: '46px', height: '46px', borderRadius: '12px', flexShrink: 0,
-                  background: phoneHovered ? 'rgba(37,85,255,0.2)' : 'rgba(37,85,255,0.08)',
-                  border: `1px solid ${phoneHovered ? 'rgba(37,85,255,0.55)' : 'rgba(37,85,255,0.25)'}`,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '20px', transition: 'all 0.3s ease',
-                  boxShadow: phoneHovered ? '0 0 20px rgba(37,85,255,0.25)' : 'none',
-                }}>📞</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+                <motion.div
+                  whileHover={{ scale: 1.08, rotate: 4 }}
+                  style={{
+                    width: '44px', height: '44px', flexShrink: 0,
+                    background: phoneHovered ? 'rgba(37,85,255,0.2)' : 'rgba(37,85,255,0.07)',
+                    border: `2px solid ${phoneHovered ? '#2555FF' : 'rgba(37,85,255,0.3)'}`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '18px', transition: 'all 0.25s ease',
+                  }}
+                >📞</motion.div>
                 <div>
                   <div style={{
-                    fontSize: '10px', fontWeight: 800, letterSpacing: '0.1em',
-                    textTransform: 'uppercase', color: 'rgba(255,255,255,0.38)', marginBottom: '4px',
+                    fontSize: '9px', fontWeight: 900, letterSpacing: '0.16em',
+                    textTransform: 'uppercase',
+                    color: phoneHovered ? '#2555FF' : 'rgba(255,255,255,0.3)',
+                    marginBottom: '5px', transition: 'color 0.25s ease',
                   }}>DIRECT PHONE / CALL</div>
                   <div style={{
-                    fontSize: '14px', fontWeight: 700, color: '#ffffff', letterSpacing: '-0.01em',
+                    fontFamily: "'Archivo Black', sans-serif",
+                    fontSize: '14px', fontWeight: 900,
+                    color: '#ffffff', letterSpacing: '-0.02em',
                   }}>+91 6387636285</div>
                 </div>
               </div>
-              <div style={{
-                fontSize: '10px', fontWeight: 900, letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-                color: phoneHovered ? '#fff' : '#2555FF',
-                background: phoneHovered ? '#2555FF' : 'rgba(37,85,255,0.1)',
-                padding: '7px 14px', borderRadius: '8px',
-                border: '1px solid rgba(37,85,255,0.35)',
-                transition: 'all 0.25s ease', flexShrink: 0,
-                boxShadow: phoneHovered ? '0 4px 16px rgba(37,85,255,0.35)' : 'none',
-              }}>CALL DIRECT ↗</div>
-            </a>
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                style={{
+                  fontSize: '10px', fontWeight: 900, letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: phoneHovered ? '#ffffff' : '#2555FF',
+                  background: phoneHovered ? '#2555FF' : 'transparent',
+                  padding: '9px 16px',
+                  border: '2px solid #2555FF',
+                  transition: 'all 0.22s ease', flexShrink: 0,
+                  cursor: 'pointer',
+                }}
+              >CALL DIRECT ↗</motion.div>
+            </motion.a>
 
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom Bar: Social Links */}
