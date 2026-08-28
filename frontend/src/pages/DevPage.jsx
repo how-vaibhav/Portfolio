@@ -33,13 +33,16 @@ export default function DevPage() {
       <DevNavbar />
 
       {/* Main Content — slides over the footer */}
-      <main style={{ position: 'relative', zIndex: 10, background: '#080808', marginBottom: `${footerHeight}px` }}>
+      <main style={{ position: 'relative', zIndex: 10, background: '#080808' }}>
         <DevHero />
         <DevFeaturedWork />
         <DevToolsStack />
         <DevExperience />
         <DevTestimonials />
       </main>
+
+      {/* Spacer for Fixed Footer Reveal - Also acts as the intersection trigger for the Navbar */}
+      <div id="contact" style={{ height: `${footerHeight}px`, width: '100%', pointerEvents: 'none' }} />
 
       {/* Fixed Footer Reveal */}
       <div 

@@ -10,7 +10,6 @@ export default function DevContactCta() {
 
   return (
     <footer
-      id="contact"
       style={{
         background: '#080808',
         borderTop: '1px solid rgba(255, 255, 255, 0.1)',
