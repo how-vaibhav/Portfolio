@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'motion/react';
+import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import useResponsive from './useResponsive';
 import './dev.css';
 

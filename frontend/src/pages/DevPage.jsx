@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import DevNavbar from '../components/Dev/DevNavbar';
 import DevHero from '../components/Dev/DevHero';
 import DevFeaturedWork from '../components/Dev/DevFeaturedWork';
@@ -13,28 +13,47 @@ import '../components/Dev/dev.css';
  * Styled and structured to match the Dev/Pixel creative developer design.
  */
 export default function DevPage() {
+  const footerRef = useRef(null);
+  const [footerHeight, setFooterHeight] = useState(0);
+
+  useEffect(() => {
+    if (!footerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setFooterHeight(entry.contentRect.height);
+      }
+    });
+    observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="dev-page-container">
+    <div className="dev-page-container" style={{ position: 'relative' }}>
       {/* Top Fixed Navbar */}
       <DevNavbar />
 
-      {/* Hero Section */}
-      <DevHero />
+      {/* Main Content — slides over the footer */}
+      <main style={{ position: 'relative', zIndex: 10, background: '#080808', marginBottom: `${footerHeight}px` }}>
+        <DevHero />
+        <DevFeaturedWork />
+        <DevToolsStack />
+        <DevExperience />
+        <DevTestimonials />
+      </main>
 
-      {/* Featured Work Grid */}
-      <DevFeaturedWork />
-
-      {/* Tools & Stack Grid */}
-      <DevToolsStack />
-
-      {/* Experience Timeline */}
-      <DevExperience />
-
-      {/* Testimonials & Architectural Showcase */}
-      <DevTestimonials />
-
-      {/* Footer & Call To Action */}
-      <DevContactCta />
+      {/* Fixed Footer Reveal */}
+      <div 
+        ref={footerRef}
+        style={{ 
+          position: 'fixed', 
+          bottom: 0, 
+          left: 0, 
+          width: '100%', 
+          zIndex: 0 
+        }}
+      >
+        <DevContactCta />
+      </div>
     </div>
   );
 }
