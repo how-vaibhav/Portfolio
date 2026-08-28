@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DevPage from './pages/DevPage';
-import DesignPage from './pages/DesignPage';
+// import DesignPage from './pages/DesignPage'; // Removed to optimize bundle size
 
 /**
  * App — sets up client-side routing.
@@ -14,7 +14,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<DevPage />} />
-        <Route path="/design" element={<DesignPage />} />
+        {/* <Route path="/design" element={<DesignPage />} /> */}
       </Routes>
     </BrowserRouter>
   );
