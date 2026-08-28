@@ -14,8 +14,8 @@ export default function DevContactCta() {
       style={{
         background: '#080808',
         borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-        paddingTop: '80px',
-        paddingBottom: '40px',
+        paddingTop: isMobile ? '50px' : '80px',
+        paddingBottom: isMobile ? '24px' : '40px',
         paddingLeft: 'clamp(20px, 4.5vw, 64px)',
         paddingRight: 'clamp(20px, 4.5vw, 64px)',
         position: 'relative',
@@ -41,10 +41,10 @@ export default function DevContactCta() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : isTablet ? '1fr 1fr' : 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: (isMobile || isTablet) ? '1fr' : '1fr 1fr',
             gap: isMobile ? '32px' : '48px',
             alignItems: 'center',
-            marginBottom: '72px',
+            marginBottom: isMobile ? '40px' : '72px',
           }}
         >
           {/* Left: Massive Typography + Availability Pill */}
@@ -52,7 +52,7 @@ export default function DevContactCta() {
             <h2
               style={{
                 fontFamily: "'Archivo Black', 'Inter', sans-serif",
-                fontSize: 'clamp(44px, 6vw, 76px)',
+                fontSize: isMobile ? 'clamp(36px, 10vw, 44px)' : 'clamp(44px, 6vw, 76px)',
                 fontWeight: 900,
                 lineHeight: 0.95,
                 letterSpacing: '-0.045em',
@@ -74,11 +74,12 @@ export default function DevContactCta() {
                 borderRadius: '4px',
                 background: '#121214',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
-                fontSize: '12px',
+                fontSize: isMobile ? '10px' : '12px',
                 fontWeight: 700,
                 letterSpacing: '0.04em',
                 textTransform: 'uppercase',
                 color: '#ffffff',
+                lineHeight: 1.4,
               }}
             >
               <span style={{ color: '#CCFF00', fontWeight: 900 }}>➔</span>
@@ -100,6 +101,7 @@ export default function DevContactCta() {
               overflow: 'hidden',
               boxShadow: '7px 7px 0px rgba(204,255,0,0.2)',
               position: 'relative',
+              width: '100%',
             }}
           >
             {/* Header */}
@@ -243,7 +245,7 @@ export default function DevContactCta() {
         <div
           style={{
             display: 'flex',
-            justifyContent: 'space-between',
+            justifyContent: isMobile ? 'center' : 'space-between',
             alignItems: 'center',
             borderTop: '1px solid rgba(255, 255, 255, 0.08)',
             paddingTop: '24px',
@@ -252,10 +254,10 @@ export default function DevContactCta() {
           }}
         >
           {/* Brand — intentionally blank */}
-          <div style={{ width: '80px' }} />
+          {!isMobile && <div style={{ width: '80px' }} />}
 
           {/* Social Icons */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '12px' : '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
             {[
               { 
                 label: 'GitHub', 
