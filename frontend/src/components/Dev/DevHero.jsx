@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, animate } from 'motion/react';
 import { PixelImage } from '../ui/pixel-image';
+import { MorphingText } from '../ui/MorphingText';
 import useResponsive from './useResponsive';
 import './dev.css';
 
@@ -68,7 +69,7 @@ export default function DevHero() {
       style={{
         minHeight: (isMobile || isTablet) ? 'auto' : '85vh',
         paddingTop: isMobile ? '72px' : '112px',
-        paddingBottom: (isMobile || isTablet) ? '64px' : 0,
+        paddingBottom: 0,
         paddingLeft: isMobile ? '24px' : isTablet ? '44px' : '80px',
         paddingRight: isMobile ? '24px' : isTablet ? '44px' : '80px',
         position: 'relative',
@@ -114,7 +115,7 @@ export default function DevHero() {
         display: 'flex', flexDirection: (isMobile || isTablet) ? 'column' : 'row',
         alignItems: 'center', justifyContent: 'space-between',
         gap: (isMobile || isTablet) ? '48px' : 0,
-        paddingBottom: isMobile ? '32px' : 0,
+        paddingBottom: 0,
         minHeight: (isMobile || isTablet) ? 'auto' : 'calc(100vh - 112px)',
       }}>
 
@@ -212,7 +213,10 @@ export default function DevHero() {
                   letterSpacing: '0',
                   display: 'inline-block',
                   cursor: 'default',
-                  transformOrigin: 'left center'
+                  transformOrigin: 'left center',
+                  minWidth: isMobile ? '200px' : isTablet ? '280px' : '360px',
+                  height: isMobile ? '60px' : isTablet ? '90px' : '120px',
+                  position: 'relative'
                 }}
                 whileHover={{
                   rotate: 2,
@@ -221,7 +225,7 @@ export default function DevHero() {
                   transition: { type: 'spring', stiffness: 300, damping: 15 }
                 }}
               >
-                Brands.
+                <MorphingText texts={['Brands.', 'Ideas.', 'Systems.']} className="h-full w-full text-left" />
               </motion.div>
             </div>
           </motion.h1>
