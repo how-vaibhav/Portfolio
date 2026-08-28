@@ -227,7 +227,7 @@ export default function DevExperience() {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(3, 1fr)' : 'repeat(5, 1fr)',
+                gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
                 gap: isMobile ? '24px' : isTablet ? '20px' : '16px',
                 position: 'relative',
                 zIndex: 2,
