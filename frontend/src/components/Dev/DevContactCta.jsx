@@ -133,9 +133,9 @@ export default function DevContactCta() {
               transition={{ type: 'spring', stiffness: 400, damping: 28 }}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                flexWrap: isMobile ? 'wrap' : 'nowrap',
-                gap: isMobile ? '14px' : '12px',
-                padding: '20px 28px',
+                flexWrap: 'nowrap',
+                gap: isMobile ? '8px' : '12px',
+                padding: isMobile ? '16px 20px' : '20px 28px',
                 borderBottom: '1px solid rgba(255,255,255,0.06)',
                 textDecoration: 'none',
               }}
@@ -167,7 +167,7 @@ export default function DevContactCta() {
                     fontFamily: "'Inter', sans-serif",
                     fontSize: isMobile ? '13px' : '15px', fontWeight: 600,
                     color: '#ffffff', letterSpacing: '0em',
-                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '210px',
+                    overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: isMobile ? '120px' : '210px',
                   }}>howvaibhav@gmail.com</div>
                 </div>
               </div>
@@ -196,9 +196,9 @@ export default function DevContactCta() {
               transition={{ type: 'spring', stiffness: 400, damping: 28 }}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                flexWrap: isMobile ? 'wrap' : 'nowrap',
-                gap: isMobile ? '14px' : '12px',
-                padding: '20px 28px',
+                flexWrap: 'nowrap',
+                gap: isMobile ? '8px' : '12px',
+                padding: isMobile ? '16px 20px' : '20px 28px',
                 textDecoration: 'none',
               }}
             >

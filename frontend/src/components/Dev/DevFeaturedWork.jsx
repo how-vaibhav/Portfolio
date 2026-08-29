@@ -7,7 +7,7 @@ const PROJECTS = [
   {
     id: 'emineral',
     num: '01',
-    title: 'eMINERAL',
+    title: 'eMineral Pass',
     tag: 'SaaS Platform',
     accent: '#2555FF',
     image: '/assets/project-emineral-screenshot.png',
@@ -29,7 +29,7 @@ const PROJECTS = [
   {
     id: 'logdetector',
     num: '03',
-    title: 'LOG DETECT',
+    title: 'LOG DETECTOR',
     tag: 'Security & Forensics',
     accent: '#FF4D4D',
     image: '/assets/project-logdetector-screenshot.png',
@@ -57,7 +57,7 @@ function ProjectCard({ p, i, isMobile, isTablet }) {
 
   /* Card fade + lift */
   const cardOpacity = useTransform(smooth, [0, 0.2], [0, 1]);
-  const cardY       = useTransform(smooth, [0, 1], [24, 0]);
+  const cardY = useTransform(smooth, [0, 1], [24, 0]);
 
   const isEven = i % 2 === 0;
   const tabColor = p.accent === '#CCFF00' ? '#080808' : '#ffffff';
@@ -151,8 +151,8 @@ function ProjectCard({ p, i, isMobile, isTablet }) {
           }} />
           {/* Year chip on image */}
           <div style={{
-            position: 'absolute', 
-            top: 10, 
+            position: 'absolute',
+            top: 10,
             right: 10,
             background: 'rgba(0,0,0,0.6)',
             backdropFilter: 'blur(6px)',
@@ -204,8 +204,8 @@ function ProjectCard({ p, i, isMobile, isTablet }) {
                 color: '#fff',
                 background: 'rgba(255, 255, 255, 0.03)',
               }}
-              whileHover={{ 
-                background: p.accent, 
+              whileHover={{
+                background: p.accent,
                 color: '#000',
                 borderColor: p.accent,
                 scale: 1.1,
