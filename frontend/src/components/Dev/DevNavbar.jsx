@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { useModeTransition } from '../../context/ModeTransitionContext';
 import useResponsive from './useResponsive';
-// import ModeToggle from '../ModeToggle';
 
 export default function DevNavbar() {
+  const { transitionTo } = useModeTransition();
   const { isMobile } = useResponsive();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -59,7 +61,7 @@ export default function DevNavbar() {
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 100,
-          background: isScrolled ? 'rgba(8, 8, 8, 0.8)' : '#080808',
+          background: isScrolled ? 'rgba(8, 8, 8, 0.85)' : '#080808',
           backdropFilter: isScrolled ? 'blur(16px)' : 'none',
           WebkitBackdropFilter: isScrolled ? 'blur(16px)' : 'none',
           border: isScrolled ? '2px solid rgba(204,255,0,0.3)' : '2px solid #CCFF00',
@@ -69,8 +71,8 @@ export default function DevNavbar() {
           display: 'flex',
           alignItems: 'center',
           transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-          width: isMobile ? '92%' : 'auto', // Keep it bounded on mobile
-          maxWidth: '700px', // Increased from 500px to prevent flexbox center clipping
+          width: isMobile ? '94%' : 'auto', // Keep it bounded on mobile
+          maxWidth: '760px',
         }}
       >
         <nav 
@@ -80,8 +82,8 @@ export default function DevNavbar() {
             alignItems: 'center', 
             justifyContent: isMobile ? 'space-between' : 'center',
             width: '100%',
-            gap: isMobile ? '2px' : '8px',
-            padding: '0 4px', // Add breathing room to prevent container clipping
+            gap: isMobile ? '2px' : '6px',
+            padding: '0 4px',
             overflowX: 'auto',
             WebkitOverflowScrolling: 'touch',
           }}
@@ -97,10 +99,10 @@ export default function DevNavbar() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  flexShrink: 0, // Prevent flexbox from squishing the pill and ruining the curve
-                  overflow: 'hidden', // Guarantee perfect pill clipping
-                  padding: isMobile ? '10px 14px' : '10px 24px',
-                  fontSize: isMobile ? '11px' : '13px',
+                  flexShrink: 0,
+                  overflow: 'hidden',
+                  padding: isMobile ? '8px 12px' : '9px 20px',
+                  fontSize: isMobile ? '10px' : '12px',
                   fontWeight: 900,
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
@@ -142,6 +144,62 @@ export default function DevNavbar() {
               </a>
             );
           })}
+
+          {/* Elegant Divider */}
+          <span
+            style={{
+              width: '1px',
+              height: '18px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              margin: '0 4px',
+              flexShrink: 0,
+            }}
+          />
+
+          {/* Standout Graphic Design Mode Button with Cinematic Transition */}
+          <button
+            type="button"
+            onClick={() => transitionTo('/design')}
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              padding: isMobile ? '8px 12px' : '9px 18px',
+              background: 'linear-gradient(135deg, #FF5500 0%, #FF8C00 100%)',
+              color: '#FFFFFF',
+              borderRadius: 9999,
+              fontSize: isMobile ? '10px' : '12px',
+              fontWeight: 900,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              boxShadow: '0 2px 14px rgba(255, 85, 0, 0.45)',
+              border: '1px solid rgba(255, 255, 255, 0.3)',
+              transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
+              zIndex: 2,
+              cursor: 'pointer',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.06)';
+              e.currentTarget.style.boxShadow = '0 4px 22px rgba(255, 85, 0, 0.7)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = '0 2px 14px rgba(255, 85, 0, 0.45)';
+            }}
+            title="Open Graphic Design Portfolio (Cinematic Transition)"
+          >
+            <motion.span
+              animate={{ rotate: [0, 90, 0] }}
+              transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
+              style={{ fontSize: '13px', display: 'inline-block' }}
+            >
+              ✦
+            </motion.span>
+            <span>DESIGN</span>
+          </button>
         </nav>
       </header>
 

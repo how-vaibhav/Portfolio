@@ -1,21 +1,26 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import DevPage from './pages/DevPage';
-// import DesignPage from './pages/DesignPage'; // Removed to optimize bundle size
+import DesignPage from './pages/DesignPage';
+import { ModeTransitionProvider } from './context/ModeTransitionContext';
+import ModeTransitionOverlay from './components/Transitions/ModeTransitionOverlay';
 
 /**
- * App — sets up client-side routing.
+ * App — sets up client-side routing with high-quality cinematic mode transitions.
  *
  * Routes:
  *   /         → DevPage   (CS/developer portfolio — default root)
- *   /design   → DesignPage (personal brand / designer mode)
+ *   /design   → DesignPage (graphic design / designer mode)
  */
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<DevPage />} />
-        {/* <Route path="/design" element={<DesignPage />} /> */}
-      </Routes>
+      <ModeTransitionProvider>
+        <ModeTransitionOverlay />
+        <Routes>
+          <Route path="/" element={<DevPage />} />
+          <Route path="/design" element={<DesignPage />} />
+        </Routes>
+      </ModeTransitionProvider>
     </BrowserRouter>
   );
 }

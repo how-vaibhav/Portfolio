@@ -37,6 +37,18 @@ const PROJECTS = [
     desc: 'Multiprocessed log analyzer using Shannon entropy & MITRE Kill-Chain mapping.',
     year: '2026',
   },
+  {
+    id: 'loaniq',
+    num: '04',
+    title: 'LoanIQ — AI Predictor',
+    tag: 'ML & FinTech Stacking Ensemble',
+    accent: '#00E5FF',
+    image: '/assets/project-loaniq-screenshot.png',
+    url: 'https://loan-approval-predictor-8p0v.onrender.com',
+    githubUrl: 'https://github.com/how-vaibhav/Loan-Approval-Predictor',
+    desc: 'Calibrated stacking ensemble (XGBoost + LightGBM + Random Forest) evaluating retail loan solvency with 83.9% ROC-AUC, automated SMOTE balancing & real-time Flask API.',
+    year: '2026',
+  },
 ];
 
 /* ─── Single card with stripe-reveal ─────────────── */
@@ -239,6 +251,38 @@ function ProjectCard({ p, i, isMobile, isTablet }) {
           }}>
             {p.desc}
           </p>
+
+          {/* Action Links */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '4px' }}>
+            <span style={{ fontSize: '11px', fontWeight: 800, color: p.accent, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <span>Live Application</span>
+              <span>↗</span>
+            </span>
+            {p.githubUrl && (
+              <span
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  window.open(p.githubUrl, '_blank', 'noopener,noreferrer');
+                }}
+                style={{
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  color: 'rgba(255,255,255,0.5)',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  transition: 'color 0.2s',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
+              >
+                <span>GitHub Source</span>
+                <span>↗</span>
+              </span>
+            )}
+          </div>
         </div>
       </motion.a>
     </div>
