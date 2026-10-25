@@ -364,7 +364,11 @@ export default function ServicesCorkboard() {
         overflow: 'hidden',
         // Clean solid warm parchment background — explicitly NO grid lines
         backgroundColor: '#F8F6F0',
-        backgroundImage: 'none',
+        backgroundImage: `
+          linear-gradient(rgba(0, 0, 0, 0.045) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.045) 1px, transparent 1px)
+        `,
+        backgroundSize: '36px 36px',
         fontFamily: "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif",
         borderTop: '1px dashed rgba(0, 0, 0, 0.12)',
         zIndex: 5,

@@ -43,8 +43,8 @@ export default function DesignPage() {
       />
 
       <main style={{ position: 'relative', zIndex: 10 }}>
-        {/* Creative Editorial Intro */}
-        <DesignHero />
+        {/* The Anatomy of HowVaibhav — Hero Section */}
+        <DesignAnatomy />
 
         {/* Dynamic Display: 3D Isometric Conveyor (Lowe) or Folder Desk Grid (Robin) */}
         {activeView === '3d' ? (
