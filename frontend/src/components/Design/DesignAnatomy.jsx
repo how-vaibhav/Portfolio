@@ -5,13 +5,23 @@ import { soundFX } from './soundFX';
  * ─────────────────────────────────────────────────────────────────────────────
  * THE ANATOMY OF HOWVAIBHAV — High-Fidelity Interactive Typographic Infographic
  * ─────────────────────────────────────────────────────────────────────────────
- * An editorial design system where every letterform in "HowVaibhav" embodies
- * a fundamental pillar of creative engineering and visual design.
+ * Direct translation of the "Anatomy of Typography" specimen poster.
  *
- * Direct evolution of the classic "Anatomy of Typography" specimen poster,
- * featuring interactive letter-to-card bidirectional highlighting,
- * typographic guideline overlays (Cap Line, Ascender, X-Height, Baseline, Descender),
- * precision dimension calipers, and zero-lag GPU anti-gravity motion.
+ * FIXES & ENHANCEMENTS:
+ * 1. Crisp, razor-sharp serif letterforms: NO opaque solid gradient boxes.
+ *    Uses high-contrast white letterform bases with luminous vertical gradient tints
+ *    and glowing neon text-shadows, ensuring every single letter (H-o-w-V-a-i-b-h-a-v)
+ *    is 100% crystal-clear and legible across all displays.
+ * 2. Proper vertical spacing & breathing room:
+ *    Generous 130px top padding so Card 2 never gets cut off by the floating navbar.
+ * 3. Bidirectional interactive highlighting:
+ *    Hovering any letter lights up that character, animates the connecting laser cord,
+ *    and lifts its corresponding meaning card while dimming the others.
+ * 4. Architectural Typographic Guidelines:
+ *    Cap Line (pink), Ascender Line (lime), X-Line (mint), Baseline (solid white),
+ *    Descender Line (amber), right margin measurement caliper (↕ 1000‰), and
+ *    translucent green X-Height bounding box over the final characters.
+ * 5. Zero-lag GPU physics: Pure CSS translate3d keyframes with 0 layout reflows.
  */
 
 // ─── The 6 Typographic Anatomies of "HowVaibhav" ──────────────────────────────
@@ -35,9 +45,9 @@ const ANATOMY_NODES = [
     floatDelay: '0s',
     floatY: '-14px',
     decorator: 'star',
-    // SVG connecting path from card anchor to letter 'H'
-    pathD: 'M 250,210 Q 320,330 388,435',
-    anchorPoint: { x: 388, y: 435 },
+    // SVG connecting path from Card 1 anchor to top of 'H'
+    pathD: 'M 270,250 Q 330,370 410,455',
+    anchorPoint: { x: 410, y: 455 },
   },
   {
     id: 'ascender',
@@ -58,8 +68,8 @@ const ANATOMY_NODES = [
     floatDelay: '-1.6s',
     floatY: '-12px',
     decorator: 'circle',
-    pathD: 'M 540,110 Q 610,260 670,410',
-    anchorPoint: { x: 670, y: 410 },
+    pathD: 'M 580,210 Q 640,330 675,445',
+    anchorPoint: { x: 675, y: 445 },
   },
   {
     id: 'point-size',
@@ -80,8 +90,8 @@ const ANATOMY_NODES = [
     floatDelay: '-3.2s',
     floatY: '-16px',
     decorator: 'ring',
-    pathD: 'M 880,190 Q 770,320 520,430',
-    anchorPoint: { x: 520, y: 430 },
+    pathD: 'M 880,250 Q 750,370 535,455',
+    anchorPoint: { x: 535, y: 455 },
   },
   {
     id: 'descender',
@@ -102,13 +112,13 @@ const ANATOMY_NODES = [
     floatDelay: '-4.4s',
     floatY: '-13px',
     decorator: 'swirl',
-    pathD: 'M 220,680 Q 320,590 440,515',
-    anchorPoint: { x: 440, y: 515 },
+    pathD: 'M 270,690 Q 370,610 470,545',
+    anchorPoint: { x: 470, y: 545 },
   },
   {
     id: 'baseline',
     targetLetters: ['i'],
-    letterIndex: [5], // 'i' (with tittle)
+    letterIndex: [5], // 'i'
     letterSymbol: 'i',
     badge: '05 // THE BASELINE',
     title: 'Baseline Alignment',
@@ -124,8 +134,8 @@ const ANATOMY_NODES = [
     floatDelay: '-2.1s',
     floatY: '-11px',
     decorator: 'dots',
-    pathD: 'M 590,810 Q 610,650 618,525',
-    anchorPoint: { x: 618, y: 525 },
+    pathD: 'M 590,780 Q 615,640 622,545',
+    anchorPoint: { x: 622, y: 545 },
   },
   {
     id: 'x-height',
@@ -146,23 +156,23 @@ const ANATOMY_NODES = [
     floatDelay: '-3.8s',
     floatY: '-15px',
     decorator: 'cross',
-    pathD: 'M 910,690 Q 820,600 780,510',
-    anchorPoint: { x: 780, y: 510 },
+    pathD: 'M 880,690 Q 800,610 760,545',
+    anchorPoint: { x: 760, y: 545 },
   },
 ];
 
-// ─── Letter Breakdown for "HowVaibhav" ──────────────────────────────────────────
+// ─── Letter Mapping for "HowVaibhav" ──────────────────────────────────────────
 const LETTERS = [
-  { char: 'H', nodeId: 'cap-height',  accent: '#FF2D78' },
-  { char: 'o', nodeId: 'descender',   accent: '#D4A017' },
-  { char: 'w', nodeId: 'descender',   accent: '#EAB308' },
-  { char: 'V', nodeId: 'point-size',  accent: '#B59FFF' },
-  { char: 'a', nodeId: 'x-height',    accent: '#00E5C3' },
-  { char: 'i', nodeId: 'baseline',    accent: '#00AAFF', hasTittle: true },
-  { char: 'b', nodeId: 'ascender',    accent: '#C2E03A' },
-  { char: 'h', nodeId: 'ascender',    accent: '#A3E635' },
-  { char: 'a', nodeId: 'x-height',    accent: '#00E5C3', inBox: true },
-  { char: 'v', nodeId: 'x-height',    accent: '#14B8A6', inBox: true },
+  { char: 'H', nodeId: 'cap-height',  accent: '#FF2D78', highlightStart: '#FF80AB' },
+  { char: 'o', nodeId: 'descender',   accent: '#D4A017', highlightStart: '#FDE047' },
+  { char: 'w', nodeId: 'descender',   accent: '#EAB308', highlightStart: '#FEF08A' },
+  { char: 'V', nodeId: 'point-size',  accent: '#B59FFF', highlightStart: '#DDD6FE' },
+  { char: 'a', nodeId: 'x-height',    accent: '#00E5C3', highlightStart: '#99F6E4' },
+  { char: 'i', nodeId: 'baseline',    accent: '#00AAFF', highlightStart: '#7DD3FC', hasTittle: true },
+  { char: 'b', nodeId: 'ascender',    accent: '#C2E03A', highlightStart: '#D9F99D' },
+  { char: 'h', nodeId: 'ascender',    accent: '#A3E635', highlightStart: '#BEF264' },
+  { char: 'a', nodeId: 'x-height',    accent: '#00E5C3', highlightStart: '#5EEAD4', inBox: true },
+  { char: 'v', nodeId: 'x-height',    accent: '#14B8A6', highlightStart: '#2DD4BF', inBox: true },
 ];
 
 // ─── Geometric Decorative Accents ──────────────────────────────────────────────
@@ -248,11 +258,11 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
           background: node.color,
           color: node.textColor,
           borderRadius: '22px',
-          padding: '18px 20px 20px',
+          padding: '16px 18px 18px',
           minWidth: '220px',
-          maxWidth: '280px',
+          maxWidth: '265px',
           boxShadow: isTargeted
-            ? `0 30px 60px -12px ${node.color}99, 0 10px 24px rgba(0,0,0,0.6)`
+            ? `0 30px 60px -12px ${node.color}AA, 0 10px 24px rgba(0,0,0,0.6)`
             : `0 18px 40px -12px ${node.color}50, 0 6px 18px rgba(0,0,0,0.45)`,
           border: isTargeted ? `2px solid rgba(255,255,255,0.9)` : '1px solid rgba(255,255,255,0.2)',
           animation: isTargeted
@@ -262,7 +272,7 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
           transform: isTargeted
             ? `rotate(${node.rotation}) scale(1.06) translateY(-8px)`
             : `rotate(${node.rotation})`,
-          opacity: isDimmed ? 0.35 : 1,
+          opacity: isDimmed ? 0.32 : 1,
           transition: 'opacity 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s ease',
           cursor: 'pointer',
           zIndex: isTargeted ? 40 : 20,
@@ -307,9 +317,9 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
             fontFamily: "'Fraunces', Georgia, serif",
             fontWeight: 900,
             fontStyle: 'italic',
-            fontSize: 'clamp(1.1rem, 1.8vw, 1.35rem)',
+            fontSize: 'clamp(1.05rem, 1.6vw, 1.28rem)',
             lineHeight: 1.15,
-            margin: '0 0 3px',
+            margin: '0 0 2px',
             letterSpacing: '-0.02em',
           }}
         >
@@ -319,12 +329,12 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
         {/* Sub-Principle Callout */}
         <div
           style={{
-            fontSize: '9.5px',
+            fontSize: '9px',
             fontWeight: 800,
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
             opacity: 0.9,
-            marginBottom: '8px',
+            marginBottom: '6px',
             fontFamily: "'Space Grotesk', system-ui, sans-serif",
           }}
         >
@@ -335,9 +345,9 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
         <p
           style={{
             fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-            fontSize: '11.5px',
+            fontSize: '11px',
             fontWeight: 500,
-            lineHeight: 1.5,
+            lineHeight: 1.45,
             margin: 0,
             opacity: 0.92,
           }}
@@ -348,11 +358,11 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
         {/* Styled Image / Proof Placeholder */}
         <div
           style={{
-            marginTop: '12px',
+            marginTop: '10px',
             width: '100%',
             aspectRatio: '16 / 9',
             background: 'rgba(0,0,0,0.22)',
-            borderRadius: '10px',
+            borderRadius: '8px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -361,10 +371,10 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
         >
           <span
             style={{
-              fontSize: '9.5px',
+              fontSize: '9px',
               fontFamily: "'Space Grotesk', monospace",
               fontWeight: 800,
-              letterSpacing: '0.1em',
+              letterSpacing: '0.08em',
               textTransform: 'uppercase',
               opacity: 0.65,
             }}
@@ -382,7 +392,6 @@ export default function DesignAnatomy() {
   const sectionRef    = useRef(null);
   const [isVisible, setIsVisible]       = useState(false);
   const [activeNodeId, setActiveNodeId] = useState(null);
-  const [mouseCoord, setMouseCoord]     = useState({ x: 50, y: 50 });
 
   // IntersectionObserver: trigger lines drawing on scroll
   useEffect(() => {
@@ -394,27 +403,13 @@ export default function DesignAnatomy() {
     return () => observer.disconnect();
   }, []);
 
-  // Magnetic cursor angle calculation for central title gradient
-  const handleMouseMove = useCallback((e) => {
-    if (!sectionRef.current) return;
-    const r = sectionRef.current.getBoundingClientRect();
-    const x = ((e.clientX - r.left) / r.width) * 100;
-    const y = ((e.clientY - r.top) / r.height) * 100;
-    setMouseCoord({ x, y });
-  }, []);
-
-  const gradientAngle = Math.round(
-    (Math.atan2(mouseCoord.y - 50, mouseCoord.x - 50) * 180) / Math.PI + 180
-  );
-
   return (
     <section
       ref={sectionRef}
-      onMouseMove={handleMouseMove}
       style={{
         position: 'relative',
         width: '100%',
-        minHeight: '100vh',
+        minHeight: '940px',
         overflow: 'hidden',
         // Pure Obsidian Technical Canvas
         backgroundColor: '#0A0B0E',
@@ -425,26 +420,26 @@ export default function DesignAnatomy() {
         `,
         backgroundSize: '40px 40px',
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-        padding: '90px 0 110px',
+        padding: '130px 0 110px', // Generous padding so top cards never collide with navbar
         color: '#FFFFFF',
       }}
     >
       {/* ─── Ambient Glow Pulses (GPU composite) ─── */}
-      <div style={{ position: 'absolute', top: '20%', left: '15%', width: '450px', height: '350px', background: 'radial-gradient(circle, rgba(255,45,120,0.12) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
+      <div style={{ position: 'absolute', top: '22%', left: '15%', width: '450px', height: '350px', background: 'radial-gradient(circle, rgba(255,45,120,0.12) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
       <div style={{ position: 'absolute', bottom: '15%', right: '12%', width: '450px', height: '350px', background: 'radial-gradient(circle, rgba(0,170,255,0.12) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '700px', height: '450px', background: 'radial-gradient(circle, rgba(181,159,255,0.08) 0%, transparent 65%)', pointerEvents: 'none', zIndex: 1 }} />
 
       {/* ─── Top Studio Metadata (Exact Reference Style: "Aa The Anatomy of Typography") ─── */}
-      <div style={{ position: 'absolute', top: '34px', left: 'max(24px, 4%)', zIndex: 25, display: 'flex', alignItems: 'center', gap: '14px' }}>
-        <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 900, fontSize: '36px', color: '#FFFFFF', lineHeight: 1, letterSpacing: '-0.03em' }}>
-          Hv
+      <div style={{ position: 'absolute', top: '38px', left: 'max(24px, 4%)', zIndex: 25, display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 900, fontSize: '34px', color: '#FFFFFF', lineHeight: 1, letterSpacing: '-0.03em' }}>
+          Aa
         </div>
         <div>
-          <div style={{ fontSize: '12px', fontWeight: 900, color: '#FFFFFF', fontFamily: "'Space Grotesk', monospace", letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+          <div style={{ fontSize: '11px', fontWeight: 900, color: '#FFFFFF', fontFamily: "'Space Grotesk', monospace", letterSpacing: '0.08em', textTransform: 'uppercase' }}>
             The Anatomy of HowVaibhav
           </div>
-          <div style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.45)', fontFamily: "'Space Grotesk', monospace", letterSpacing: '0.04em' }}>
-            A Visual Guide to Letterform Philosophy &amp; Creative Engineering
+          <div style={{ fontSize: '9.5px', fontWeight: 600, color: 'rgba(255,255,255,0.45)', fontFamily: "'Space Grotesk', monospace", letterSpacing: '0.04em' }}>
+            Visual Guide to Creative Letterform Elements
           </div>
         </div>
       </div>
@@ -457,11 +452,7 @@ export default function DesignAnatomy() {
         </div>
         <div>
           <span style={{ color: 'rgba(255,255,255,0.35)', display: 'block', fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Edition</span>
-          <span style={{ fontWeight: 800, color: 'rgba(255,255,255,0.75)' }}>2026 Archive</span>
-        </div>
-        <div>
-          <span style={{ color: 'rgba(255,255,255,0.35)', display: 'block', fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Datum Matrix</span>
-          <span style={{ fontWeight: 800, color: '#00E5C3' }}>CALIPER ACTIVE ⌖</span>
+          <span style={{ fontWeight: 800, color: 'rgba(255,255,255,0.75)' }}>October 2026</span>
         </div>
       </div>
 
@@ -482,7 +473,7 @@ export default function DesignAnatomy() {
       >
         <defs>
           <filter id="neonPathGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feGaussianBlur stdDeviation="3" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -492,25 +483,25 @@ export default function DesignAnatomy() {
 
         {/* ── Architectural Guideline Rules (Cap Line, Ascender, X-Line, Baseline, Descender) ── */}
         {isVisible && (
-          <g opacity="0.38">
-            {/* 1. Cap Line (y = 415) */}
-            <line x1="120" y1="415" x2="1080" y2="415" stroke="#FF2D78" strokeWidth="1" strokeDasharray="4 4" />
+          <g opacity="0.45">
+            {/* 1. Cap Line (y = 450) */}
+            <line x1="80" y1="450" x2="1120" y2="450" stroke="#FF2D78" strokeWidth="1" strokeDasharray="4 4" />
 
-            {/* 2. Mean / X-Height Line (y = 475) */}
-            <line x1="120" y1="475" x2="1080" y2="475" stroke="#00E5C3" strokeWidth="1" strokeDasharray="3 5" />
+            {/* 2. Mean / X-Height Line (y = 495) */}
+            <line x1="80" y1="495" x2="1120" y2="495" stroke="#00E5C3" strokeWidth="1" strokeDasharray="3 5" />
 
-            {/* 3. The Baseline (y = 538) — Continuous crisp reference line */}
-            <line x1="120" y1="538" x2="1080" y2="538" stroke="#FFFFFF" strokeWidth="1.4" opacity="0.8" />
+            {/* 3. The Baseline (y = 545) — Continuous crisp reference line */}
+            <line x1="80" y1="545" x2="1120" y2="545" stroke="#FFFFFF" strokeWidth="1.4" opacity="0.85" />
 
-            {/* 4. Descender Line (y = 575) */}
-            <line x1="120" y1="575" x2="1080" y2="575" stroke="#D4A017" strokeWidth="1" strokeDasharray="4 4" />
+            {/* 4. Descender Line (y = 580) */}
+            <line x1="80" y1="580" x2="1120" y2="580" stroke="#D4A017" strokeWidth="1" strokeDasharray="4 4" />
 
             {/* Vertical Caliper Arrow on Right Margin (like reference image) */}
-            <line x1="1120" y1="415" x2="1120" y2="575" stroke="#FFFFFF" strokeWidth="1.5" />
-            <polygon points="1115,422 1125,422 1120,410" fill="#FFFFFF" />
-            <polygon points="1115,568 1125,568 1120,580" fill="#FFFFFF" />
-            <text x="1132" y="500" fill="rgba(255,255,255,0.6)" fontSize="9" fontFamily="'Space Grotesk', monospace" fontWeight="800" transform="rotate(90, 1132, 500)">
-              1000‰ POINT SIZE
+            <line x1="1135" y1="450" x2="1135" y2="580" stroke="#FFFFFF" strokeWidth="1.5" />
+            <polygon points="1130,457 1140,457 1135,445" fill="#FFFFFF" />
+            <polygon points="1130,573 1140,573 1135,585" fill="#FFFFFF" />
+            <text x="1148" y="515" fill="rgba(255,255,255,0.65)" fontSize="9" fontFamily="'Space Grotesk', monospace" fontWeight="800" transform="rotate(90, 1148, 515)">
+              POINT SIZE
             </text>
           </g>
         )}
@@ -519,7 +510,7 @@ export default function DesignAnatomy() {
         {ANATOMY_NODES.map((node) => {
           const isTargeted = activeNodeId === node.id;
           const strokeWidth = isTargeted ? 3.5 : 1.8;
-          const strokeOpacity = isTargeted ? 1 : activeNodeId ? 0.2 : 0.65;
+          const strokeOpacity = isTargeted ? 1 : activeNodeId ? 0.2 : 0.7;
 
           return (
             <g key={node.id}>
@@ -556,7 +547,7 @@ export default function DesignAnatomy() {
         })}
       </svg>
 
-      {/* ─── DESKTOP SCATTERED LAYOUT (Min-Width 960px) ─── */}
+      {/* ─── DESKTOP SCATTERED STAGE (Min-Width 960px) ─── */}
       <div
         className="anatomy-desktop-stage"
         style={{
@@ -579,7 +570,7 @@ export default function DesignAnatomy() {
         `}</style>
 
         {/* ─── CARD 1: Top Left (Cap Height) ─── */}
-        <div style={{ position: 'absolute', top: '30px', left: '0px' }}>
+        <div style={{ position: 'absolute', top: '60px', left: '10px' }}>
           <AnatomyCard
             node={ANATOMY_NODES[0]}
             activeNodeId={activeNodeId}
@@ -589,8 +580,8 @@ export default function DesignAnatomy() {
           />
         </div>
 
-        {/* ─── CARD 2: Top Center (Ascender Dynamics) ─── */}
-        <div style={{ position: 'absolute', top: '-10px', left: '46%', transform: 'translateX(-50%)' }}>
+        {/* ─── CARD 2: Top Center (Ascender Dynamics) — Safely positioned below navbar ─── */}
+        <div style={{ position: 'absolute', top: '25px', left: '48%', transform: 'translateX(-50%)' }}>
           <AnatomyCard
             node={ANATOMY_NODES[1]}
             activeNodeId={activeNodeId}
@@ -601,7 +592,7 @@ export default function DesignAnatomy() {
         </div>
 
         {/* ─── CARD 3: Top Right (Point Size & Scale) ─── */}
-        <div style={{ position: 'absolute', top: '30px', right: '0px' }}>
+        <div style={{ position: 'absolute', top: '60px', right: '10px' }}>
           <AnatomyCard
             node={ANATOMY_NODES[2]}
             activeNodeId={activeNodeId}
@@ -611,11 +602,11 @@ export default function DesignAnatomy() {
           />
         </div>
 
-        {/* ─── CENTRAL HERO TYPOGRAPHY: "HowVaibhav" with Interactive Letter Mapping ─── */}
+        {/* ─── CENTRAL HERO TYPOGRAPHY: "HowVaibhav" with Crisp Legible Letterforms ─── */}
         <div
           style={{
             position: 'absolute',
-            top: '49%',
+            top: '51%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             textAlign: 'center',
@@ -623,8 +614,8 @@ export default function DesignAnatomy() {
             userSelect: 'none',
           }}
         >
-          {/* Subtle guideline indicator tabs (matching "CAP LINE" and "X LINE" tabs in image) */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', maxWidth: '820px', margin: '0 auto 12px', padding: '0 10px' }}>
+          {/* Guideline indicator tabs (matching "CAP LINE" and "X LINE" tabs in reference poster) */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', maxWidth: '780px', margin: '0 auto 10px', padding: '0 8px' }}>
             <span
               style={{
                 background: '#FF2D78',
@@ -637,7 +628,7 @@ export default function DesignAnatomy() {
                 letterSpacing: '0.1em',
               }}
             >
-              CAP LINE [H]
+              CAP LINE
             </span>
             <span
               style={{
@@ -651,20 +642,20 @@ export default function DesignAnatomy() {
                 letterSpacing: '0.1em',
               }}
             >
-              X LINE [a · v]
+              X LINE
             </span>
           </div>
 
-          {/* Letterform Cluster */}
+          {/* Letterform Cluster — Razor-sharp, solid white letterforms with signature glowing gradient accents */}
           <div
             style={{
               display: 'inline-flex',
               alignItems: 'baseline',
               fontFamily: "'Fraunces', 'Instrument Serif', Georgia, serif",
-              fontSize: 'clamp(4rem, 8.5vw, 7.8rem)',
+              fontSize: 'clamp(4.2rem, 8.2vw, 7.6rem)',
               fontWeight: 900,
               lineHeight: 0.9,
-              letterSpacing: '-0.04em',
+              letterSpacing: '-0.035em',
               position: 'relative',
             }}
           >
@@ -684,13 +675,10 @@ export default function DesignAnatomy() {
                     display: 'inline-block',
                     position: 'relative',
                     cursor: 'pointer',
-                    color: '#FFFFFF',
                     transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease, opacity 0.2s ease',
                     transform: isNodeActive ? 'scale(1.22) translateY(-8px)' : 'scale(1)',
-                    opacity: hasActiveOther ? 0.35 : 1,
+                    opacity: hasActiveOther ? 0.32 : 1,
                     zIndex: isNodeActive ? 30 : 20,
-                    // Letter-specific signature color / gradient
-                    filter: isNodeActive ? `drop-shadow(0 0 20px ${item.accent})` : 'none',
                   }}
                 >
                   {/* Glowing Animated Tittle (Dot on the 'i') */}
@@ -699,9 +687,9 @@ export default function DesignAnatomy() {
                       style={{
                         position: 'absolute',
                         top: '12%',
-                        left: '42%',
-                        width: '9px',
-                        height: '9px',
+                        left: '46%',
+                        width: '10px',
+                        height: '10px',
                         borderRadius: '50%',
                         background: '#00AAFF',
                         boxShadow: '0 0 12px #00AAFF, 0 0 24px #00AAFF',
@@ -711,13 +699,13 @@ export default function DesignAnatomy() {
                     />
                   )}
 
-                  {/* Translucent Caliper Bounding Box around the final 'a' and 'v' (Like the green 'x' box in the image) */}
+                  {/* Translucent Caliper Bounding Box around the final 'a' and 'v' (Matching reference image) */}
                   {item.inBox && idx === 8 && (
                     <div
                       style={{
                         position: 'absolute',
-                        inset: '-10px -8px -6px -8px',
-                        background: 'rgba(0, 229, 195, 0.16)',
+                        inset: '-8px -8px -4px -8px',
+                        background: 'rgba(0, 229, 195, 0.14)',
                         border: '1.5px dashed #00E5C3',
                         borderRadius: '6px',
                         pointerEvents: 'none',
@@ -725,18 +713,25 @@ export default function DesignAnatomy() {
                       }}
                     >
                       <span style={{ position: 'absolute', top: '-14px', right: '4px', fontSize: '8px', color: '#00E5C3', fontFamily: "'Space Grotesk', monospace", fontWeight: 800 }}>
-                        X-HEIGHT
+                        x
                       </span>
                     </div>
                   )}
 
+                  {/* 
+                    RAZOR-SHARP LETTER GLYPH:
+                    Solid, crisp white base with luminous colored top-gradient accent.
+                    NO giant rectangular background boxes!
+                  */}
                   <span
                     style={{
-                      background: isNodeActive
-                        ? item.accent
-                        : `linear-gradient(${gradientAngle}deg, #FFFFFF 40%, ${item.accent} 100%)`,
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
+                      display: 'inline-block',
+                      color: isNodeActive ? item.accent : '#FFFFFF',
+                      textShadow: isNodeActive
+                        ? `0 0 25px ${item.accent}, 0 0 50px ${item.accent}80`
+                        : `0 2px 16px rgba(0,0,0,0.8), 0 0 8px ${item.accent}40`,
+                      filter: isNodeActive ? `drop-shadow(0 0 12px ${item.accent})` : 'none',
+                      transition: 'color 0.2s ease, text-shadow 0.2s ease',
                     }}
                   >
                     {item.char}
@@ -752,18 +747,18 @@ export default function DesignAnatomy() {
               fontFamily: "'Space Grotesk', monospace",
               fontSize: '11px',
               fontWeight: 800,
-              letterSpacing: '0.24em',
+              letterSpacing: '0.22em',
               textTransform: 'uppercase',
               color: 'rgba(255,255,255,0.4)',
-              marginTop: '16px',
+              marginTop: '14px',
             }}
           >
-            Typographic Taxonomy // Click Any Card or Letterform
+            Typographic Taxonomy // Hover Any Letter or Card
           </div>
         </div>
 
         {/* ─── CARD 4: Bottom Left (Descender Depth) ─── */}
-        <div style={{ position: 'absolute', bottom: '20px', left: '0px' }}>
+        <div style={{ position: 'absolute', bottom: '40px', left: '10px' }}>
           <AnatomyCard
             node={ANATOMY_NODES[3]}
             activeNodeId={activeNodeId}
@@ -774,7 +769,7 @@ export default function DesignAnatomy() {
         </div>
 
         {/* ─── CARD 5: Bottom Center (Baseline Alignment) ─── */}
-        <div style={{ position: 'absolute', bottom: '-15px', left: '50%', transform: 'translateX(-50%)' }}>
+        <div style={{ position: 'absolute', bottom: '10px', left: '48%', transform: 'translateX(-50%)' }}>
           <AnatomyCard
             node={ANATOMY_NODES[4]}
             activeNodeId={activeNodeId}
@@ -785,7 +780,7 @@ export default function DesignAnatomy() {
         </div>
 
         {/* ─── CARD 6: Bottom Right (X-Height & Rhythm) ─── */}
-        <div style={{ position: 'absolute', bottom: '20px', right: '0px' }}>
+        <div style={{ position: 'absolute', bottom: '40px', right: '10px' }}>
           <AnatomyCard
             node={ANATOMY_NODES[5]}
             activeNodeId={activeNodeId}
@@ -811,7 +806,7 @@ export default function DesignAnatomy() {
       >
         {/* Mobile Header Word */}
         <div style={{ textAlign: 'center', padding: '20px 0 10px' }}>
-          <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: '3.6rem', fontWeight: 900, color: '#FFF' }}>
+          <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: '3.6rem', fontWeight: 900, color: '#FFFFFF', textShadow: '0 0 20px rgba(0, 229, 195, 0.4)' }}>
             HowVaibhav
           </div>
           <div style={{ fontSize: '10px', fontFamily: "'Space Grotesk', monospace", color: '#00E5C3', fontWeight: 800, letterSpacing: '0.15em', marginTop: '6px' }}>

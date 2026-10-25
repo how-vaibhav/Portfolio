@@ -75,7 +75,6 @@ coverage/
 *.tsbuildinfo
 
 # ── Design Mode (Future Upgrade) ──────────────
-frontend/src/pages/DesignPage.jsx
 frontend/src/components/AboutSection.jsx
 frontend/src/components/CanvasScrollAnimation.jsx
 frontend/src/components/ContactScaleSection.jsx
