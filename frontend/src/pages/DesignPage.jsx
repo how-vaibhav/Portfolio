@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useModeTransition } from '../context/ModeTransitionContext';
 import DesignModeSwitch from '../components/Design/DesignModeSwitch';
-import DesignHero from '../components/Design/DesignHero';
 import Folder3DConveyor from '../components/Design/Folder3DConveyor';
 import FolderDeskGrid from '../components/Design/FolderDeskGrid';
 import FolderModal from '../components/Design/FolderModal';
@@ -139,8 +138,6 @@ export default function DesignPage() {
         {/* Creative Laboratory & Craft Manifesto */}
         <DesignPlayground />
 
-        {/* The Anatomy of HowVaibhav — Scattered infographic with floating capability cards */}
-        <DesignAnatomy />
 
         {/* Services & Capabilities Anti-Gravity Pinboard ("What I Can Help with:") */}
         <ServicesCorkboard />
