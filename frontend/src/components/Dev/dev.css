@@ -240,3 +240,15 @@
   border-left-color: #2555FF;
   background: rgba(37,85,255,0.05);
 }
+
+
+/* Responsive Mobile Customization for Design Mode Button */
+@media (max-width: 640px) {
+  .dev-design-mode-btn {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+  }
+}

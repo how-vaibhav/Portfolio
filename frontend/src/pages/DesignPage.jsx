@@ -168,6 +168,7 @@ export default function DesignPage() {
 
       {/* Floating Bottom-Right DEV Mode Switch Button */}
       <aside
+        className="floating-dev-switch-wrap"
         style={{
           position: 'fixed',
           bottom: '24px',
@@ -180,10 +181,10 @@ export default function DesignPage() {
         <button
           type="button"
           onClick={() => {
-            soundFX.playSnap();
+            try { soundFX.playWarp(); } catch {}
             transitionTo('/');
           }}
-          className="design-return-btn"
+          className="design-return-btn floating-dev-btn"
           title="Switch to Software Developer & CS Mode"
           style={{
             background: '#111215',
@@ -205,6 +206,7 @@ export default function DesignPage() {
             whiteSpace: 'nowrap',
           }}
           onMouseEnter={(e) => {
+            try { soundFX.playHover(); } catch {}
             e.currentTarget.style.borderColor = '#CCFF00';
             e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
             e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(204, 255, 0, 0.45)';
