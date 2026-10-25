@@ -227,28 +227,64 @@ function NodeDecorator({ type, color, accent }) {
   return null;
 }
 
-// ─── Individual Floating Anatomical Card (Compact & Text-Free) ────────────────
+// ─── Individual Floating Anatomical Card (Ultra-Smooth 3D Parallax & Gyro Tilt) ─
 function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
+  const cardRef = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
+
   const isTargeted = activeNodeId === node.id;
   const isDimmed   = activeNodeId !== null && !isTargeted;
   const animName   = `cFloat_${node.id}`;
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const normX = (x / rect.width - 0.5) * 2; // -1 to 1
+    const normY = (y / rect.height - 0.5) * 2; // -1 to 1
+
+    setTilt({
+      x: -normY * 13,
+      y: normX * 15,
+    });
+    setGlare({
+      x: (x / rect.width) * 100,
+      y: (y / rect.height) * 100,
+      opacity: 0.32,
+    });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    try { soundFX.playHover(); } catch {}
+    onHover(node.id);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setTilt({ x: 0, y: 0 });
+    setGlare({ x: 50, y: 50, opacity: 0 });
+    onLeave();
+  };
 
   return (
     <>
       <style>{`
         @keyframes ${animName} {
-          0%, 100% { transform: translate3d(0, 0, 0) rotate(${node.rotation}); }
-          50%       { transform: translate3d(0, ${node.floatY}, 0) rotate(${node.rotation}); }
+          0%, 100% { transform: perspective(1000px) translate3d(0, 0, 0) rotate(${node.rotation}); }
+          50%       { transform: perspective(1000px) translate3d(0, ${node.floatY}, 0) rotate(${node.rotation}); }
         }
       `}</style>
 
       <div
+        ref={cardRef}
         data-node-id={node.id}
-        onMouseEnter={() => {
-          try { soundFX.playTick(); } catch {}
-          onHover(node.id);
-        }}
-        onMouseLeave={onLeave}
+        onMouseEnter={handleMouseEnter}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         onClick={() => {
           try { soundFX.playSnap(); } catch {}
           onSelect(node.id === activeNodeId ? null : node.id);
@@ -260,23 +296,46 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
           borderRadius: '20px',
           padding: '14px 16px 16px',
           width: '215px',
-          boxShadow: isTargeted
-            ? `0 24px 50px -10px ${node.color}AA, 0 8px 20px rgba(0,0,0,0.6)`
+          transformStyle: 'preserve-3d',
+          boxShadow: isHovered || isTargeted
+            ? `0 32px 65px -10px ${node.color}95, 0 12px 28px rgba(0,0,0,0.55), inset 0 1px 1px rgba(255,255,255,0.7)`
             : `0 14px 34px -10px ${node.color}50, 0 4px 14px rgba(0,0,0,0.45)`,
-          border: isTargeted ? `2px solid rgba(255,255,255,0.9)` : '1px solid rgba(255,255,255,0.2)',
-          animation: isTargeted
+          border: isTargeted
+            ? `2px solid rgba(255,255,255,0.95)`
+            : isHovered
+            ? `2px solid rgba(255,255,255,0.85)`
+            : '1px solid rgba(255,255,255,0.2)',
+          animation: isHovered || isTargeted
             ? 'none'
             : `${animName} ${node.floatDuration} cubic-bezier(0.45,0,0.55,1) ${node.floatDelay} infinite`,
           willChange: 'transform',
-          transform: isTargeted
-            ? `rotate(${node.rotation}) scale(1.06) translateY(-6px)`
-            : `rotate(${node.rotation})`,
-          opacity: isDimmed ? 0.3 : 1,
-          transition: 'opacity 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s ease',
+          transform: isHovered
+            ? `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) translate3d(0, -14px, 35px) scale(1.08)`
+            : isTargeted
+            ? `perspective(1000px) rotate(${node.rotation}) translate3d(0, -8px, 20px) scale(1.05)`
+            : `perspective(1000px) rotate(${node.rotation})`,
+          opacity: isDimmed ? 0.28 : 1,
+          transition: isHovered
+            ? 'transform 0.08s ease-out, box-shadow 0.25s ease, border-color 0.2s ease, opacity 0.25s ease'
+            : 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.2s ease, opacity 0.25s ease',
           cursor: 'pointer',
-          zIndex: isTargeted ? 40 : 20,
+          zIndex: isHovered || isTargeted ? 50 : 20,
         }}
       >
+        {/* Dynamic Specular Holographic Glare Sheen */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            borderRadius: '20px',
+            pointerEvents: 'none',
+            background: `radial-gradient(circle at ${glare.x}% ${glare.y}%, rgba(255,255,255,${glare.opacity}) 0%, transparent 60%)`,
+            mixBlendMode: 'overlay',
+            transition: isHovered ? 'opacity 0.15s ease' : 'opacity 0.4s ease',
+            opacity: glare.opacity,
+            zIndex: 10,
+          }}
+        />
         {/* Corner Decorator Badge */}
         <NodeDecorator type={node.decorator} color={node.color} accent={node.accentColor} />
 

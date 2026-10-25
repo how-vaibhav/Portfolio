@@ -34,6 +34,8 @@ export default function Folder3DConveyor({ projects, onSelectProject }) {
   const [isMobile, setIsMobile] = useState(false);
   const [isSmallMobile, setIsSmallMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  const [hoveredIdx, setHoveredIdx] = useState(null);
+  const [focalTilt, setFocalTilt] = useState({ x: 0, y: 0 });
 
   // Responsive breakpoints
   useEffect(() => {
@@ -387,9 +389,19 @@ export default function Folder3DConveyor({ projects, onSelectProject }) {
               const tabPositions = [14, 42, 70, 28, 56];
               const tabLeft = `${tabPositions[index % tabPositions.length]}px`;
 
+              const isHovered = hoveredIdx === index;
+              const hoverPosZ = isHovered ? posZ + 42 : posZ;
+              const hoverScale = isHovered ? scale * 1.05 : scale;
+              const hoverRotX = isHovered ? rotateXAngle - 6 : rotateXAngle;
+
               return (
                 <div
                   key={project.id}
+                  onMouseEnter={() => {
+                    setHoveredIdx(index);
+                    try { soundFX.playHover(); } catch {}
+                  }}
+                  onMouseLeave={() => setHoveredIdx(null)}
                   onClick={() => {
                     if (hasDragged.current) return;
                     if (isFocal) {
@@ -399,12 +411,13 @@ export default function Folder3DConveyor({ projects, onSelectProject }) {
                       goToProject(index);
                     }
                   }}
-                  className={`iso-folder-unit ${isFocal ? 'is-focal' : ''}`}
+                  className={`iso-folder-unit ${isFocal ? 'is-focal' : ''} ${isHovered ? 'is-hovered' : ''}`}
                   style={{
-                    transform: `translate3d(${posX}px, ${posY}px, ${posZ}px) rotateX(${rotateXAngle}deg) scale(${scale})`,
-                    opacity,
-                    zIndex,
+                    transform: `translate3d(${posX}px, ${posY}px, ${hoverPosZ}px) rotateX(${hoverRotX}deg) scale(${hoverScale})`,
+                    opacity: isHovered ? 1 : opacity,
+                    zIndex: isHovered ? 95 : zIndex,
                     '--accent-col': project.folderColor || '#00D2FF',
+                    transition: isDragging.current ? 'none' : 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease',
                   }}
                 >
                   {/* Physical Folder Shell */}
