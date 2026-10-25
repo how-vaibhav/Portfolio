@@ -396,6 +396,48 @@ export default function DesignAnatomy() {
   const sectionRef    = useRef(null);
   const [isVisible, setIsVisible]       = useState(false);
   const [activeNodeId, setActiveNodeId] = useState(null);
+  const [mobileIndex, setMobileIndex]   = useState(0);
+
+  // Touch gesture tracking for mobile swipe specimen carousel
+  const touchStartX = useRef(0);
+  const touchDeltaX = useRef(0);
+
+  const handleTouchStart = (e) => {
+    if (e.touches.length === 1) {
+      touchStartX.current = e.touches[0].clientX;
+      touchDeltaX.current = 0;
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (e.touches.length === 1) {
+      touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (Math.abs(touchDeltaX.current) > 35) {
+      if (touchDeltaX.current < 0) {
+        const nextIdx = (mobileIndex + 1) % ANATOMY_NODES.length;
+        setMobileIndex(nextIdx);
+        setActiveNodeId(ANATOMY_NODES[nextIdx].id);
+        try { soundFX.playSnap(); } catch {}
+      } else {
+        const prevIdx = (mobileIndex - 1 + ANATOMY_NODES.length) % ANATOMY_NODES.length;
+        setMobileIndex(prevIdx);
+        setActiveNodeId(ANATOMY_NODES[prevIdx].id);
+        try { soundFX.playSnap(); } catch {}
+      }
+    }
+    touchStartX.current = 0;
+    touchDeltaX.current = 0;
+  };
+
+  const selectNodeByIndex = (idx) => {
+    setMobileIndex(idx);
+    setActiveNodeId(ANATOMY_NODES[idx].id);
+    try { soundFX.playTick(); } catch {}
+  };
 
   // IntersectionObserver: trigger lines drawing on scroll
   useEffect(() => {
@@ -746,40 +788,412 @@ export default function DesignAnatomy() {
         </div>
       </div>
 
-      {/* ─── MOBILE RESPONSIVE FALLBACK (Stacked Clean Grid) ─── */}
+      {/* ─── MOBILE RESPONSIVE INTERACTIVE SPECIMEN DECK ─── */}
       <div
         className="anatomy-mobile-grid"
         style={{
           display: 'none',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '24px',
-          padding: '0 20px',
-          maxWidth: '560px',
+          gap: '16px',
+          padding: '0 16px',
+          maxWidth: '520px',
           margin: '0 auto',
         }}
       >
-        {/* Mobile Header Word */}
-        <div style={{ textAlign: 'center', padding: '20px 0 10px' }}>
-          <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontSize: '3.6rem', fontWeight: 900, color: '#FFFFFF', textShadow: '0 0 20px rgba(0, 229, 195, 0.4)' }}>
-            HowVaibhav
+        {/* Mobile Header Badge */}
+        <div style={{ textAlign: 'center', paddingTop: '6px' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'rgba(0, 229, 195, 0.12)',
+              border: '1px solid rgba(0, 229, 195, 0.4)',
+              borderRadius: '999px',
+              padding: '4px 14px',
+              fontSize: '10px',
+              fontFamily: "'Space Grotesk', monospace",
+              fontWeight: 800,
+              color: '#00E5C3',
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase',
+            }}
+          >
+            <span>✦</span>
+            <span>Typographic Anatomy</span>
+            <span>✦</span>
           </div>
-          <div style={{ fontSize: '10px', fontFamily: "'Space Grotesk', monospace", color: '#00E5C3', fontWeight: 800, letterSpacing: '0.15em', marginTop: '6px' }}>
-            THE ANATOMY OF DESIGN
+          <div
+            style={{
+              fontSize: '11px',
+              color: 'rgba(255, 255, 255, 0.55)',
+              fontFamily: "'Space Grotesk', sans-serif",
+              marginTop: '5px',
+              letterSpacing: '0.02em',
+            }}
+          >
+            Tap any letter or swipe to inspect principles
           </div>
         </div>
 
-        {ANATOMY_NODES.map((node) => (
-          <div key={node.id} style={{ width: '100%', maxWidth: '340px' }}>
-            <AnatomyCard
-              node={{ ...node, rotation: '0deg', floatDuration: '0s' }}
-              activeNodeId={activeNodeId}
-              onSelect={setActiveNodeId}
-              onHover={setActiveNodeId}
-              onLeave={() => setActiveNodeId(null)}
-            />
+        {/* ── Interactive Wordmark Letter Ribbon ── */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '3px',
+            background: 'rgba(255, 255, 255, 0.04)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            borderRadius: '16px',
+            padding: '10px 10px',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255,255,255,0.08)',
+            width: '100%',
+            maxWidth: '380px',
+          }}
+        >
+          {LETTERS.map((item, idx) => {
+            const nodeIndex = ANATOMY_NODES.findIndex((n) => n.id === item.nodeId);
+            const isSelected = activeNodeId ? activeNodeId === item.nodeId : mobileIndex === nodeIndex;
+
+            return (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => selectNodeByIndex(nodeIndex)}
+                style={{
+                  background: isSelected ? `${item.accent}25` : 'transparent',
+                  border: isSelected ? `1.5px solid ${item.accent}` : '1.5px solid transparent',
+                  borderRadius: '8px',
+                  padding: '4px 2px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  flex: 1,
+                  minWidth: '24px',
+                  transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+                  transform: isSelected ? 'scale(1.15) translateY(-2px)' : 'none',
+                  boxShadow: isSelected ? `0 4px 12px ${item.accent}40` : 'none',
+                  position: 'relative',
+                }}
+              >
+                {/* Dot on 'i' pulsing */}
+                {item.hasTittle && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: '2px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: '4px',
+                      height: '4px',
+                      borderRadius: '50%',
+                      background: item.accent,
+                      boxShadow: `0 0 6px ${item.accent}`,
+                      animation: 'pulse 1.8s infinite',
+                    }}
+                  />
+                )}
+
+                <span
+                  style={{
+                    fontFamily: "'Fraunces', Georgia, serif",
+                    fontSize: '21px',
+                    fontWeight: 900,
+                    lineHeight: 1,
+                    color: isSelected ? item.accent : '#FFFFFF',
+                    textShadow: isSelected ? `0 0 12px ${item.accent}` : 'none',
+                  }}
+                >
+                  {item.char}
+                </span>
+
+                {/* Mini arrow indicator */}
+                <span
+                  style={{
+                    fontSize: '6px',
+                    lineHeight: 1,
+                    marginTop: '2px',
+                    color: item.accent,
+                    opacity: isSelected ? 1 : 0,
+                    transition: 'opacity 0.2s ease',
+                  }}
+                >
+                  ▲
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ── Active Specimen Card (Interactive Swipeable Lens) ── */}
+        {(() => {
+          const activeNode = ANATOMY_NODES[mobileIndex];
+          return (
+            <div
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              style={{
+                width: '100%',
+                maxWidth: '380px',
+                background: '#12141A',
+                border: `2px solid ${activeNode.color}`,
+                borderRadius: '18px',
+                padding: '18px 16px',
+                boxShadow: `0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px ${activeNode.color}30`,
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+              }}
+            >
+              {/* Top ambient color glow */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '-40px',
+                  right: '-40px',
+                  width: '120px',
+                  height: '120px',
+                  borderRadius: '50%',
+                  background: activeNode.color,
+                  opacity: 0.15,
+                  filter: 'blur(30px)',
+                  pointerEvents: 'none',
+                }}
+              />
+
+              {/* Card Header Bar */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '12px',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '10px',
+                    fontWeight: 900,
+                    letterSpacing: '0.12em',
+                    color: activeNode.color,
+                    background: `${activeNode.color}18`,
+                    border: `1px solid ${activeNode.color}45`,
+                    borderRadius: '999px',
+                    padding: '3px 10px',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {activeNode.badge}
+                </span>
+
+                <span
+                  style={{
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    color: 'rgba(255, 255, 255, 0.5)',
+                  }}
+                >
+                  0{mobileIndex + 1} / 06
+                </span>
+              </div>
+
+              {/* Letter Symbol & Title Grid */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
+                <div
+                  style={{
+                    width: '54px',
+                    height: '54px',
+                    borderRadius: '14px',
+                    background: `${activeNode.color}20`,
+                    border: `1.5px solid ${activeNode.color}`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontFamily: "'Fraunces', Georgia, serif",
+                    fontSize: '26px',
+                    fontWeight: 900,
+                    color: activeNode.color,
+                    boxShadow: `0 4px 16px ${activeNode.color}35`,
+                    flexShrink: 0,
+                  }}
+                >
+                  {activeNode.letterSymbol}
+                </div>
+
+                <div>
+                  <h3
+                    style={{
+                      fontFamily: "'Fraunces', Georgia, serif",
+                      fontSize: '18px',
+                      fontWeight: 800,
+                      color: '#FFFFFF',
+                      margin: '0 0 2px',
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {activeNode.title}
+                  </h3>
+                  <div
+                    style={{
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontSize: '10px',
+                      fontWeight: 800,
+                      letterSpacing: '0.06em',
+                      color: activeNode.color,
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {activeNode.principle}
+                  </div>
+                </div>
+              </div>
+
+              {/* Condensed Punchy Description */}
+              <p
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+                  fontSize: '12.5px',
+                  lineHeight: 1.5,
+                  color: 'rgba(255, 255, 255, 0.82)',
+                  margin: '0 0 14px',
+                }}
+              >
+                {activeNode.description}
+              </p>
+
+              {/* Metric Tag & Arrow Prompt */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  paddingTop: '10px',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '10px',
+                    fontWeight: 800,
+                    color: 'rgba(255, 255, 255, 0.65)',
+                    background: 'rgba(255, 255, 255, 0.06)',
+                    padding: '3px 8px',
+                    borderRadius: '4px',
+                  }}
+                >
+                  {activeNode.metric}
+                </span>
+
+                <span
+                  style={{
+                    fontSize: '10px',
+                    color: activeNode.color,
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    fontWeight: 800,
+                  }}
+                >
+                  SWIPE OR TAP ⇄
+                </span>
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* ── Carousel Step Indicator Dots & Arrows ── */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '12px',
+            width: '100%',
+            maxWidth: '380px',
+            padding: '2px 0 10px',
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => {
+              const prevIdx = (mobileIndex - 1 + ANATOMY_NODES.length) % ANATOMY_NODES.length;
+              selectNodeByIndex(prevIdx);
+            }}
+            style={{
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.12)',
+              color: '#FFFFFF',
+              borderRadius: '999px',
+              padding: '6px 14px',
+              fontSize: '11px',
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontWeight: 800,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+            }}
+          >
+            <span>‹</span>
+            <span>PREV</span>
+          </button>
+
+          {/* Dots */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            {ANATOMY_NODES.map((node, i) => {
+              const isActive = mobileIndex === i;
+              return (
+                <button
+                  key={node.id}
+                  type="button"
+                  onClick={() => selectNodeByIndex(i)}
+                  aria-label={`Go to specimen ${i + 1}`}
+                  style={{
+                    width: isActive ? '20px' : '7px',
+                    height: '7px',
+                    borderRadius: '999px',
+                    background: isActive ? node.color : 'rgba(255, 255, 255, 0.25)',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    transition: 'all 0.25s ease',
+                    boxShadow: isActive ? `0 0 8px ${node.color}` : 'none',
+                  }}
+                />
+              );
+            })}
           </div>
-        ))}
+
+          <button
+            type="button"
+            onClick={() => {
+              const nextIdx = (mobileIndex + 1) % ANATOMY_NODES.length;
+              selectNodeByIndex(nextIdx);
+            }}
+            style={{
+              background: 'rgba(255, 255, 255, 0.06)',
+              border: '1px solid rgba(255, 255, 255, 0.12)',
+              color: '#FFFFFF',
+              borderRadius: '999px',
+              padding: '6px 14px',
+              fontSize: '11px',
+              fontFamily: "'Space Grotesk', sans-serif",
+              fontWeight: 800,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+            }}
+          >
+            <span>NEXT</span>
+            <span>›</span>
+          </button>
+        </div>
       </div>
     </section>
   );

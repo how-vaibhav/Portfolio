@@ -286,8 +286,29 @@ function CardInnerArtwork({ type }) {
 export default function ServicesCorkboard() {
   const [cards, setCards] = useState(INITIAL_CARDS);
   const [draggedCardId, setDraggedCardId] = useState(null);
+  const [activeMobileIdx, setActiveMobileIdx] = useState(0);
 
   const containerRef = useRef(null);
+  const mobileRailRef = useRef(null);
+
+  const handleMobileScroll = () => {
+    if (!mobileRailRef.current) return;
+    const scrollLeft = mobileRailRef.current.scrollLeft;
+    const cardWidth = 270;
+    const idx = Math.round(scrollLeft / cardWidth);
+    setActiveMobileIdx(Math.max(0, Math.min(cards.length - 1, idx)));
+  };
+
+  const scrollToCard = (index) => {
+    if (!mobileRailRef.current) return;
+    const cardWidth = 286;
+    mobileRailRef.current.scrollTo({
+      left: index * cardWidth,
+      behavior: 'smooth',
+    });
+    setActiveMobileIdx(index);
+    try { soundFX.playTick(); } catch {}
+  };
   const dragStartRef = useRef({ x: 0, y: 0, origX: 0, origY: 0 });
 
   // Update position during drag only (0 background CPU usage)
@@ -406,6 +427,19 @@ export default function ServicesCorkboard() {
         .corkboard-card:hover {
           z-index: 45 !important;
           box-shadow: 0 28px 60px -15px rgba(30, 107, 255, 0.5), 0 12px 24px -8px rgba(0,0,0,0.2) !important;
+        }
+
+        @media (min-width: 769px) {
+          .corkboard-desktop-canvas { display: block !important; }
+          .corkboard-mobile-reel    { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .corkboard-desktop-canvas { display: none !important; }
+          .corkboard-mobile-reel    { display: block !important; }
+        }
+
+        .corkboard-snap-rail::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
 
@@ -563,11 +597,12 @@ export default function ServicesCorkboard() {
         </svg>
       </div>
 
-      {/* ─── Main Pinboard Canvas (1100 x 780 Virtual Coordinate Space) ─── */}
+      {/* ─── Desktop Interactive Pinboard Canvas (Min-Width 769px) ─── */}
       <div
         ref={containerRef}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
+        className="corkboard-desktop-canvas"
         style={{
           position: 'relative',
           maxWidth: '1120px',
@@ -684,6 +719,162 @@ export default function ServicesCorkboard() {
             </div>
           );
         })}
+      </div>
+
+      {/* ─── Touch-Native Mobile Cork Reel (Max-Width 768px) ─── */}
+      <div
+        className="corkboard-mobile-reel"
+        style={{
+          display: 'none',
+          position: 'relative',
+          width: '100%',
+          margin: '0 auto',
+        }}
+      >
+        {/* Swipe Helper Banner */}
+        <div style={{ textAlign: 'center', marginBottom: '16px', padding: '0 16px' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'rgba(30, 107, 255, 0.08)',
+              border: '1px solid rgba(30, 107, 255, 0.22)',
+              borderRadius: '999px',
+              padding: '5px 14px',
+              fontSize: '11px',
+              fontFamily: "'Space Grotesk', system-ui, sans-serif",
+              fontWeight: 800,
+              color: '#1E6BFF',
+              letterSpacing: '0.04em',
+            }}
+          >
+            <span>←</span>
+            <span>SWIPE 5 CAPABILITIES</span>
+            <span>→</span>
+          </div>
+        </div>
+
+        {/* Horizontal Snap Reel */}
+        <div
+          ref={mobileRailRef}
+          onScroll={handleMobileScroll}
+          className="corkboard-snap-rail"
+          style={{
+            display: 'flex',
+            gap: '16px',
+            overflowX: 'auto',
+            scrollSnapType: 'x mandatory',
+            padding: '24px 20px 24px',
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            scrollBehavior: 'smooth',
+          }}
+        >
+          {cards.map((card, idx) => {
+            const tilts = [-2.2, 1.8, -1.6, 2, -1.8];
+            const tilt = tilts[idx % tilts.length];
+            return (
+              <div
+                key={card.id}
+                style={{
+                  scrollSnapAlign: 'center',
+                  flex: '0 0 min(270px, 78vw)',
+                  position: 'relative',
+                  transform: `rotate(${tilt}deg)`,
+                  transition: 'transform 0.25s ease',
+                }}
+                onClick={() => {
+                  try { soundFX.playSnap(); } catch {}
+                }}
+              >
+                {/* Blue Card Shell with Heavy Rounded Corners */}
+                <div
+                  style={{
+                    position: 'relative',
+                    width: '100%',
+                    background: '#1E6BFF',
+                    borderRadius: '24px',
+                    padding: '12px 12px 14px',
+                    boxShadow: '0 18px 36px -10px rgba(30, 107, 255, 0.45), 0 8px 18px rgba(0, 0, 0, 0.12)',
+                    border: '1px solid rgba(255, 255, 255, 0.25)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  {/* 3D Blue Pushpin */}
+                  <Pushpin />
+
+                  {/* Inner Image Area Display */}
+                  <div
+                    style={{
+                      width: '100%',
+                      aspectRatio: '4 / 5',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      background: '#FFFFFF',
+                      border: '1px solid rgba(0, 0, 0, 0.06)',
+                      boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.08)',
+                    }}
+                  >
+                    <CardInnerArtwork type={card.type} />
+                  </div>
+
+                  {/* Bold White Title at Bottom */}
+                  <h3
+                    style={{
+                      textAlign: 'center',
+                      fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                      fontWeight: 800,
+                      fontSize: '16px',
+                      color: '#FFFFFF',
+                      margin: '8px 0 2px',
+                      letterSpacing: '-0.01em',
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Reel Pagination Dots */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            marginTop: '12px',
+          }}
+        >
+          {cards.map((card, i) => {
+            const isActive = activeMobileIdx === i;
+            return (
+              <button
+                key={card.id}
+                type="button"
+                onClick={() => scrollToCard(i)}
+                aria-label={`View capability ${i + 1}`}
+                style={{
+                  width: isActive ? '22px' : '8px',
+                  height: '8px',
+                  borderRadius: '999px',
+                  background: isActive ? '#1E6BFF' : 'rgba(30, 107, 255, 0.22)',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
+                  transition: 'all 0.25s ease',
+                  boxShadow: isActive ? '0 0 8px rgba(30, 107, 255, 0.5)' : 'none',
+                }}
+              />
+            );
+          })}
+        </div>
       </div>
     </section>
   );

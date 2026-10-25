@@ -217,9 +217,10 @@ export default function DesignPage() {
             e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(204, 255, 0, 0.25)';
           }}
         >
-          <span style={{ fontSize: '13px' }}>⚡</span>
-          <span>DEV MODE</span>
+          <span className="floating-dev-icon" style={{ fontSize: '13px', lineHeight: 1 }}>⚡</span>
+          <span className="floating-dev-label">DEV MODE</span>
           <span
+            className="floating-dev-code-badge"
             style={{
               fontFamily: 'monospace',
               fontSize: '11px',
@@ -229,6 +230,7 @@ export default function DesignPage() {
               padding: '2px 6px',
               borderRadius: '4px',
               letterSpacing: '-0.04em',
+              lineHeight: 1.1,
             }}
           >
             &lt;/&gt;
