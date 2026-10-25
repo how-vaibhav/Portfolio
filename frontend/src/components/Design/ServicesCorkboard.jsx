@@ -1,65 +1,136 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { soundFX } from './soundFX';
 
 /**
- * INITIAL PINBOARD CARD DATA
- * Static resting positions in a 1100 x 780 coordinate space matching the reference image:
- * - Card 1 (Brand Identity): Top Left, rotated -6.5deg
- * - Card 2 (SM Design): Center, rotated +2.2deg
- * - Card 3 (Marketing Creatives): Top Right, rotated +6.5deg
- * - Card 4 (Brand Systems): Bottom Left, rotated +3.8deg
- * - Card 5 (Content Strategy): Bottom Right, rotated -3.5deg
+ * ELEVATED SERVICES CORKBOARD DATA
+ * 5 Studio-Grade Capabilities with comprehensive deliverables, scopes, and turnarounds.
  */
 const INITIAL_CARDS = [
   {
     id: 'card-1',
-    title: 'Brand Identity',
-    rotation: -6.5,
-    x: 180,
-    y: 190,
-    width: 255,
-    height: 355,
+    number: '01',
+    badge: 'ZERO-TO-ONE IDENTITY',
+    title: 'Brand Identity & Art Direction',
+    shortTitle: 'Brand Identity',
+    turnaround: '1–2 Weeks',
+    deliverablesCount: '6 Master Modules',
+    idealFit: 'Founders, Startups & Global Rebrands',
+    summary: 'Distill your core essence into an iconic visual system that commands instant authority and scales seamlessly across every modern medium.',
+    deliverables: [
+      'Infinite-resolution vector logomark suite (.SVG, .AI, .EPS, .PDF) in primary, stacked, and glyph formats',
+      'Comprehensive 40+ page Brand Guidelines covering optical construction, clear zones, and misuse rules',
+      'Curated typography hierarchy pairing bespoke display serifs with robust web-safe sans-serifs',
+      'Precision HSL/HEX color architecture featuring primary, secondary, and WCAG AA-accessible tokens',
+      'Physical stationery & merchandise dielines (business cards, letterhead, foil-stamped folders)',
+      '100% full commercial intellectual property assignment and master Figma asset package',
+    ],
     type: 'branding',
+    accentColor: '#1E6BFF',
+    rotation: -6.5,
+    x: 185,
+    y: 195,
+    width: 260,
+    height: 365,
   },
   {
     id: 'card-2',
-    title: 'SM Design',
+    number: '02',
+    badge: 'HIGH-VELOCITY EDITORIAL',
+    title: 'Social & Editorial Systems',
+    shortTitle: 'Editorial Systems',
+    turnaround: '3–5 Days',
+    deliverablesCount: '5 Template Suites',
+    idealFit: 'Founders, Creators & High-Growth Tech',
+    summary: 'High-contrast, retention-engineered carousel slides and editorial templates designed to maximize organic reach and establish thought leadership.',
+    deliverables: [
+      'Modular 10-slide high-retention carousel templates built with Figma Auto-Layout 5.0',
+      'High-converting typographic headline frameworks and custom thumbnail cover designs',
+      'Motion-ready story and reel cover layouts optimized for 9:16 and 4:5 mobile viewports',
+      'Reusable visual asset toolkit (custom vector arrows, editorial markers, highlighters, stamps)',
+      'Clean editable Figma design components with unified typography styles for rapid publishing',
+    ],
+    type: 'social',
+    accentColor: '#FF6B00',
     rotation: 2.2,
     x: 540,
     y: 280,
-    width: 260,
-    height: 360,
-    type: 'social',
+    width: 265,
+    height: 370,
   },
   {
     id: 'card-3',
-    title: 'Marketing Creatives',
+    number: '03',
+    badge: 'TACTILE CRAFT & MERCH',
+    title: 'Packaging, Print & Merch',
+    shortTitle: 'Packaging & Merch',
+    turnaround: '1–2 Weeks',
+    deliverablesCount: '5 Production Dielines',
+    idealFit: 'DTC Brands, Luxury Goods & Physical Products',
+    summary: 'Tangible, high-end packaging experiences that turn unboxing into brand devotion through tactile textures, blind deboss, and foil accents.',
+    deliverables: [
+      'Print-ready custom dieline files calibrated for commercial offset, flexo, and digital presses',
+      'Luxury finishing specs: blind debossing, hot-stamped gold/silver foils, spot UV, and soft-touch laminates',
+      'Custom apparel & lifestyle merch mockups (heavyweight tees, tote bags, embroidered caps)',
+      'Pantone Matching System (PMS) color separation guides and calibrated CMYK color profiles',
+      'Direct printer prepress coordination and sample proof sign-off support to eliminate press errors',
+    ],
+    type: 'packaging',
+    accentColor: '#F59E0B',
     rotation: 6.5,
     x: 885,
-    y: 240,
+    y: 235,
     width: 260,
     height: 365,
-    type: 'creatives',
   },
   {
     id: 'card-4',
-    title: 'Brand Systems',
+    number: '04',
+    badge: 'PRODUCTION TOKENS',
+    title: 'Design Systems & Tokens',
+    shortTitle: 'Design Systems',
+    turnaround: '1–3 Weeks',
+    deliverablesCount: '4 Architecture Layers',
+    idealFit: 'SaaS Platforms, Engineering Teams & Scaling Apps',
+    summary: 'Production-ready design systems bridging Figma and modern frontend frameworks with 100% token parity and zero design drift.',
+    deliverables: [
+      'Figma Variables token architecture with full multi-mode support (Dark, Light, Brand Accents)',
+      'Automated token export pipeline producing clean CSS Custom Properties, Tailwind tokens, and JSON',
+      'Reusable accessible UI component library (buttons, inputs, dropdowns, cards, navigation)',
+      'Complete interactive state documentation (Default, Hover, Active, Focus-Visible, Disabled)',
+      'WCAG 2.2 AA accessibility audit verifying color contrast ratios and keyboard navigation targets',
+    ],
+    type: 'systems',
+    accentColor: '#00E5C3',
     rotation: 3.8,
     x: 295,
-    y: 575,
-    width: 255,
-    height: 355,
-    type: 'systems',
+    y: 580,
+    width: 260,
+    height: 365,
   },
   {
     id: 'card-5',
-    title: 'Content Strategy',
+    number: '05',
+    badge: 'HIGH-STAKES COLLATERAL',
+    title: 'Pitch Decks & Investor Collateral',
+    shortTitle: 'Pitch Decks',
+    turnaround: '3–7 Days',
+    deliverablesCount: '15–20 Master Slides',
+    idealFit: 'Founders Raising Capital & Keynote Speakers',
+    summary: 'Persuasive, high-converting investor decks that translate complex technical architectures into crisp, fundable narratives.',
+    deliverables: [
+      'Custom 15–20 slide master presentation deck designed natively in Figma or Apple Keynote',
+      'Bespoke data visualizations, inflection traction curves, and system architecture schematics',
+      'Executive one-pager teaser PDF calibrated for high-impact investor email introductions',
+      'Lightweight web-optimized PDF distribution package (under 10MB) with embedded interactive links',
+      'Editable component templates allowing founders to update metrics and projections on the fly',
+    ],
+    type: 'pitchdeck',
+    accentColor: '#B59FFF',
     rotation: -3.5,
-    x: 770,
+    x: 775,
     y: 590,
-    width: 260,
-    height: 360,
-    type: 'content',
+    width: 265,
+    height: 370,
   },
 ];
 
@@ -74,7 +145,7 @@ const CONNECTIONS = [
 ];
 
 /**
- * Realistic 3D Glossy Blue Pushpin
+ * Realistic 3D Glossy Blue Pushpin with specular reflection and metallic pin point
  */
 function Pushpin() {
   return (
@@ -98,33 +169,46 @@ function Pushpin() {
           width: '24px',
           height: '24px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle at 35% 30%, #60A5FA 0%, #1E6BFF 50%, #0F4BC2 100%)',
-          border: '1px solid rgba(255, 255, 255, 0.65)',
+          background: 'radial-gradient(circle at 35% 30%, #90BFFF 0%, #1E6BFF 45%, #0B3EAA 100%)',
+          boxShadow: 'inset 0 -2px 4px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.65)',
           position: 'relative',
-          boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.7), inset 0 -2px 4px rgba(0,0,0,0.4)',
         }}
       >
+        {/* Specular White Dot */}
         <div
           style={{
             position: 'absolute',
-            top: '3px',
-            left: '5px',
+            top: '4px',
+            left: '6px',
             width: '6px',
-            height: '6px',
+            height: '4px',
             borderRadius: '50%',
-            background: 'rgba(255, 255, 255, 0.9)',
-            filter: 'blur(0.5px)',
+            background: '#FFFFFF',
+            opacity: 0.9,
+            transform: 'rotate(-25deg)',
           }}
         />
       </div>
-      {/* Metallic Tapered Needle Base */}
+
+      {/* Tapered Collar */}
       <div
         style={{
-          width: '5px',
-          height: '9px',
-          background: 'linear-gradient(to right, #94A3B8, #F1F5F9, #64748B)',
-          borderRadius: '0 0 2px 2px',
-          boxShadow: '0 1px 2px rgba(0,0,0,0.3)',
+          width: '12px',
+          height: '5px',
+          background: 'linear-gradient(90deg, #0B3EAA 0%, #1E6BFF 50%, #0B3EAA 100%)',
+          borderRadius: '2px',
+          marginTop: '-1px',
+        }}
+      />
+
+      {/* Cast Shadow Below Pin */}
+      <div
+        style={{
+          width: '18px',
+          height: '6px',
+          background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, transparent 70%)',
+          borderRadius: '50%',
+          marginTop: '1px',
         }}
       />
     </div>
@@ -132,41 +216,191 @@ function Pushpin() {
 }
 
 /**
- * Inner Artwork for each Card (Exact visual replica of the reference image)
+ * Studio-Grade High-Fidelity Artwork for Each Service
  */
 function CardInnerArtwork({ type }) {
   if (type === 'branding') {
     return (
-      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '10px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-          <div style={{ background: '#FF6B00', borderRadius: '10px', padding: '8px', display: 'flex', alignItems: 'center', gap: '6px', color: '#FFF' }}>
-            <div style={{ width: '12px', height: '12px', background: '#FFF', borderRadius: '2px', transform: 'rotate(45deg)' }} />
-            <span style={{ fontSize: '11px', fontWeight: 800 }}>Elevera</span>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '12px',
+          background: 'radial-gradient(circle at 50% 20%, #FFFFFF 0%, #F5F7FA 100%)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Grid Background Pattern */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            opacity: 0.08,
+            backgroundImage: 'radial-gradient(#0F172A 1px, transparent 1px)',
+            backgroundSize: '12px 12px',
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Top Header Tag */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            position: 'relative',
+            zIndex: 2,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: "'Space Grotesk', monospace",
+              fontSize: '8.5px',
+              fontWeight: 800,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: '#0F172A',
+            }}
+          >
+            OPTICAL GRID // 01
+          </span>
+          <span
+            style={{
+              fontSize: '8px',
+              fontWeight: 800,
+              background: '#EFF6FF',
+              color: '#1E6BFF',
+              padding: '2px 6px',
+              borderRadius: '4px',
+              border: '1px solid #BFDBFE',
+            }}
+          >
+            VECTOR MASTER
+          </span>
+        </div>
+
+        {/* Centerpiece: Interlocking Monogram Emblem with Construction Geometry */}
+        <div
+          style={{
+            margin: 'auto 0',
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {/* Construction Circle */}
+          <div
+            style={{
+              position: 'absolute',
+              width: '100px',
+              height: '100px',
+              borderRadius: '50%',
+              border: '1px dashed rgba(30, 107, 255, 0.35)',
+              pointerEvents: 'none',
+            }}
+          />
+
+          {/* Construction 45-deg Angle Guide */}
+          <div
+            style={{
+              position: 'absolute',
+              width: '115px',
+              height: '1px',
+              background: 'rgba(30, 107, 255, 0.25)',
+              transform: 'rotate(45deg)',
+              pointerEvents: 'none',
+            }}
+          />
+
+          {/* Luxury Monogram Badge */}
+          <div
+            style={{
+              width: '68px',
+              height: '68px',
+              borderRadius: '16px',
+              background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
+              border: '1.5px solid rgba(255, 255, 255, 0.15)',
+              boxShadow: '0 8px 20px -4px rgba(15, 23, 42, 0.35), 0 0 0 1px rgba(30, 107, 255, 0.2)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              zIndex: 3,
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                fontSize: '28px',
+                fontWeight: 900,
+                color: '#FFFFFF',
+                letterSpacing: '-0.06em',
+                background: 'linear-gradient(180deg, #FFFFFF 30%, #CBD5E1 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              HV
+            </span>
+
+            {/* Micro Gold Accent Dot */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '8px',
+                right: '8px',
+                width: '5px',
+                height: '5px',
+                borderRadius: '50%',
+                background: '#FFD700',
+                boxShadow: '0 0 6px rgba(255, 215, 0, 0.8)',
+              }}
+            />
           </div>
-          <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '10px', padding: '8px', display: 'flex', alignItems: 'center', gap: '6px', color: '#1E293B' }}>
-            <div style={{ width: '12px', height: '12px', background: '#FF6B00', borderRadius: '2px', transform: 'rotate(45deg)' }} />
-            <span style={{ fontSize: '11px', fontWeight: 800 }}>Elevera</span>
+
+          <div
+            style={{
+              fontFamily: "'Space Grotesk', system-ui, sans-serif",
+              fontSize: '11px',
+              fontWeight: 800,
+              color: '#0F172A',
+              marginTop: '8px',
+              letterSpacing: '-0.01em',
+            }}
+          >
+            Elevera Global Identity
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', margin: '8px 0' }}>
-          <div style={{ background: '#000', color: '#FFF', borderRadius: '8px', padding: '8px', textAlign: 'center', aspectRatio: '1' }}>
-            <div style={{ fontSize: '12px', fontWeight: 900 }}>≡≡</div>
-            <div style={{ fontSize: '7px', opacity: 0.8, marginTop: '2px' }}>Elevera</div>
+        {/* Bottom Swatches & Spec */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: '8px',
+            border: '1px solid #E2E8F0',
+            padding: '6px 8px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+            position: 'relative',
+            zIndex: 2,
+          }}
+        >
+          <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+            <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: '#0F172A' }} />
+            <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: '#1E6BFF' }} />
+            <span style={{ width: '9px', height: '9px', borderRadius: '50%', background: '#F8FAFC', border: '1px solid #CBD5E1' }} />
           </div>
-          <div style={{ background: '#FFF', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '8px', textAlign: 'center', aspectRatio: '1' }}>
-            <div style={{ width: '12px', height: '12px', background: '#FF6B00', borderRadius: '2px', margin: '0 auto' }} />
-            <div style={{ fontSize: '7px', color: '#64748B', marginTop: '2px' }}>Elevera</div>
-          </div>
-          <div style={{ background: '#FF6B00', color: '#FFF', borderRadius: '8px', padding: '8px', textAlign: 'center', aspectRatio: '1' }}>
-            <div style={{ fontSize: '12px', fontWeight: 900 }}>✦</div>
-            <div style={{ fontSize: '7px', marginTop: '2px' }}>Elevera</div>
-          </div>
-        </div>
-
-        <div style={{ background: 'linear-gradient(90deg, #FFF7ED, #FFFFFF, #FFEDD5)', border: '1px solid #FDBA74', borderRadius: '10px', padding: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-          <div style={{ width: '14px', height: '14px', background: '#FF6B00', color: '#FFF', borderRadius: '3px', fontSize: '9px', fontWeight: 900, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>E</div>
-          <span style={{ fontSize: '11px', fontWeight: 900, color: '#1E293B' }}>Elevera</span>
+          <span style={{ fontSize: '8px', fontFamily: 'monospace', fontWeight: 700, color: '#64748B' }}>
+            CANELA + NEUE
+          </span>
         </div>
       </div>
     );
@@ -174,45 +408,268 @@ function CardInnerArtwork({ type }) {
 
   if (type === 'social') {
     return (
-      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '10px', background: 'linear-gradient(180deg, #FAF8F5 0%, #FFF5ED 100%)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(0,0,0,0.08)', paddingBottom: '6px' }}>
-          <span style={{ fontSize: '9px', fontWeight: 900, letterSpacing: '0.04em', textTransform: 'uppercase', color: '#1E293B' }}>Your Brand Deserves Better</span>
-          <span style={{ fontSize: '8px', background: '#FFEDD5', color: '#C2410C', fontWeight: 800, padding: '2px 5px', borderRadius: '4px' }}>POST</span>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '12px',
+          background: 'linear-gradient(180deg, #FAF8F5 0%, #FFF5ED 100%)',
+          position: 'relative',
+        }}
+      >
+        {/* Top Header */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderBottom: '1px solid rgba(0,0,0,0.06)',
+            paddingBottom: '6px',
+          }}
+        >
+          <span
+            style={{
+              fontSize: '8.5px',
+              fontWeight: 900,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              color: '#1E293B',
+              fontFamily: "'Space Grotesk', system-ui",
+            }}
+          >
+            CAROUSEL SYSTEM
+          </span>
+          <span
+            style={{
+              fontSize: '7.5px',
+              background: '#FFEDD5',
+              color: '#C2410C',
+              fontWeight: 800,
+              padding: '2px 5px',
+              borderRadius: '4px',
+            }}
+          >
+            10-SLIDE DECK
+          </span>
         </div>
 
-        <div style={{ margin: 'auto 0', textAlign: 'center', background: '#FFFFFF', borderRadius: '8px', border: '1px solid #E2E8F0', padding: '10px 8px', position: 'relative', boxShadow: '0 2px 6px rgba(0,0,0,0.04)' }}>
-          <span style={{ fontSize: '28px', display: 'block' }}>🏛️</span>
-          <div style={{ fontSize: '9px', fontWeight: 800, color: '#1E293B', marginTop: '4px' }}>Strategic Visual Hooks</div>
-          <div style={{ position: 'absolute', bottom: '4px', right: '4px', background: '#1E293B', color: '#FB923C', fontSize: '7px', fontFamily: 'monospace', padding: '2px 5px', borderRadius: '3px' }}>
-            💻 elevera.co
+        {/* Editorial Preview Card Stack */}
+        <div
+          style={{
+            margin: 'auto 0',
+            textAlign: 'center',
+            background: '#FFFFFF',
+            borderRadius: '10px',
+            border: '1px solid #E2E8F0',
+            padding: '12px 10px',
+            position: 'relative',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "'Space Grotesk', system-ui, sans-serif",
+              fontSize: '13px',
+              fontWeight: 900,
+              color: '#0F172A',
+              lineHeight: 1.15,
+              letterSpacing: '-0.02em',
+            }}
+          >
+            CRAFT OVER NOISE.
+          </div>
+          <p
+            style={{
+              fontSize: '8px',
+              color: '#64748B',
+              margin: '4px 0 0',
+              lineHeight: 1.3,
+            }}
+          >
+            Visual hooks that command attention in the first 0.6 seconds of scrolling.
+          </p>
+
+          {/* Swipe indicator dots */}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '3px',
+              marginTop: '8px',
+            }}
+          >
+            <span style={{ width: '12px', height: '3px', borderRadius: '2px', background: '#FF6B00' }} />
+            <span style={{ width: '4px', height: '3px', borderRadius: '2px', background: '#CBD5E1' }} />
+            <span style={{ width: '4px', height: '3px', borderRadius: '2px', background: '#CBD5E1' }} />
+            <span style={{ width: '4px', height: '3px', borderRadius: '2px', background: '#CBD5E1' }} />
           </div>
         </div>
 
-        <div style={{ background: '#FFFFFF', borderRadius: '8px', padding: '6px 8px', border: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '8px', fontWeight: 700, color: '#64748B' }}>Viral Retention</span>
-          <span style={{ fontSize: '11px', fontWeight: 900, color: '#EA580C' }}>+340% ↗</span>
+        {/* Metric Banner */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: '8px',
+            padding: '6px 8px',
+            border: '1px solid #FED7AA',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <span style={{ fontSize: '8px', fontWeight: 700, color: '#64748B' }}>Retention Uplift</span>
+          <span style={{ fontSize: '10.5px', fontWeight: 900, color: '#EA580C' }}>+340% ↗</span>
         </div>
       </div>
     );
   }
 
-  if (type === 'creatives') {
+  if (type === 'packaging') {
     return (
-      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '10px', background: 'linear-gradient(180deg, #F1F5F9 0%, #E2E8F0 100%)' }}>
-        <div>
-          <div style={{ fontSize: '12px', fontWeight: 900, color: '#0F172A', lineHeight: 1.15 }}>We Build Brands</div>
-          <div style={{ fontSize: '10px', fontWeight: 900, color: '#EA580C', textDecoration: 'underline' }}>That Mean Business.</div>
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '12px',
+          background: 'linear-gradient(180deg, #FDF8F0 0%, #F5EDE0 100%)',
+          position: 'relative',
+        }}
+      >
+        {/* Top Header */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            borderBottom: '1px dashed #D6C7B2',
+            paddingBottom: '5px',
+          }}
+        >
+          <span
+            style={{
+              fontSize: '8.5px',
+              fontWeight: 800,
+              fontFamily: "'Space Grotesk', system-ui",
+              color: '#78350F',
+              letterSpacing: '0.05em',
+            }}
+          >
+            DIELINE SPEC // 03
+          </span>
+          <span
+            style={{
+              fontSize: '7.5px',
+              background: '#FEF3C7',
+              color: '#B45309',
+              fontWeight: 800,
+              padding: '2px 5px',
+              borderRadius: '4px',
+            }}
+          >
+            OFFSET PRESS
+          </span>
         </div>
 
-        <div style={{ margin: 'auto 0', display: 'flex', justifyContent: 'center' }}>
-          <div style={{ width: '80px', height: '95px', borderRadius: '999px', background: 'linear-gradient(135deg, #CBD5E1, #94A3B8)', border: '2px solid #FB923C', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 6px 14px rgba(0,0,0,0.15)', position: 'relative' }}>
-            <span style={{ fontSize: '38px', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}>🗿</span>
-            <div style={{ position: 'absolute', top: '2px', right: '2px', width: '8px', height: '8px', borderRadius: '50%', background: '#F97316', boxShadow: '0 0 8px #F97316' }} />
+        {/* Centerpiece: Luxury Packaging Box Graphic with Gold Foil Accent */}
+        <div
+          style={{
+            margin: 'auto 0',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <div
+            style={{
+              width: '88px',
+              height: '84px',
+              borderRadius: '12px',
+              background: 'linear-gradient(145deg, #2A241F 0%, #15110E 100%)',
+              border: '1.5px solid #E5C378',
+              boxShadow: '0 8px 18px rgba(0,0,0,0.25)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              padding: '8px',
+            }}
+          >
+            {/* Gold Foil Crown Insignia */}
+            <div
+              style={{
+                fontFamily: "'Space Grotesk', system-ui",
+                fontSize: '8px',
+                fontWeight: 900,
+                color: '#FBBF24',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                borderBottom: '1px solid #78350F',
+                paddingBottom: '2px',
+              }}
+            >
+              HV ATELIER
+            </div>
+            <div
+              style={{
+                fontSize: '11px',
+                fontWeight: 900,
+                color: '#FFFFFF',
+                marginTop: '4px',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              24K FOIL
+            </div>
+            <span
+              style={{
+                fontSize: '7px',
+                color: '#D4AF37',
+                fontFamily: 'monospace',
+                marginTop: '2px',
+              }}
+            >
+              BLIND DEBOSS
+            </span>
+
+            {/* Corner Registration Marks */}
+            <div style={{ position: 'absolute', top: '3px', left: '3px', width: '4px', height: '4px', borderTop: '1px solid #D4AF37', borderLeft: '1px solid #D4AF37' }} />
+            <div style={{ position: 'absolute', bottom: '3px', right: '3px', width: '4px', height: '4px', borderBottom: '1px solid #D4AF37', borderRight: '1px solid #D4AF37' }} />
+          </div>
+
+          <div
+            style={{
+              fontSize: '10px',
+              fontWeight: 800,
+              color: '#451A03',
+              marginTop: '6px',
+            }}
+          >
+            Tactile Unboxing Suite
           </div>
         </div>
 
-        <div style={{ fontSize: '8px', color: '#64748B', textAlign: 'center', fontWeight: 600 }}>
-          Performance Billboard &amp; Viral Ads
+        {/* Bottom Swatch */}
+        <div
+          style={{
+            background: '#FFFFFF',
+            borderRadius: '6px',
+            border: '1px solid #E5D5C0',
+            padding: '5px 8px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <span style={{ fontSize: '7.5px', color: '#78350F', fontWeight: 700 }}>PANTONE 286 C</span>
+          <span style={{ fontSize: '7.5px', fontFamily: 'monospace', fontWeight: 800, color: '#B45309' }}>871 METALLIC</span>
         </div>
       </div>
     );
@@ -220,60 +677,525 @@ function CardInnerArtwork({ type }) {
 
   if (type === 'systems') {
     return (
-      <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '10px', background: '#F8FAFC' }}>
-        <div style={{ background: '#0F172A', color: '#FFF', padding: '6px 8px', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '8px', fontWeight: 900, letterSpacing: '0.06em', textTransform: 'uppercase' }}>Brand Guidelines</span>
-          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#F97316' }} />
+      <div
+        style={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '12px',
+          background: '#F8FAFC',
+          position: 'relative',
+        }}
+      >
+        {/* Top Header */}
+        <div
+          style={{
+            background: '#0F172A',
+            color: '#FFF',
+            padding: '6px 8px',
+            borderRadius: '6px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <span
+            style={{
+              fontSize: '8px',
+              fontWeight: 900,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              fontFamily: "'Space Grotesk', monospace",
+            }}
+          >
+            FIGMA TOKENS // 04
+          </span>
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00E5C3', boxShadow: '0 0 6px #00E5C3' }} />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', margin: '6px 0' }}>
+        {/* Token Architecture Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px', margin: '4px 0' }}>
           <div style={{ background: '#FFF', border: '1px solid #E2E8F0', padding: '6px', borderRadius: '6px' }}>
-            <div style={{ fontSize: '8px', fontWeight: 800, color: '#0F172A' }}>Color System</div>
-            <div style={{ display: 'flex', gap: '3px', marginTop: '4px' }}>
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#1E6BFF' }} />
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#FF6B00' }} />
-              <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#0F172A' }} />
+            <div style={{ fontSize: '7.5px', fontWeight: 800, color: '#0F172A' }}>COLOR TOKENS</div>
+            <div style={{ display: 'flex', gap: '4px', marginTop: '4px' }}>
+              <span style={{ width: '10px', height: '10px', borderRadius: '3px', background: '#1E6BFF' }} />
+              <span style={{ width: '10px', height: '10px', borderRadius: '3px', background: '#00E5C3' }} />
+              <span style={{ width: '10px', height: '10px', borderRadius: '3px', background: '#0F172A' }} />
+            </div>
+            <div style={{ fontSize: '6.5px', fontFamily: 'monospace', color: '#64748B', marginTop: '3px' }}>
+              $primary-500
             </div>
           </div>
           <div style={{ background: '#FFF', border: '1px solid #E2E8F0', padding: '6px', borderRadius: '6px' }}>
-            <div style={{ fontSize: '8px', fontWeight: 800, color: '#0F172A' }}>Typography</div>
-            <div style={{ fontSize: '7px', color: '#64748B', fontFamily: 'monospace', marginTop: '3px' }}>Aa H1, H2, Body</div>
+            <div style={{ fontSize: '7.5px', fontWeight: 800, color: '#0F172A' }}>TYPE SCALE</div>
+            <div style={{ fontSize: '7px', fontWeight: 800, color: '#1E6BFF', marginTop: '2px' }}>
+              1.25 Major 3rd
+            </div>
+            <div style={{ fontSize: '6.5px', fontFamily: 'monospace', color: '#64748B', marginTop: '2px' }}>
+              12 / 16 / 24 / 40
+            </div>
           </div>
         </div>
 
-        <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', color: '#065F46', padding: '5px 8px', borderRadius: '6px', textAlign: 'center', fontSize: '8px', fontWeight: 800 }}>
-          ✓ Verified Production Tokens
+        {/* State Pill */}
+        <div
+          style={{
+            background: '#ECFDF5',
+            border: '1px solid #A7F3D0',
+            color: '#065F46',
+            padding: '5px 8px',
+            borderRadius: '6px',
+            textAlign: 'center',
+            fontSize: '8px',
+            fontWeight: 800,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '4px',
+          }}
+        >
+          <span>✓</span>
+          <span>Zero-Drift Figma Parity</span>
         </div>
       </div>
     );
   }
 
-  // content
+  // Pitch Decks & Investor Collateral
   return (
-    <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '10px', background: '#F8FAFC' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E2E8F0', paddingBottom: '4px' }}>
-        <span style={{ fontSize: '9px', fontWeight: 900, color: '#0F172A' }}>Content Strategy Hub</span>
-        <span style={{ fontSize: '8px', background: '#DBEAFE', color: '#1E40AF', fontWeight: 800, padding: '2px 5px', borderRadius: '999px' }}>Q3 Ready</span>
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: '12px',
+        background: 'linear-gradient(145deg, #0B0F19 0%, #151C2C 100%)',
+        color: '#FFFFFF',
+        position: 'relative',
+      }}
+    >
+      {/* Top Header */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          paddingBottom: '5px',
+        }}
+      >
+        <span
+          style={{
+            fontSize: '8px',
+            fontWeight: 900,
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+            fontFamily: "'Space Grotesk', system-ui",
+            color: '#93C5FD',
+          }}
+        >
+          INVESTOR DECK // 05
+        </span>
+        <span
+          style={{
+            fontSize: '7.5px',
+            background: 'rgba(30, 107, 255, 0.25)',
+            color: '#60A5FA',
+            border: '1px solid rgba(96, 165, 250, 0.4)',
+            fontWeight: 800,
+            padding: '2px 5px',
+            borderRadius: '4px',
+          }}
+        >
+          SERIES A
+        </span>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', margin: '6px 0' }}>
-        <div style={{ background: '#FFF', border: '1px solid #E2E8F0', padding: '4px 6px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between', fontSize: '8px' }}>
-          <span style={{ color: '#334155', fontWeight: 600 }}>Brand Reveal Teaser</span>
-          <b style={{ color: '#059669' }}>Approved</b>
+      {/* Slide Visual Mockup */}
+      <div
+        style={{
+          margin: 'auto 0',
+          background: 'rgba(255, 255, 255, 0.04)',
+          borderRadius: '8px',
+          border: '1px solid rgba(255, 255, 255, 0.08)',
+          padding: '8px',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+          <span style={{ fontSize: '13px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em' }}>
+            $4.2M Round
+          </span>
+          <span style={{ fontSize: '8px', color: '#10B981', fontWeight: 800 }}>+280% QoQ</span>
         </div>
-        <div style={{ background: '#FFF', border: '1px solid #E2E8F0', padding: '4px 6px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between', fontSize: '8px' }}>
-          <span style={{ color: '#334155', fontWeight: 600 }}>Viral Framework Carousel</span>
-          <b style={{ color: '#D97706' }}>In Review</b>
-        </div>
-        <div style={{ background: '#FFF', border: '1px solid #E2E8F0', padding: '4px 6px', borderRadius: '4px', display: 'flex', justifyContent: 'space-between', fontSize: '8px' }}>
-          <span style={{ color: '#334155', fontWeight: 600 }}>Founder Letter Issue #14</span>
-          <b style={{ color: '#2563EB' }}>Drafting</b>
+
+        {/* Inflection Curve Graphic */}
+        <svg viewBox="0 0 100 28" fill="none" style={{ width: '100%', height: '22px', margin: '4px 0' }}>
+          <path d="M2,24 Q30,22 55,14 T98,2" stroke="#60A5FA" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M2,24 Q30,22 55,14 T98,2 L98,28 L2,28 Z" fill="rgba(96, 165, 250, 0.15)" />
+        </svg>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '7px', color: '#94A3B8' }}>
+          <span>Seed Traction</span>
+          <span style={{ color: '#E2E8F0', fontWeight: 700 }}>Series A Close</span>
         </div>
       </div>
 
-      <div style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', padding: '4px 8px', borderRadius: '6px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <span style={{ fontSize: '8px', color: '#64748B' }}>Projected Reach</span>
-        <span style={{ fontSize: '10px', fontWeight: 900, color: '#1D4ED8' }}>+128K 🚀</span>
+      {/* Confidential Footer */}
+      <div
+        style={{
+          background: 'rgba(255, 255, 255, 0.06)',
+          borderRadius: '6px',
+          padding: '4px 8px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          fontSize: '7.5px',
+        }}
+      >
+        <span style={{ color: '#94A3B8' }}>Collateral Spec</span>
+        <span style={{ color: '#F8FAFC', fontWeight: 800 }}>Keynote + Figma</span>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Deliverables & Scope Inspector Modal
+ * Pops up when clicking any service card, showing full scope, turnaround, and direct email inquiry.
+ */
+function DeliverablesModal({ service, onClose }) {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onClose]);
+
+  if (!service) return null;
+
+  const mailtoSubject = encodeURIComponent(`Project Inquiry: ${service.title} with HowVaibhav`);
+  const mailtoBody = encodeURIComponent(
+    `Hi Vaibhav,
+
+I came across your portfolio and I'm interested in partnering with you on ${service.title}.
+
+Project Overview:
+- Timeline / Target Launch:
+- Key Goals:
+
+Looking forward to hearing from you!
+`
+  );
+  const mailtoLink = `mailto:vaibhavverma.work@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="deliverables-modal-title"
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 99999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '16px',
+        backgroundColor: 'rgba(10, 15, 28, 0.72)',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        animation: 'modalFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          try { soundFX.playPop(); } catch {}
+          onClose();
+        }
+      }}
+    >
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          maxWidth: '660px',
+          maxHeight: '90vh',
+          overflowY: 'auto',
+          background: '#FFFFFF',
+          borderRadius: '24px',
+          boxShadow: '0 25px 70px -15px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+          display: 'flex',
+          flexDirection: 'column',
+          animation: 'modalSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
+        {/* Top Header Ribbon */}
+        <div
+          style={{
+            background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
+            color: '#FFFFFF',
+            padding: '24px 28px 22px',
+            position: 'relative',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          }}
+        >
+          {/* Close Button */}
+          <button
+            type="button"
+            onClick={() => {
+              try { soundFX.playPop(); } catch {}
+              onClose();
+            }}
+            aria-label="Close dialog"
+            style={{
+              position: 'absolute',
+              top: '20px',
+              right: '20px',
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.12)',
+              border: '1px solid rgba(255, 255, 255, 0.15)',
+              color: '#FFFFFF',
+              fontSize: '18px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.22)';
+              e.currentTarget.style.transform = 'scale(1.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+          >
+            ✕
+          </button>
+
+          {/* Module Tag */}
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'rgba(30, 107, 255, 0.25)',
+              border: '1px solid rgba(30, 107, 255, 0.45)',
+              borderRadius: '999px',
+              padding: '4px 12px',
+              fontSize: '11px',
+              fontFamily: "'Space Grotesk', monospace",
+              fontWeight: 800,
+              color: '#60A5FA',
+              letterSpacing: '0.06em',
+              marginBottom: '10px',
+            }}
+          >
+            <span>{service.number}</span>
+            <span>//</span>
+            <span>{service.badge}</span>
+          </div>
+
+          <h3
+            id="deliverables-modal-title"
+            style={{
+              fontFamily: "'Space Grotesk', system-ui, sans-serif",
+              fontSize: 'clamp(20px, 3.2vw, 26px)',
+              fontWeight: 900,
+              color: '#FFFFFF',
+              letterSpacing: '-0.02em',
+              margin: '0 0 8px',
+              lineHeight: 1.2,
+            }}
+          >
+            {service.title}
+          </h3>
+
+          <p
+            style={{
+              fontSize: '14px',
+              color: '#94A3B8',
+              lineHeight: 1.45,
+              margin: 0,
+            }}
+          >
+            {service.summary}
+          </p>
+        </div>
+
+        {/* 3 Key Metric Specs Bar */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '12px',
+            padding: '16px 28px',
+            background: '#F8FAFC',
+            borderBottom: '1px solid #E2E8F0',
+          }}
+        >
+          <div>
+            <div style={{ fontSize: '11px', color: '#64748B', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Turnaround
+            </div>
+            <div style={{ fontSize: '14px', fontWeight: 900, color: '#1E6BFF', marginTop: '2px', fontFamily: "'Space Grotesk', sans-serif" }}>
+              {service.turnaround}
+            </div>
+          </div>
+          <div>
+            <div style={{ fontSize: '11px', color: '#64748B', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Scope Volume
+            </div>
+            <div style={{ fontSize: '14px', fontWeight: 900, color: '#0F172A', marginTop: '2px', fontFamily: "'Space Grotesk', sans-serif" }}>
+              {service.deliverablesCount}
+            </div>
+          </div>
+          <div>
+            <div style={{ fontSize: '11px', color: '#64748B', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Ideal Partner
+            </div>
+            <div style={{ fontSize: '13px', fontWeight: 800, color: '#334155', marginTop: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {service.idealFit}
+            </div>
+          </div>
+        </div>
+
+        {/* Deliverables Checklist */}
+        <div style={{ padding: '24px 28px' }}>
+          <div
+            style={{
+              fontSize: '12px',
+              fontWeight: 800,
+              fontFamily: "'Space Grotesk', sans-serif",
+              letterSpacing: '0.05em',
+              textTransform: 'uppercase',
+              color: '#0F172A',
+              marginBottom: '14px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+          >
+            <span style={{ color: '#1E6BFF' }}>✦</span>
+            <span>Included Master Deliverables</span>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {service.deliverables.map((item, idx) => (
+              <div
+                key={idx}
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '12px',
+                  background: '#F8FAFC',
+                  border: '1px solid #E2E8F0',
+                  borderRadius: '12px',
+                  padding: '12px 14px',
+                  transition: 'background 0.15s ease',
+                }}
+              >
+                <div
+                  style={{
+                    width: '20px',
+                    height: '20px',
+                    borderRadius: '50%',
+                    background: '#1E6BFF',
+                    color: '#FFFFFF',
+                    fontSize: '11px',
+                    fontWeight: 900,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    marginTop: '1px',
+                  }}
+                >
+                  ✓
+                </div>
+                <div style={{ fontSize: '13.5px', color: '#334155', lineHeight: 1.45, fontWeight: 500 }}>
+                  {item}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Modal Action Footer */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '16px',
+            padding: '18px 28px 24px',
+            borderTop: '1px solid #E2E8F0',
+            background: '#FFFFFF',
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => {
+              try { soundFX.playPop(); } catch {}
+              onClose();
+            }}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: '#64748B',
+              fontSize: '14px',
+              fontWeight: 700,
+              cursor: 'pointer',
+              padding: '10px 16px',
+              borderRadius: '999px',
+              transition: 'color 0.15s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#0F172A')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#64748B')}
+          >
+            ← Back to Board
+          </button>
+
+          <a
+            href={mailtoLink}
+            onClick={() => {
+              try { soundFX.playSnap(); } catch {}
+            }}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: '#1E6BFF',
+              color: '#FFFFFF',
+              fontFamily: "'Space Grotesk', system-ui, sans-serif",
+              fontSize: '14px',
+              fontWeight: 800,
+              padding: '12px 24px',
+              borderRadius: '999px',
+              textDecoration: 'none',
+              boxShadow: '0 8px 24px -6px rgba(30, 107, 255, 0.45)',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = '#0B57E0';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = '#1E6BFF';
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+          >
+            <span>Inquire About This Service</span>
+            <span style={{ fontSize: '16px' }}>↗</span>
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -287,10 +1209,13 @@ export default function ServicesCorkboard() {
   const [cards, setCards] = useState(INITIAL_CARDS);
   const [draggedCardId, setDraggedCardId] = useState(null);
   const [activeMobileIdx, setActiveMobileIdx] = useState(0);
+  const [selectedService, setSelectedService] = useState(null);
 
   const containerRef = useRef(null);
   const mobileRailRef = useRef(null);
+  const dragStartRef = useRef({ x: 0, y: 0, origX: 0, origY: 0, moved: false });
 
+  // Mobile horizontal scroll tracking
   const handleMobileScroll = () => {
     if (!mobileRailRef.current) return;
     const scrollLeft = mobileRailRef.current.scrollLeft;
@@ -309,29 +1234,23 @@ export default function ServicesCorkboard() {
     setActiveMobileIdx(index);
     try { soundFX.playTick(); } catch {}
   };
-  const dragStartRef = useRef({ x: 0, y: 0, origX: 0, origY: 0 });
 
-  // Update position during drag only (0 background CPU usage)
+  // Pointer Drag Handlers (Desktop Canvas)
   const handlePointerDown = (cardId, e) => {
-    e.stopPropagation();
-    try {
-      soundFX.playSnap();
-    } catch {}
-
-    setDraggedCardId(cardId);
+    e.preventDefault();
     const card = cards.find((c) => c.id === cardId);
     if (!card) return;
 
+    setDraggedCardId(cardId);
     dragStartRef.current = {
       x: e.clientX,
       y: e.clientY,
       origX: card.x,
       origY: card.y,
+      moved: false,
     };
 
-    if (e.currentTarget.setPointerCapture) {
-      e.currentTarget.setPointerCapture(e.pointerId);
-    }
+    try { soundFX.playHover(); } catch {}
   };
 
   const handlePointerMove = (e) => {
@@ -339,6 +1258,10 @@ export default function ServicesCorkboard() {
 
     const deltaX = e.clientX - dragStartRef.current.x;
     const deltaY = e.clientY - dragStartRef.current.y;
+
+    if (Math.abs(deltaX) > 4 || Math.abs(deltaY) > 4) {
+      dragStartRef.current.moved = true;
+    }
 
     setCards((prev) =>
       prev.map((c) => {
@@ -353,17 +1276,28 @@ export default function ServicesCorkboard() {
   };
 
   const handlePointerUp = () => {
-    if (!draggedCardId) return;
-    setDraggedCardId(null);
+    if (draggedCardId) {
+      if (!dragStartRef.current.moved) {
+        // Was a tap/click without drag -> Open Inspection Modal!
+        const clickedCard = cards.find((c) => c.id === draggedCardId);
+        if (clickedCard) {
+          try { soundFX.playSnap(); } catch {}
+          setSelectedService(clickedCard);
+        }
+      } else {
+        try { soundFX.playSnap(); } catch {}
+      }
+      setDraggedCardId(null);
+    }
   };
 
-  // Compute curved SVG thread paths (Quadratic Bezier with natural gravity catenary sag)
+  // Calculate dynamic thread bezier path connecting two card pin heads
   const getThreadPath = (fromId, toId, sagOffset) => {
     const c1 = cards.find((c) => c.id === fromId);
     const c2 = cards.find((c) => c.id === toId);
     if (!c1 || !c2) return '';
 
-    // Pushpin is at top-center of each card
+    // Pushpin head is located at (card.x, card.y - card.height / 2)
     const p1x = c1.x;
     const p1y = c1.y - c1.height / 2;
 
@@ -373,11 +1307,12 @@ export default function ServicesCorkboard() {
     const midX = (p1x + p2x) / 2;
     const midY = (p1y + p2y) / 2 + sagOffset;
 
-    return `M ${p1x.toFixed(1)},${p1y.toFixed(1)} Q ${midX.toFixed(1)},${midY.toFixed(1)} ${p2x.toFixed(1)},${p2y.toFixed(1)}`;
+    return `M ${p1x} ${p1y} Q ${midX} ${midY} ${p2x} ${p2y}`;
   };
 
   return (
     <section
+      id="services"
       style={{
         position: 'relative',
         width: '100%',
@@ -427,6 +1362,15 @@ export default function ServicesCorkboard() {
         .corkboard-card:hover {
           z-index: 45 !important;
           box-shadow: 0 28px 60px -15px rgba(30, 107, 255, 0.5), 0 12px 24px -8px rgba(0,0,0,0.2) !important;
+        }
+
+        @keyframes modalFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes modalSlideUp {
+          from { opacity: 0; transform: translateY(20px) scale(0.97); }
+          to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         @media (min-width: 769px) {
@@ -595,6 +1539,21 @@ export default function ServicesCorkboard() {
         <svg viewBox="0 0 240 14" fill="none" style={{ width: '180px', height: '12px', margin: '6px auto 0', color: 'rgba(30, 107, 255, 0.45)' }}>
           <path d="M4,10 Q120,2 236,8" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
         </svg>
+
+        {/* Clean Contextual Subtitle */}
+        <p
+          style={{
+            fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+            fontSize: 'clamp(14px, 1.8vw, 16px)',
+            color: '#64748B',
+            fontWeight: 500,
+            maxWidth: '560px',
+            margin: '12px auto 0',
+            lineHeight: 1.5,
+          }}
+        >
+          Click or drag any pinned capability card to inspect included deliverables, timelines, and production specs.
+        </p>
       </div>
 
       {/* ─── Desktop Interactive Pinboard Canvas (Min-Width 769px) ─── */}
@@ -611,7 +1570,7 @@ export default function ServicesCorkboard() {
           touchAction: 'none',
         }}
       >
-        {/* ─── Pure Vector SVG Connecting Strings Layer (GPU Rendered, 0% CPU Overhead) ─── */}
+        {/* ─── Vector SVG Connecting Strings Layer (GPU Rendered, 0% CPU Overhead) ─── */}
         <svg
           viewBox="0 0 1100 780"
           style={{
@@ -673,11 +1632,11 @@ export default function ServicesCorkboard() {
                   position: 'relative',
                   width: '100%',
                   height: '100%',
-                  background: '#1E6BFF',
+                  background: 'linear-gradient(145deg, #1E6BFF 0%, #1557D6 100%)',
                   borderRadius: '26px',
                   padding: '12px 12px 14px',
                   boxShadow: '0 20px 40px -15px rgba(30, 107, 255, 0.45), 0 10px 20px -8px rgba(0, 0, 0, 0.15)',
-                  border: '1px solid rgba(255, 255, 255, 0.25)',
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
@@ -686,35 +1645,94 @@ export default function ServicesCorkboard() {
                 {/* 3D Blue Pushpin pinned at top-center */}
                 <Pushpin />
 
+                {/* Top Mini Pill Indicator */}
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '8px',
+                    padding: '0 2px',
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "'Space Grotesk', monospace",
+                      fontSize: '9px',
+                      fontWeight: 800,
+                      color: 'rgba(255, 255, 255, 0.85)',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    CAPABILITY {card.number}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: '8px',
+                      fontFamily: "'Space Grotesk', monospace",
+                      fontWeight: 800,
+                      background: 'rgba(255, 255, 255, 0.2)',
+                      color: '#FFFFFF',
+                      padding: '2px 7px',
+                      borderRadius: '999px',
+                      border: '1px solid rgba(255, 255, 255, 0.25)',
+                    }}
+                  >
+                    {card.turnaround}
+                  </span>
+                </div>
+
                 {/* Inner Image Area Display */}
                 <div
                   style={{
                     width: '100%',
-                    aspectRatio: '4 / 5',
+                    aspectRatio: '4 / 4.7',
                     borderRadius: '18px',
                     overflow: 'hidden',
                     background: '#FFFFFF',
                     border: '1px solid rgba(0, 0, 0, 0.06)',
-                    boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.08)',
+                    boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0,0,0,0.06)',
                   }}
                 >
                   <CardInnerArtwork type={card.type} />
                 </div>
 
-                {/* Bold White Title at Bottom */}
-                <h3
-                  style={{
-                    textAlign: 'center',
-                    fontFamily: "'Space Grotesk', system-ui, sans-serif",
-                    fontWeight: 800,
-                    fontSize: '17px',
-                    color: '#FFFFFF',
-                    margin: '6px 0 0',
-                    letterSpacing: '-0.01em',
-                  }}
-                >
-                  {card.title}
-                </h3>
+                {/* Bottom Card Footer with Title and Inspect Action */}
+                <div style={{ marginTop: '8px', textAlign: 'center' }}>
+                  <h3
+                    style={{
+                      fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                      fontWeight: 800,
+                      fontSize: '15.5px',
+                      color: '#FFFFFF',
+                      margin: '0 0 4px',
+                      letterSpacing: '-0.01em',
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+
+                  {/* Tactile Click Pill */}
+                  <div
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      fontSize: '8.5px',
+                      fontFamily: "'Space Grotesk', monospace",
+                      fontWeight: 800,
+                      color: 'rgba(255, 255, 255, 0.95)',
+                      background: 'rgba(0, 0, 0, 0.18)',
+                      padding: '2px 8px',
+                      borderRadius: '999px',
+                      border: '1px solid rgba(255, 255, 255, 0.25)',
+                    }}
+                  >
+                    <span>Inspect Scope</span>
+                    <span>↗</span>
+                  </div>
+                </div>
               </div>
             </div>
           );
@@ -741,7 +1759,7 @@ export default function ServicesCorkboard() {
               background: 'rgba(30, 107, 255, 0.08)',
               border: '1px solid rgba(30, 107, 255, 0.22)',
               borderRadius: '999px',
-              padding: '5px 14px',
+              padding: '6px 14px',
               fontSize: '11px',
               fontFamily: "'Space Grotesk', system-ui, sans-serif",
               fontWeight: 800,
@@ -750,7 +1768,7 @@ export default function ServicesCorkboard() {
             }}
           >
             <span>←</span>
-            <span>SWIPE 5 CAPABILITIES</span>
+            <span>SWIPE 5 CAPABILITIES • TAP TO INSPECT</span>
             <span>→</span>
           </div>
         </div>
@@ -780,13 +1798,15 @@ export default function ServicesCorkboard() {
                 key={card.id}
                 style={{
                   scrollSnapAlign: 'center',
-                  flex: '0 0 min(270px, 78vw)',
+                  flex: '0 0 min(280px, 80vw)',
                   position: 'relative',
                   transform: `rotate(${tilt}deg)`,
                   transition: 'transform 0.25s ease',
+                  cursor: 'pointer',
                 }}
                 onClick={() => {
                   try { soundFX.playSnap(); } catch {}
+                  setSelectedService(card);
                 }}
               >
                 {/* Blue Card Shell with Heavy Rounded Corners */}
@@ -794,11 +1814,11 @@ export default function ServicesCorkboard() {
                   style={{
                     position: 'relative',
                     width: '100%',
-                    background: '#1E6BFF',
+                    background: 'linear-gradient(145deg, #1E6BFF 0%, #1557D6 100%)',
                     borderRadius: '24px',
                     padding: '12px 12px 14px',
                     boxShadow: '0 18px 36px -10px rgba(30, 107, 255, 0.45), 0 8px 18px rgba(0, 0, 0, 0.12)',
-                    border: '1px solid rgba(255, 255, 255, 0.25)',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
@@ -807,35 +1827,92 @@ export default function ServicesCorkboard() {
                   {/* 3D Blue Pushpin */}
                   <Pushpin />
 
+                  {/* Top Mini Pill Indicator */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      marginBottom: '8px',
+                      padding: '0 2px',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "'Space Grotesk', monospace",
+                        fontSize: '9px',
+                        fontWeight: 800,
+                        color: 'rgba(255, 255, 255, 0.85)',
+                        letterSpacing: '0.04em',
+                      }}
+                    >
+                      CAPABILITY {card.number}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '8px',
+                        fontFamily: "'Space Grotesk', monospace",
+                        fontWeight: 800,
+                        background: 'rgba(255, 255, 255, 0.2)',
+                        color: '#FFFFFF',
+                        padding: '2px 7px',
+                        borderRadius: '999px',
+                        border: '1px solid rgba(255, 255, 255, 0.25)',
+                      }}
+                    >
+                      {card.turnaround}
+                    </span>
+                  </div>
+
                   {/* Inner Image Area Display */}
                   <div
                     style={{
                       width: '100%',
-                      aspectRatio: '4 / 5',
+                      aspectRatio: '4 / 4.7',
                       borderRadius: '16px',
                       overflow: 'hidden',
                       background: '#FFFFFF',
                       border: '1px solid rgba(0, 0, 0, 0.06)',
-                      boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.08)',
+                      boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0,0,0,0.06)',
                     }}
                   >
                     <CardInnerArtwork type={card.type} />
                   </div>
 
                   {/* Bold White Title at Bottom */}
-                  <h3
-                    style={{
-                      textAlign: 'center',
-                      fontFamily: "'Space Grotesk', system-ui, sans-serif",
-                      fontWeight: 800,
-                      fontSize: '16px',
-                      color: '#FFFFFF',
-                      margin: '8px 0 2px',
-                      letterSpacing: '-0.01em',
-                    }}
-                  >
-                    {card.title}
-                  </h3>
+                  <div style={{ marginTop: '8px', textAlign: 'center' }}>
+                    <h3
+                      style={{
+                        fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                        fontWeight: 800,
+                        fontSize: '15px',
+                        color: '#FFFFFF',
+                        margin: '0 0 4px',
+                        letterSpacing: '-0.01em',
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {card.title}
+                    </h3>
+                    <div
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        fontSize: '8px',
+                        fontFamily: "'Space Grotesk', monospace",
+                        fontWeight: 800,
+                        color: 'rgba(255, 255, 255, 0.95)',
+                        background: 'rgba(0, 0, 0, 0.18)',
+                        padding: '2px 7px',
+                        borderRadius: '999px',
+                        border: '1px solid rgba(255, 255, 255, 0.25)',
+                      }}
+                    >
+                      <span>Tap to Inspect Scope</span>
+                      <span>↗</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             );
@@ -876,6 +1953,12 @@ export default function ServicesCorkboard() {
           })}
         </div>
       </div>
+
+      {/* ─── Deliverables & Scope Inspector Lightbox Modal ─── */}
+      <DeliverablesModal
+        service={selectedService}
+        onClose={() => setSelectedService(null)}
+      />
     </section>
   );
 }
