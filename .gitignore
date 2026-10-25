@@ -74,12 +74,8 @@ coverage/
 .stylelintcache
 *.tsbuildinfo
 
-# ── Design Mode (Future Upgrade) ──────────────
-frontend/src/components/AboutSection.jsx
-frontend/src/components/CanvasScrollAnimation.jsx
-frontend/src/components/ContactScaleSection.jsx
-frontend/src/components/CreativeProjectsSection.jsx
-frontend/src/components/EducationSection.jsx
-frontend/src/components/IntroductionSection.jsx
-frontend/src/components/VaibhavStudioSection.jsx
-frontend/src/components/WelcomeSection.jsx
+# ── Python / Virtualenv ───────────────────────
+.venv/
+venv/
+__pycache__/
+*.py[cod]
