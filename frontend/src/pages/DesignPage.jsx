@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useModeTransition } from '../context/ModeTransitionContext';
-import DesignModeSwitch from '../components/Design/DesignModeSwitch';
 import Folder3DConveyor from '../components/Design/Folder3DConveyor';
 import FolderDeskGrid from '../components/Design/FolderDeskGrid';
 import FolderModal from '../components/Design/FolderModal';
@@ -35,11 +34,7 @@ export default function DesignPage() {
 
   return (
     <div className="design-page-root">
-      {/* Top Floating Control Bar — NO NAVBAR, just the return switch */}
-      <DesignModeSwitch
-        activeView={activeView}
-        onViewChange={(v) => setActiveView(v)}
-      />
+      
 
       <main style={{ position: 'relative', zIndex: 10 }}>
         {/* The Anatomy of HowVaibhav — Hero Section */}
@@ -170,6 +165,74 @@ export default function DesignPage() {
           onClose={() => setSelectedProject(null)}
         />
       )}
+
+      {/* Floating Bottom-Right DEV Mode Switch Button */}
+      <aside
+        style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          zIndex: 9999,
+          pointerEvents: 'auto',
+        }}
+        aria-label="Mode Switch"
+      >
+        <button
+          type="button"
+          onClick={() => {
+            soundFX.playSnap();
+            transitionTo('/');
+          }}
+          className="design-return-btn"
+          title="Switch to Software Developer & CS Mode"
+          style={{
+            background: '#111215',
+            color: '#FFFFFF',
+            border: '1.5px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '9999px',
+            padding: '10px 20px',
+            fontSize: '12px',
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontWeight: 900,
+            letterSpacing: '0.06em',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            cursor: 'pointer',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(204, 255, 0, 0.25)',
+            backdropFilter: 'blur(8px)',
+            transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+            whiteSpace: 'nowrap',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = '#CCFF00';
+            e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
+            e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(204, 255, 0, 0.45)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            e.currentTarget.style.transform = 'none';
+            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(204, 255, 0, 0.25)';
+          }}
+        >
+          <span style={{ fontSize: '13px' }}>⚡</span>
+          <span>DEV MODE</span>
+          <span
+            style={{
+              fontFamily: 'monospace',
+              fontSize: '11px',
+              fontWeight: 800,
+              background: '#CCFF00',
+              color: '#07080A',
+              padding: '2px 6px',
+              borderRadius: '4px',
+              letterSpacing: '-0.04em',
+            }}
+          >
+            &lt;/&gt;
+          </span>
+        </button>
+      </aside>
     </div>
   );
 }

@@ -35,7 +35,7 @@ const ANATOMY_NODES = [
     title: 'Cap Height & Hierarchy',
     principle: 'Maximum Vertical Amplitude',
     description:
-      'The structural apex of the visual hierarchy. Reaching from baseline to top datum (720‰), it commands cognitive attention, ensuring the core brand truth cuts through noise before subtext is parsed.',
+      'The structural apex of brand hierarchy. Commands cognitive focus, ensuring core identity cuts through noise before subtext.',
     metric: 'CAP_HT: 720‰',
     color: '#FF2D78',      // Electric Rose Pink
     textColor: '#FFFFFF',
@@ -58,7 +58,7 @@ const ANATOMY_NODES = [
     title: 'Ascender Dynamics',
     principle: 'Trajectory Beyond the Mean',
     description:
-      'Tall vertical stems that break through the conservative ceiling of the mean line. Pushing interfaces beyond standard conventions to instill momentum, forward vision, and kinetic air.',
+      'Vertical stems breaking past the mean line. Pushes beyond standard conventions with kinetic momentum and air.',
     metric: 'ASC: +240 EM',
     color: '#C2E03A',      // Vibrant Lime Green
     textColor: '#0B0F19',
@@ -80,7 +80,7 @@ const ANATOMY_NODES = [
     title: 'Point Size & Scale',
     principle: 'Macro Impact × Micro Detail',
     description:
-      'The infinite zoom of design. Calibrating micro-interactions to sub-pixel tolerance while orchestrating massive architectural billboards that anchor entire digital ecosystems.',
+      'The infinite zoom of design craft. Sub-pixel precision scaling seamlessly to massive architectural impact.',
     metric: 'SCALE: ∞ DYNAMIC',
     color: '#B59FFF',      // Soft Ethereal Lavender
     textColor: '#0B0F19',
@@ -102,7 +102,7 @@ const ANATOMY_NODES = [
     title: 'Descender Depth',
     principle: 'Subterranean Foundation',
     description:
-      'The gravitational anchor pulling beneath the baseline. Harmonizing positive stroke weight with negative counter-space to ground aesthetic beauty in rock-solid code, security, and logic.',
+      'Gravitational foundation beneath the baseline. Harmonizing stroke weight and negative counter-space with structural logic.',
     metric: 'DEPTH: -180 EM',
     color: '#D4A017',      // Warm Amber Gold
     textColor: '#0B0F19',
@@ -124,7 +124,7 @@ const ANATOMY_NODES = [
     title: 'Baseline Alignment',
     principle: 'Mathematical Precision & Tittle Focus',
     description:
-      'The immutable datum upon which every character balances. Guided by the solitary glowing dot ("tittle") of the "i", embodying obsessive micro-craft, semantic fidelity, and zero visual drift.',
+      'The immutable datum where every element aligns. Guided by the tittle of the "i" with zero visual drift.',
     metric: 'DATUM: 0.00 Y-AXIS',
     color: '#00AAFF',      // Electric Azure Blue
     textColor: '#FFFFFF',
@@ -146,7 +146,7 @@ const ANATOMY_NODES = [
     title: 'X-Height & Rhythm',
     principle: 'Human Legibility & Resonance',
     description:
-      'The body height that dictates natural optical flow. Framed in the technical caliper bounding box, proving that design systems can stretch across breakpoints without losing human warmth.',
+      'Body height dictating optical rhythm. Ensures design systems stay human, balanced, and legible across any screen.',
     metric: 'RATIO: 0.72 GOLDEN',
     color: '#00E5C3',      // Vibrant Mint Emerald
     textColor: '#0B0F19',
@@ -347,7 +347,11 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
             fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
             fontSize: '11px',
             fontWeight: 500,
-            lineHeight: 1.45,
+            lineHeight: 1.4,
+            display: '-webkit-box',
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
             margin: 0,
             opacity: 0.92,
           }}
@@ -420,7 +424,7 @@ export default function DesignAnatomy() {
         `,
         backgroundSize: '40px 40px',
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-        padding: '130px 0 110px', // Generous padding so top cards never collide with navbar
+        padding: '80px 0 90px', // Clean balanced padding without top navbar
         color: '#FFFFFF',
       }}
     >
@@ -428,33 +432,6 @@ export default function DesignAnatomy() {
       <div style={{ position: 'absolute', top: '22%', left: '15%', width: '450px', height: '350px', background: 'radial-gradient(circle, rgba(255,45,120,0.12) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
       <div style={{ position: 'absolute', bottom: '15%', right: '12%', width: '450px', height: '350px', background: 'radial-gradient(circle, rgba(0,170,255,0.12) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '700px', height: '450px', background: 'radial-gradient(circle, rgba(181,159,255,0.08) 0%, transparent 65%)', pointerEvents: 'none', zIndex: 1 }} />
-
-      {/* ─── Top Studio Metadata (Exact Reference Style: "Aa The Anatomy of Typography") ─── */}
-      <div style={{ position: 'absolute', top: '38px', left: 'max(24px, 4%)', zIndex: 25, display: 'flex', alignItems: 'center', gap: '14px' }}>
-        <div style={{ fontFamily: "'Fraunces', Georgia, serif", fontWeight: 900, fontSize: '34px', color: '#FFFFFF', lineHeight: 1, letterSpacing: '-0.03em' }}>
-          Aa
-        </div>
-        <div>
-          <div style={{ fontSize: '11px', fontWeight: 900, color: '#FFFFFF', fontFamily: "'Space Grotesk', monospace", letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-            The Anatomy of HowVaibhav
-          </div>
-          <div style={{ fontSize: '9.5px', fontWeight: 600, color: 'rgba(255,255,255,0.45)', fontFamily: "'Space Grotesk', monospace", letterSpacing: '0.04em' }}>
-            Visual Guide to Creative Letterform Elements
-          </div>
-        </div>
-      </div>
-
-      {/* ─── Bottom Studio Metadata (Reference: "Created by Vasil Enev | August 2024") ─── */}
-      <div style={{ position: 'absolute', bottom: '30px', left: 'max(24px, 4%)', zIndex: 25, display: 'flex', gap: '28px', fontSize: '11px', fontFamily: "'Space Grotesk', monospace" }}>
-        <div>
-          <span style={{ color: 'rgba(255,255,255,0.35)', display: 'block', fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Created by</span>
-          <span style={{ fontWeight: 800, color: 'rgba(255,255,255,0.75)' }}>Vaibhav Verma</span>
-        </div>
-        <div>
-          <span style={{ color: 'rgba(255,255,255,0.35)', display: 'block', fontSize: '9px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Edition</span>
-          <span style={{ fontWeight: 800, color: 'rgba(255,255,255,0.75)' }}>October 2026</span>
-        </div>
-      </div>
 
       {/* ─── SVG CONNECTOR LAYER & TYPOGRAPHIC GUIDELINE RULES ─── */}
       <svg
@@ -496,13 +473,6 @@ export default function DesignAnatomy() {
             {/* 4. Descender Line (y = 580) */}
             <line x1="80" y1="580" x2="1120" y2="580" stroke="#D4A017" strokeWidth="1" strokeDasharray="4 4" />
 
-            {/* Vertical Caliper Arrow on Right Margin (like reference image) */}
-            <line x1="1135" y1="450" x2="1135" y2="580" stroke="#FFFFFF" strokeWidth="1.5" />
-            <polygon points="1130,457 1140,457 1135,445" fill="#FFFFFF" />
-            <polygon points="1130,573 1140,573 1135,585" fill="#FFFFFF" />
-            <text x="1148" y="515" fill="rgba(255,255,255,0.65)" fontSize="9" fontFamily="'Space Grotesk', monospace" fontWeight="800" transform="rotate(90, 1148, 515)">
-              POINT SIZE
-            </text>
           </g>
         )}
 
@@ -739,21 +709,6 @@ export default function DesignAnatomy() {
                 </span>
               );
             })}
-          </div>
-
-          {/* Sub-label Under Central Specimen */}
-          <div
-            style={{
-              fontFamily: "'Space Grotesk', monospace",
-              fontSize: '11px',
-              fontWeight: 800,
-              letterSpacing: '0.22em',
-              textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.4)',
-              marginTop: '14px',
-            }}
-          >
-            Typographic Taxonomy // Hover Any Letter or Card
           </div>
         </div>
 
