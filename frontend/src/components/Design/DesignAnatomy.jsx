@@ -1,41 +1,32 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { soundFX } from './soundFX';
 
 /**
  * ─────────────────────────────────────────────────────────────────────────────
- * THE ANATOMY OF HOWVAIBHAV — High-Fidelity Interactive Typographic Infographic
+ * THE ANATOMY OF HOWVAIBHAV — Interactive Typographic Brand Taxonomy
  * ─────────────────────────────────────────────────────────────────────────────
- * Direct translation of the "Anatomy of Typography" specimen poster.
+ * An acrostic typographic taxonomy where every letter in "HowVaibhav" reveals
+ * a core brand craft principle whose heading spelling matches the letter:
  *
- * FIXES & ENHANCEMENTS:
- * 1. Crisp, razor-sharp serif letterforms: NO opaque solid gradient boxes.
- *    Uses high-contrast white letterform bases with luminous vertical gradient tints
- *    and glowing neon text-shadows, ensuring every single letter (H-o-w-V-a-i-b-h-a-v)
- *    is 100% crystal-clear and legible across all displays.
- * 2. Proper vertical spacing & breathing room:
- *    Generous 130px top padding so Card 2 never gets cut off by the floating navbar.
- * 3. Bidirectional interactive highlighting:
- *    Hovering any letter lights up that character, animates the connecting laser cord,
- *    and lifts its corresponding meaning card while dimming the others.
- * 4. Architectural Typographic Guidelines:
- *    Cap Line (pink), Ascender Line (lime), X-Line (mint), Baseline (solid white),
- *    Descender Line (amber), right margin measurement caliper (↕ 1000‰), and
- *    translucent green X-Height bounding box over the final characters.
- * 5. Zero-lag GPU physics: Pure CSS translate3d keyframes with 0 layout reflows.
+ *  H -> Hierarchy & Height
+ *  O -> Optical Balance & Orbit
+ *  W -> Weight & White Space
+ *  V -> Vector Craft & Volume
+ *  A -> Architecture & Apex
+ *  I -> Identity & Ink Precision
+ *  B -> Baseline & Bold Stems
  */
 
-// ─── The 6 Typographic Anatomies of "HowVaibhav" ──────────────────────────────
+// ─── The 7 Typographic Anatomies of "HowVaibhav" ──────────────────────────────
 const ANATOMY_NODES = [
   {
-    id: 'cap-height',
-    targetLetters: ['H'],
-    letterIndex: [0], // 'H'
+    id: 'node-h',
+    targetLetters: ['H', 'h'],
+    letterIndex: [0, 7],
     letterSymbol: 'H',
-    badge: '01 // CAP LINE',
-    title: 'Cap Height & Hierarchy',
+    badge: '01 // H · HIERARCHY',
+    title: 'Hierarchy & Height',
     principle: 'Maximum Vertical Amplitude',
-    description:
-      'The structural apex of brand hierarchy. Commands cognitive focus, ensuring core identity cuts through noise before subtext.',
     metric: 'CAP_HT: 720‰',
     color: '#FF2D78',      // Electric Rose Pink
     textColor: '#FFFFFF',
@@ -43,150 +34,160 @@ const ANATOMY_NODES = [
     rotation: '-3deg',
     floatDuration: '5.2s',
     floatDelay: '0s',
-    floatY: '-14px',
+    floatY: '-12px',
     decorator: 'star',
     // SVG connecting path from Card 1 anchor to top of 'H'
-    pathD: 'M 270,250 Q 330,370 410,455',
-    anchorPoint: { x: 410, y: 455 },
+    pathD: 'M 240,190 Q 280,310 350,410',
+    anchorPoint: { x: 350, y: 410 },
   },
   {
-    id: 'ascender',
-    targetLetters: ['b', 'h'],
-    letterIndex: [6, 7], // 'b', 'h'
-    letterSymbol: 'b · h',
-    badge: '02 // ASCENDER LINE',
-    title: 'Ascender Dynamics',
-    principle: 'Trajectory Beyond the Mean',
-    description:
-      'Vertical stems breaking past the mean line. Pushes beyond standard conventions with kinetic momentum and air.',
-    metric: 'ASC: +240 EM',
+    id: 'node-b',
+    targetLetters: ['b'],
+    letterIndex: [6],
+    letterSymbol: 'B',
+    badge: '02 // B · BASELINE',
+    title: 'Baseline & Bold Stems',
+    principle: 'Structural Stem Power',
+    metric: 'ASC_HT: +240 EM',
     color: '#C2E03A',      // Vibrant Lime Green
     textColor: '#0B0F19',
     accentColor: '#8AAA00',
-    rotation: '2.4deg',
+    rotation: '2deg',
     floatDuration: '6.4s',
     floatDelay: '-1.6s',
-    floatY: '-12px',
+    floatY: '-10px',
     decorator: 'circle',
-    pathD: 'M 580,210 Q 640,330 675,445',
-    anchorPoint: { x: 675, y: 445 },
+    pathD: 'M 600,175 Q 630,300 675,410',
+    anchorPoint: { x: 675, y: 410 },
   },
   {
-    id: 'point-size',
-    targetLetters: ['V'],
-    letterIndex: [3], // 'V'
+    id: 'node-v',
+    targetLetters: ['V', 'v'],
+    letterIndex: [3, 9],
     letterSymbol: 'V',
-    badge: '03 // POINT SIZE',
-    title: 'Point Size & Scale',
-    principle: 'Macro Impact × Micro Detail',
-    description:
-      'The infinite zoom of design craft. Sub-pixel precision scaling seamlessly to massive architectural impact.',
-    metric: 'SCALE: ∞ DYNAMIC',
+    badge: '03 // V · VECTOR',
+    title: 'Vector Craft & Volume',
+    principle: 'Infinite Scalability & Rigor',
+    metric: 'VERTEX: 42.4° APEX',
     color: '#B59FFF',      // Soft Ethereal Lavender
     textColor: '#0B0F19',
     accentColor: '#5E35B1',
-    rotation: '3.6deg',
+    rotation: '3deg',
     floatDuration: '7.1s',
     floatDelay: '-3.2s',
-    floatY: '-16px',
+    floatY: '-14px',
     decorator: 'ring',
-    pathD: 'M 880,250 Q 750,370 535,455',
-    anchorPoint: { x: 535, y: 455 },
+    pathD: 'M 960,190 Q 770,280 545,410',
+    anchorPoint: { x: 545, y: 410 },
   },
   {
-    id: 'descender',
-    targetLetters: ['o', 'w'],
-    letterIndex: [1, 2], // 'o', 'w'
-    letterSymbol: 'o · w',
-    badge: '04 // DESCENDER DEPTH',
-    title: 'Descender Depth',
-    principle: 'Subterranean Foundation',
-    description:
-      'Gravitational foundation beneath the baseline. Harmonizing stroke weight and negative counter-space with structural logic.',
-    metric: 'DEPTH: -180 EM',
-    color: '#D4A017',      // Warm Amber Gold
+    id: 'node-o',
+    targetLetters: ['o'],
+    letterIndex: [1],
+    letterSymbol: 'O',
+    badge: '04 // O · OPTICAL',
+    title: 'Optical Balance & Orbit',
+    principle: 'Pure Circular Resonance',
+    metric: 'OVERSHOOT: +18‰',
+    color: '#FF8A00',      // Solar Amber Orange
     textColor: '#0B0F19',
-    accentColor: '#7B5800',
+    accentColor: '#7B4200',
     rotation: '-2.5deg',
     floatDuration: '5.8s',
     floatDelay: '-4.4s',
-    floatY: '-13px',
+    floatY: '-11px',
     decorator: 'swirl',
-    pathD: 'M 270,690 Q 370,610 470,545',
-    anchorPoint: { x: 470, y: 545 },
+    pathD: 'M 220,710 Q 300,580 410,485',
+    anchorPoint: { x: 410, y: 485 },
   },
   {
-    id: 'baseline',
+    id: 'node-w',
+    targetLetters: ['w'],
+    letterIndex: [2],
+    letterSymbol: 'W',
+    badge: '05 // W · WEIGHT',
+    title: 'Weight & White Space',
+    principle: 'Harmonic Stroke Tension',
+    metric: 'STEM_WT: 114 EM',
+    color: '#F59E0B',      // Marigold Gold Yellow
+    textColor: '#0B0F19',
+    accentColor: '#78350F',
+    rotation: '2.5deg',
+    floatDuration: '6.1s',
+    floatDelay: '-2.5s',
+    floatY: '-10px',
+    decorator: 'cross',
+    pathD: 'M 370,720 Q 420,600 470,485',
+    anchorPoint: { x: 470, y: 485 },
+  },
+  {
+    id: 'node-i',
     targetLetters: ['i'],
-    letterIndex: [5], // 'i'
-    letterSymbol: 'i',
-    badge: '05 // THE BASELINE',
-    title: 'Baseline Alignment',
-    principle: 'Mathematical Precision & Tittle Focus',
-    description:
-      'The immutable datum where every element aligns. Guided by the tittle of the "i" with zero visual drift.',
+    letterIndex: [5],
+    letterSymbol: 'I',
+    badge: '06 // I · IDENTITY',
+    title: 'Identity & Ink Precision',
+    principle: 'Tittle Focal Point Datum',
     metric: 'DATUM: 0.00 Y-AXIS',
     color: '#00AAFF',      // Electric Azure Blue
     textColor: '#FFFFFF',
     accentColor: '#80D8FF',
-    rotation: '1.8deg',
+    rotation: '-1.8deg',
     floatDuration: '5.0s',
-    floatDelay: '-2.1s',
+    floatDelay: '-1.8s',
     floatY: '-11px',
     decorator: 'dots',
-    pathD: 'M 590,780 Q 615,640 622,545',
-    anchorPoint: { x: 622, y: 545 },
+    pathD: 'M 830,720 Q 730,600 635,485',
+    anchorPoint: { x: 635, y: 485 },
   },
   {
-    id: 'x-height',
-    targetLetters: ['a', 'v'],
-    letterIndex: [4, 8, 9], // 'a', 'a', 'v'
-    letterSymbol: 'a · v',
-    badge: '06 // X-HEIGHT RATIO',
-    title: 'X-Height & Rhythm',
-    principle: 'Human Legibility & Resonance',
-    description:
-      'Body height dictating optical rhythm. Ensures design systems stay human, balanced, and legible across any screen.',
+    id: 'node-a',
+    targetLetters: ['a'],
+    letterIndex: [4, 8],
+    letterSymbol: 'A',
+    badge: '07 // A · ARCHITECTURE',
+    title: 'Architecture & Apex',
+    principle: 'Humanist Geometric Form',
     metric: 'RATIO: 0.72 GOLDEN',
     color: '#00E5C3',      // Vibrant Mint Emerald
     textColor: '#0B0F19',
     accentColor: '#006050',
-    rotation: '-3.8deg',
+    rotation: '3deg',
     floatDuration: '6.6s',
     floatDelay: '-3.8s',
-    floatY: '-15px',
-    decorator: 'cross',
-    pathD: 'M 880,690 Q 800,610 760,545',
-    anchorPoint: { x: 760, y: 545 },
+    floatY: '-13px',
+    decorator: 'ring',
+    pathD: 'M 980,710 Q 890,590 795,485',
+    anchorPoint: { x: 795, y: 485 },
   },
 ];
 
-// ─── Letter Mapping for "HowVaibhav" ──────────────────────────────────────────
+// ─── Direct Letter Mapping for "HowVaibhav" ──────────────────────────────────
 const LETTERS = [
-  { char: 'H', nodeId: 'cap-height',  accent: '#FF2D78', highlightStart: '#FF80AB' },
-  { char: 'o', nodeId: 'descender',   accent: '#D4A017', highlightStart: '#FDE047' },
-  { char: 'w', nodeId: 'descender',   accent: '#EAB308', highlightStart: '#FEF08A' },
-  { char: 'V', nodeId: 'point-size',  accent: '#B59FFF', highlightStart: '#DDD6FE' },
-  { char: 'a', nodeId: 'x-height',    accent: '#00E5C3', highlightStart: '#99F6E4' },
-  { char: 'i', nodeId: 'baseline',    accent: '#00AAFF', highlightStart: '#7DD3FC', hasTittle: true },
-  { char: 'b', nodeId: 'ascender',    accent: '#C2E03A', highlightStart: '#D9F99D' },
-  { char: 'h', nodeId: 'ascender',    accent: '#A3E635', highlightStart: '#BEF264' },
-  { char: 'a', nodeId: 'x-height',    accent: '#00E5C3', highlightStart: '#5EEAD4', inBox: true },
-  { char: 'v', nodeId: 'x-height',    accent: '#14B8A6', highlightStart: '#2DD4BF', inBox: true },
+  { char: 'H', nodeId: 'node-h', accent: '#FF2D78' },
+  { char: 'o', nodeId: 'node-o', accent: '#FF8A00' },
+  { char: 'w', nodeId: 'node-w', accent: '#F59E0B' },
+  { char: 'V', nodeId: 'node-v', accent: '#B59FFF' },
+  { char: 'a', nodeId: 'node-a', accent: '#00E5C3' },
+  { char: 'i', nodeId: 'node-i', accent: '#00AAFF', hasTittle: true },
+  { char: 'b', nodeId: 'node-b', accent: '#C2E03A' },
+  { char: 'h', nodeId: 'node-h', accent: '#FF2D78' },
+  { char: 'a', nodeId: 'node-a', accent: '#00E5C3' },
+  { char: 'v', nodeId: 'node-v', accent: '#B59FFF' },
 ];
 
 // ─── Geometric Decorative Accents ──────────────────────────────────────────────
 function NodeDecorator({ type, color, accent }) {
   if (type === 'star') {
     return (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style={{ position: 'absolute', top: '-13px', right: '-11px', pointerEvents: 'none' }}>
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none" style={{ position: 'absolute', top: '-11px', right: '-9px', pointerEvents: 'none' }}>
         <path d="M14 2l2.6 8.5H25l-6.8 5 2.6 8.5L14 18.8 7.2 24l2.6-8.5L3 10.5h8.4z" fill={color} stroke={accent} strokeWidth="1.2" />
       </svg>
     );
   }
   if (type === 'circle') {
     return (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style={{ position: 'absolute', top: '-12px', right: '-10px', pointerEvents: 'none' }}>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={{ position: 'absolute', top: '-10px', right: '-8px', pointerEvents: 'none' }}>
         <circle cx="12" cy="12" r="9.5" stroke={accent} strokeWidth="2.5" fill="none" />
         <circle cx="12" cy="12" r="3.5" fill={color} />
       </svg>
@@ -194,31 +195,30 @@ function NodeDecorator({ type, color, accent }) {
   }
   if (type === 'ring') {
     return (
-      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" style={{ position: 'absolute', top: '-13px', left: '-11px', pointerEvents: 'none' }}>
+      <svg width="24" height="24" viewBox="0 0 26 26" fill="none" style={{ position: 'absolute', top: '-11px', left: '-9px', pointerEvents: 'none' }}>
         <circle cx="13" cy="13" r="10.5" stroke={accent} strokeWidth="2" fill="none" strokeDasharray="3 3.5" />
       </svg>
     );
   }
   if (type === 'swirl') {
     return (
-      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style={{ position: 'absolute', bottom: '-12px', left: '-10px', pointerEvents: 'none' }}>
-        <path d="M14 4 C7 4 4 9 4 14 C4 20 9 23 14 23 C20 23 23 19 23 14" stroke={accent} strokeWidth="2.2" strokeLinecap="round" fill="none" />
-        <circle cx="23" cy="14" r="2.5" fill={color} />
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={{ position: 'absolute', top: '-10px', right: '-8px', pointerEvents: 'none' }}>
+        <path d="M12 4a8 8 0 108 8 5 5 0 00-5-5 3 3 0 00-3 3" stroke={accent} strokeWidth="2" strokeLinecap="round" />
       </svg>
     );
   }
   if (type === 'dots') {
     return (
-      <svg width="28" height="14" viewBox="0 0 28 14" fill="none" style={{ position: 'absolute', bottom: '-10px', right: '-8px', pointerEvents: 'none' }}>
-        <circle cx="5" cy="7" r="3.5" fill={color} />
-        <circle cx="14" cy="7" r="3" fill={color} opacity="0.75" />
-        <circle cx="23" cy="7" r="2.5" fill={color} opacity="0.45" />
+      <svg width="24" height="12" viewBox="0 0 24 12" fill="none" style={{ position: 'absolute', top: '-8px', right: '-6px', pointerEvents: 'none' }}>
+        <circle cx="4" cy="6" r="3" fill={accent} />
+        <circle cx="12" cy="6" r="3" fill={color} />
+        <circle cx="20" cy="6" r="3" fill={accent} />
       </svg>
     );
   }
   if (type === 'cross') {
     return (
-      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" style={{ position: 'absolute', top: '-11px', right: '-9px', pointerEvents: 'none' }}>
+      <svg width="20" height="20" viewBox="0 0 22 22" fill="none" style={{ position: 'absolute', top: '-10px', right: '-8px', pointerEvents: 'none' }}>
         <line x1="11" y1="2" x2="11" y2="20" stroke={accent} strokeWidth="2.5" strokeLinecap="round" />
         <line x1="2" y1="11" x2="20" y2="11" stroke={accent} strokeWidth="2.5" strokeLinecap="round" />
       </svg>
@@ -227,7 +227,7 @@ function NodeDecorator({ type, color, accent }) {
   return null;
 }
 
-// ─── Individual Floating Anatomical Card ───────────────────────────────────────
+// ─── Individual Floating Anatomical Card (Compact & Text-Free) ────────────────
 function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
   const isTargeted = activeNodeId === node.id;
   const isDimmed   = activeNodeId !== null && !isTargeted;
@@ -257,22 +257,21 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
           position: 'relative',
           background: node.color,
           color: node.textColor,
-          borderRadius: '22px',
-          padding: '16px 18px 18px',
-          minWidth: '220px',
-          maxWidth: '265px',
+          borderRadius: '20px',
+          padding: '14px 16px 16px',
+          width: '215px',
           boxShadow: isTargeted
-            ? `0 30px 60px -12px ${node.color}AA, 0 10px 24px rgba(0,0,0,0.6)`
-            : `0 18px 40px -12px ${node.color}50, 0 6px 18px rgba(0,0,0,0.45)`,
+            ? `0 24px 50px -10px ${node.color}AA, 0 8px 20px rgba(0,0,0,0.6)`
+            : `0 14px 34px -10px ${node.color}50, 0 4px 14px rgba(0,0,0,0.45)`,
           border: isTargeted ? `2px solid rgba(255,255,255,0.9)` : '1px solid rgba(255,255,255,0.2)',
           animation: isTargeted
             ? 'none'
             : `${animName} ${node.floatDuration} cubic-bezier(0.45,0,0.55,1) ${node.floatDelay} infinite`,
           willChange: 'transform',
           transform: isTargeted
-            ? `rotate(${node.rotation}) scale(1.06) translateY(-8px)`
+            ? `rotate(${node.rotation}) scale(1.06) translateY(-6px)`
             : `rotate(${node.rotation})`,
-          opacity: isDimmed ? 0.32 : 1,
+          opacity: isDimmed ? 0.3 : 1,
           transition: 'opacity 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1), border-color 0.2s ease',
           cursor: 'pointer',
           zIndex: isTargeted ? 40 : 20,
@@ -282,17 +281,17 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
         <NodeDecorator type={node.decorator} color={node.color} accent={node.accentColor} />
 
         {/* Top Meta Line: Badge + Metric */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '6px', marginBottom: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '4px', marginBottom: '8px' }}>
           <span
             style={{
               background: node.textColor === '#FFFFFF' ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.18)',
               color: node.textColor,
-              fontSize: '8.5px',
+              fontSize: '8px',
               fontFamily: "'Space Grotesk', monospace",
               fontWeight: 900,
-              letterSpacing: '0.12em',
+              letterSpacing: '0.1em',
               textTransform: 'uppercase',
-              padding: '2.5px 7px',
+              padding: '2px 6px',
               borderRadius: '4px',
             }}
           >
@@ -300,7 +299,7 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
           </span>
           <span
             style={{
-              fontSize: '8px',
+              fontSize: '7.5px',
               fontFamily: "'Space Grotesk', monospace",
               fontWeight: 800,
               opacity: 0.75,
@@ -311,15 +310,15 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
           </span>
         </div>
 
-        {/* Card Title (Serif Italic like classic specimen poster) */}
+        {/* Card Title (Serif Italic) */}
         <h3
           style={{
             fontFamily: "'Fraunces', Georgia, serif",
             fontWeight: 900,
             fontStyle: 'italic',
-            fontSize: 'clamp(1.05rem, 1.6vw, 1.28rem)',
+            fontSize: '17px',
             lineHeight: 1.15,
-            margin: '0 0 2px',
+            margin: '0 0 3px',
             letterSpacing: '-0.02em',
           }}
         >
@@ -329,42 +328,23 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
         {/* Sub-Principle Callout */}
         <div
           style={{
-            fontSize: '9px',
+            fontSize: '8.5px',
             fontWeight: 800,
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
-            opacity: 0.9,
-            marginBottom: '6px',
+            opacity: 0.88,
+            marginBottom: '8px',
             fontFamily: "'Space Grotesk', system-ui, sans-serif",
           }}
         >
           ✦ {node.principle}
         </div>
 
-        {/* Deep Meaning Description */}
-        <p
-          style={{
-            fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-            fontSize: '11px',
-            fontWeight: 500,
-            lineHeight: 1.4,
-            display: '-webkit-box',
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-            margin: 0,
-            opacity: 0.92,
-          }}
-        >
-          {node.description}
-        </p>
-
-        {/* Styled Image / Proof Placeholder */}
+        {/* Styled Proof / Artwork Placeholder Box */}
         <div
           style={{
-            marginTop: '10px',
             width: '100%',
-            aspectRatio: '16 / 9',
+            height: '42px',
             background: 'rgba(0,0,0,0.22)',
             borderRadius: '8px',
             display: 'flex',
@@ -375,12 +355,12 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
         >
           <span
             style={{
-              fontSize: '9px',
+              fontSize: '8.5px',
               fontFamily: "'Space Grotesk', monospace",
               fontWeight: 800,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              opacity: 0.65,
+              opacity: 0.75,
             }}
           >
             ↑ Inject Artwork [{node.letterSymbol}]
@@ -455,18 +435,16 @@ export default function DesignAnatomy() {
       style={{
         position: 'relative',
         width: '100%',
-        minHeight: '940px',
+        minHeight: '880px',
         overflow: 'hidden',
-        // Pure Obsidian Technical Canvas
         backgroundColor: '#0A0B0E',
-        // Clean engineering grid background (CSS only, zero overhead)
         backgroundImage: `
-          linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)
+          linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)
         `,
         backgroundSize: '40px 40px',
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-        padding: '80px 0 90px', // Clean balanced padding without top navbar
+        padding: '50px 0 70px',
         color: '#FFFFFF',
       }}
     >
@@ -475,7 +453,7 @@ export default function DesignAnatomy() {
       <div style={{ position: 'absolute', bottom: '15%', right: '12%', width: '450px', height: '350px', background: 'radial-gradient(circle, rgba(0,170,255,0.12) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '700px', height: '450px', background: 'radial-gradient(circle, rgba(181,159,255,0.08) 0%, transparent 65%)', pointerEvents: 'none', zIndex: 1 }} />
 
-      {/* ─── SVG CONNECTOR LAYER & TYPOGRAPHIC GUIDELINE RULES ─── */}
+      {/* ─── SVG CONNECTOR LAYER (Clean Laser Lines Only — NO Dotted Guideline Overlays) ─── */}
       <svg
         viewBox="0 0 1200 900"
         preserveAspectRatio="xMidYMid meet"
@@ -500,29 +478,11 @@ export default function DesignAnatomy() {
           </filter>
         </defs>
 
-        {/* ── Architectural Guideline Rules (Cap Line, Ascender, X-Line, Baseline, Descender) ── */}
-        {isVisible && (
-          <g opacity="0.45">
-            {/* 1. Cap Line (y = 450) */}
-            <line x1="80" y1="450" x2="1120" y2="450" stroke="#FF2D78" strokeWidth="1" strokeDasharray="4 4" />
-
-            {/* 2. Mean / X-Height Line (y = 495) */}
-            <line x1="80" y1="495" x2="1120" y2="495" stroke="#00E5C3" strokeWidth="1" strokeDasharray="3 5" />
-
-            {/* 3. The Baseline (y = 545) — Continuous crisp reference line */}
-            <line x1="80" y1="545" x2="1120" y2="545" stroke="#FFFFFF" strokeWidth="1.4" opacity="0.85" />
-
-            {/* 4. Descender Line (y = 580) */}
-            <line x1="80" y1="580" x2="1120" y2="580" stroke="#D4A017" strokeWidth="1" strokeDasharray="4 4" />
-
-          </g>
-        )}
-
-        {/* ── Dynamic Connecting Paths from Cards to Specific Letter Nodes ── */}
+        {/* ── Dynamic Connecting Laser Paths from Cards to Specific Letter Nodes ── */}
         {ANATOMY_NODES.map((node) => {
           const isTargeted = activeNodeId === node.id;
           const strokeWidth = isTargeted ? 3.5 : 1.8;
-          const strokeOpacity = isTargeted ? 1 : activeNodeId ? 0.2 : 0.7;
+          const strokeOpacity = isTargeted ? 1 : activeNodeId ? 0.2 : 0.65;
 
           return (
             <g key={node.id}>
@@ -565,7 +525,7 @@ export default function DesignAnatomy() {
         style={{
           position: 'relative',
           maxWidth: '1240px',
-          minHeight: '840px',
+          minHeight: '860px',
           margin: '0 auto',
           padding: '0 24px',
         }}
@@ -581,8 +541,8 @@ export default function DesignAnatomy() {
           }
         `}</style>
 
-        {/* ─── CARD 1: Top Left (Cap Height) ─── */}
-        <div style={{ position: 'absolute', top: '60px', left: '10px' }}>
+        {/* ─── CARD 1: Top Left (H - Hierarchy & Height) ─── */}
+        <div style={{ position: 'absolute', top: '40px', left: '40px' }}>
           <AnatomyCard
             node={ANATOMY_NODES[0]}
             activeNodeId={activeNodeId}
@@ -592,8 +552,8 @@ export default function DesignAnatomy() {
           />
         </div>
 
-        {/* ─── CARD 2: Top Center (Ascender Dynamics) — Safely positioned below navbar ─── */}
-        <div style={{ position: 'absolute', top: '25px', left: '48%', transform: 'translateX(-50%)' }}>
+        {/* ─── CARD 2: Top Center (B - Baseline & Bold Stems) ─── */}
+        <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)' }}>
           <AnatomyCard
             node={ANATOMY_NODES[1]}
             activeNodeId={activeNodeId}
@@ -603,8 +563,8 @@ export default function DesignAnatomy() {
           />
         </div>
 
-        {/* ─── CARD 3: Top Right (Point Size & Scale) ─── */}
-        <div style={{ position: 'absolute', top: '60px', right: '10px' }}>
+        {/* ─── CARD 3: Top Right (V - Vector Craft & Volume) ─── */}
+        <div style={{ position: 'absolute', top: '40px', right: '40px' }}>
           <AnatomyCard
             node={ANATOMY_NODES[2]}
             activeNodeId={activeNodeId}
@@ -614,11 +574,11 @@ export default function DesignAnatomy() {
           />
         </div>
 
-        {/* ─── CENTRAL HERO TYPOGRAPHY: "HowVaibhav" with Crisp Legible Letterforms ─── */}
+        {/* ─── CENTRAL HERO TYPOGRAPHY: "HowVaibhav" (Razor Sharp, No Dotted Lines) ─── */}
         <div
           style={{
             position: 'absolute',
-            top: '51%',
+            top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
             textAlign: 'center',
@@ -626,45 +586,13 @@ export default function DesignAnatomy() {
             userSelect: 'none',
           }}
         >
-          {/* Guideline indicator tabs (matching "CAP LINE" and "X LINE" tabs in reference poster) */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', maxWidth: '780px', margin: '0 auto 10px', padding: '0 8px' }}>
-            <span
-              style={{
-                background: '#FF2D78',
-                color: '#FFF',
-                fontSize: '9px',
-                fontFamily: "'Space Grotesk', monospace",
-                fontWeight: 900,
-                padding: '3px 9px',
-                borderRadius: '4px',
-                letterSpacing: '0.1em',
-              }}
-            >
-              CAP LINE
-            </span>
-            <span
-              style={{
-                background: '#00E5C3',
-                color: '#0B0F19',
-                fontSize: '9px',
-                fontFamily: "'Space Grotesk', monospace",
-                fontWeight: 900,
-                padding: '3px 9px',
-                borderRadius: '4px',
-                letterSpacing: '0.1em',
-              }}
-            >
-              X LINE
-            </span>
-          </div>
-
-          {/* Letterform Cluster — Razor-sharp, solid white letterforms with signature glowing gradient accents */}
+          {/* Letterform Cluster — Razor-sharp, solid white letterforms with glowing colored hover accents */}
           <div
             style={{
               display: 'inline-flex',
               alignItems: 'baseline',
               fontFamily: "'Fraunces', 'Instrument Serif', Georgia, serif",
-              fontSize: 'clamp(4.2rem, 8.2vw, 7.6rem)',
+              fontSize: 'clamp(4.4rem, 8.4vw, 7.8rem)',
               fontWeight: 900,
               lineHeight: 0.9,
               letterSpacing: '-0.035em',
@@ -711,37 +639,14 @@ export default function DesignAnatomy() {
                     />
                   )}
 
-                  {/* Translucent Caliper Bounding Box around the final 'a' and 'v' (Matching reference image) */}
-                  {item.inBox && idx === 8 && (
-                    <div
-                      style={{
-                        position: 'absolute',
-                        inset: '-8px -8px -4px -8px',
-                        background: 'rgba(0, 229, 195, 0.14)',
-                        border: '1.5px dashed #00E5C3',
-                        borderRadius: '6px',
-                        pointerEvents: 'none',
-                        zIndex: -1,
-                      }}
-                    >
-                      <span style={{ position: 'absolute', top: '-14px', right: '4px', fontSize: '8px', color: '#00E5C3', fontFamily: "'Space Grotesk', monospace", fontWeight: 800 }}>
-                        x
-                      </span>
-                    </div>
-                  )}
-
-                  {/* 
-                    RAZOR-SHARP LETTER GLYPH:
-                    Solid, crisp white base with luminous colored top-gradient accent.
-                    NO giant rectangular background boxes!
-                  */}
+                  {/* Letter Glyph */}
                   <span
                     style={{
                       display: 'inline-block',
                       color: isNodeActive ? item.accent : '#FFFFFF',
                       textShadow: isNodeActive
                         ? `0 0 25px ${item.accent}, 0 0 50px ${item.accent}80`
-                        : `0 2px 16px rgba(0,0,0,0.8), 0 0 8px ${item.accent}40`,
+                        : `0 2px 16px rgba(0,0,0,0.8), 0 0 8px ${item.accent}30`,
                       filter: isNodeActive ? `drop-shadow(0 0 12px ${item.accent})` : 'none',
                       transition: 'color 0.2s ease, text-shadow 0.2s ease',
                     }}
@@ -754,8 +659,8 @@ export default function DesignAnatomy() {
           </div>
         </div>
 
-        {/* ─── CARD 4: Bottom Left (Descender Depth) ─── */}
-        <div style={{ position: 'absolute', bottom: '40px', left: '10px' }}>
+        {/* ─── CARD 4: Bottom Left (O - Optical Balance & Orbit) ─── */}
+        <div style={{ position: 'absolute', bottom: '40px', left: '20px' }}>
           <AnatomyCard
             node={ANATOMY_NODES[3]}
             activeNodeId={activeNodeId}
@@ -765,8 +670,8 @@ export default function DesignAnatomy() {
           />
         </div>
 
-        {/* ─── CARD 5: Bottom Center (Baseline Alignment) ─── */}
-        <div style={{ position: 'absolute', bottom: '10px', left: '48%', transform: 'translateX(-50%)' }}>
+        {/* ─── CARD 5: Bottom Mid-Left (W - Weight & White Space) ─── */}
+        <div style={{ position: 'absolute', bottom: '25px', left: '29%', transform: 'translateX(-50%)' }}>
           <AnatomyCard
             node={ANATOMY_NODES[4]}
             activeNodeId={activeNodeId}
@@ -776,10 +681,21 @@ export default function DesignAnatomy() {
           />
         </div>
 
-        {/* ─── CARD 6: Bottom Right (X-Height & Rhythm) ─── */}
-        <div style={{ position: 'absolute', bottom: '40px', right: '10px' }}>
+        {/* ─── CARD 6: Bottom Mid-Right (I - Identity & Ink Precision) ─── */}
+        <div style={{ position: 'absolute', bottom: '25px', left: '71%', transform: 'translateX(-50%)' }}>
           <AnatomyCard
             node={ANATOMY_NODES[5]}
+            activeNodeId={activeNodeId}
+            onSelect={setActiveNodeId}
+            onHover={setActiveNodeId}
+            onLeave={() => setActiveNodeId(null)}
+          />
+        </div>
+
+        {/* ─── CARD 7: Bottom Right (A - Architecture & Apex) ─── */}
+        <div style={{ position: 'absolute', bottom: '40px', right: '20px' }}>
+          <AnatomyCard
+            node={ANATOMY_NODES[6]}
             activeNodeId={activeNodeId}
             onSelect={setActiveNodeId}
             onHover={setActiveNodeId}
@@ -928,7 +844,7 @@ export default function DesignAnatomy() {
           })}
         </div>
 
-        {/* ── Active Specimen Card (Interactive Swipeable Lens) ── */}
+        {/* ── Active Specimen Card (Interactive Swipeable Lens — Clean & Text-Free) ── */}
         {(() => {
           const activeNode = ANATOMY_NODES[mobileIndex];
           return (
@@ -942,7 +858,7 @@ export default function DesignAnatomy() {
                 background: '#12141A',
                 border: `2px solid ${activeNode.color}`,
                 borderRadius: '18px',
-                padding: '18px 16px',
+                padding: '16px 16px 14px',
                 boxShadow: `0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px ${activeNode.color}30`,
                 position: 'relative',
                 overflow: 'hidden',
@@ -971,7 +887,7 @@ export default function DesignAnatomy() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  marginBottom: '12px',
+                  marginBottom: '10px',
                 }}
               >
                 <span
@@ -999,16 +915,16 @@ export default function DesignAnatomy() {
                     color: 'rgba(255, 255, 255, 0.5)',
                   }}
                 >
-                  0{mobileIndex + 1} / 06
+                  0{mobileIndex + 1} / 07
                 </span>
               </div>
 
               {/* Letter Symbol & Title Grid */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '10px' }}>
                 <div
                   style={{
-                    width: '54px',
-                    height: '54px',
+                    width: '52px',
+                    height: '52px',
                     borderRadius: '14px',
                     background: `${activeNode.color}20`,
                     border: `1.5px solid ${activeNode.color}`,
@@ -1049,23 +965,10 @@ export default function DesignAnatomy() {
                       textTransform: 'uppercase',
                     }}
                   >
-                    {activeNode.principle}
+                    ✦ {activeNode.principle}
                   </div>
                 </div>
               </div>
-
-              {/* Condensed Punchy Description */}
-              <p
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-                  fontSize: '12.5px',
-                  lineHeight: 1.5,
-                  color: 'rgba(255, 255, 255, 0.82)',
-                  margin: '0 0 14px',
-                }}
-              >
-                {activeNode.description}
-              </p>
 
               {/* Metric Tag & Arrow Prompt */}
               <div
@@ -1154,8 +1057,8 @@ export default function DesignAnatomy() {
                   onClick={() => selectNodeByIndex(i)}
                   aria-label={`Go to specimen ${i + 1}`}
                   style={{
-                    width: isActive ? '20px' : '7px',
-                    height: '7px',
+                    width: isActive ? '18px' : '6px',
+                    height: '6px',
                     borderRadius: '999px',
                     background: isActive ? node.color : 'rgba(255, 255, 255, 0.25)',
                     border: 'none',

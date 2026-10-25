@@ -166,7 +166,7 @@ export default function DesignPage() {
         />
       )}
 
-      {/* Floating Bottom-Right DEV Mode Switch Button */}
+      {/* Floating Bottom-Right DEV Mode Switch Button — Tactile Cyber Green Emblem */}
       <aside
         className="floating-dev-switch-wrap"
         style={{
@@ -187,54 +187,34 @@ export default function DesignPage() {
           className="design-return-btn floating-dev-btn"
           title="Switch to Software Developer & CS Mode"
           style={{
-            background: '#111215',
-            color: '#FFFFFF',
-            border: '1.5px solid rgba(255, 255, 255, 0.2)',
+            background: '#CCFF00',
+            color: '#07080A',
+            border: '2px solid #07080A',
             borderRadius: '9999px',
-            padding: '10px 20px',
-            fontSize: '12px',
-            fontFamily: "'Space Grotesk', sans-serif",
+            padding: '8px 16px',
+            fontSize: '13px',
+            fontFamily: "'Space Grotesk', monospace",
             fontWeight: 900,
-            letterSpacing: '0.06em',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '8px',
+            gap: '6px',
             cursor: 'pointer',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(204, 255, 0, 0.25)',
-            backdropFilter: 'blur(8px)',
+            boxShadow: '0 8px 24px rgba(204, 255, 0, 0.45), 3px 3px 0px #07080A',
             transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
             whiteSpace: 'nowrap',
           }}
           onMouseEnter={(e) => {
             try { soundFX.playHover(); } catch {}
-            e.currentTarget.style.borderColor = '#CCFF00';
-            e.currentTarget.style.transform = 'translateY(-3px) scale(1.05)';
-            e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(204, 255, 0, 0.45)';
+            e.currentTarget.style.transform = 'translateY(-3px) scale(1.08)';
+            e.currentTarget.style.boxShadow = '0 12px 32px rgba(204, 255, 0, 0.65), 4px 4px 0px #07080A';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
             e.currentTarget.style.transform = 'none';
-            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(204, 255, 0, 0.25)';
+            e.currentTarget.style.boxShadow = '0 8px 24px rgba(204, 255, 0, 0.45), 3px 3px 0px #07080A';
           }}
         >
-          <span className="floating-dev-icon" style={{ fontSize: '13px', lineHeight: 1 }}>⚡</span>
-          <span className="floating-dev-label">DEV MODE</span>
-          <span
-            className="floating-dev-code-badge"
-            style={{
-              fontFamily: 'monospace',
-              fontSize: '11px',
-              fontWeight: 800,
-              background: '#CCFF00',
-              color: '#07080A',
-              padding: '2px 6px',
-              borderRadius: '4px',
-              letterSpacing: '-0.04em',
-              lineHeight: 1.1,
-            }}
-          >
-            &lt;/&gt;
-          </span>
+          <span style={{ fontSize: '12px', lineHeight: 1 }}>⚡</span>
+          <span style={{ fontFamily: 'monospace', fontWeight: 900, fontSize: '12.5px', letterSpacing: '-0.02em' }}>&lt;/&gt;</span>
         </button>
       </aside>
     </div>

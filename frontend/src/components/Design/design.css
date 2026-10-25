@@ -660,8 +660,8 @@
 /* Responsive Floating Return Button on Phone Screens */
 @media (max-width: 640px) {
   .floating-dev-switch-wrap {
-    bottom: 18px !important;
-    right: 18px !important;
+    bottom: 16px !important;
+    right: 16px !important;
   }
   .floating-dev-btn {
     width: 44px !important;
@@ -671,17 +671,6 @@
     border-radius: 50% !important;
     justify-content: center !important;
     gap: 2px !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 16px rgba(204, 255, 0, 0.35) !important;
-  }
-  .floating-dev-label {
-    display: none !important;
-  }
-  .floating-dev-icon {
-    font-size: 14px !important;
-  }
-  .floating-dev-code-badge {
-    padding: 1px 3px !important;
-    font-size: 9px !important;
-    border-radius: 3px !important;
+    box-shadow: 0 8px 20px rgba(204, 255, 0, 0.5), 3px 3px 0px #07080A !important;
   }
 }
