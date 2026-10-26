@@ -235,7 +235,7 @@ function NodeDecorator({ type, color, accent }) {
 }
 
 // ─── Individual Floating Anatomical Card (Ultra-Smooth 3D Parallax & Gyro Tilt) ─
-function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
+function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave, onOpenLightbox }) {
   const cardRef = useRef(null);
   const [isHovered, setIsHovered] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -406,17 +406,29 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
           ✦ {node.principle}
         </div>
 
-        {/* Visual Artwork Showcase Plate */}
+        {/* Visual Artwork Showcase Plate - 16:9 Uncropped Original Aspect Ratio */}
         <div
+          onClick={(e) => {
+            e.stopPropagation();
+            if (onOpenLightbox) onOpenLightbox(node);
+          }}
+          title="Click to inspect full uncropped artwork in HD"
           style={{
             position: 'relative',
             width: '100%',
-            height: '96px',
+            aspectRatio: '16 / 9',
             borderRadius: '11px',
             overflow: 'hidden',
-            background: 'rgba(0, 0, 0, 0.35)',
-            boxShadow: '0 8px 20px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3)',
-            border: `1px solid ${node.textColor === '#FFFFFF' ? 'rgba(255, 255, 255, 0.32)' : 'rgba(0, 0, 0, 0.22)'}`,
+            background: '#07090E',
+            boxShadow: isHovered
+              ? '0 12px 28px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.35)'
+              : '0 8px 20px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25)',
+            border: `1.5px solid ${node.textColor === '#FFFFFF' ? 'rgba(255, 255, 255, 0.35)' : 'rgba(0, 0, 0, 0.25)'}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'zoom-in',
+            transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
           }}
         >
           <img
@@ -426,51 +438,82 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
             style={{
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center',
+              objectFit: 'contain',
               display: 'block',
-              transform: isHovered ? 'scale(1.08)' : 'scale(1)',
+              transform: isHovered ? 'scale(1.03)' : 'scale(1)',
               transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           />
-          {/* Subtle bottom gradient overlay for legibility */}
+
+          {/* Micro HD Expand Indicator on Hover */}
           <div
             style={{
               position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(to top, rgba(0, 0, 0, 0.48) 0%, transparent 55%)',
+              top: '5px',
+              right: '5px',
+              background: 'rgba(7, 9, 14, 0.78)',
+              backdropFilter: 'blur(6px)',
+              padding: '2px 5px',
+              borderRadius: '4px',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              fontSize: '8px',
+              color: '#FFFFFF',
+              opacity: isHovered ? 1 : 0,
+              transform: isHovered ? 'scale(1)' : 'scale(0.85)',
+              transition: 'opacity 0.2s ease, transform 0.2s ease',
               pointerEvents: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '3px',
+              fontFamily: "'Space Grotesk', monospace",
+              fontWeight: 700,
             }}
-          />
-          {/* Studio Monograph Plate Badge */}
+          >
+            <span>⛶</span>
+            <span>HD</span>
+          </div>
+        </div>
+
+        {/* Studio Monograph Plate Sub-Bar (Below image - 0% artwork obscuration!) */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginTop: '6px',
+            padding: '0 2px',
+          }}
+        >
           <div
             style={{
-              position: 'absolute',
-              bottom: '5px',
-              left: '6px',
               display: 'flex',
               alignItems: 'center',
               gap: '4px',
-              background: 'rgba(10, 12, 18, 0.82)',
-              backdropFilter: 'blur(6px)',
-              padding: '2px 7px',
-              borderRadius: '4px',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
+              fontFamily: "'Space Grotesk', monospace",
+              fontSize: '7.5px',
+              fontWeight: 800,
+              color: node.textColor,
+              opacity: 0.9,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
             }}
           >
-            <span
-              style={{
-                fontFamily: "'Space Grotesk', monospace",
-                fontSize: '7.5px',
-                fontWeight: 800,
-                color: '#FFFFFF',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-              }}
-            >
-              PLATE // {node.letterSymbol}
-            </span>
+            <span>PLATE // {node.letterSymbol}</span>
+            <span style={{ opacity: 0.4 }}>·</span>
+            <span style={{ opacity: 0.75 }}>16:9 NATIVE</span>
           </div>
+          <span
+            style={{
+              fontFamily: "'Space Grotesk', monospace",
+              fontSize: '7px',
+              fontWeight: 800,
+              color: node.textColor,
+              opacity: 0.65,
+              letterSpacing: '0.05em',
+            }}
+          >
+            UNCROPPED
+          </span>
         </div>
       </div>
     </>
@@ -492,6 +535,7 @@ export default function DesignAnatomy() {
   const [activeNodeId, setActiveNodeId] = useState(null);
   const [mobileIndex, setMobileIndex]   = useState(0);
   const [selectedFont, setSelectedFont] = useState(ARTISTIC_FONTS[0]); // Default: Haute Monograph (Cinzel Decorative)
+  const [lightboxNode, setLightboxNode] = useState(null); // Fullscreen uncropped HD modal
 
   // Touch gesture tracking for mobile swipe specimen carousel
   const touchStartX = useRef(0);
@@ -533,6 +577,17 @@ export default function DesignAnatomy() {
     setActiveNodeId(ANATOMY_NODES[idx].id);
     try { soundFX.playTick(); } catch {}
   };
+
+  // Escape key listener to dismiss lightbox
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && lightboxNode) {
+        setLightboxNode(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxNode]);
 
   // IntersectionObserver: trigger lines drawing on scroll
   useEffect(() => {
@@ -664,6 +719,7 @@ export default function DesignAnatomy() {
             onSelect={setActiveNodeId}
             onHover={setActiveNodeId}
             onLeave={() => setActiveNodeId(null)}
+            onOpenLightbox={setLightboxNode}
           />
         </div>
 
@@ -675,6 +731,7 @@ export default function DesignAnatomy() {
             onSelect={setActiveNodeId}
             onHover={setActiveNodeId}
             onLeave={() => setActiveNodeId(null)}
+            onOpenLightbox={setLightboxNode}
           />
         </div>
 
@@ -686,6 +743,7 @@ export default function DesignAnatomy() {
             onSelect={setActiveNodeId}
             onHover={setActiveNodeId}
             onLeave={() => setActiveNodeId(null)}
+            onOpenLightbox={setLightboxNode}
           />
         </div>
 
@@ -847,6 +905,7 @@ export default function DesignAnatomy() {
             onSelect={setActiveNodeId}
             onHover={setActiveNodeId}
             onLeave={() => setActiveNodeId(null)}
+            onOpenLightbox={setLightboxNode}
           />
         </div>
 
@@ -858,6 +917,7 @@ export default function DesignAnatomy() {
             onSelect={setActiveNodeId}
             onHover={setActiveNodeId}
             onLeave={() => setActiveNodeId(null)}
+            onOpenLightbox={setLightboxNode}
           />
         </div>
 
@@ -869,6 +929,7 @@ export default function DesignAnatomy() {
             onSelect={setActiveNodeId}
             onHover={setActiveNodeId}
             onLeave={() => setActiveNodeId(null)}
+            onOpenLightbox={setLightboxNode}
           />
         </div>
 
@@ -880,6 +941,7 @@ export default function DesignAnatomy() {
             onSelect={setActiveNodeId}
             onHover={setActiveNodeId}
             onLeave={() => setActiveNodeId(null)}
+            onOpenLightbox={setLightboxNode}
           />
         </div>
       </div>
@@ -1151,18 +1213,24 @@ export default function DesignAnatomy() {
                 </div>
               </div>
 
-              {/* Mobile Active Artwork Plate */}
+              {/* Mobile Active Artwork Plate - 16:9 Uncropped Original Aspect Ratio */}
               <div
+                onClick={() => setLightboxNode(activeNode)}
+                title="Tap to view full uncropped artwork in HD"
                 style={{
                   position: 'relative',
                   width: '100%',
-                  aspectRatio: '16/9',
+                  aspectRatio: '16 / 9',
                   borderRadius: '12px',
                   overflow: 'hidden',
-                  margin: '6px 0 10px',
-                  border: `1.5px solid ${activeNode.color}60`,
+                  margin: '8px 0 6px',
+                  border: `1.5px solid ${activeNode.color}75`,
                   boxShadow: `0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px ${activeNode.color}25`,
-                  background: '#0B0F19',
+                  background: '#07090E',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'zoom-in',
                 }}
               >
                 <img
@@ -1171,29 +1239,46 @@ export default function DesignAnatomy() {
                   style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: 'center',
+                    objectFit: 'contain',
                     display: 'block',
                   }}
                 />
                 <div
                   style={{
                     position: 'absolute',
-                    inset: 0,
-                    background: 'linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 55%)',
-                    pointerEvents: 'none',
+                    top: '6px',
+                    right: '6px',
+                    background: 'rgba(7, 9, 14, 0.78)',
+                    backdropFilter: 'blur(6px)',
+                    padding: '2px 6px',
+                    borderRadius: '4px',
+                    border: '1px solid rgba(255, 255, 255, 0.25)',
+                    fontSize: '8.5px',
+                    color: '#FFFFFF',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '3px',
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontWeight: 700,
                   }}
-                />
+                >
+                  <span>⛶</span>
+                  <span>HD</span>
+                </div>
+              </div>
+
+              {/* Mobile Specimen Sub-Bar (Zero artwork obscuration!) */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '10px',
+                  padding: '0 4px',
+                }}
+              >
                 <div
                   style={{
-                    position: 'absolute',
-                    bottom: '6px',
-                    left: '8px',
-                    background: 'rgba(10, 12, 18, 0.85)',
-                    backdropFilter: 'blur(6px)',
-                    padding: '3px 8px',
-                    borderRadius: '5px',
-                    border: `1px solid ${activeNode.color}70`,
                     fontFamily: "'Space Grotesk', monospace",
                     fontSize: '8.5px',
                     fontWeight: 800,
@@ -1203,6 +1288,18 @@ export default function DesignAnatomy() {
                   }}
                 >
                   PLATE 0{mobileIndex + 1} // {activeNode.letterSymbol}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '8px',
+                    fontWeight: 700,
+                    color: 'rgba(255, 255, 255, 0.55)',
+                    letterSpacing: '0.06em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  16:9 ORIGINAL ASPECT RATIO · UNCROPPED
                 </div>
               </div>
 
@@ -1334,6 +1431,167 @@ export default function DesignAnatomy() {
           </button>
         </div>
       </div>
+
+      {/* ── High-Fidelity 16:9 Uncropped Artwork Lightbox Modal ── */}
+      {lightboxNode && (
+        <div
+          onClick={() => setLightboxNode(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            backgroundColor: 'rgba(5, 7, 11, 0.94)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px',
+            animation: 'fadeIn 0.25s ease',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              position: 'relative',
+              width: '100%',
+              maxWidth: '1040px',
+              backgroundColor: '#090C13',
+              borderRadius: '20px',
+              border: `2px solid ${lightboxNode.color}`,
+              boxShadow: `0 30px 80px rgba(0, 0, 0, 0.8), 0 0 50px ${lightboxNode.color}35`,
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            {/* Modal Header */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '16px 22px',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                background: 'rgba(255, 255, 255, 0.02)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <span
+                  style={{
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '12px',
+                    fontWeight: 900,
+                    color: lightboxNode.color,
+                    background: `${lightboxNode.color}20`,
+                    border: `1px solid ${lightboxNode.color}60`,
+                    padding: '3px 10px',
+                    borderRadius: '6px',
+                    letterSpacing: '0.08em',
+                  }}
+                >
+                  LETTER [{lightboxNode.letterSymbol}] · {lightboxNode.badge}
+                </span>
+                <div>
+                  <h4
+                    style={{
+                      margin: 0,
+                      fontFamily: "'Fraunces', serif",
+                      fontStyle: 'italic',
+                      fontSize: '18px',
+                      color: '#FFFFFF',
+                    }}
+                  >
+                    {lightboxNode.title}
+                  </h4>
+                  <div
+                    style={{
+                      fontFamily: "'Space Grotesk', monospace",
+                      fontSize: '10px',
+                      color: 'rgba(255, 255, 255, 0.65)',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.06em',
+                    }}
+                  >
+                    ✦ {lightboxNode.principle}
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setLightboxNode(null)}
+                style={{
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: '#FFFFFF',
+                  borderRadius: '999px',
+                  padding: '6px 14px',
+                  fontFamily: "'Space Grotesk', monospace",
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  transition: 'background 0.2s',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.18)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)')}
+              >
+                <span>CLOSE</span>
+                <span style={{ fontSize: '13px' }}>✕</span>
+              </button>
+            </div>
+
+            {/* Pristine 16:9 Uncropped Artwork Display */}
+            <div
+              style={{
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '16 / 9',
+                background: '#040609',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden',
+              }}
+            >
+              <img
+                src={lightboxNode.image}
+                alt={lightboxNode.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+              />
+            </div>
+
+            {/* Modal Footer Info */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '12px 22px',
+                borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                background: 'rgba(0, 0, 0, 0.35)',
+                fontSize: '11px',
+                fontFamily: "'Space Grotesk', monospace",
+                color: 'rgba(255, 255, 255, 0.65)',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ color: lightboxNode.color }}>●</span>
+                <span>ORIGINAL ASPECT RATIO · 16:9 NATIVE WIDESCREEN · 0% CROPPING</span>
+              </div>
+              <div style={{ opacity: 0.75, fontSize: '10px' }}>PRESS ESC OR CLICK OUTSIDE TO CLOSE</div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

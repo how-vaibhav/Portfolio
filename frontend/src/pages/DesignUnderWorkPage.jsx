@@ -376,16 +376,20 @@ export default function DesignUnderWorkPage() {
                   overflow: 'hidden',
                 }}
               >
-                {/* Widescreen Preview Plate */}
+                {/* Widescreen Preview Plate - 16:9 Uncropped Original Aspect Ratio */}
                 <div
                   style={{
                     position: 'relative',
                     width: '100%',
-                    aspectRatio: '16/9',
+                    aspectRatio: '16 / 9',
                     borderRadius: '10px',
                     overflow: 'hidden',
-                    marginBottom: '12px',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    marginBottom: '10px',
+                    border: '1px solid rgba(255, 255, 255, 0.14)',
+                    background: '#07090E',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
                 >
                   <img
@@ -394,37 +398,49 @@ export default function DesignUnderWorkPage() {
                     style={{
                       width: '100%',
                       height: '100%',
-                      objectFit: 'cover',
-                      transform: isHovered ? 'scale(1.05)' : 'scale(1)',
+                      objectFit: 'contain',
+                      transform: isHovered ? 'scale(1.02)' : 'scale(1)',
                       transition: 'transform 0.4s ease',
+                      display: 'block',
                     }}
                   />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%)',
-                    }}
-                  />
+                </div>
+
+                {/* Specimen Tag Bar (Clean, zero image obscuration) */}
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginBottom: '8px',
+                  }}
+                >
                   <span
                     style={{
-                      position: 'absolute',
-                      bottom: '6px',
-                      left: '8px',
-                      background: 'rgba(0,0,0,0.75)',
-                      backdropFilter: 'blur(4px)',
-                      padding: '2px 8px',
-                      borderRadius: '4px',
                       fontFamily: "'Space Grotesk', monospace",
                       fontSize: '8px',
                       fontWeight: 800,
                       color: item.color,
-                      border: `1px solid ${item.color}60`,
+                      background: `${item.color}18`,
+                      padding: '2px 8px',
+                      borderRadius: '4px',
+                      border: `1px solid ${item.color}50`,
                       letterSpacing: '0.06em',
                       textTransform: 'uppercase',
                     }}
                   >
                     {item.tag}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "'Space Grotesk', monospace",
+                      fontSize: '7.5px',
+                      fontWeight: 700,
+                      color: 'rgba(255, 255, 255, 0.5)',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
+                    16:9 ORIGINAL
                   </span>
                 </div>
 
