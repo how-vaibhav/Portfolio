@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useModeTransition } from '../context/ModeTransitionContext';
 import { soundFX } from '../components/Design/soundFX';
+import ModeToggle from '../components/ModeToggle';
 
 /**
  * DesignUnderWorkPage — State-of-the-Art "Studio Crafting in Progress" Experience.
- * Displayed when visitors on the deployed site toggle into Design Mode.
+ * Shown to visitors on the deployed site when toggling into Design Mode.
  *
- * Features:
- * - High-end Drafting Blueprint & Void Aesthetic
- * - Real-time animated calibration telemetry & progress bar
- * - Interactive Sneak-Peek Studio Plates with 3D tilt & holographic sheen
- * - Seamless return to Dev Portfolio and option to preview the Live Working Prototype (/design/studio)
+ * Mobile-First Responsive Architecture:
+ * - Fluid clamp typography and padding
+ * - Integrated ModeToggle in the header
+ * - Responsive 1-col to 3-col preview cards
+ * - Tactile action buttons with mobile tap target sizing
  */
 export default function DesignUnderWorkPage() {
   const { transitionTo } = useModeTransition();
@@ -19,6 +20,14 @@ export default function DesignUnderWorkPage() {
   const [devBtnHovered, setDevBtnHovered] = useState(false);
   const [activePreviewIndex, setActivePreviewIndex] = useState(0);
   const [timeString, setTimeString] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Live real-time studio clock
   useEffect(() => {
@@ -76,12 +85,12 @@ export default function DesignUnderWorkPage() {
         width: '100%',
         backgroundColor: '#07080B',
         backgroundImage: `
-          radial-gradient(circle at 50% 0%, rgba(204, 255, 0, 0.06) 0%, transparent 60%),
+          radial-gradient(circle at 50% 0%, rgba(204, 255, 0, 0.07) 0%, transparent 60%),
           radial-gradient(circle at 90% 80%, rgba(255, 45, 120, 0.05) 0%, transparent 50%),
           linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
           linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)
         `,
-        backgroundSize: '100% 100%, 100% 100%, 44px 44px, 44px 44px',
+        backgroundSize: '100% 100%, 100% 100%, 40px 40px, 40px 40px',
         color: '#FFFFFF',
         fontFamily: "'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif",
         position: 'relative',
@@ -89,30 +98,33 @@ export default function DesignUnderWorkPage() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '0 0 40px',
+        padding: isMobile ? '0 0 30px' : '0 0 44px',
         boxSizing: 'border-box',
       }}
     >
-      {/* ── Top Ambient Navigation Bar ── */}
+      {/* ── Top Header Navigation Bar with Integrated ModeToggle ── */}
       <header
         style={{
           width: '100%',
           maxWidth: '1240px',
           margin: '0 auto',
-          padding: '24px 24px',
+          padding: isMobile ? '16px 18px 12px' : '24px 32px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          gap: '12px',
           position: 'relative',
           zIndex: 20,
+          boxSizing: 'border-box',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        {/* Brand Name & Studio Status Tag */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '12px', flexWrap: 'wrap' }}>
           <span
             style={{
               fontFamily: "'Fraunces', Georgia, serif",
               fontWeight: 900,
-              fontSize: '20px',
+              fontSize: isMobile ? '18px' : '22px',
               letterSpacing: '-0.03em',
               color: '#FFFFFF',
             }}
@@ -122,71 +134,51 @@ export default function DesignUnderWorkPage() {
           <span
             style={{
               background: 'rgba(255, 255, 255, 0.08)',
-              border: '1px solid rgba(255, 255, 255, 0.14)',
+              border: '1px solid rgba(255, 255, 255, 0.16)',
               borderRadius: '999px',
-              padding: '3px 10px',
-              fontSize: '9.5px',
+              padding: '2.5px 8px',
+              fontSize: isMobile ? '8px' : '9.5px',
               fontFamily: "'Space Grotesk', monospace",
               fontWeight: 800,
               letterSpacing: '0.08em',
               color: '#CCFF00',
               textTransform: 'uppercase',
+              whiteSpace: 'nowrap',
             }}
           >
-            STUDIO LAB // IN PROGRESS
+            {isMobile ? 'WIP LAB' : 'STUDIO LAB // IN PROGRESS'}
           </span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          <div
-            style={{
-              fontSize: '11px',
-              fontFamily: "'JetBrains Mono', monospace",
-              color: 'rgba(255, 255, 255, 0.45)',
-              display: 'none',
-              alignItems: 'center',
-              gap: '6px',
-            }}
-            className="under-work-time"
-          >
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#CCFF00', display: 'inline-block', boxShadow: '0 0 8px #CCFF00' }} />
-            {timeString}
-          </div>
+        {/* Right Controls: ModeToggle Switcher */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {!isMobile && (
+            <div
+              style={{
+                fontSize: '11px',
+                fontFamily: "'JetBrains Mono', monospace",
+                color: 'rgba(255, 255, 255, 0.45)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              <span
+                style={{
+                  width: '6px',
+                  height: '6px',
+                  borderRadius: '50%',
+                  background: '#CCFF00',
+                  display: 'inline-block',
+                  boxShadow: '0 0 8px #CCFF00',
+                }}
+              />
+              {timeString}
+            </div>
+          )}
 
-          <button
-            type="button"
-            onClick={() => {
-              try { soundFX.playWarp(); } catch {}
-              transitionTo('/');
-            }}
-            style={{
-              background: 'rgba(255, 255, 255, 0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.16)',
-              borderRadius: '999px',
-              padding: '7px 16px',
-              fontSize: '12px',
-              fontWeight: 800,
-              color: '#FFFFFF',
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              transition: 'all 0.2s ease',
-              backdropFilter: 'blur(10px)',
-            }}
-            onMouseEnter={(e) => {
-              try { soundFX.playHover(); } catch {}
-              e.currentTarget.style.borderColor = '#CCFF00';
-              e.currentTarget.style.color = '#CCFF00';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.16)';
-              e.currentTarget.style.color = '#FFFFFF';
-            }}
-          >
-            <span style={{ fontFamily: 'monospace', fontWeight: 900 }}>&lt;/&gt;</span>
-            <span>Return to Dev</span>
-          </button>
+          {/* Integrated Mode Toggle Pill */}
+          <ModeToggle />
         </div>
       </header>
 
@@ -197,30 +189,30 @@ export default function DesignUnderWorkPage() {
           margin: '0 auto',
           position: 'relative',
           zIndex: 10,
-          padding: '20px 0 40px',
+          padding: isMobile ? '10px 0 30px' : '20px 0 40px',
         }}
       >
         {/* Monograph Top Pip & Status */}
-        <div style={{ textAlign: 'center', marginBottom: '18px' }}>
+        <div style={{ textAlign: 'center', marginBottom: isMobile ? '14px' : '18px' }}>
           <div
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '8px',
+              gap: '6px',
               background: 'rgba(204, 255, 0, 0.08)',
               border: '1px solid rgba(204, 255, 0, 0.35)',
               borderRadius: '999px',
-              padding: '5px 16px',
-              fontSize: '10.5px',
+              padding: isMobile ? '4px 12px' : '5px 16px',
+              fontSize: isMobile ? '9.5px' : '10.5px',
               fontWeight: 800,
               color: '#CCFF00',
-              letterSpacing: '0.12em',
+              letterSpacing: '0.1em',
               textTransform: 'uppercase',
               boxShadow: '0 0 20px rgba(204, 255, 0, 0.15)',
             }}
           >
-            <span style={{ animation: 'spin 8s linear infinite', display: 'inline-block' }}>✦</span>
-            <span>Creative Brand Laboratory · Edition 2026</span>
+            <span>✦</span>
+            <span>Brand Laboratory · Edition 2026</span>
             <span>✦</span>
           </div>
         </div>
@@ -231,15 +223,16 @@ export default function DesignUnderWorkPage() {
             fontFamily: "'Fraunces', Georgia, serif",
             fontWeight: 900,
             fontStyle: 'italic',
-            fontSize: 'clamp(36px, 5.8vw, 68px)',
-            lineHeight: 1.08,
+            fontSize: 'clamp(28px, 6.2vw, 64px)',
+            lineHeight: 1.1,
             letterSpacing: '-0.03em',
             textAlign: 'center',
             maxWidth: '920px',
-            margin: '0 auto 18px',
+            margin: '0 auto 16px',
             background: 'linear-gradient(180deg, #FFFFFF 30%, rgba(255,255,255,0.72) 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
+            padding: '0 8px',
           }}
         >
           Something extraordinary is currently taking shape.
@@ -249,12 +242,13 @@ export default function DesignUnderWorkPage() {
         <p
           style={{
             textAlign: 'center',
-            fontSize: 'clamp(14px, 1.8vw, 17px)',
+            fontSize: 'clamp(13px, 2.5vw, 16.5px)',
             lineHeight: 1.6,
             color: 'rgba(255, 255, 255, 0.65)',
             maxWidth: '680px',
-            margin: '0 auto 36px',
+            margin: isMobile ? '0 auto 28px' : '0 auto 36px',
             fontWeight: 400,
+            padding: '0 12px',
           }}
         >
           The graphic design archive, bespoke typographic specimens, and 3D conveyor portfolios of{' '}
@@ -266,12 +260,13 @@ export default function DesignUnderWorkPage() {
         <div
           style={{
             maxWidth: '640px',
-            margin: '0 auto 48px',
+            margin: isMobile ? '0 auto 36px' : '0 auto 48px',
             background: 'rgba(255, 255, 255, 0.03)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: '16px',
-            padding: '16px 20px',
+            padding: isMobile ? '14px 14px' : '16px 20px',
             boxShadow: '0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
+            boxSizing: 'border-box',
           }}
         >
           <div
@@ -281,12 +276,12 @@ export default function DesignUnderWorkPage() {
               justifyContent: 'space-between',
               marginBottom: '10px',
               fontFamily: "'JetBrains Mono', monospace",
-              fontSize: '11px',
+              fontSize: isMobile ? '9.5px' : '11px',
               letterSpacing: '0.04em',
             }}
           >
-            <span style={{ color: '#CCFF00', fontWeight: 800 }}>CALIBRATION STATUS // 88.4%</span>
-            <span style={{ color: 'rgba(255, 255, 255, 0.45)' }}>PHASE: PROOFING STAGE</span>
+            <span style={{ color: '#CCFF00', fontWeight: 800 }}>CALIBRATION // 88.4%</span>
+            <span style={{ color: 'rgba(255, 255, 255, 0.45)' }}>PROOFING STAGE</span>
           </div>
 
           {/* Glowing Animated Progress Bar */}
@@ -316,12 +311,12 @@ export default function DesignUnderWorkPage() {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
+              gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
               gap: '8px',
               marginTop: '14px',
               paddingTop: '12px',
               borderTop: '1px solid rgba(255, 255, 255, 0.06)',
-              fontSize: '9.5px',
+              fontSize: isMobile ? '9px' : '9.5px',
               fontFamily: "'Space Grotesk', monospace",
               color: 'rgba(255, 255, 255, 0.55)',
             }}
@@ -337,7 +332,7 @@ export default function DesignUnderWorkPage() {
         <div style={{ textAlign: 'center', marginBottom: '14px' }}>
           <span
             style={{
-              fontSize: '11px',
+              fontSize: isMobile ? '10px' : '11px',
               fontFamily: "'Space Grotesk', monospace",
               fontWeight: 800,
               letterSpacing: '0.1em',
@@ -352,9 +347,9 @@ export default function DesignUnderWorkPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '20px',
-            marginBottom: '44px',
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: isMobile ? '14px' : '20px',
+            marginBottom: isMobile ? '32px' : '44px',
           }}
         >
           {SNEAK_PEEK_PLATES.map((item, idx) => {
@@ -369,12 +364,12 @@ export default function DesignUnderWorkPage() {
                 style={{
                   background: 'rgba(15, 17, 24, 0.85)',
                   border: isHovered ? `1.5px solid ${item.color}` : '1.5px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: '18px',
-                  padding: '16px',
+                  borderRadius: '16px',
+                  padding: isMobile ? '14px' : '16px',
                   boxShadow: isHovered
                     ? `0 20px 40px rgba(0, 0, 0, 0.7), 0 0 24px ${item.color}35`
                     : '0 8px 24px rgba(0, 0, 0, 0.4)',
-                  transform: isHovered ? 'translateY(-6px)' : 'none',
+                  transform: !isMobile && isHovered ? 'translateY(-6px)' : 'none',
                   transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                   cursor: 'pointer',
                   position: 'relative',
@@ -389,7 +384,7 @@ export default function DesignUnderWorkPage() {
                     aspectRatio: '16/9',
                     borderRadius: '10px',
                     overflow: 'hidden',
-                    marginBottom: '14px',
+                    marginBottom: '12px',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
                   }}
                 >
@@ -400,7 +395,7 @@ export default function DesignUnderWorkPage() {
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
-                      transform: isHovered ? 'scale(1.06)' : 'scale(1)',
+                      transform: isHovered ? 'scale(1.05)' : 'scale(1)',
                       transition: 'transform 0.4s ease',
                     }}
                   />
@@ -437,8 +432,8 @@ export default function DesignUnderWorkPage() {
                   style={{
                     fontFamily: "'Fraunces', Georgia, serif",
                     fontWeight: 800,
-                    fontSize: '18px',
-                    margin: '0 0 6px',
+                    fontSize: isMobile ? '16px' : '18px',
+                    margin: '0 0 4px',
                     color: '#FFFFFF',
                   }}
                 >
@@ -446,7 +441,7 @@ export default function DesignUnderWorkPage() {
                 </h3>
                 <p
                   style={{
-                    fontSize: '12px',
+                    fontSize: isMobile ? '11.5px' : '12px',
                     lineHeight: 1.5,
                     color: 'rgba(255, 255, 255, 0.6)',
                     margin: 0,
@@ -459,14 +454,15 @@ export default function DesignUnderWorkPage() {
           })}
         </div>
 
-        {/* ── Action Buttons Hub ── */}
+        {/* ── Action Buttons Hub (Responsive: stacked on mobile, row on desktop) ── */}
         <div
           style={{
             display: 'flex',
-            flexWrap: 'wrap',
+            flexDirection: isMobile ? 'column' : 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '14px',
+            gap: isMobile ? '10px' : '14px',
+            width: isMobile ? '100%' : 'auto',
           }}
         >
           {/* Primary Action: Return to Developer Portfolio */}
@@ -481,16 +477,19 @@ export default function DesignUnderWorkPage() {
               color: '#07080A',
               border: '2px solid #07080A',
               borderRadius: '999px',
-              padding: '12px 28px',
-              fontSize: '13px',
+              padding: isMobile ? '13px 20px' : '12px 28px',
+              fontSize: isMobile ? '12.5px' : '13px',
               fontFamily: "'Space Grotesk', monospace",
               fontWeight: 900,
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '8px',
               boxShadow: '0 10px 28px rgba(204, 255, 0, 0.4), 3px 3px 0px #07080A',
               transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+              width: isMobile ? '100%' : 'auto',
+              boxSizing: 'border-box',
             }}
             onMouseEnter={(e) => {
               try { soundFX.playHover(); } catch {}
@@ -503,7 +502,7 @@ export default function DesignUnderWorkPage() {
             }}
           >
             <span style={{ fontFamily: 'monospace', fontWeight: 900, fontSize: '14px' }}>&lt;/&gt;</span>
-            <span>Return to Software Developer Portfolio</span>
+            <span>Return to Software Developer Mode</span>
           </button>
 
           {/* Secondary Action: Explore Working Prototype (/design/studio) */}
@@ -518,15 +517,18 @@ export default function DesignUnderWorkPage() {
               color: '#FFFFFF',
               border: '1.5px solid rgba(255, 255, 255, 0.2)',
               borderRadius: '999px',
-              padding: '12px 24px',
-              fontSize: '13px',
+              padding: isMobile ? '13px 20px' : '12px 24px',
+              fontSize: isMobile ? '12px' : '13px',
               fontWeight: 800,
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
               gap: '8px',
               backdropFilter: 'blur(8px)',
               transition: 'all 0.2s ease',
+              width: isMobile ? '100%' : 'auto',
+              boxSizing: 'border-box',
             }}
             onMouseEnter={(e) => {
               try { soundFX.playHover(); } catch {}
@@ -550,24 +552,24 @@ export default function DesignUnderWorkPage() {
       <footer
         style={{
           textAlign: 'center',
-          fontSize: '11px',
+          fontSize: isMobile ? '9.5px' : '11px',
           color: 'rgba(255, 255, 255, 0.35)',
           letterSpacing: '0.06em',
           textTransform: 'uppercase',
-          padding: '16px 20px 0',
+          padding: '16px 16px 0',
           position: 'relative',
           zIndex: 10,
         }}
       >
-        HOWVAIBHAV STUDIO // BRAND & ARTIFACT ARCHIVE // CURATED BY VAIBHAV VERMA
+        HOWVAIBHAV STUDIO // BRAND ARCHIVE // VAIBHAV VERMA
       </footer>
 
       {/* ── Floating Bottom-Right DEV Mode Switch Button ── */}
       <aside
         style={{
           position: 'fixed',
-          bottom: '24px',
-          right: '24px',
+          bottom: isMobile ? '16px' : '24px',
+          right: isMobile ? '16px' : '24px',
           zIndex: 9999,
           pointerEvents: 'auto',
           display: 'flex',
@@ -576,31 +578,33 @@ export default function DesignUnderWorkPage() {
         }}
         aria-label="Switch to Developer Mode"
       >
-        <div
-          style={{
-            position: 'absolute',
-            right: 'calc(100% + 12px)',
-            opacity: devBtnHovered ? 1 : 0,
-            transform: devBtnHovered ? 'translateX(0)' : 'translateX(8px)',
-            pointerEvents: 'none',
-            background: 'rgba(9, 11, 15, 0.94)',
-            color: '#CCFF00',
-            border: '1px solid rgba(204, 255, 0, 0.45)',
-            borderRadius: '8px',
-            padding: '5px 11px',
-            fontFamily: "'Space Grotesk', monospace",
-            fontSize: '11px',
-            fontWeight: 800,
-            letterSpacing: '0.08em',
-            whiteSpace: 'nowrap',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.65)',
-            backdropFilter: 'blur(8px)',
-            WebkitBackdropFilter: 'blur(8px)',
-            transition: 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
-        >
-          DEV MODE
-        </div>
+        {!isMobile && (
+          <div
+            style={{
+              position: 'absolute',
+              right: 'calc(100% + 12px)',
+              opacity: devBtnHovered ? 1 : 0,
+              transform: devBtnHovered ? 'translateX(0)' : 'translateX(8px)',
+              pointerEvents: 'none',
+              background: 'rgba(9, 11, 15, 0.94)',
+              color: '#CCFF00',
+              border: '1px solid rgba(204, 255, 0, 0.45)',
+              borderRadius: '8px',
+              padding: '5px 11px',
+              fontFamily: "'Space Grotesk', monospace",
+              fontSize: '11px',
+              fontWeight: 800,
+              letterSpacing: '0.08em',
+              whiteSpace: 'nowrap',
+              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.65)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              transition: 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          >
+            DEV MODE
+          </div>
+        )}
 
         <button
           type="button"
@@ -617,9 +621,9 @@ export default function DesignUnderWorkPage() {
           }}
           onMouseLeave={() => setDevBtnHovered(false)}
           style={{
-            width: '52px',
-            height: '52px',
-            minWidth: '52px',
+            width: isMobile ? '46px' : '52px',
+            height: isMobile ? '46px' : '52px',
+            minWidth: isMobile ? '46px' : '52px',
             borderRadius: '50%',
             background: 'linear-gradient(145deg, #DDFF33 0%, #B8E600 100%)',
             color: '#07080A',
@@ -642,7 +646,7 @@ export default function DesignUnderWorkPage() {
             style={{
               fontFamily: "'JetBrains Mono', 'Fira Code', 'Space Grotesk', monospace",
               fontWeight: 900,
-              fontSize: '15px',
+              fontSize: isMobile ? '13px' : '15px',
               letterSpacing: '-0.04em',
               lineHeight: 1,
               color: '#07080A',
