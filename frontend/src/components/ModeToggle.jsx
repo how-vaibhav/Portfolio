@@ -8,7 +8,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 export default function ModeToggle() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const isDesign = pathname === '/design';
+  const isDesign = pathname.startsWith('/design');
   const [animating, setAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 

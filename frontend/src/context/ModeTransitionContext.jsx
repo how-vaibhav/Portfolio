@@ -20,11 +20,11 @@ export function ModeTransitionProvider({ children }) {
     // Prevent double invocation
     if (isTransitioning) return;
 
-    const isEnteringDesign = targetPath === '/design';
-    const currentIsDesign = location.pathname === '/design';
+    const isEnteringDesign = targetPath.startsWith('/design');
+    const currentIsDesign = location.pathname.startsWith('/design');
 
-    // If already on the requested page, simply scroll to top
-    if ((isEnteringDesign && currentIsDesign) || (!isEnteringDesign && !currentIsDesign)) {
+    // If already on the exact target path, simply scroll to top
+    if (targetPath === location.pathname) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
