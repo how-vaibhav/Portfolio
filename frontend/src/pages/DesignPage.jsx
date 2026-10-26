@@ -22,6 +22,7 @@ export default function DesignPage() {
   const { transitionTo } = useModeTransition();
   const [activeView, setActiveView] = useState('3d'); // '3d' or 'grid'
   const [selectedProject, setSelectedProject] = useState(null);
+  const [devBtnHovered, setDevBtnHovered] = useState(false);
 
   // Set document title
   useEffect(() => {
@@ -166,7 +167,7 @@ export default function DesignPage() {
         />
       )}
 
-      {/* Floating Bottom-Right DEV Mode Switch Button — Tactile Cyber Green Emblem */}
+      {/* Floating Bottom-Right DEV Mode Switch Button — Precision Cyber Green Emblem */}
       <aside
         className="floating-dev-switch-wrap"
         style={{
@@ -175,9 +176,39 @@ export default function DesignPage() {
           right: '24px',
           zIndex: 9999,
           pointerEvents: 'auto',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
         }}
-        aria-label="Mode Switch"
+        aria-label="Switch to Developer Mode"
       >
+        {/* Sleek Contextual Hover Tooltip Pill */}
+        <div
+          style={{
+            position: 'absolute',
+            right: 'calc(100% + 12px)',
+            opacity: devBtnHovered ? 1 : 0,
+            transform: devBtnHovered ? 'translateX(0)' : 'translateX(8px)',
+            pointerEvents: 'none',
+            background: 'rgba(9, 11, 15, 0.94)',
+            color: '#CCFF00',
+            border: '1px solid rgba(204, 255, 0, 0.45)',
+            borderRadius: '8px',
+            padding: '5px 11px',
+            fontFamily: "'Space Grotesk', monospace",
+            fontSize: '11px',
+            fontWeight: 800,
+            letterSpacing: '0.08em',
+            whiteSpace: 'nowrap',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.65)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)',
+            transition: 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+        >
+          DEV MODE
+        </div>
+
         <button
           type="button"
           onClick={() => {
@@ -186,35 +217,46 @@ export default function DesignPage() {
           }}
           className="design-return-btn floating-dev-btn"
           title="Switch to Software Developer & CS Mode"
+          aria-label="Switch to Developer Mode"
+          onMouseEnter={() => {
+            try { soundFX.playHover(); } catch {}
+            setDevBtnHovered(true);
+          }}
+          onMouseLeave={() => setDevBtnHovered(false)}
           style={{
-            background: '#CCFF00',
+            width: '52px',
+            height: '52px',
+            minWidth: '52px',
+            borderRadius: '50%',
+            background: 'linear-gradient(145deg, #DDFF33 0%, #B8E600 100%)',
             color: '#07080A',
             border: '2px solid #07080A',
-            borderRadius: '9999px',
-            padding: '8px 16px',
-            fontSize: '13px',
-            fontFamily: "'Space Grotesk', monospace",
-            fontWeight: 900,
-            display: 'inline-flex',
+            display: 'flex',
             alignItems: 'center',
-            gap: '6px',
+            justifyContent: 'center',
             cursor: 'pointer',
-            boxShadow: '0 8px 24px rgba(204, 255, 0, 0.45), 3px 3px 0px #07080A',
-            transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-            whiteSpace: 'nowrap',
-          }}
-          onMouseEnter={(e) => {
-            try { soundFX.playHover(); } catch {}
-            e.currentTarget.style.transform = 'translateY(-3px) scale(1.08)';
-            e.currentTarget.style.boxShadow = '0 12px 32px rgba(204, 255, 0, 0.65), 4px 4px 0px #07080A';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'none';
-            e.currentTarget.style.boxShadow = '0 8px 24px rgba(204, 255, 0, 0.45), 3px 3px 0px #07080A';
+            padding: 0,
+            boxShadow: devBtnHovered
+              ? '0 14px 34px rgba(204, 255, 0, 0.65), 4px 4px 0px #07080A, inset 0 1.5px 1px rgba(255, 255, 255, 0.9), inset 0 -2px 2px rgba(0, 0, 0, 0.15)'
+              : '0 8px 24px rgba(204, 255, 0, 0.4), 3px 3px 0px #07080A, inset 0 1.5px 1px rgba(255, 255, 255, 0.8), inset 0 -1.5px 1px rgba(0, 0, 0, 0.12)',
+            transform: devBtnHovered ? 'translateY(-3px) scale(1.08)' : 'none',
+            transition: 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
+            userSelect: 'none',
+            outline: 'none',
           }}
         >
-          <span style={{ fontSize: '12px', lineHeight: 1 }}>⚡</span>
-          <span style={{ fontFamily: 'monospace', fontWeight: 900, fontSize: '12.5px', letterSpacing: '-0.02em' }}>&lt;/&gt;</span>
+          <span
+            style={{
+              fontFamily: "'JetBrains Mono', 'Fira Code', 'Space Grotesk', monospace",
+              fontWeight: 900,
+              fontSize: '15px',
+              letterSpacing: '-0.04em',
+              lineHeight: 1,
+              color: '#07080A',
+            }}
+          >
+            &lt;/&gt;
+          </span>
         </button>
       </aside>
     </div>
