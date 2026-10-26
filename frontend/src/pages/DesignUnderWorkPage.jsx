@@ -65,7 +65,7 @@ export default function DesignUnderWorkPage() {
       title: '3D Conveyor Deck',
       tag: 'SYSTEM 02 // ISOMETRIC AXIS',
       image: '/assets/text_image/artwork-o.jpg',
-      color: '#FF8A00',
+      color: '#FF5500',
       desc: 'Continuous spatial projection gallery inspired by contemporary European monographs.',
     },
     {

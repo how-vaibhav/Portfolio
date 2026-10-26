@@ -37,16 +37,40 @@ const ANATOMY_NODES = [
     floatDelay: '0s',
     floatY: '-12px',
     decorator: 'star',
-    // SVG connecting path from Card 1 anchor to top of 'H'
-    pathD: 'M 240,190 Q 280,310 350,410',
-    anchorPoint: { x: 350, y: 410 },
+    originPoint: { x: 160, y: 225 },
+    anchorPoint: { x: 330, y: 410 },
+    pathD: 'M 160,225 C 160,330 330,320 330,410',
+    flowSpeed: '4.2s',
+  },
+  {
+    id: 'node-v',
+    targetLetters: ['V', 'v'],
+    letterIndex: [3, 9],
+    letterSymbol: 'V',
+    badge: '02 // V · VECTOR',
+    title: 'Vector Craft & Volume',
+    principle: 'Infinite Scalability & Rigor',
+    metric: 'VERTEX: 42.4° APEX',
+    image: '/assets/text_image/artwork-v.jpg',
+    color: '#9E7BFF',      // Vibrant Deep Violet
+    textColor: '#FFFFFF',
+    accentColor: '#C9B5FF',
+    rotation: '2.5deg',
+    floatDuration: '6.4s',
+    floatDelay: '-1.6s',
+    floatY: '-10px',
+    decorator: 'ring',
+    originPoint: { x: 590, y: 205 },
+    anchorPoint: { x: 525, y: 410 },
+    pathD: 'M 590,205 C 590,300 525,310 525,410',
+    flowSpeed: '4.8s',
   },
   {
     id: 'node-b',
     targetLetters: ['b'],
     letterIndex: [6],
     letterSymbol: 'B',
-    badge: '02 // B · BASELINE',
+    badge: '03 // B · BASELINE',
     title: 'Baseline & Bold Stems',
     principle: 'Structural Stem Power',
     metric: 'ASC_HT: +240 EM',
@@ -55,33 +79,14 @@ const ANATOMY_NODES = [
     textColor: '#0B0F19',
     accentColor: '#8AAA00',
     rotation: '2deg',
-    floatDuration: '6.4s',
-    floatDelay: '-1.6s',
-    floatY: '-10px',
-    decorator: 'circle',
-    pathD: 'M 600,175 Q 630,300 675,410',
-    anchorPoint: { x: 675, y: 410 },
-  },
-  {
-    id: 'node-v',
-    targetLetters: ['V', 'v'],
-    letterIndex: [3, 9],
-    letterSymbol: 'V',
-    badge: '03 // V · VECTOR',
-    title: 'Vector Craft & Volume',
-    principle: 'Infinite Scalability & Rigor',
-    metric: 'VERTEX: 42.4° APEX',
-    image: '/assets/text_image/artwork-v.jpg',
-    color: '#B59FFF',      // Soft Ethereal Lavender
-    textColor: '#0B0F19',
-    accentColor: '#5E35B1',
-    rotation: '3deg',
     floatDuration: '7.1s',
     floatDelay: '-3.2s',
     floatY: '-14px',
-    decorator: 'ring',
-    pathD: 'M 960,190 Q 770,280 545,410',
-    anchorPoint: { x: 545, y: 410 },
+    decorator: 'circle',
+    originPoint: { x: 1040, y: 225 },
+    anchorPoint: { x: 695, y: 410 },
+    pathD: 'M 1040,225 C 1040,330 695,320 695,410',
+    flowSpeed: '5.1s',
   },
   {
     id: 'node-o',
@@ -93,16 +98,18 @@ const ANATOMY_NODES = [
     principle: 'Pure Circular Resonance',
     metric: 'OVERSHOOT: +18‰',
     image: '/assets/text_image/artwork-o.jpg',
-    color: '#FF8A00',      // Solar Amber Orange
-    textColor: '#0B0F19',
-    accentColor: '#7B4200',
+    color: '#FF5500',      // Vivid Flame Tangerine Orange (Distinct from Yellow W)
+    textColor: '#FFFFFF',
+    accentColor: '#FFAA77',
     rotation: '-2.5deg',
     floatDuration: '5.8s',
     floatDelay: '-4.4s',
     floatY: '-11px',
     decorator: 'swirl',
-    pathD: 'M 220,710 Q 300,580 410,485',
-    anchorPoint: { x: 410, y: 485 },
+    originPoint: { x: 140, y: 675 },
+    anchorPoint: { x: 390, y: 485 },
+    pathD: 'M 140,675 C 140,560 390,580 390,485',
+    flowSpeed: '4.4s',
   },
   {
     id: 'node-w',
@@ -114,16 +121,18 @@ const ANATOMY_NODES = [
     principle: 'Harmonic Stroke Tension',
     metric: 'STEM_WT: 114 EM',
     image: '/assets/text_image/artwork-w.jpg',
-    color: '#F59E0B',      // Marigold Gold Yellow
+    color: '#FFDE00',      // Brilliant Cyber Canary Solar Gold (Distinct from Orange O)
     textColor: '#0B0F19',
-    accentColor: '#78350F',
+    accentColor: '#B29B00',
     rotation: '2.5deg',
     floatDuration: '6.1s',
     floatDelay: '-2.5s',
     floatY: '-10px',
     decorator: 'cross',
-    pathD: 'M 370,720 Q 420,600 470,485',
-    anchorPoint: { x: 470, y: 485 },
+    originPoint: { x: 348, y: 690 },
+    anchorPoint: { x: 460, y: 485 },
+    pathD: 'M 348,690 C 348,580 460,575 460,485',
+    flowSpeed: '4.6s',
   },
   {
     id: 'node-i',
@@ -143,8 +152,10 @@ const ANATOMY_NODES = [
     floatDelay: '-1.8s',
     floatY: '-11px',
     decorator: 'dots',
-    pathD: 'M 830,720 Q 730,600 635,485',
-    anchorPoint: { x: 635, y: 485 },
+    originPoint: { x: 852, y: 690 },
+    anchorPoint: { x: 640, y: 485 },
+    pathD: 'M 852,690 C 852,580 640,575 640,485',
+    flowSpeed: '4.9s',
   },
   {
     id: 'node-a',
@@ -164,23 +175,25 @@ const ANATOMY_NODES = [
     floatDelay: '-3.8s',
     floatY: '-13px',
     decorator: 'ring',
-    pathD: 'M 980,710 Q 890,590 795,485',
-    anchorPoint: { x: 795, y: 485 },
+    originPoint: { x: 1060, y: 675 },
+    anchorPoint: { x: 805, y: 485 },
+    pathD: 'M 1060,675 C 1060,560 805,580 805,485',
+    flowSpeed: '5.3s',
   },
 ];
 
 // ─── Direct Letter Mapping for "HowVaibhav" ──────────────────────────────────
 const LETTERS = [
   { char: 'H', nodeId: 'node-h', accent: '#FF2D78' },
-  { char: 'o', nodeId: 'node-o', accent: '#FF8A00' },
-  { char: 'w', nodeId: 'node-w', accent: '#F59E0B' },
-  { char: 'V', nodeId: 'node-v', accent: '#B59FFF' },
+  { char: 'o', nodeId: 'node-o', accent: '#FF5500' },
+  { char: 'w', nodeId: 'node-w', accent: '#FFDE00' },
+  { char: 'V', nodeId: 'node-v', accent: '#9E7BFF' },
   { char: 'a', nodeId: 'node-a', accent: '#00E5C3' },
   { char: 'i', nodeId: 'node-i', accent: '#00AAFF', hasTittle: true },
   { char: 'b', nodeId: 'node-b', accent: '#C2E03A' },
   { char: 'h', nodeId: 'node-h', accent: '#FF2D78' },
   { char: 'a', nodeId: 'node-a', accent: '#00E5C3' },
-  { char: 'v', nodeId: 'node-v', accent: '#B59FFF' },
+  { char: 'v', nodeId: 'node-v', accent: '#9E7BFF' },
 ];
 
 // ─── Geometric Decorative Accents ──────────────────────────────────────────────
@@ -508,7 +521,7 @@ export default function DesignAnatomy() {
       <div style={{ position: 'absolute', bottom: '15%', right: '12%', width: '450px', height: '350px', background: 'radial-gradient(circle, rgba(0,170,255,0.12) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 1 }} />
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '700px', height: '450px', background: 'radial-gradient(circle, rgba(181,159,255,0.08) 0%, transparent 65%)', pointerEvents: 'none', zIndex: 1 }} />
 
-      {/* ─── SVG CONNECTOR LAYER (Clean Laser Lines Only — NO Dotted Guideline Overlays) ─── */}
+      {/* ─── SVG CONNECTOR LAYER (Curved Architectural Laser Pathways — Zero Overlap) ─── */}
       <svg
         viewBox="0 0 1200 900"
         preserveAspectRatio="xMidYMid meet"
@@ -525,7 +538,14 @@ export default function DesignAnatomy() {
       >
         <defs>
           <filter id="neonPathGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feGaussianBlur stdDeviation="3.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id="pulseGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -533,15 +553,31 @@ export default function DesignAnatomy() {
           </filter>
         </defs>
 
-        {/* ── Dynamic Connecting Laser Paths from Cards to Specific Letter Nodes ── */}
+        {/* ── Dynamic Connecting Curved Laser Paths from Cards to Specific Letter Nodes ── */}
         {ANATOMY_NODES.map((node) => {
           const isTargeted = activeNodeId === node.id;
-          const strokeWidth = isTargeted ? 3.5 : 1.8;
-          const strokeOpacity = isTargeted ? 1 : activeNodeId ? 0.2 : 0.65;
+          const strokeWidth = isTargeted ? 3.2 : 1.7;
+          const strokeOpacity = isTargeted ? 1 : activeNodeId ? 0.2 : 0.72;
 
           return (
             <g key={node.id}>
-              {/* Main curved path */}
+              {/* Outer Ambient Glow Halo */}
+              <path
+                d={node.pathD}
+                stroke={node.color}
+                strokeWidth={isTargeted ? 8 : 4.5}
+                fill="none"
+                strokeLinecap="round"
+                opacity={isTargeted ? 0.45 : strokeOpacity * 0.28}
+                filter="url(#neonPathGlow)"
+                style={{
+                  strokeDasharray: 1000,
+                  strokeDashoffset: isVisible ? 0 : 1000,
+                  transition: 'stroke-dashoffset 1.4s cubic-bezier(0.25, 1, 0.5, 1), stroke-width 0.25s ease, opacity 0.25s ease',
+                }}
+              />
+
+              {/* Core Crisp Laser Filament */}
               <path
                 d={node.pathD}
                 stroke={node.color}
@@ -551,23 +587,75 @@ export default function DesignAnatomy() {
                 opacity={strokeOpacity}
                 filter="url(#neonPathGlow)"
                 style={{
-                  strokeDasharray: 900,
-                  strokeDashoffset: isVisible ? 0 : 900,
-                  transition: 'stroke-dashoffset 1.4s cubic-bezier(0.25, 1, 0.5, 1), stroke-width 0.2s ease, opacity 0.2s ease',
+                  strokeDasharray: 1000,
+                  strokeDashoffset: isVisible ? 0 : 1000,
+                  transition: 'stroke-dashoffset 1.4s cubic-bezier(0.25, 1, 0.5, 1), stroke-width 0.25s ease, opacity 0.25s ease',
                 }}
               />
-              {/* Target terminal node circle on the exact letterform */}
+
+              {/* Animated Glowing Light Photon Packet Travelling Along the Curve */}
               {isVisible && (
+                <circle r={isTargeted ? 3.5 : 2.5} fill="#FFFFFF" filter="url(#pulseGlow)" opacity={isTargeted ? 1 : 0.85}>
+                  <animateMotion
+                    path={node.pathD}
+                    dur={node.flowSpeed || '4.5s'}
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              )}
+
+              {/* Origin Connection Pin Dot at Card Anchor */}
+              {isVisible && node.originPoint && (
                 <circle
-                  cx={node.anchorPoint.x}
-                  cy={node.anchorPoint.y}
-                  r={isTargeted ? 6 : 4}
+                  cx={node.originPoint.x}
+                  cy={node.originPoint.y}
+                  r={isTargeted ? 4.5 : 3}
                   fill={node.color}
                   stroke="#FFFFFF"
-                  strokeWidth="2"
-                  filter="url(#neonPathGlow)"
-                  style={{ transition: 'r 0.2s ease' }}
+                  strokeWidth="1.5"
+                  opacity={strokeOpacity}
                 />
+              )}
+
+              {/* Target Terminal Halo & Bullseye Anchor on the Letter */}
+              {isVisible && (
+                <g>
+                  {/* Expanding Breathing Pulse Ring */}
+                  <circle
+                    cx={node.anchorPoint.x}
+                    cy={node.anchorPoint.y}
+                    r={isTargeted ? 8 : 5}
+                    fill="none"
+                    stroke={node.color}
+                    strokeWidth="1.5"
+                    opacity={isTargeted ? 0.9 : 0.5}
+                  >
+                    <animate
+                      attributeName="r"
+                      values={isTargeted ? '6;14;6' : '4;9;4'}
+                      dur="2.4s"
+                      repeatCount="indefinite"
+                    />
+                    <animate
+                      attributeName="opacity"
+                      values={isTargeted ? '0.9;0.1;0.9' : '0.6;0;0.6'}
+                      dur="2.4s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+
+                  {/* Core Target Center Dot */}
+                  <circle
+                    cx={node.anchorPoint.x}
+                    cy={node.anchorPoint.y}
+                    r={isTargeted ? 5.5 : 3.5}
+                    fill={node.color}
+                    stroke="#FFFFFF"
+                    strokeWidth="1.8"
+                    filter="url(#neonPathGlow)"
+                    style={{ transition: 'r 0.2s ease' }}
+                  />
+                </g>
               )}
             </g>
           );
@@ -608,7 +696,7 @@ export default function DesignAnatomy() {
           />
         </div>
 
-        {/* ─── CARD 2: Top Center (B - Baseline & Bold Stems) ─── */}
+        {/* ─── CARD 2: Top Center (V - Vector Craft & Volume) ─── */}
         <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)' }}>
           <AnatomyCard
             node={ANATOMY_NODES[1]}
@@ -620,7 +708,7 @@ export default function DesignAnatomy() {
           />
         </div>
 
-        {/* ─── CARD 3: Top Right (V - Vector Craft & Volume) ─── */}
+        {/* ─── CARD 3: Top Right (B - Baseline & Bold Stems) ─── */}
         <div style={{ position: 'absolute', top: '40px', right: '40px' }}>
           <AnatomyCard
             node={ANATOMY_NODES[2]}
