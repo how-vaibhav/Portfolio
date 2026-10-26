@@ -891,7 +891,7 @@ Project Overview:
 Looking forward to hearing from you!
 `
   );
-  const mailtoLink = `mailto:vaibhavverma.work@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
+  const mailtoLink = `mailto:howvaibhav@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
 
   return (
     <div

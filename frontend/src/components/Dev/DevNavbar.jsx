@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useModeTransition } from '../../context/ModeTransitionContext';
 import useResponsive from './useResponsive';
 import { soundFX } from '../Design/soundFX';
 
 export default function DevNavbar() {
+  const { transitionTo } = useModeTransition();
   const { isMobile } = useResponsive();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -146,6 +148,103 @@ export default function DevNavbar() {
               </a>
             );
           })}
+
+          {/* Elegant Divider */}
+          <span
+            style={{
+              width: '1px',
+              height: '18px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              margin: '0 4px',
+              flexShrink: 0,
+            }}
+          />
+
+          {/* Custom Responsive Graphic Design Mode Button (Mobile Subtle Logo vs Laptop Full Badge) */}
+          <button
+            type="button"
+            onClick={() => {
+              try { soundFX.playAperture(); } catch {}
+              transitionTo('/design');
+            }}
+            className="dev-design-mode-btn"
+            style={{
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: isMobile ? '0px' : '7px',
+              padding: isMobile ? '0' : '9px 18px',
+              width: isMobile ? '34px' : 'auto',
+              height: isMobile ? '34px' : 'auto',
+              minWidth: isMobile ? '34px' : 'auto',
+              background: isMobile 
+                ? 'linear-gradient(135deg, rgba(255, 85, 0, 0.22) 0%, rgba(255, 140, 0, 0.28) 100%)'
+                : 'linear-gradient(135deg, #FF5500 0%, #FF8C00 100%)',
+              color: isMobile ? '#FF7700' : '#FFFFFF',
+              borderRadius: 9999,
+              fontSize: '11.5px',
+              fontWeight: 900,
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              boxShadow: isMobile
+                ? '0 0 14px rgba(255, 85, 0, 0.35)'
+                : '0 2px 14px rgba(255, 85, 0, 0.45)',
+              border: isMobile
+                ? '1.5px solid rgba(255, 119, 0, 0.6)'
+                : '1px solid rgba(255, 255, 255, 0.3)',
+              transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+              whiteSpace: 'nowrap',
+              flexShrink: 0,
+              zIndex: 2,
+              cursor: 'pointer',
+            }}
+            onMouseEnter={(e) => {
+              try { soundFX.playHover(); } catch {}
+              e.currentTarget.style.transform = isMobile ? 'scale(1.12)' : 'scale(1.06)';
+              e.currentTarget.style.boxShadow = isMobile
+                ? '0 0 22px rgba(255, 85, 0, 0.7)'
+                : '0 4px 22px rgba(255, 85, 0, 0.7)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = isMobile
+                ? '0 0 14px rgba(255, 85, 0, 0.35)'
+                : '0 2px 14px rgba(255, 85, 0, 0.45)';
+            }}
+            title="Open Graphic Design Portfolio (Cinematic Transition)"
+            aria-label="Switch to Graphic Design Mode"
+          >
+            {isMobile ? (
+              // On phone screens: Minimalist, subtle glowing geometric design logo
+              <motion.span
+                animate={{ rotate: [0, 90, 0], scale: [1, 1.15, 1] }}
+                transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
+                style={{
+                  fontSize: '15px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  filter: 'drop-shadow(0 0 5px #FF5500)',
+                  lineHeight: 1,
+                }}
+              >
+                ✦
+              </motion.span>
+            ) : (
+              // On laptop/desktop screens: Full button with animated spark and DESIGN label
+              <>
+                <motion.span
+                  animate={{ rotate: [0, 90, 0] }}
+                  transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
+                  style={{ fontSize: '13px', display: 'inline-block' }}
+                >
+                  ✦
+                </motion.span>
+                <span>DESIGN</span>
+              </>
+            )}
+          </button>
         </nav>
       </header>
 </>

@@ -1,3 +1,4 @@
+import ModeToggle from '../ModeToggle';
 import React, { useState, useEffect } from 'react';
 
 const ORANGE = '#E84419';
@@ -121,6 +122,10 @@ export function DevNavbar() {
       )}
 
 
+          {/* Right Side: Mode Switcher */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+        <ModeToggle />
+      </div>
     </header>
   );
 }

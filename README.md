@@ -1,15 +1,17 @@
 <div align="center">
 
-```text
+<h1 align="center">HOWVAIBHAV</h1>
+
+<pre align="center">
   ██╗  ██╗ ██████╗ ██╗    ██╗██╗   ██╗ █████╗ ██╗██████╗ ██╗  ██╗ █████╗ ██╗   ██╗
   ██║  ██║██╔═══██╗██║    ██║██║   ██║██╔══██╗██║██╔══██╗██║  ██║██╔══██╗██║   ██║
   ███████║██║   ██║██║ █╗ ██║██║   ██║███████║██║██████╔╝███████║███████║██║   ██║
   ██╔══██║██║   ██║██║███╗██║╚██╗ ██╔╝██╔══██║██║██╔══██╗██╔══██║██╔══██║╚██╗ ██╔╝
   ██║  ██║╚██████╔╝╚███╔███╔╝ ╚████╔╝ ██║  ██║██║██████╔╝██║  ██║██║  ██║ ╚████╔╝ 
   ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝   ╚═══╝  ╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  
-```
+</pre>
 
-### ✦ TECH × GRAPHIC BRAND ATELIER ✦
+<h3 align="center">✦ TECH × GRAPHIC BRAND ATELIER ✦</h3>
 
 <p align="center">
   <strong>An experimental, studio-grade portfolio exploring the intersection of systems engineering, optical typography, tactile interaction, and procedural Web Audio.</strong>

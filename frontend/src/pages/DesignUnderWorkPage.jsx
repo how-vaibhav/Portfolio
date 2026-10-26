@@ -45,7 +45,7 @@ export default function DesignUnderWorkPage() {
   useEffect(() => {
     document.title = 'HowVaibhav — Creative Studio [Crafting In Progress]';
     return () => {
-      document.title = 'Vaibhav Verma — Software Developer & CS Portfolio';
+      document.title = 'Vaibhav Tiwari — Software Developer & CS Portfolio';
     };
   }, []);
 

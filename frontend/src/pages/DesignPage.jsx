@@ -29,7 +29,7 @@ export default function DesignPage() {
     document.title = 'HowVaibhav — Graphic Design & Brand Archive 2026';
     window.scrollTo({ top: 0, behavior: 'instant' });
     return () => {
-      document.title = 'Vaibhav Verma — Software Developer & CS Portfolio';
+      document.title = 'Vaibhav Tiwari — Software Developer & CS Portfolio';
     };
   }, []);
 
