@@ -407,20 +407,19 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave, onOpenLig
 }
 
 // ─── Main DesignAnatomy Section ───────────────────────────────────────────────
-// ─── Curated Artistic Typography Species for "HowVaibhav" ─────────────────────
-const ARTISTIC_FONTS = [
-  { id: 'cinzel', name: 'Haute Monograph', family: "'Cinzel Decorative', serif", weight: 900, style: 'normal', tracking: '-0.015em' },
-  { id: 'syne', name: 'Avant-Garde Studio', family: "'Syne', sans-serif", weight: 900, style: 'normal', tracking: '-0.035em' },
-  { id: 'bodoni', name: 'Editorial Didone', family: "'Bodoni Moda', serif", weight: 900, style: 'italic', tracking: '-0.03em' },
-  { id: 'unbounded', name: 'Brutalist Cyber', family: "'Unbounded', sans-serif", weight: 900, style: 'normal', tracking: '-0.04em' },
-];
+// ─── Editorial Didone Typography for "HowVaibhav" ──────────────────────────────
+const HERO_FONT = {
+  family: "'Bodoni Moda', Georgia, serif",
+  weight: 900,
+  style: 'italic',
+  tracking: '-0.03em',
+};
 
 export default function DesignAnatomy() {
   const sectionRef    = useRef(null);
   const [isVisible, setIsVisible]       = useState(false);
   const [activeNodeId, setActiveNodeId] = useState(null);
   const [mobileIndex, setMobileIndex]   = useState(0);
-  const [selectedFont, setSelectedFont] = useState(ARTISTIC_FONTS[0]); // Default: Haute Monograph (Cinzel Decorative)
   const [lightboxNode, setLightboxNode] = useState(null); // Fullscreen uncropped HD modal
 
   // Touch gesture tracking for mobile swipe specimen carousel
@@ -648,77 +647,19 @@ export default function DesignAnatomy() {
             alignItems: 'center',
           }}
         >
-          {/* Artistic Type Species Switcher Pill */}
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '4px',
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
-              borderRadius: '999px',
-              padding: '3px 4px',
-              marginBottom: '14px',
-              backdropFilter: 'blur(10px)',
-              boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
-            }}
-          >
-            <span
-              style={{
-                fontSize: '8.5px',
-                fontFamily: "'Space Grotesk', monospace",
-                fontWeight: 800,
-                color: '#CCFF00',
-                padding: '0 8px',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-              }}
-            >
-              ✦ TYPE SPECIES:
-            </span>
-            {ARTISTIC_FONTS.map((f) => {
-              const isSelected = selectedFont.id === f.id;
-              return (
-                <button
-                  key={f.id}
-                  type="button"
-                  onClick={() => {
-                    try { soundFX.playSnap(); } catch {}
-                    setSelectedFont(f);
-                  }}
-                  style={{
-                    background: isSelected ? 'rgba(255, 255, 255, 0.18)' : 'transparent',
-                    color: isSelected ? '#FFFFFF' : 'rgba(255, 255, 255, 0.5)',
-                    border: isSelected ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid transparent',
-                    borderRadius: '999px',
-                    padding: '3px 10px',
-                    fontFamily: "'Space Grotesk', monospace",
-                    fontSize: '9.5px',
-                    fontWeight: 800,
-                    letterSpacing: '0.04em',
-                    textTransform: 'uppercase',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease',
-                    boxShadow: isSelected ? '0 2px 8px rgba(0,0,0,0.3)' : 'none',
-                  }}
-                >
-                  {f.name}
-                </button>
-              );
-            })}
-          </div>
 
-          {/* Letterform Cluster — Sculptural Artistic Letterforms with Glowing Hover Accents */}
+
+          {/* Letterform Cluster — Sculptural Editorial Didone Letterforms with Glowing Hover Accents */}
           <div
             style={{
               display: 'inline-flex',
               alignItems: 'baseline',
-              fontFamily: selectedFont.family,
-              fontSize: 'clamp(4.4rem, 8.4vw, 7.8rem)',
-              fontWeight: selectedFont.weight,
-              fontStyle: selectedFont.style,
+              fontFamily: HERO_FONT.family,
+              fontSize: 'clamp(4.6rem, 8.6vw, 8.2rem)',
+              fontWeight: HERO_FONT.weight,
+              fontStyle: HERO_FONT.style,
               lineHeight: 0.9,
-              letterSpacing: selectedFont.tracking,
+              letterSpacing: HERO_FONT.tracking,
               position: 'relative',
               transition: 'all 0.25s ease',
             }}
@@ -943,10 +884,10 @@ export default function DesignAnatomy() {
 
                 <span
                   style={{
-                    fontFamily: selectedFont.family,
-                    fontSize: '21px',
-                    fontWeight: selectedFont.weight,
-                    fontStyle: selectedFont.style,
+                    fontFamily: HERO_FONT.family,
+                    fontSize: '22px',
+                    fontWeight: HERO_FONT.weight,
+                    fontStyle: HERO_FONT.style,
                     lineHeight: 1,
                     color: isSelected ? item.accent : '#FFFFFF',
                     textShadow: isSelected ? `0 0 12px ${item.accent}` : 'none',
