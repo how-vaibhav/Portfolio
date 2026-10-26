@@ -28,6 +28,7 @@ const ANATOMY_NODES = [
     title: 'Hierarchy & Height',
     principle: 'Maximum Vertical Amplitude',
     metric: 'CAP_HT: 720‰',
+    image: '/assets/text_image/artwork-h.jpg',
     color: '#FF2D78',      // Electric Rose Pink
     textColor: '#FFFFFF',
     accentColor: '#FF80AB',
@@ -49,6 +50,7 @@ const ANATOMY_NODES = [
     title: 'Baseline & Bold Stems',
     principle: 'Structural Stem Power',
     metric: 'ASC_HT: +240 EM',
+    image: '/assets/text_image/artwork-b.jpg',
     color: '#C2E03A',      // Vibrant Lime Green
     textColor: '#0B0F19',
     accentColor: '#8AAA00',
@@ -69,6 +71,7 @@ const ANATOMY_NODES = [
     title: 'Vector Craft & Volume',
     principle: 'Infinite Scalability & Rigor',
     metric: 'VERTEX: 42.4° APEX',
+    image: '/assets/text_image/artwork-v.jpg',
     color: '#B59FFF',      // Soft Ethereal Lavender
     textColor: '#0B0F19',
     accentColor: '#5E35B1',
@@ -89,6 +92,7 @@ const ANATOMY_NODES = [
     title: 'Optical Balance & Orbit',
     principle: 'Pure Circular Resonance',
     metric: 'OVERSHOOT: +18‰',
+    image: '/assets/text_image/artwork-o.jpg',
     color: '#FF8A00',      // Solar Amber Orange
     textColor: '#0B0F19',
     accentColor: '#7B4200',
@@ -109,6 +113,7 @@ const ANATOMY_NODES = [
     title: 'Weight & White Space',
     principle: 'Harmonic Stroke Tension',
     metric: 'STEM_WT: 114 EM',
+    image: '/assets/text_image/artwork-w.jpg',
     color: '#F59E0B',      // Marigold Gold Yellow
     textColor: '#0B0F19',
     accentColor: '#78350F',
@@ -129,6 +134,7 @@ const ANATOMY_NODES = [
     title: 'Identity & Ink Precision',
     principle: 'Tittle Focal Point Datum',
     metric: 'DATUM: 0.00 Y-AXIS',
+    image: '/assets/text_image/artwork-i.jpg',
     color: '#00AAFF',      // Electric Azure Blue
     textColor: '#FFFFFF',
     accentColor: '#80D8FF',
@@ -149,6 +155,7 @@ const ANATOMY_NODES = [
     title: 'Architecture & Apex',
     principle: 'Humanist Geometric Form',
     metric: 'RATIO: 0.72 GOLDEN',
+    image: '/assets/text_image/artwork-a.jpg',
     color: '#00E5C3',      // Vibrant Mint Emerald
     textColor: '#0B0F19',
     accentColor: '#006050',
@@ -399,31 +406,71 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave }) {
           ✦ {node.principle}
         </div>
 
-        {/* Styled Proof / Artwork Placeholder Box */}
+        {/* Visual Artwork Showcase Plate */}
         <div
           style={{
+            position: 'relative',
             width: '100%',
-            height: '42px',
-            background: 'rgba(0,0,0,0.22)',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            border: `1px dashed ${node.textColor === '#FFFFFF' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.25)'}`,
+            height: '96px',
+            borderRadius: '11px',
+            overflow: 'hidden',
+            background: 'rgba(0, 0, 0, 0.35)',
+            boxShadow: '0 8px 20px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3)',
+            border: `1px solid ${node.textColor === '#FFFFFF' ? 'rgba(255, 255, 255, 0.32)' : 'rgba(0, 0, 0, 0.22)'}`,
           }}
         >
-          <span
+          <img
+            src={node.image}
+            alt={node.title}
+            loading="lazy"
             style={{
-              fontSize: '8.5px',
-              fontFamily: "'Space Grotesk', monospace",
-              fontWeight: 800,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              opacity: 0.75,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center',
+              display: 'block',
+              transform: isHovered ? 'scale(1.08)' : 'scale(1)',
+              transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          />
+          {/* Subtle bottom gradient overlay for legibility */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(to top, rgba(0, 0, 0, 0.48) 0%, transparent 55%)',
+              pointerEvents: 'none',
+            }}
+          />
+          {/* Studio Monograph Plate Badge */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '5px',
+              left: '6px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              background: 'rgba(10, 12, 18, 0.82)',
+              backdropFilter: 'blur(6px)',
+              padding: '2px 7px',
+              borderRadius: '4px',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
             }}
           >
-            ↑ Inject Artwork [{node.letterSymbol}]
-          </span>
+            <span
+              style={{
+                fontFamily: "'Space Grotesk', monospace",
+                fontSize: '7.5px',
+                fontWeight: 800,
+                color: '#FFFFFF',
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+              }}
+            >
+              PLATE // {node.letterSymbol}
+            </span>
+          </div>
         </div>
       </div>
     </>
@@ -1026,6 +1073,61 @@ export default function DesignAnatomy() {
                   >
                     ✦ {activeNode.principle}
                   </div>
+                </div>
+              </div>
+
+              {/* Mobile Active Artwork Plate */}
+              <div
+                style={{
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '16/9',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  margin: '6px 0 10px',
+                  border: `1.5px solid ${activeNode.color}60`,
+                  boxShadow: `0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px ${activeNode.color}25`,
+                  background: '#0B0F19',
+                }}
+              >
+                <img
+                  src={activeNode.image}
+                  alt={activeNode.title}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                    display: 'block',
+                  }}
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 55%)',
+                    pointerEvents: 'none',
+                  }}
+                />
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: '6px',
+                    left: '8px',
+                    background: 'rgba(10, 12, 18, 0.85)',
+                    backdropFilter: 'blur(6px)',
+                    padding: '3px 8px',
+                    borderRadius: '5px',
+                    border: `1px solid ${activeNode.color}70`,
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '8.5px',
+                    fontWeight: 800,
+                    color: activeNode.color,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  PLATE 0{mobileIndex + 1} // {activeNode.letterSymbol}
                 </div>
               </div>
 
