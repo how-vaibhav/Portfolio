@@ -1,17 +1,30 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { useModeTransition } from '../context/ModeTransitionContext';
 import { soundFX } from '../components/Design/soundFX';
+import {
+  Motif1_Dharmachakra,
+  Motif2_SuryaAureole,
+  Motif3_KolamKnot,
+  Motif4_ToranaBracket,
+  Motif5_YantraWatermark,
+  Motif6_PadmaCorner,
+  Motif7_KalashFinial,
+  Motif8_BinduCore,
+  Motif9_DevanagariStamp,
+  Motif10_MayuraFlourish,
+} from '../components/Design/IndianMotifs';
 
 /**
  * DesignUnderWorkPage — State-of-the-Art Creative Studio Exhibition Preview.
- * Presented to visitors on the deployed site.
  *
- * Clean, majestic layout:
- * - Headline: "Something extraordinary is currently taking shape."
- * - Artistically elevated 16:9 museum exhibition plates with HD inspection lightbox.
- * - Zero navbar clutter (no time, no switch button in navbar).
- * - Responsive from mobile phones to ultra-wide displays.
+ * Infused with:
+ * - Professional Framer Motion physics, entrance choreography & micro-interactions.
+ * - 10 Curated Ancient Indian Artistic Micro-Motifs (Chakra, Surya, Kolam, Torana, Yantra, Padma, Kalash, Bindu, Devanagari Mudrika, Mayura).
+ * - Only the hero headline: "Something extraordinary is currently taking shape."
+ * - Flawlessly responsive across mobile phones (360px-430px) and wide screens.
+ * - Zero navbar clutter (no time, no switch button in header).
  */
 export default function DesignUnderWorkPage() {
   const { transitionTo } = useModeTransition();
@@ -24,7 +37,7 @@ export default function DesignUnderWorkPage() {
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -36,7 +49,7 @@ export default function DesignUnderWorkPage() {
     };
   }, []);
 
-  // Curated exhibition master plates
+  // Curated exhibition master plates with individual Indian Mudrika Seal stamps
   const EXHIBITION_PLATES = [
     {
       id: 'plate-1',
@@ -44,8 +57,9 @@ export default function DesignUnderWorkPage() {
       title: 'Typographic Anatomy',
       artwork: '/assets/text_image/artwork-h.jpg',
       color: '#FF2D78',
-      specimen: 'SPECIMEN 01 // H · HIERARCHY',
-      curatorialNote: 'Interactive letterform anatomy with precision optical stems and dynamic laser guides.',
+      stampGlyph: 'सृजन',
+      stampSub: 'SRIJAN // CREATION',
+      curatorialNote: 'Bespoke letterform dissection with precision optical stems and laser harmonic guides.',
     },
     {
       id: 'plate-2',
@@ -53,7 +67,8 @@ export default function DesignUnderWorkPage() {
       title: '3D Spatial Conveyor Deck',
       artwork: '/assets/text_image/artwork-o.jpg',
       color: '#FF5500',
-      specimen: 'SYSTEM 02 // ISOMETRIC AXIS',
+      stampGlyph: 'कला',
+      stampSub: 'KALĀ // AESTHETICS',
       curatorialNote: 'Volumetric continuous spatial projection gallery inspired by avant-garde European monographs.',
     },
     {
@@ -62,8 +77,9 @@ export default function DesignUnderWorkPage() {
       title: 'Tactile Brand Dossiers',
       artwork: '/assets/text_image/artwork-b.jpg',
       color: '#C2E03A',
-      specimen: 'ARCHIVE 03 // B · BASELINE',
-      curatorialNote: 'Physical paper folder physics, debossed verification stamps, and bespoke case studies.',
+      stampGlyph: 'रूप',
+      stampSub: 'ROOP // STRUCTURE',
+      curatorialNote: 'Physical paper folder physics, debossed verification stamps, and bespoke executive monographs.',
     },
   ];
 
@@ -74,7 +90,7 @@ export default function DesignUnderWorkPage() {
         width: '100%',
         backgroundColor: '#07080B',
         backgroundImage: `
-          radial-gradient(circle at 50% 0%, rgba(204, 255, 0, 0.06) 0%, transparent 60%),
+          radial-gradient(circle at 50% 0%, rgba(255, 184, 0, 0.05) 0%, transparent 60%),
           radial-gradient(circle at 85% 85%, rgba(255, 45, 120, 0.04) 0%, transparent 55%),
           radial-gradient(circle at 15% 75%, rgba(255, 85, 0, 0.04) 0%, transparent 50%),
           linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
@@ -88,7 +104,7 @@ export default function DesignUnderWorkPage() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: isMobile ? '0 0 40px' : '0 0 54px',
+        padding: isMobile ? '0 0 36px' : '0 0 54px',
         boxSizing: 'border-box',
       }}
     >
@@ -98,7 +114,7 @@ export default function DesignUnderWorkPage() {
           width: '100%',
           maxWidth: '1240px',
           margin: '0 auto',
-          padding: isMobile ? '18px 20px' : '26px 36px',
+          padding: isMobile ? '16px 18px' : '26px 36px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -107,30 +123,34 @@ export default function DesignUnderWorkPage() {
           boxSizing: 'border-box',
         }}
       >
-        {/* Brand Monogram */}
+        {/* Brand Monogram + [Element 1: Dharmachakra Rotating Cosmic Wheel] */}
         <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? '8px' : '12px' }}>
+          {/* Element 1: Dharmachakra Micro Cosmic Wheel */}
+          <Motif1_Dharmachakra size={isMobile ? 18 : 22} color="#FFB800" />
+
           <span
             style={{
               fontFamily: "'Fraunces', 'Bodoni Moda', Georgia, serif",
               fontWeight: 900,
-              fontSize: isMobile ? '19px' : '23px',
+              fontSize: isMobile ? '18px' : '23px',
               letterSpacing: '-0.03em',
               color: '#FFFFFF',
             }}
           >
             HowVaibhav
           </span>
+
           <span
             style={{
-              background: 'rgba(255, 255, 255, 0.06)',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
+              background: 'rgba(255, 184, 0, 0.08)',
+              border: '1px solid rgba(255, 184, 0, 0.22)',
               borderRadius: '999px',
               padding: '2.5px 9px',
-              fontSize: isMobile ? '8.5px' : '9.5px',
+              fontSize: isMobile ? '8px' : '9.5px',
               fontFamily: "'Space Grotesk', monospace",
               fontWeight: 800,
               letterSpacing: '0.08em',
-              color: 'rgba(255, 255, 255, 0.7)',
+              color: '#FFB800',
               textTransform: 'uppercase',
               whiteSpace: 'nowrap',
             }}
@@ -145,7 +165,7 @@ export default function DesignUnderWorkPage() {
             display: 'flex',
             alignItems: 'center',
             gap: '6px',
-            fontSize: isMobile ? '9.5px' : '10.5px',
+            fontSize: isMobile ? '9px' : '10.5px',
             fontFamily: "'Space Grotesk', monospace",
             fontWeight: 700,
             color: 'rgba(255, 255, 255, 0.45)',
@@ -153,15 +173,8 @@ export default function DesignUnderWorkPage() {
             textTransform: 'uppercase',
           }}
         >
-          <span
-            style={{
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              background: '#CCFF00',
-              boxShadow: '0 0 8px #CCFF00',
-            }}
-          />
+          {/* Element 8: Bindu Core Status Indicator */}
+          <Motif8_BinduCore color="#CCFF00" size={8} />
           <span>CRAFTING</span>
         </div>
       </header>
@@ -169,48 +182,80 @@ export default function DesignUnderWorkPage() {
       {/* ── Main Hero Section ── */}
       <main
         style={{
-          width: 'min(92%, 1160px)',
+          width: 'min(92%, 1180px)',
           margin: '0 auto',
           position: 'relative',
           zIndex: 10,
-          padding: isMobile ? '10px 0 20px' : '20px 0 30px',
+          padding: isMobile ? '12px 0 24px' : '24px 0 36px',
         }}
       >
-        {/* Main Headline — Only this heading is displayed */}
-        <h1
-          style={{
-            fontFamily: "'Fraunces', 'Bodoni Moda', Georgia, serif",
-            fontWeight: 900,
-            fontStyle: 'italic',
-            fontSize: 'clamp(30px, 5.8vw, 66px)',
-            lineHeight: 1.12,
-            letterSpacing: '-0.035em',
-            textAlign: 'center',
-            maxWidth: '960px',
-            margin: isMobile ? '18px auto 34px' : '24px auto 48px',
-            background: 'linear-gradient(180deg, #FFFFFF 25%, rgba(255,255,255,0.72) 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            padding: '0 8px',
-          }}
+        {/* [Element 2: Surya Aureole Radiating Solar Corona Glow behind Headline] */}
+        <Motif2_SuryaAureole isMobile={isMobile} />
+
+        {/* Master Headline with Smooth Entrance Animation */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}
         >
-          Something extraordinary is currently taking shape.
-        </h1>
+          <h1
+            style={{
+              fontFamily: "'Fraunces', 'Bodoni Moda', Georgia, serif",
+              fontWeight: 900,
+              fontStyle: 'italic',
+              fontSize: 'clamp(28px, 5.8vw, 66px)',
+              lineHeight: 1.12,
+              letterSpacing: '-0.035em',
+              textAlign: 'center',
+              maxWidth: '960px',
+              margin: isMobile ? '12px auto 18px' : '20px auto 24px',
+              background: 'linear-gradient(180deg, #FFFFFF 25%, rgba(255, 255, 255, 0.72) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              padding: '0 8px',
+            }}
+          >
+            Something extraordinary is currently taking shape.
+          </h1>
+
+          {/* [Element 3: Kolam / Rangoli Infinity Knotwork Divider Ribbon] */}
+          <div style={{ margin: isMobile ? '14px 0 28px' : '20px 0 42px' }}>
+            <Motif3_KolamKnot color="#FFB800" />
+          </div>
+        </motion.div>
 
         {/* ── Artistically Elevated Exhibition Cards Grid ── */}
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-            gap: isMobile ? '18px' : '24px',
-            marginTop: '10px',
+            gap: isMobile ? '20px' : '26px',
+            position: 'relative',
+            zIndex: 2,
           }}
         >
-          {EXHIBITION_PLATES.map((plate) => {
+          {EXHIBITION_PLATES.map((plate, idx) => {
             const isHovered = hoveredPlateId === plate.id;
             return (
-              <article
+              <motion.article
                 key={plate.id}
+                initial={{ opacity: 0, y: 36, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{
+                  duration: 0.65,
+                  delay: 0.15 + idx * 0.15,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                whileHover={
+                  !isMobile
+                    ? {
+                        y: -8,
+                        scale: 1.015,
+                        transition: { duration: 0.28, ease: 'easeOut' },
+                      }
+                    : undefined
+                }
                 onMouseEnter={() => {
                   try { soundFX.playHover(); } catch {}
                   setHoveredPlateId(plate.id);
@@ -221,35 +266,43 @@ export default function DesignUnderWorkPage() {
                   setLightboxPlate(plate);
                 }}
                 style={{
-                  background: 'linear-gradient(170deg, rgba(17, 20, 29, 0.75) 0%, rgba(9, 11, 16, 0.9) 100%)',
+                  background: 'linear-gradient(170deg, rgba(16, 19, 28, 0.82) 0%, rgba(9, 11, 16, 0.94) 100%)',
                   border: isHovered
                     ? `1.5px solid ${plate.color}`
                     : '1.5px solid rgba(255, 255, 255, 0.1)',
-                  borderRadius: '18px',
-                  padding: isMobile ? '14px' : '18px',
+                  borderRadius: '20px',
+                  padding: isMobile ? '16px 14px' : '20px 18px',
                   boxShadow: isHovered
-                    ? `0 24px 50px rgba(0, 0, 0, 0.8), 0 0 32px ${plate.color}30`
-                    : '0 10px 30px rgba(0, 0, 0, 0.5)',
-                  transform: !isMobile && isHovered ? 'translateY(-8px)' : 'none',
-                  transition: 'all 0.32s cubic-bezier(0.16, 1, 0.3, 1)',
+                    ? `0 24px 50px rgba(0, 0, 0, 0.85), 0 0 35px ${plate.color}35`
+                    : '0 10px 30px rgba(0, 0, 0, 0.55)',
                   cursor: 'pointer',
                   position: 'relative',
                   overflow: 'hidden',
                   backdropFilter: 'blur(20px)',
                   WebkitBackdropFilter: 'blur(20px)',
+                  transition: 'border 0.3s ease, box-shadow 0.3s ease',
                 }}
               >
-                {/* Subtle Ambient Color Glow Backdrop */}
+                {/* [Element 4: Torana Temple Archway Scalloped Corner Brackets on 4 Corners] */}
+                <Motif4_ToranaBracket position="top-left" color="#FFB800" />
+                <Motif4_ToranaBracket position="top-right" color="#FFB800" />
+                <Motif4_ToranaBracket position="bottom-left" color="#FFB800" />
+                <Motif4_ToranaBracket position="bottom-right" color="#FFB800" />
+
+                {/* [Element 5: Yantra Sacred Interlocking Triangles Watermark in background] */}
+                <Motif5_YantraWatermark color={plate.color} />
+
+                {/* Ambient Color Glow Sphere behind Card */}
                 <div
                   style={{
                     position: 'absolute',
-                    top: '-30%',
-                    right: '-30%',
+                    top: '-25%',
+                    right: '-25%',
                     width: '180px',
                     height: '180px',
                     borderRadius: '50%',
                     background: plate.color,
-                    opacity: isHovered ? 0.16 : 0.04,
+                    opacity: isHovered ? 0.22 : 0.06,
                     filter: 'blur(50px)',
                     transition: 'opacity 0.4s ease',
                     pointerEvents: 'none',
@@ -272,6 +325,12 @@ export default function DesignUnderWorkPage() {
                     justifyContent: 'center',
                   }}
                 >
+                  {/* [Element 6: Padma Sacred 4-Petal Lotus Accents on Vitrine Corners] */}
+                  <Motif6_PadmaCorner position="top-left" color="#FFB800" />
+                  <Motif6_PadmaCorner position="top-right" color="#FFB800" />
+                  <Motif6_PadmaCorner position="bottom-left" color="#FFB800" />
+                  <Motif6_PadmaCorner position="bottom-right" color="#FFB800" />
+
                   <img
                     src={plate.artwork}
                     alt={plate.title}
@@ -291,7 +350,7 @@ export default function DesignUnderWorkPage() {
                       position: 'absolute',
                       top: '8px',
                       right: '8px',
-                      background: 'rgba(0, 0, 0, 0.72)',
+                      background: 'rgba(0, 0, 0, 0.75)',
                       border: '1px solid rgba(255, 255, 255, 0.2)',
                       borderRadius: '6px',
                       padding: '3px 7px',
@@ -305,6 +364,7 @@ export default function DesignUnderWorkPage() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: '4px',
+                      zIndex: 6,
                     }}
                   >
                     <span>⛶</span>
@@ -312,30 +372,28 @@ export default function DesignUnderWorkPage() {
                   </div>
                 </div>
 
-                {/* Specimen Plaque Bar */}
+                {/* Specimen Tag Bar */}
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     marginBottom: '10px',
+                    position: 'relative',
+                    zIndex: 2,
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-                    <span
-                      style={{
-                        width: '7px',
-                        height: '7px',
-                        borderRadius: '50%',
-                        background: plate.color,
-                        boxShadow: `0 0 8px ${plate.color}`,
-                        display: 'inline-block',
-                      }}
-                    />
+                    {/* [Element 7: Kalash Finial Arch Crest] */}
+                    <Motif7_KalashFinial color={plate.color} />
+
+                    {/* [Element 8: Bindu Core Center Focal Pip] */}
+                    <Motif8_BinduCore color={plate.color} size={8} />
+
                     <span
                       style={{
                         fontFamily: "'Space Grotesk', monospace",
-                        fontSize: '9px',
+                        fontSize: '9.5px',
                         fontWeight: 900,
                         color: plate.color,
                         letterSpacing: '0.08em',
@@ -345,18 +403,13 @@ export default function DesignUnderWorkPage() {
                       {plate.plateNo}
                     </span>
                   </div>
-                  <span
-                    style={{
-                      fontFamily: "'Space Grotesk', monospace",
-                      fontSize: '8px',
-                      fontWeight: 700,
-                      color: 'rgba(255, 255, 255, 0.45)',
-                      letterSpacing: '0.06em',
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    16:9 NATIVE
-                  </span>
+
+                  {/* [Element 9: Devanagari Mudrika Royal Craft Seal Stamp] */}
+                  <Motif9_DevanagariStamp
+                    glyph={plate.stampGlyph}
+                    sub={plate.stampSub.split(' // ')[0]}
+                    color="#FFB800"
+                  />
                 </div>
 
                 {/* Card Title */}
@@ -368,12 +421,14 @@ export default function DesignUnderWorkPage() {
                     margin: '0 0 6px',
                     color: '#FFFFFF',
                     letterSpacing: '-0.015em',
+                    position: 'relative',
+                    zIndex: 2,
                   }}
                 >
                   {plate.title}
                 </h2>
 
-                {/* Curatorial Note */}
+                {/* Curatorial Note + [Element 10: Mayura Feather Flourish] */}
                 <p
                   style={{
                     fontSize: isMobile ? '11.5px' : '12.5px',
@@ -381,141 +436,162 @@ export default function DesignUnderWorkPage() {
                     color: 'rgba(255, 255, 255, 0.62)',
                     margin: 0,
                     fontWeight: 400,
+                    position: 'relative',
+                    zIndex: 2,
                   }}
                 >
                   {plate.curatorialNote}
+                  {/* Element 10: Mayura Feather Flourish */}
+                  <Motif10_MayuraFlourish color="#00E5C3" />
                 </p>
-              </article>
+              </motion.article>
             );
           })}
         </div>
       </main>
 
       {/* ── Cinematic Full-Screen Lightbox Modal ── */}
-      {lightboxPlate && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setLightboxPlate(null)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 99999,
-            backgroundColor: 'rgba(4, 5, 8, 0.94)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: isMobile ? '20px 14px' : '36px',
-            boxSizing: 'border-box',
-          }}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {lightboxPlate && (
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setLightboxPlate(null)}
             style={{
-              position: 'relative',
-              maxWidth: '1100px',
-              width: '100%',
+              position: 'fixed',
+              inset: 0,
+              zIndex: 99999,
+              backgroundColor: 'rgba(4, 5, 8, 0.94)',
+              backdropFilter: 'blur(22px)',
+              WebkitBackdropFilter: 'blur(22px)',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: 'center',
+              padding: isMobile ? '20px 14px' : '36px',
+              boxSizing: 'border-box',
             }}
           >
-            {/* Top Modal Controls */}
-            <div
+            <motion.div
+              initial={{ scale: 0.92, y: 16 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.92, y: 16 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
               style={{
+                position: 'relative',
+                maxWidth: '1100px',
                 width: '100%',
                 display: 'flex',
+                flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'space-between',
-                marginBottom: '14px',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span
+              {/* Top Modal Controls */}
+              <div
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  marginBottom: '14px',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Motif8_BinduCore color={lightboxPlate.color} size={9} />
+                  <span
+                    style={{
+                      fontFamily: "'Space Grotesk', monospace",
+                      fontSize: '11px',
+                      fontWeight: 900,
+                      color: lightboxPlate.color,
+                      letterSpacing: '0.08em',
+                    }}
+                  >
+                    {lightboxPlate.plateNo}
+                  </span>
+                  <span style={{ color: 'rgba(255, 255, 255, 0.4)' }}>·</span>
+                  <span
+                    style={{
+                      fontFamily: "'Fraunces', Georgia, serif",
+                      fontSize: '15px',
+                      fontWeight: 800,
+                      color: '#FFFFFF',
+                    }}
+                  >
+                    {lightboxPlate.title}
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setLightboxPlate(null)}
                   style={{
-                    fontFamily: "'Space Grotesk', monospace",
-                    fontSize: '11px',
-                    fontWeight: 900,
-                    color: lightboxPlate.color,
-                    letterSpacing: '0.08em',
-                  }}
-                >
-                  {lightboxPlate.plateNo}
-                </span>
-                <span style={{ color: 'rgba(255, 255, 255, 0.4)' }}>·</span>
-                <span
-                  style={{
-                    fontFamily: "'Fraunces', Georgia, serif",
-                    fontSize: '15px',
-                    fontWeight: 800,
+                    background: 'rgba(255, 255, 255, 0.1)',
+                    border: '1px solid rgba(255, 255, 255, 0.2)',
+                    borderRadius: '50%',
+                    width: '38px',
+                    height: '38px',
                     color: '#FFFFFF',
+                    fontSize: '18px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    transition: 'background 0.2s ease',
                   }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.22)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+                  }}
+                  aria-label="Close Preview"
                 >
-                  {lightboxPlate.title}
-                </span>
+                  ✕
+                </button>
               </div>
 
-              <button
-                type="button"
-                onClick={() => setLightboxPlate(null)}
+              {/* High Resolution Artwork Frame with Torana Corners */}
+              <div
                 style={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  borderRadius: '50%',
-                  width: '36px',
-                  height: '36px',
-                  color: '#FFFFFF',
-                  fontSize: '18px',
+                  position: 'relative',
+                  width: '100%',
+                  aspectRatio: '16 / 9',
+                  borderRadius: '14px',
+                  overflow: 'hidden',
+                  background: '#020305',
+                  border: `1.5px solid ${lightboxPlate.color}45`,
+                  boxShadow: `0 30px 80px rgba(0, 0, 0, 0.9), 0 0 50px ${lightboxPlate.color}25`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  cursor: 'pointer',
-                  transition: 'background 0.2s ease',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.22)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
-                }}
-                aria-label="Close Preview"
               >
-                ✕
-              </button>
-            </div>
+                <Motif4_ToranaBracket position="top-left" color="#FFB800" />
+                <Motif4_ToranaBracket position="top-right" color="#FFB800" />
+                <Motif4_ToranaBracket position="bottom-left" color="#FFB800" />
+                <Motif4_ToranaBracket position="bottom-right" color="#FFB800" />
 
-            {/* High Resolution Artwork Frame */}
-            <div
-              style={{
-                width: '100%',
-                aspectRatio: '16 / 9',
-                borderRadius: '14px',
-                overflow: 'hidden',
-                background: '#020305',
-                border: `1.5px solid ${lightboxPlate.color}40`,
-                boxShadow: `0 30px 80px rgba(0, 0, 0, 0.9), 0 0 50px ${lightboxPlate.color}25`,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <img
-                src={lightboxPlate.artwork}
-                alt={lightboxPlate.title}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  display: 'block',
-                }}
-              />
-            </div>
-          </div>
-        </div>
-      )}
+                <img
+                  src={lightboxPlate.artwork}
+                  alt={lightboxPlate.title}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    display: 'block',
+                  }}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── Floating Bottom-Right DEV Mode Return Button ── */}
       <aside
