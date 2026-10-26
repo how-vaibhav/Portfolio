@@ -346,65 +346,21 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave, onOpenLig
         {/* Corner Decorator Badge */}
         <NodeDecorator type={node.decorator} color={node.color} accent={node.accentColor} />
 
-        {/* Top Meta Line: Badge + Metric */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '4px', marginBottom: '8px' }}>
-          <span
-            style={{
-              background: node.textColor === '#FFFFFF' ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.18)',
-              color: node.textColor,
-              fontSize: '8px',
-              fontFamily: "'Space Grotesk', monospace",
-              fontWeight: 900,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              padding: '2px 6px',
-              borderRadius: '4px',
-            }}
-          >
-            {node.badge}
-          </span>
-          <span
-            style={{
-              fontSize: '7.5px',
-              fontFamily: "'Space Grotesk', monospace",
-              fontWeight: 800,
-              opacity: 0.75,
-              letterSpacing: '0.04em',
-            }}
-          >
-            {node.metric}
-          </span>
-        </div>
-
-        {/* Card Title (Serif Italic) */}
+        {/* Card Main Heading */}
         <h3
           style={{
             fontFamily: "'Fraunces', Georgia, serif",
             fontWeight: 900,
             fontStyle: 'italic',
             fontSize: '17px',
-            lineHeight: 1.15,
-            margin: '0 0 3px',
+            lineHeight: 1.25,
+            margin: '0 0 10px',
             letterSpacing: '-0.02em',
+            paddingRight: '16px',
           }}
         >
           {node.title}
         </h3>
-
-        {/* Sub-Principle Callout */}
-        <div
-          style={{
-            fontSize: '8.5px',
-            fontWeight: 800,
-            textTransform: 'uppercase',
-            letterSpacing: '0.08em',
-            opacity: 0.88,
-            marginBottom: '8px',
-            fontFamily: "'Space Grotesk', system-ui, sans-serif",
-          }}
-        >
-          ✦ {node.principle}
-        </div>
 
         {/* Visual Artwork Showcase Plate - 16:9 Uncropped Original Aspect Ratio */}
         <div
@@ -412,7 +368,7 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave, onOpenLig
             e.stopPropagation();
             if (onOpenLightbox) onOpenLightbox(node);
           }}
-          title="Click to inspect full uncropped artwork in HD"
+          title="Click to inspect full uncropped artwork"
           style={{
             position: 'relative',
             width: '100%',
@@ -444,76 +400,6 @@ function AnatomyCard({ node, activeNodeId, onSelect, onHover, onLeave, onOpenLig
               transition: 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           />
-
-          {/* Micro HD Expand Indicator on Hover */}
-          <div
-            style={{
-              position: 'absolute',
-              top: '5px',
-              right: '5px',
-              background: 'rgba(7, 9, 14, 0.78)',
-              backdropFilter: 'blur(6px)',
-              padding: '2px 5px',
-              borderRadius: '4px',
-              border: '1px solid rgba(255, 255, 255, 0.25)',
-              fontSize: '8px',
-              color: '#FFFFFF',
-              opacity: isHovered ? 1 : 0,
-              transform: isHovered ? 'scale(1)' : 'scale(0.85)',
-              transition: 'opacity 0.2s ease, transform 0.2s ease',
-              pointerEvents: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '3px',
-              fontFamily: "'Space Grotesk', monospace",
-              fontWeight: 700,
-            }}
-          >
-            <span>⛶</span>
-            <span>HD</span>
-          </div>
-        </div>
-
-        {/* Studio Monograph Plate Sub-Bar (Below image - 0% artwork obscuration!) */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: '6px',
-            padding: '0 2px',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-              fontFamily: "'Space Grotesk', monospace",
-              fontSize: '7.5px',
-              fontWeight: 800,
-              color: node.textColor,
-              opacity: 0.9,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-            }}
-          >
-            <span>PLATE // {node.letterSymbol}</span>
-            <span style={{ opacity: 0.4 }}>·</span>
-            <span style={{ opacity: 0.75 }}>16:9 NATIVE</span>
-          </div>
-          <span
-            style={{
-              fontFamily: "'Space Grotesk', monospace",
-              fontSize: '7px',
-              fontWeight: 800,
-              color: node.textColor,
-              opacity: 0.65,
-              letterSpacing: '0.05em',
-            }}
-          >
-            UNCROPPED
-          </span>
         </div>
       </div>
     </>
@@ -1124,31 +1010,43 @@ export default function DesignAnatomy() {
                 }}
               />
 
-              {/* Card Header Bar */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginBottom: '10px',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "'Space Grotesk', monospace",
-                    fontSize: '10px',
-                    fontWeight: 900,
-                    letterSpacing: '0.12em',
-                    color: activeNode.color,
-                    background: `${activeNode.color}18`,
-                    border: `1px solid ${activeNode.color}45`,
-                    borderRadius: '999px',
-                    padding: '3px 10px',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {activeNode.badge}
-                </span>
+              {/* Mobile Letter Symbol & Main Heading Grid (Only Main Heading) */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '14px', marginBottom: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div
+                    style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '12px',
+                      background: `${activeNode.color}20`,
+                      border: `1.5px solid ${activeNode.color}`,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontFamily: "'Fraunces', Georgia, serif",
+                      fontSize: '24px',
+                      fontWeight: 900,
+                      color: activeNode.color,
+                      boxShadow: `0 4px 16px ${activeNode.color}35`,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {activeNode.letterSymbol}
+                  </div>
+
+                  <h3
+                    style={{
+                      fontFamily: "'Fraunces', Georgia, serif",
+                      fontSize: '20px',
+                      fontWeight: 800,
+                      color: '#FFFFFF',
+                      margin: 0,
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    {activeNode.title}
+                  </h3>
+                </div>
 
                 <span
                   style={{
@@ -1162,68 +1060,17 @@ export default function DesignAnatomy() {
                 </span>
               </div>
 
-              {/* Letter Symbol & Title Grid */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '10px' }}>
-                <div
-                  style={{
-                    width: '52px',
-                    height: '52px',
-                    borderRadius: '14px',
-                    background: `${activeNode.color}20`,
-                    border: `1.5px solid ${activeNode.color}`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontFamily: "'Fraunces', Georgia, serif",
-                    fontSize: '26px',
-                    fontWeight: 900,
-                    color: activeNode.color,
-                    boxShadow: `0 4px 16px ${activeNode.color}35`,
-                    flexShrink: 0,
-                  }}
-                >
-                  {activeNode.letterSymbol}
-                </div>
-
-                <div>
-                  <h3
-                    style={{
-                      fontFamily: "'Fraunces', Georgia, serif",
-                      fontSize: '18px',
-                      fontWeight: 800,
-                      color: '#FFFFFF',
-                      margin: '0 0 2px',
-                      lineHeight: 1.2,
-                    }}
-                  >
-                    {activeNode.title}
-                  </h3>
-                  <div
-                    style={{
-                      fontFamily: "'Space Grotesk', sans-serif",
-                      fontSize: '10px',
-                      fontWeight: 800,
-                      letterSpacing: '0.06em',
-                      color: activeNode.color,
-                      textTransform: 'uppercase',
-                    }}
-                  >
-                    ✦ {activeNode.principle}
-                  </div>
-                </div>
-              </div>
-
               {/* Mobile Active Artwork Plate - 16:9 Uncropped Original Aspect Ratio */}
               <div
                 onClick={() => setLightboxNode(activeNode)}
-                title="Tap to view full uncropped artwork in HD"
+                title="Tap to view full uncropped artwork"
                 style={{
                   position: 'relative',
                   width: '100%',
                   aspectRatio: '16 / 9',
                   borderRadius: '12px',
                   overflow: 'hidden',
-                  margin: '8px 0 6px',
+                  margin: '4px 0 10px',
                   border: `1.5px solid ${activeNode.color}75`,
                   boxShadow: `0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px ${activeNode.color}25`,
                   background: '#07090E',
@@ -1243,96 +1090,25 @@ export default function DesignAnatomy() {
                     display: 'block',
                   }}
                 />
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '6px',
-                    right: '6px',
-                    background: 'rgba(7, 9, 14, 0.78)',
-                    backdropFilter: 'blur(6px)',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    border: '1px solid rgba(255, 255, 255, 0.25)',
-                    fontSize: '8.5px',
-                    color: '#FFFFFF',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '3px',
-                    fontFamily: "'Space Grotesk', monospace",
-                    fontWeight: 700,
-                  }}
-                >
-                  <span>⛶</span>
-                  <span>HD</span>
-                </div>
               </div>
 
-              {/* Mobile Specimen Sub-Bar (Zero artwork obscuration!) */}
+              {/* Clean Navigation Prompt */}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  marginBottom: '10px',
-                  padding: '0 4px',
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "'Space Grotesk', monospace",
-                    fontSize: '8.5px',
-                    fontWeight: 800,
-                    color: activeNode.color,
-                    letterSpacing: '0.08em',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  PLATE 0{mobileIndex + 1} // {activeNode.letterSymbol}
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Space Grotesk', monospace",
-                    fontSize: '8px',
-                    fontWeight: 700,
-                    color: 'rgba(255, 255, 255, 0.55)',
-                    letterSpacing: '0.06em',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  16:9 ORIGINAL ASPECT RATIO · UNCROPPED
-                </div>
-              </div>
-
-              {/* Metric Tag & Arrow Prompt */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  paddingTop: '10px',
+                  justifyContent: 'center',
+                  paddingTop: '8px',
                   borderTop: '1px solid rgba(255, 255, 255, 0.08)',
                 }}
               >
-                <span
-                  style={{
-                    fontFamily: "'Space Grotesk', monospace",
-                    fontSize: '10px',
-                    fontWeight: 800,
-                    color: 'rgba(255, 255, 255, 0.65)',
-                    background: 'rgba(255, 255, 255, 0.06)',
-                    padding: '3px 8px',
-                    borderRadius: '4px',
-                  }}
-                >
-                  {activeNode.metric}
-                </span>
-
                 <span
                   style={{
                     fontSize: '10px',
                     color: activeNode.color,
                     fontFamily: "'Space Grotesk', sans-serif",
                     fontWeight: 800,
+                    letterSpacing: '0.08em',
                   }}
                 >
                   SWIPE OR TAP ⇄
@@ -1484,38 +1260,25 @@ export default function DesignAnatomy() {
                     fontWeight: 900,
                     color: lightboxNode.color,
                     background: `${lightboxNode.color}20`,
-                    border: `1px solid ${lightboxNode.color}60`,
-                    padding: '3px 10px',
+                    border: `1.5px solid ${lightboxNode.color}60`,
+                    padding: '4px 12px',
                     borderRadius: '6px',
                     letterSpacing: '0.08em',
                   }}
                 >
-                  LETTER [{lightboxNode.letterSymbol}] · {lightboxNode.badge}
+                  LETTER [{lightboxNode.letterSymbol}]
                 </span>
-                <div>
-                  <h4
-                    style={{
-                      margin: 0,
-                      fontFamily: "'Fraunces', serif",
-                      fontStyle: 'italic',
-                      fontSize: '18px',
-                      color: '#FFFFFF',
-                    }}
-                  >
-                    {lightboxNode.title}
-                  </h4>
-                  <div
-                    style={{
-                      fontFamily: "'Space Grotesk', monospace",
-                      fontSize: '10px',
-                      color: 'rgba(255, 255, 255, 0.65)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.06em',
-                    }}
-                  >
-                    ✦ {lightboxNode.principle}
-                  </div>
-                </div>
+                <h4
+                  style={{
+                    margin: 0,
+                    fontFamily: "'Fraunces', serif",
+                    fontStyle: 'italic',
+                    fontSize: '20px',
+                    color: '#FFFFFF',
+                  }}
+                >
+                  {lightboxNode.title}
+                </h4>
               </div>
 
               <button
