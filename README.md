@@ -9,7 +9,7 @@
   ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝   ╚═══╝  ╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  
 ```
 
-### ✦ COMPUTER SCIENCE × GRAPHIC BRAND ATELIER ✦
+### ✦ TECH × GRAPHIC BRAND ATELIER ✦
 
 <p align="center">
   <strong>An experimental, studio-grade portfolio exploring the intersection of systems engineering, optical typography, tactile interaction, and procedural Web Audio.</strong>
@@ -32,7 +32,7 @@
 
 ---
 
-## ⚡ The Dual-World Architecture
+##  The Dual-World Architecture
 
 This portfolio operates as two completely distinct, interconnected experiential dimensions built on a shared reactive routing spine:
 
@@ -45,7 +45,7 @@ Seamless, cinematic cross-mode navigation is orchestrated by `ModeTransitionCont
 
 ---
 
-## 🎨 Design Mode Deep Dive (`/design`)
+##  Design Mode Deep Dive (`/design`)
 
 ### 1. The Anatomy of HowVaibhav (Interactive Typography Hero)
 An homage to Swiss editorial specimen posters and anatomical typography guides:
@@ -78,7 +78,7 @@ An homage to Swiss editorial specimen posters and anatomical typography guides:
 
 ---
 
-## 🔊 Procedural Web Audio Engine (`soundFX.js`)
+## Procedural Web Audio Engine (`soundFX.js`)
 
 Unlike portfolios relying on bulky `.mp3` or `.wav` audio files that lag behind interactions, this project synthesizes sound **procedurally in real time** via the Web Audio API:
 - **Zero Network Overhead:** 0 KB audio assets downloaded.
@@ -92,7 +92,7 @@ Unlike portfolios relying on bulky `.mp3` or `.wav` audio files that lag behind 
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 The monorepo has been thoroughly audited and stripped of dead weight, reducing production build times from **17.7s down to 4.2s**:
 
@@ -112,7 +112,7 @@ Portfolio/
 │   │   └── sitemap.xml
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── Design/                         # 🎨 Design Mode Studio Showcase
+│   │   │   ├── Design/                         # Design Mode Studio Showcase
 │   │   │   │   ├── DesignAnatomy.jsx           # 7-Letter acrostic anatomy hero & 3D tilt
 │   │   │   │   ├── Folder3DConveyor.jsx        # 3D isometric folder carousel deck
 │   │   │   │   ├── FolderDeskGrid.jsx          # Manila filing cabinet desk grid
@@ -122,7 +122,7 @@ Portfolio/
 │   │   │   │   ├── designData.js               # Project metadata & asset manifests
 │   │   │   │   ├── soundFX.js                  # Web Audio API procedural synthesizer
 │   │   │   │   └── design.css                  # Design tokens, washi tape & keyframes
-│   │   │   ├── Dev/                            # ⚡ Developer Mode Showcase
+│   │   │   ├── Dev/                            # Developer Mode Showcase
 │   │   │   │   ├── DevHero.jsx                 # Pixel reveal hero & status badge
 │   │   │   │   ├── DevNavbar.jsx               # Floating glass header with active pill
 │   │   │   │   ├── DevFeaturedWork.jsx         # Full-stack case studies with tags
@@ -166,7 +166,7 @@ Portfolio/
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - **Node.js:** v18.0.0 or higher
@@ -205,7 +205,7 @@ Generates a minified production build in `frontend/dist/` in **~4.2 seconds**.
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 | Layer | Technologies |
 | :--- | :--- |
@@ -221,7 +221,7 @@ Generates a minified production build in `frontend/dist/` in **~4.2 seconds**.
 
 ---
 
-## 📄 License
+## License
 
-Crafted with dedication by **Vaibhav Verma** ([@how-vaibhav](https://github.com/how-vaibhav)).  
+Crafted with dedication by **Vaibhav Tiwari** ([@how-vaibhav](https://github.com/how-vaibhav)).  
 Released under the [MIT License](LICENSE).
