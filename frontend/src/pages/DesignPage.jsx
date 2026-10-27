@@ -4,9 +4,8 @@ import DesignAnatomy from '../components/Design/DesignAnatomy';
 import HowVaibhavStory from '../components/Design/HowVaibhavStory';
 import ArtCirclesOrbit from '../components/Design/ArtCirclesOrbit';
 import ServicesCorkboard from '../components/Design/ServicesCorkboard';
-import {
-  Doodle_NeonLightningBolt,
-} from '../components/Design/DesignArtisticDoodles';
+import MixedMediaAssembly from '../components/Design/MixedMediaAssembly';
+
 import { soundFX } from '../components/Design/soundFX';
 import '../components/Design/design.css';
 
@@ -45,89 +44,11 @@ export default function DesignPage() {
         {/* ART CIRCLES — Dual Orbit Rotational Showcase (20 Exhibits: Explanation & Design) */}
         <ArtCirclesOrbit />
 
-        {/* ─── STUDIO CALIBRATION & TRANSITIONAL DIVIDER ─── */}
-        <div
-          style={{
-            width: 'min(94%, 1240px)',
-            margin: '20px auto 40px',
-            position: 'relative',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '12px 24px',
-            background: 'rgba(13, 16, 24, 0.72)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
-            border: '1px solid rgba(255, 255, 255, 0.09)',
-            borderRadius: '999px',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.45)',
-            flexWrap: 'wrap',
-            gap: '12px',
-          }}
-        >
-          {/* Left: Flame Orange Mini Flash Bolt & Swiss Metric */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <Doodle_NeonLightningBolt
-              color="#FF5500"
-              width={24}
-              height={36}
-              rotation={-6}
-            />
-            <span
-              style={{
-                fontFamily: "'Space Grotesk', monospace",
-                fontSize: '10.5px',
-                fontWeight: 800,
-                color: 'rgba(255, 255, 255, 0.72)',
-                letterSpacing: '0.12em',
-                textTransform: 'uppercase',
-              }}
-            >
-              STUDIO CALIBRATION // 40PX GRID MATRIX
-            </span>
-          </div>
-
-          {/* Center: Ancient Sacred Geometry Craft Seal & Star */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ color: '#FFB800', fontSize: '13px' }}>✦</span>
-            <span
-              style={{
-                fontFamily: "'Noto Serif Devanagari', 'Rozha One', 'Space Grotesk', serif",
-                fontSize: '11px',
-                fontWeight: 900,
-                color: '#FFB800',
-                letterSpacing: '0.08em',
-              }}
-            >
-              सृजन कला · ARCHIVE 2026
-            </span>
-            <span style={{ color: '#FFB800', fontSize: '13px' }}>✦</span>
-          </div>
-
-          {/* Right: CMYK Registration Chips & Crosshair */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#00D2FF', boxShadow: '0 0 6px #00D2FF' }} title="Cyan 100%" />
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FF2D78', boxShadow: '0 0 6px #FF2D78' }} title="Magenta 100%" />
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FFDE00', boxShadow: '0 0 6px #FFDE00' }} title="Yellow 100%" />
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FFFFFF', boxShadow: '0 0 6px #FFFFFF' }} title="Key/Black 100%" />
-            </div>
-            <span
-              style={{
-                fontFamily: "'Space Grotesk', monospace",
-                fontSize: '10px',
-                fontWeight: 800,
-                color: '#CCFF00',
-                letterSpacing: '0.08em',
-              }}
-            >
-              ⊕ REG: 100%
-            </span>
-          </div>
-        </div>
-
-        {/* Services & Capabilities Anti-Gravity Pinboard ("What I Can Help with:") */}
+                {/* Services & Capabilities Anti-Gravity Pinboard ("What I Can Help with:") */}
         <ServicesCorkboard />
+
+        {/* ─── KINETIC MIXED-MEDIA ART ASSEMBLY (20 TACTILE PIECES CONVERGE ON SCROLL) ─── */}
+        <MixedMediaAssembly />
 
         {/* Bottom Spacing */}
         <div style={{ height: "40px" }} />

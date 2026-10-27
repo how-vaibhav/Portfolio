@@ -143,12 +143,13 @@ const INITIAL_CARDS = [
 
 // Connection strings linking card pushpins (from -> to, natural curve sag)
 const CONNECTIONS = [
-  { from: 'card-1', to: 'card-2', sag: -28 }, // arch upwards
-  { from: 'card-2', to: 'card-3', sag: -24 }, // arch upwards
-  { from: 'card-1', to: 'card-4', sag: 22 },  // natural droop
-  { from: 'card-2', to: 'card-4', sag: 32 },  // diagonal cord
-  { from: 'card-2', to: 'card-5', sag: 28 },  // diagonal cord
-  { from: 'card-3', to: 'card-5', sag: 25 },  // downward cord
+  { from: 'card-1', to: 'card-2', sag: -26 }, // top-left to top-center
+  { from: 'card-2', to: 'card-3', sag: -22 }, // top-center to top-right
+  { from: 'card-1', to: 'card-4', sag: 22 },  // top-left to bottom-left
+  { from: 'card-2', to: 'card-4', sag: 30 },  // top-center diagonal to bottom-left
+  { from: 'card-2', to: 'card-5', sag: 26 },  // top-center diagonal to bottom-right
+  { from: 'card-3', to: 'card-5', sag: 24 },  // top-right to bottom-right
+  { from: 'card-4', to: 'card-5', sag: 34 },  // bottom-left to bottom-right baseline
 ];
 
 /**
@@ -1298,18 +1299,18 @@ export default function ServicesCorkboard() {
     }
   };
 
-  // Calculate dynamic thread bezier path connecting two card pin heads
+  // Calculate dynamic tactile crimson thread bezier path connecting two card pin heads
   const getThreadPath = (fromId, toId, sagOffset) => {
     const c1 = cards.find((c) => c.id === fromId);
     const c2 = cards.find((c) => c.id === toId);
     if (!c1 || !c2) return '';
 
-    // Pushpin head is located at (card.x, card.y - card.height / 2)
+    // Pushpin penetration point is at top-center of card
     const p1x = c1.x;
-    const p1y = c1.y - c1.height / 2;
+    const p1y = c1.y - c1.height / 2 + 2;
 
     const p2x = c2.x;
-    const p2y = c2.y - c2.height / 2;
+    const p2y = c2.y - c2.height / 2 + 2;
 
     const midX = (p1x + p2x) / 2;
     const midY = (p1y + p2y) / 2 + sagOffset;
@@ -1669,36 +1670,115 @@ export default function ServicesCorkboard() {
           touchAction: 'none',
         }}
       >
-        {/* ─── Vector SVG Connecting Strings Layer (GPU Rendered, 0% CPU Overhead) ─── */}
+        {/* ─── Tactile Crimson Detective String Network (Vibrant & High-Contrast) ─── */}
         <svg
-          viewBox="0 0 1100 780"
+          viewBox="0 0 1120 790"
           style={{
             position: 'absolute',
             inset: 0,
             width: '100%',
             height: '100%',
             pointerEvents: 'none',
-            zIndex: 15,
+            zIndex: 16,
             overflow: 'visible',
           }}
           aria-hidden="true"
         >
           <defs>
-            <filter id="corkThreadShadow" x="-10%" y="-10%" width="120%" height="130%">
-              <feDropShadow dx="0" dy="2" stdDeviation="1.5" floodColor="#000000" floodOpacity="0.25" />
+            {/* Ambient Red Filament Glow Filter */}
+            <filter id="corkThreadGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            {/* Soft Shadow Under Thread */}
+            <filter id="corkThreadShadow" x="-15%" y="-15%" width="130%" height="140%">
+              <feDropShadow dx="0" dy="3.5" stdDeviation="2.5" floodColor="#000000" floodOpacity="0.75" />
             </filter>
           </defs>
 
-          {CONNECTIONS.map((conn, idx) => (
-            <path
-              key={idx}
-              d={getThreadPath(conn.from, conn.to, conn.sag)}
-              stroke="#1A1D20"
-              strokeWidth="2"
-              fill="none"
-              strokeLinecap="round"
-              filter="url(#corkThreadShadow)"
-            />
+          {/* Render All Dynamic Interconnecting Threads */}
+          {CONNECTIONS.map((conn, idx) => {
+            const pathData = getThreadPath(conn.from, conn.to, conn.sag);
+            if (!pathData) return null;
+
+            return (
+              <g key={idx} className="corkboard-thread-strand">
+                {/* 1. Deep Drop Shadow for tactile 3D elevation off the corkboard */}
+                <path
+                  d={pathData}
+                  stroke="rgba(0, 0, 0, 0.72)"
+                  strokeWidth="4.5"
+                  fill="none"
+                  strokeLinecap="round"
+                  transform="translate(0, 3)"
+                />
+
+                {/* 2. Ambient Crimson Glow Aura */}
+                <path
+                  d={pathData}
+                  stroke="#FF1744"
+                  strokeWidth="5"
+                  strokeOpacity="0.28"
+                  fill="none"
+                  strokeLinecap="round"
+                  filter="url(#corkThreadGlow)"
+                />
+
+                {/* 3. Primary Vibrant Scarlet Red Twine Core */}
+                <path
+                  d={pathData}
+                  stroke="#FF2453"
+                  strokeWidth="2.8"
+                  fill="none"
+                  strokeLinecap="round"
+                  filter="url(#corkThreadShadow)"
+                />
+
+                {/* 4. Core Specular Highlight for silky thread texture */}
+                <path
+                  d={pathData}
+                  stroke="#FF6B8B"
+                  strokeWidth="1.5"
+                  fill="none"
+                  strokeLinecap="round"
+                />
+
+                {/* 5. Braided Fiber Weave Sheen Pattern */}
+                <path
+                  d={pathData}
+                  stroke="#FFE4E8"
+                  strokeWidth="0.85"
+                  strokeDasharray="5 7"
+                  fill="none"
+                  strokeLinecap="round"
+                  opacity="0.85"
+                />
+              </g>
+            );
+          })}
+
+          {/* Pin Loop Eyelets at Card Pushpins */}
+          {cards.map((c) => (
+            <g key={`pin-eyelet-${c.id}`}>
+              <circle
+                cx={c.x}
+                cy={c.y - c.height / 2 + 2}
+                r="4.5"
+                fill="#FF1744"
+                stroke="#FFFFFF"
+                strokeWidth="1.4"
+                filter="url(#corkThreadGlow)"
+              />
+              <circle
+                cx={c.x}
+                cy={c.y - c.height / 2 + 2}
+                r="1.8"
+                fill="#1E293B"
+              />
+            </g>
           ))}
         </svg>
 
