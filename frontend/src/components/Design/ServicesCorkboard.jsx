@@ -1,5 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { soundFX } from './soundFX';
+import {
+  Doodle_NeonLightningBolt,
+  Doodle_VectorPenNib,
+  Doodle_FibonacciGoldenSpiral,
+  Doodle_SwissReticleCropMark,
+  Doodle_ModernistStarCluster,
+} from './DesignArtisticDoodles';
 
 /**
  * ELEVATED SERVICES CORKBOARD DATA
@@ -1318,15 +1325,16 @@ export default function ServicesCorkboard() {
         width: '100%',
         padding: '80px 0 70px',
         overflow: 'hidden',
-        // Clean solid warm parchment background — explicitly NO grid lines
-        backgroundColor: '#F8F6F0',
+        // Clean black grid aesthetic
+        backgroundColor: '#0A0B0E',
         backgroundImage: `
-          linear-gradient(rgba(0, 0, 0, 0.045) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 0, 0, 0.045) 1px, transparent 1px)
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px)
         `,
-        backgroundSize: '36px 36px',
+        backgroundSize: '40px 40px',
         fontFamily: "'Plus Jakarta Sans', 'Inter', system-ui, sans-serif",
-        borderTop: '1px dashed rgba(0, 0, 0, 0.12)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+        color: '#FFFFFF',
         zIndex: 5,
       }}
     >
@@ -1402,9 +1410,9 @@ export default function ServicesCorkboard() {
           zIndex: 1,
         }}
       >
-        <svg viewBox="0 0 100 100" fill="#1E293B" style={{ width: '100%', height: '100%' }}>
+        <svg viewBox="0 0 100 100" fill="rgba(255, 255, 255, 0.25)" style={{ width: '100%', height: '100%' }}>
           <path d="M28,68 C23,68 18,72 18,77 C18,82 23,86 28,86 C34,86 38,81 38,76 L38,34 L68,26 L68,66 C63,66 58,70 58,75 C58,80 63,84 68,84 C74,84 78,79 78,74 L78,16 C78,14 76,12 73,13 L33,23 C30,24 28,26 28,29 L28,68 Z" />
-          <path d="M12,65 Q16,63 20,66" stroke="#1E293B" strokeWidth="2" strokeLinecap="round" fill="none" />
+          <path d="M12,65 Q16,63 20,66" stroke="rgba(255, 255, 255, 0.25)" strokeWidth="2" strokeLinecap="round" fill="none" />
         </svg>
       </div>
 
@@ -1435,6 +1443,97 @@ export default function ServicesCorkboard() {
         </svg>
       </div>
 
+      {/* ─── OUTER BORDER ARTISTIC ACCENTS (Framing Margins, Center Clean) ─── */}
+      {/* Mid-Right Perimeter: Cyber Lime Lightning Bolt */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '40%',
+          right: 'max(14px, 2.5%)',
+          width: '78px',
+          height: '120px',
+          pointerEvents: 'auto',
+          zIndex: 2,
+        }}
+      >
+        <Doodle_NeonLightningBolt
+          color="#CCFF00"
+          width={76}
+          height={116}
+          rotation={12}
+        />
+      </div>
+
+      {/* Top-Right Far Border: Floating Vector Pen Nib */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '20px',
+          right: 'max(16px, 3.2%)',
+          pointerEvents: 'auto',
+          zIndex: 2,
+        }}
+      >
+        <Doodle_VectorPenNib
+          color="#00D2FF"
+          accentColor="#9E7BFF"
+          width={98}
+          height={82}
+          rotation={-10}
+        />
+      </div>
+
+      {/* Top-Left Far Border: Floating Modernist Star */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: 'max(16px, 3.2%)',
+          pointerEvents: 'auto',
+          zIndex: 2,
+        }}
+      >
+        <Doodle_ModernistStarCluster
+          color="#FFDE00"
+          size={48}
+          rotation={8}
+        />
+      </div>
+
+      {/* Bottom-Left Far Border: Fibonacci Golden Spiral */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '18px',
+          left: 'max(16px, 3.2%)',
+          pointerEvents: 'auto',
+          zIndex: 2,
+        }}
+      >
+        <Doodle_FibonacciGoldenSpiral
+          color="#F59E0B"
+          size={110}
+          rotation={-3}
+        />
+      </div>
+
+      {/* Bottom-Right Far Border: Swiss Modernist Reticle */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '18px',
+          right: 'max(16px, 3.2%)',
+          pointerEvents: 'auto',
+          zIndex: 2,
+        }}
+      >
+        <Doodle_SwissReticleCropMark
+          color="#00E5C3"
+          size={70}
+          rotation={4}
+        />
+      </div>
+
       {/* Bottom-Left Lithograph Mountain Peak */}
       <div
         style={{
@@ -1448,7 +1547,7 @@ export default function ServicesCorkboard() {
           zIndex: 1,
         }}
       >
-        <svg viewBox="0 0 200 200" fill="none" style={{ width: '100%', height: '100%', color: '#1E293B' }}>
+        <svg viewBox="0 0 200 200" fill="none" style={{ width: '100%', height: '100%', color: '#334155' }}>
           <path d="M10,190 L95,60 L130,115 L155,80 L200,190 Z" fill="currentColor" fillOpacity="0.12" />
           <path d="M10,190 L95,60 L130,115 L155,80 L200,190" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" />
           <path d="M95,60 Q85,110 50,190 M95,60 Q110,105 130,115 M155,80 Q165,130 180,190" stroke="currentColor" strokeWidth="1.8" />
@@ -1499,7 +1598,7 @@ export default function ServicesCorkboard() {
           zIndex: 1,
         }}
       >
-        <svg viewBox="0 0 300 300" fill="none" style={{ width: '100%', height: '100%', color: '#0F172A' }}>
+        <svg viewBox="0 0 300 300" fill="none" style={{ width: '100%', height: '100%', color: '#1E293B' }}>
           <path d="M50,10 C140,-10 240,60 270,140 C300,220 220,290 130,280 C60,270 40,210 70,160 C90,130 140,120 180,140" stroke="currentColor" strokeWidth="32" strokeLinecap="round" />
         </svg>
       </div>
@@ -1511,7 +1610,7 @@ export default function ServicesCorkboard() {
             fontFamily: "'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif",
             fontSize: 'clamp(2.4rem, 5.5vw, 4.2rem)',
             fontWeight: 900,
-            color: '#121316',
+            color: '#FFFFFF',
             lineHeight: 1.12,
             letterSpacing: '-0.03em',
             margin: 0,
@@ -1523,7 +1622,7 @@ export default function ServicesCorkboard() {
               fontFamily: "'Caveat', cursive",
               fontWeight: 700,
               fontSize: '1.25em',
-              color: '#1E6BFF',
+              color: '#00D2FF',
               display: 'inline-block',
               transform: 'rotate(-4deg)',
               margin: '0 6px',
@@ -1536,7 +1635,7 @@ export default function ServicesCorkboard() {
         </h2>
 
         {/* Playful curved underline */}
-        <svg viewBox="0 0 240 14" fill="none" style={{ width: '180px', height: '12px', margin: '6px auto 0', color: 'rgba(30, 107, 255, 0.45)' }}>
+        <svg viewBox="0 0 240 14" fill="none" style={{ width: '180px', height: '12px', margin: '6px auto 0', color: 'rgba(0, 210, 255, 0.65)' }}>
           <path d="M4,10 Q120,2 236,8" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" />
         </svg>
 
@@ -1545,7 +1644,7 @@ export default function ServicesCorkboard() {
           style={{
             fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
             fontSize: 'clamp(14px, 1.8vw, 16px)',
-            color: '#64748B',
+            color: '#94A3B8',
             fontWeight: 500,
             maxWidth: '560px',
             margin: '12px auto 0',

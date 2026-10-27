@@ -1,5 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { soundFX } from './soundFX';
+import {
+  Doodle_NeonLightningBolt,
+  Doodle_VectorPenNib,
+  Doodle_FibonacciGoldenSpiral,
+  Doodle_SwissReticleCropMark,
+  Doodle_SacredYantraMandala,
+  Doodle_PrismRefractionFan,
+  Doodle_ModernistStarCluster,
+  Doodle_ChromaticEyedropper,
+  Doodle_HarmonicSineWave,
+} from './DesignArtisticDoodles';
 
 /**
  * ─────────────────────────────────────────────────────────────────────────────
@@ -37,9 +48,9 @@ const ANATOMY_NODES = [
     floatDelay: '0s',
     floatY: '-12px',
     decorator: 'star',
-    originPoint: { x: 160, y: 225 },
-    anchorPoint: { x: 330, y: 410 },
-    pathD: 'M 160,225 C 160,330 330,320 330,410',
+    originPoint: { x: 150, y: 202 },
+    anchorPoint: { x: 305, y: 410 },
+    pathD: 'M 150,202 C 150,305 305,305 305,410',
     flowSpeed: '4.2s',
   },
   {
@@ -60,9 +71,9 @@ const ANATOMY_NODES = [
     floatDelay: '-1.6s',
     floatY: '-10px',
     decorator: 'ring',
-    originPoint: { x: 590, y: 205 },
-    anchorPoint: { x: 525, y: 410 },
-    pathD: 'M 590,205 C 590,300 525,310 525,410',
+    originPoint: { x: 585, y: 198 },
+    anchorPoint: { x: 520, y: 410 },
+    pathD: 'M 585,198 C 585,305 520,305 520,410',
     flowSpeed: '4.8s',
   },
   {
@@ -83,9 +94,9 @@ const ANATOMY_NODES = [
     floatDelay: '-3.2s',
     floatY: '-14px',
     decorator: 'circle',
-    originPoint: { x: 1040, y: 225 },
+    originPoint: { x: 1045, y: 202 },
     anchorPoint: { x: 695, y: 410 },
-    pathD: 'M 1040,225 C 1040,330 695,320 695,410',
+    pathD: 'M 1045,202 C 1045,305 695,305 695,410',
     flowSpeed: '5.1s',
   },
   {
@@ -106,9 +117,9 @@ const ANATOMY_NODES = [
     floatDelay: '-4.4s',
     floatY: '-11px',
     decorator: 'swirl',
-    originPoint: { x: 140, y: 675 },
+    originPoint: { x: 140, y: 645 },
     anchorPoint: { x: 390, y: 485 },
-    pathD: 'M 140,675 C 140,560 390,580 390,485',
+    pathD: 'M 140,645 C 140,555 390,575 390,485',
     flowSpeed: '4.4s',
   },
   {
@@ -129,9 +140,9 @@ const ANATOMY_NODES = [
     floatDelay: '-2.5s',
     floatY: '-10px',
     decorator: 'cross',
-    originPoint: { x: 348, y: 690 },
+    originPoint: { x: 350, y: 655 },
     anchorPoint: { x: 460, y: 485 },
-    pathD: 'M 348,690 C 348,580 460,575 460,485',
+    pathD: 'M 350,655 C 350,560 460,570 460,485',
     flowSpeed: '4.6s',
   },
   {
@@ -152,9 +163,9 @@ const ANATOMY_NODES = [
     floatDelay: '-1.8s',
     floatY: '-11px',
     decorator: 'dots',
-    originPoint: { x: 852, y: 690 },
+    originPoint: { x: 835, y: 655 },
     anchorPoint: { x: 640, y: 485 },
-    pathD: 'M 852,690 C 852,580 640,575 640,485',
+    pathD: 'M 835,655 C 835,560 640,570 640,485',
     flowSpeed: '4.9s',
   },
   {
@@ -175,9 +186,9 @@ const ANATOMY_NODES = [
     floatDelay: '-3.8s',
     floatY: '-13px',
     decorator: 'ring',
-    originPoint: { x: 1060, y: 675 },
+    originPoint: { x: 1050, y: 645 },
     anchorPoint: { x: 805, y: 485 },
-    pathD: 'M 1060,675 C 1060,560 805,580 805,485',
+    pathD: 'M 1050,645 C 1050,555 805,575 805,485',
     flowSpeed: '5.3s',
   },
 ];
@@ -671,6 +682,7 @@ export default function DesignAnatomy() {
           minHeight: '860px',
           margin: '0 auto',
           padding: '0 24px',
+          zIndex: 20,
         }}
       >
         <style>{`
@@ -682,10 +694,34 @@ export default function DesignAnatomy() {
             .anatomy-desktop-stage { display: none !important; }
             .anatomy-mobile-grid   { display: flex !important; }
           }
+
+          @keyframes doodleFloatSlow {
+            0%, 100% { transform: translateY(0px) rotate(var(--doodle-rot, 0deg)); }
+            50%      { transform: translateY(-7px) rotate(calc(var(--doodle-rot, 0deg) + 2deg)); }
+          }
+          @keyframes doodlePulseSoft {
+            0%, 100% { opacity: 0.78; }
+            50%      { opacity: 1; }
+          }
+
+          .artistic-ambient-doodle {
+            animation: doodleFloatSlow 6s ease-in-out infinite, doodlePulseSoft 4s ease-in-out infinite;
+            will-change: transform, opacity;
+          }
+          @media (max-width: 1200px) {
+            .hero-perimeter-flank {
+              display: none !important;
+            }
+          }
+          @media (max-width: 959px) {
+            .hero-perimeter-framing {
+              display: none !important;
+            }
+          }
         `}</style>
 
         {/* ─── CARD 1: Top Left (H - Hierarchy & Height) ─── */}
-        <div style={{ position: 'absolute', top: '40px', left: '40px' }}>
+        <div style={{ position: 'absolute', top: '40px', left: '40px', zIndex: 25 }}>
           <AnatomyCard
             node={ANATOMY_NODES[0]}
             activeNodeId={activeNodeId}
@@ -697,7 +733,7 @@ export default function DesignAnatomy() {
         </div>
 
         {/* ─── CARD 2: Top Center (V - Vector Craft & Volume) ─── */}
-        <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)' }}>
+        <div style={{ position: 'absolute', top: '20px', left: '50%', transform: 'translateX(-50%)', zIndex: 25 }}>
           <AnatomyCard
             node={ANATOMY_NODES[1]}
             activeNodeId={activeNodeId}
@@ -709,7 +745,7 @@ export default function DesignAnatomy() {
         </div>
 
         {/* ─── CARD 3: Top Right (B - Baseline & Bold Stems) ─── */}
-        <div style={{ position: 'absolute', top: '40px', right: '40px' }}>
+        <div style={{ position: 'absolute', top: '40px', right: '40px', zIndex: 25 }}>
           <AnatomyCard
             node={ANATOMY_NODES[2]}
             activeNodeId={activeNodeId}
@@ -813,7 +849,7 @@ export default function DesignAnatomy() {
         </div>
 
         {/* ─── CARD 4: Bottom Left (O - Optical Balance & Orbit) ─── */}
-        <div style={{ position: 'absolute', bottom: '40px', left: '20px' }}>
+        <div style={{ position: 'absolute', bottom: '40px', left: '20px', zIndex: 25 }}>
           <AnatomyCard
             node={ANATOMY_NODES[3]}
             activeNodeId={activeNodeId}
@@ -825,7 +861,7 @@ export default function DesignAnatomy() {
         </div>
 
         {/* ─── CARD 5: Bottom Mid-Left (W - Weight & White Space) ─── */}
-        <div style={{ position: 'absolute', bottom: '25px', left: '29%', transform: 'translateX(-50%)' }}>
+        <div style={{ position: 'absolute', bottom: '25px', left: '29%', transform: 'translateX(-50%)', zIndex: 25 }}>
           <AnatomyCard
             node={ANATOMY_NODES[4]}
             activeNodeId={activeNodeId}
@@ -837,7 +873,7 @@ export default function DesignAnatomy() {
         </div>
 
         {/* ─── CARD 6: Bottom Mid-Right (I - Identity & Ink Precision) ─── */}
-        <div style={{ position: 'absolute', bottom: '25px', left: '71%', transform: 'translateX(-50%)' }}>
+        <div style={{ position: 'absolute', bottom: '25px', left: '71%', transform: 'translateX(-50%)', zIndex: 25 }}>
           <AnatomyCard
             node={ANATOMY_NODES[5]}
             activeNodeId={activeNodeId}
@@ -849,7 +885,7 @@ export default function DesignAnatomy() {
         </div>
 
         {/* ─── CARD 7: Bottom Right (A - Architecture & Apex) ─── */}
-        <div style={{ position: 'absolute', bottom: '40px', right: '20px' }}>
+        <div style={{ position: 'absolute', bottom: '40px', right: '20px', zIndex: 25 }}>
           <AnatomyCard
             node={ANATOMY_NODES[6]}
             activeNodeId={activeNodeId}
@@ -857,6 +893,185 @@ export default function DesignAnatomy() {
             onHover={setActiveNodeId}
             onLeave={() => setActiveNodeId(null)}
             onOpenLightbox={setLightboxNode}
+          />
+        </div>
+
+      </div>
+
+      {/* ─── OUTER PERIMETER ARTISTIC FRAMING (Clean Hero Borders, Zero Center Clutter) ─── */}
+      <div
+        className="hero-perimeter-framing"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          overflow: 'hidden',
+          zIndex: 14,
+        }}
+      >
+        {/* 1. Neon Electric Lightning Bolt (Top-Left Outer Margin) */}
+        <div
+          className="artistic-ambient-doodle"
+          style={{
+            position: 'absolute',
+            top: '28px',
+            left: 'clamp(20px, 3.2vw, 55px)',
+            pointerEvents: 'auto',
+            '--doodle-rot': '-8deg',
+            animationDelay: '0s',
+          }}
+          title="Vector High-Velocity Voltage"
+        >
+          <Doodle_NeonLightningBolt
+            color="#1E6BFF"
+            width={76}
+            height={115}
+            rotation={-8}
+          />
+        </div>
+
+        {/* 2. Modernist Star Cluster (Top-Right Outer Margin) */}
+        <div
+          className="artistic-ambient-doodle"
+          style={{
+            position: 'absolute',
+            top: '28px',
+            right: 'clamp(20px, 3.2vw, 55px)',
+            pointerEvents: 'auto',
+            '--doodle-rot': '12deg',
+            animationDelay: '-2.8s',
+          }}
+          title="Harmonic Star Constellation"
+        >
+          <Doodle_ModernistStarCluster
+            color="#CCFF00"
+            size={56}
+            rotation={12}
+          />
+        </div>
+
+        {/* 3. Swiss Modernist Reticle & Crop Mark (Upper Ruler Border Accent) */}
+        <div
+          className="artistic-ambient-doodle hero-perimeter-flank"
+          style={{
+            position: 'absolute',
+            top: '20px',
+            left: 'clamp(140px, 16vw, 280px)',
+            pointerEvents: 'auto',
+            '--doodle-rot': '0deg',
+            animationDelay: '-0.8s',
+          }}
+          title="Precision Swiss Reticle Calibration"
+        >
+          <Doodle_SwissReticleCropMark
+            color="#00E5C3"
+            size={64}
+            rotation={0}
+          />
+        </div>
+
+        {/* 4. Fibonacci Golden Spiral Arc (Screen Left Flank — Mid-Height Outer Border) */}
+        <div
+          className="artistic-ambient-doodle hero-perimeter-flank"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: 'clamp(14px, 2.4vw, 42px)',
+            transform: 'translateY(-50%)',
+            pointerEvents: 'auto',
+            '--doodle-rot': '-5deg',
+            animationDelay: '-3.2s',
+          }}
+          title="Fibonacci 1.618 Golden Ratio Spiral"
+        >
+          <Doodle_FibonacciGoldenSpiral
+            color="#F59E0B"
+            size={125}
+            rotation={-5}
+          />
+        </div>
+
+        {/* 5. Optical Prism & Chromatic Refraction Fan (Screen Right Flank — Mid-Height Outer Border) */}
+        <div
+          className="artistic-ambient-doodle hero-perimeter-flank"
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: 'clamp(14px, 2.4vw, 42px)',
+            transform: 'translateY(-50%)',
+            pointerEvents: 'auto',
+            '--doodle-rot': '6deg',
+            animationDelay: '-4.2s',
+          }}
+          title="Chromatic Spectral Refraction Fan"
+        >
+          <Doodle_PrismRefractionFan
+            width={130}
+            height={85}
+            rotation={6}
+          />
+        </div>
+
+        {/* 6. Vector Pen Nib with Bezier Spline (Bottom-Left Outer Margin) */}
+        <div
+          className="artistic-ambient-doodle"
+          style={{
+            position: 'absolute',
+            bottom: '26px',
+            left: 'clamp(20px, 3.2vw, 55px)',
+            pointerEvents: 'auto',
+            '--doodle-rot': '-12deg',
+            animationDelay: '-1.5s',
+          }}
+          title="Mathematical Bezier Vector Pen"
+        >
+          <Doodle_VectorPenNib
+            color="#00D2FF"
+            accentColor="#9E7BFF"
+            width={106}
+            height={88}
+            rotation={-12}
+          />
+        </div>
+
+        {/* 7. Sacred Yantra Mandala Geometric Matrix (Bottom-Right Outer Margin) */}
+        <div
+          className="artistic-ambient-doodle"
+          style={{
+            position: 'absolute',
+            bottom: '26px',
+            right: 'clamp(20px, 3.2vw, 55px)',
+            pointerEvents: 'auto',
+            '--doodle-rot': '0deg',
+            animationDelay: '-3.7s',
+          }}
+          title="Sacred Sacred Matrix & Harmony Yantra"
+        >
+          <Doodle_SacredYantraMandala
+            color="#FFB800"
+            size={88}
+            rotation={0}
+          />
+        </div>
+
+        {/* 8. Chromatic Eyedropper & Color Well (Lower Ruler Border Accent) */}
+        <div
+          className="artistic-ambient-doodle hero-perimeter-flank"
+          style={{
+            position: 'absolute',
+            bottom: '20px',
+            right: 'clamp(140px, 16vw, 280px)',
+            pointerEvents: 'auto',
+            '--doodle-rot': '-14deg',
+            animationDelay: '-2.1s',
+          }}
+          title="Ink & Gamut Color Pigment Eyedropper"
+        >
+          <Doodle_ChromaticEyedropper
+            color="#FF2D78"
+            width={74}
+            height={74}
+            rotation={-14}
           />
         </div>
       </div>
@@ -874,8 +1089,16 @@ export default function DesignAnatomy() {
           margin: '0 auto',
         }}
       >
-        {/* Mobile Header Badge */}
-        <div style={{ textAlign: 'center', paddingTop: '6px' }}>
+        {/* Mobile Header Badge with Flanking Neon Doodles */}
+        <div style={{ textAlign: 'center', paddingTop: '6px', position: 'relative', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {/* Subtle Mobile Top-Left Mini Lightning Bolt */}
+          <div style={{ position: 'absolute', left: '8px', top: '2px', opacity: 0.85 }}>
+            <Doodle_NeonLightningBolt color="#1E6BFF" width={32} height={48} rotation={-10} interactive={false} />
+          </div>
+          {/* Subtle Mobile Top-Right Mini Star */}
+          <div style={{ position: 'absolute', right: '8px', top: '6px', opacity: 0.85 }}>
+            <Doodle_ModernistStarCluster color="#CCFF00" size={32} rotation={15} interactive={false} />
+          </div>
           <div
             style={{
               display: 'inline-flex',

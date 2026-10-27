@@ -1,27 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { useModeTransition } from '../context/ModeTransitionContext';
-import Folder3DConveyor from '../components/Design/Folder3DConveyor';
-import FolderDeskGrid from '../components/Design/FolderDeskGrid';
-import FolderModal from '../components/Design/FolderModal';
-import DesignPlayground from '../components/Design/DesignPlayground';
-import ServicesCorkboard from '../components/Design/ServicesCorkboard';
 import DesignAnatomy from '../components/Design/DesignAnatomy';
-import { DESIGN_PROJECTS } from '../components/Design/designData';
+import HowVaibhavStory from '../components/Design/HowVaibhavStory';
+import ArtCirclesOrbit from '../components/Design/ArtCirclesOrbit';
+import ServicesCorkboard from '../components/Design/ServicesCorkboard';
+import {
+  Doodle_NeonLightningBolt,
+} from '../components/Design/DesignArtisticDoodles';
 import { soundFX } from '../components/Design/soundFX';
 import '../components/Design/design.css';
 
 /**
  * DesignPage — Dedicated Graphic Design Mode.
- * - NO regular navbar! Just the top floating control bar with instant return switch.
- * - NO footer! Entire footer removed as requested.
- * - Features the continuous scroll-driven 3D Isometric Folder Deck (Reference 1 Lowe)
- *   and the tactile Robin-style desk archive (Reference 2).
+ * - Unified obsidian black grid theme.
+ * - Interactive Brand Anatomy hero section with laser filaments and specimen cards.
+ * - Tactile "What's Up" / HowVaibhav Story with Washi-Tape Polaroids & Ripped Paper chips.
+ * - Art Circles Dual Rotational Orbit (20 Curated Exhibits: Explanation Orbit & Design Orbit).
+ * - Tactile Services & Capabilities pinboard ("What I Can Help with:").
+ * - Handcrafted artistic doodles (electric bolts, vector bezier tools, golden ratio spirals, stars).
  * - Floating dock switch at bottom-right for instant one-click return to Dev & Resume.
  */
 export default function DesignPage() {
   const { transitionTo } = useModeTransition();
-  const [activeView, setActiveView] = useState('3d'); // '3d' or 'grid'
-  const [selectedProject, setSelectedProject] = useState(null);
   const [devBtnHovered, setDevBtnHovered] = useState(false);
 
   // Set document title
@@ -35,137 +35,103 @@ export default function DesignPage() {
 
   return (
     <div className="design-page-root">
-      
-
       <main style={{ position: 'relative', zIndex: 10 }}>
         {/* The Anatomy of HowVaibhav — Hero Section */}
         <DesignAnatomy />
 
-        {/* Dynamic Display: 3D Isometric Conveyor (Lowe) or Folder Desk Grid (Robin) */}
-        {activeView === '3d' ? (
-          <div style={{ position: 'relative' }}>
-            {/* The Continuous Scroll-Driven 3D Isometric Runway */}
-            <Folder3DConveyor
-              projects={DESIGN_PROJECTS}
-              onSelectProject={(proj) => setSelectedProject(proj)}
-            />
+        {/* The "What's Up" / Story of HowVaibhav — Washi-Tape Polaroids & Torn Paper Chips */}
+        <HowVaibhavStory />
 
-            {/* View Mode Quick Switch Button */}
-            <div
+        {/* ART CIRCLES — Dual Orbit Rotational Showcase (20 Exhibits: Explanation & Design) */}
+        <ArtCirclesOrbit />
+
+        {/* ─── STUDIO CALIBRATION & TRANSITIONAL DIVIDER ─── */}
+        <div
+          style={{
+            width: 'min(94%, 1240px)',
+            margin: '20px auto 40px',
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '12px 24px',
+            background: 'rgba(13, 16, 24, 0.72)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(255, 255, 255, 0.09)',
+            borderRadius: '999px',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.45)',
+            flexWrap: 'wrap',
+            gap: '12px',
+          }}
+        >
+          {/* Left: Flame Orange Mini Flash Bolt & Swiss Metric */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <Doodle_NeonLightningBolt
+              color="#FF5500"
+              width={24}
+              height={36}
+              rotation={-6}
+            />
+            <span
               style={{
-                textAlign: 'center',
-                margin: '14px 0 20px',
+                fontFamily: "'Space Grotesk', monospace",
+                fontSize: '10.5px',
+                fontWeight: 800,
+                color: 'rgba(255, 255, 255, 0.72)',
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
               }}
             >
-              <button
-                type="button"
-                onClick={() => {
-                  soundFX.playSnap();
-                  setActiveView('grid');
-                }}
-                style={{
-                  background: '#FFFFFF',
-                  color: '#121316',
-                  border: '2px solid #121316',
-                  padding: '10px 24px',
-                  borderRadius: '999px',
-                  fontFamily: 'Space Grotesk',
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  cursor: 'pointer',
-                  boxShadow: '3px 3px 0px #121316',
-                  transition: 'all 0.2s ease',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'translate(-2px, -2px)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'none')}
-              >
-                <span>⊞</span>
-                <span>Switch to Filing Cabinet Desk View</span>
-              </button>
-            </div>
+              STUDIO CALIBRATION // 40PX GRID MATRIX
+            </span>
           </div>
-        ) : (
-          <div style={{ position: 'relative' }}>
-            <FolderDeskGrid
-              projects={DESIGN_PROJECTS}
-              onSelectProject={(proj) => setSelectedProject(proj)}
-            />
-            <div
+
+          {/* Center: Ancient Sacred Geometry Craft Seal & Star */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ color: '#FFB800', fontSize: '13px' }}>✦</span>
+            <span
               style={{
-                textAlign: 'center',
-                margin: '14px 0 20px',
+                fontFamily: "'Noto Serif Devanagari', 'Rozha One', 'Space Grotesk', serif",
+                fontSize: '11px',
+                fontWeight: 900,
+                color: '#FFB800',
+                letterSpacing: '0.08em',
               }}
             >
-              <button
-                type="button"
-                onClick={() => {
-                  soundFX.playSnap();
-                  setActiveView('3d');
-                }}
-                style={{
-                  background: '#121316',
-                  color: '#FFFFFF',
-                  border: '2px solid #121316',
-                  padding: '10px 24px',
-                  borderRadius: '999px',
-                  fontFamily: 'Space Grotesk',
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  cursor: 'pointer',
-                  boxShadow: '3px 3px 0px #00D2FF',
-                  transition: 'all 0.2s ease',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'translate(-2px, -2px)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'none')}
-              >
-                <span>◈</span>
-                <span>Switch to 3D Isometric Conveyor</span>
-              </button>
-            </div>
+              सृजन कला · ARCHIVE 2026
+            </span>
+            <span style={{ color: '#FFB800', fontSize: '13px' }}>✦</span>
           </div>
-        )}
 
-        {/* Creative Laboratory & Craft Manifesto */}
-        <DesignPlayground />
-
+          {/* Right: CMYK Registration Chips & Crosshair */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#00D2FF', boxShadow: '0 0 6px #00D2FF' }} title="Cyan 100%" />
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FF2D78', boxShadow: '0 0 6px #FF2D78' }} title="Magenta 100%" />
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FFDE00', boxShadow: '0 0 6px #FFDE00' }} title="Yellow 100%" />
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#FFFFFF', boxShadow: '0 0 6px #FFFFFF' }} title="Key/Black 100%" />
+            </div>
+            <span
+              style={{
+                fontFamily: "'Space Grotesk', monospace",
+                fontSize: '10px',
+                fontWeight: 800,
+                color: '#CCFF00',
+                letterSpacing: '0.08em',
+              }}
+            >
+              ⊕ REG: 100%
+            </span>
+          </div>
+        </div>
 
         {/* Services & Capabilities Anti-Gravity Pinboard ("What I Can Help with:") */}
         <ServicesCorkboard />
 
-        {/* Ultra-minimal bottom signoff line — NO HEAVY FOOTER */}
-        <div
-          style={{
-            padding: '20px 16px 36px',
-            textAlign: 'center',
-            fontSize: '11px',
-            fontFamily: 'Space Grotesk',
-            color: '#888888',
-            letterSpacing: '0.04em',
-            textTransform: 'uppercase',
-            borderTop: '1px dashed rgba(0,0,0,0.1)',
-            width: 'min(94%, 1240px)',
-            margin: '0 auto',
-          }}
-        >
-          HOWVAIBHAV // GRAPHIC ARCHIVE 2026 // CRAFTED WITH PASSION & REASON
-        </div>
+        {/* Bottom Spacing */}
+        <div style={{ height: "40px" }} />
       </main>
-
-      
-
-      {/* Fullscreen Case Study Lightbox Dossier */}
-      {selectedProject && (
-        <FolderModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
 
       {/* Floating Bottom-Right DEV Mode Switch Button — Precision Cyber Green Emblem */}
       <aside
