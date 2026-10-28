@@ -9,7 +9,7 @@
   ╚═╝  ╚═╝ ╚═════╝  ╚══╝╚══╝   ╚═══╝  ╚═╝  ╚═╝╚═╝╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝  ╚═══╝  
 </pre>
 
-<h3 align="center">✦ FULL-STACK SOFTWARE ARCHITECTURE × GRAPHIC DESIGN ATELIER ✦</h3>
+<h3 align="center">FULL-STACK SOFTWARE ARCHITECTURE × GRAPHIC DESIGN ATELIER</h3>
 
 <p align="center">
   <strong>An immersive, production-grade dual-mode portfolio exploring the chasm between high-performance systems engineering, tactile optical typography, procedural Web Audio, and cultural graphic design.</strong>
@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Dual--Mode-Dev_%E2%9A%A1_%C3%97_Design_%F0%9F%8E%A8-1E6BFF?style=for-the-badge&logoColor=white" alt="Dual Mode" />
+  <img src="https://img.shields.io/badge/Dual--Mode-Dev_x_Design-1E6BFF?style=for-the-badge&logoColor=white" alt="Dual Mode" />
   <img src="https://img.shields.io/badge/Vite-6.2.0-CCFF00?style=for-the-badge&logo=vite&logoColor=black" alt="Vite 6" />
   <img src="https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 18" />
   <img src="https://img.shields.io/badge/Audio-Web_Audio_API-FF6B00?style=for-the-badge" alt="Web Audio API" />
@@ -34,7 +34,7 @@
 
 ---
 
-## ✦ The Dual-World Architecture
+## The Dual-World Architecture
 
 This portfolio operates as two completely distinct, interconnected experiential dimensions built on a shared reactive routing spine with zero layout flicker:
 
@@ -47,7 +47,7 @@ Seamless, cinematic cross-mode navigation is orchestrated by `ModeTransitionCont
 
 ---
 
-## 🎨 Design Mode Deep Dive (`/design`)
+## Design Mode Deep Dive (`/design`)
 
 ### 1. The Anatomy of HowVaibhav (Interactive Typography Hero)
 An homage to Swiss editorial specimen posters and anatomical typography guides:
@@ -66,7 +66,7 @@ An homage to Swiss editorial specimen posters and anatomical typography guides:
 ### 2. The Origin Story & What's Up (`HowVaibhavStory.jsx`)
 - **Tactile Washi-Tape Polaroids:** Analog photo showcase featuring authentic portrait photography pinned with textured semi-transparent washi tape and realistic dropshadows.
 - **The Story Behind "HowVaibhav":**
-  > *“People often ask: ‘Why the name HowVaibhav?’ Because whether deploying distributed cloud backends at 3 AM or fine-tuning a display serif’s bezier tangent by 0.2 millimeters, the reaction from peers has always been: ‘Wait, how did you pull that off?’ ...Well. How? Vaibhav. ✦”*
+  > *“People often ask: ‘Why the name HowVaibhav?’ Because whether deploying distributed cloud backends at 3 AM or fine-tuning a display serif’s bezier tangent by 0.2 millimeters, the reaction from peers has always been: ‘Wait, how did you pull that off?’ ...Well. How? Vaibhav.”*
 - **Software & Creative Instruments Stack:**
   - Photoshop, Illustrator, InDesign, Figma, Premiere Pro, After Effects, Picsart, CapCut, Audition, and Blender with authentic branded SVG badges and subtle hover lift physics.
 
@@ -83,7 +83,7 @@ A monumental rotational dual-orbit showcase presenting 35 original graphic desig
 
 ---
 
-## ⚡ Developer Mode Deep Dive (`/`)
+## Developer Mode Deep Dive (`/`)
 
 ### 1. Interactive Hero (`DevHero.jsx`)
 - **Pixel Canvas Grid Reveal:** High-performance canvas-based pixelation sweep that materializes the developer portrait on initial viewport load.
@@ -105,7 +105,7 @@ Four flagship full-stack, enterprise, and security projects:
 
 ---
 
-## 🔊 Procedural Web Audio Engine (`soundFX.js`)
+## Procedural Web Audio Engine (`soundFX.js`)
 
 Unlike portfolios relying on bulky audio files that lag behind user input, this project synthesizes mechanical sound effects **procedurally in real time** via the Web Audio API:
 - **Zero Network Overhead:** 0 KB audio files downloaded.
@@ -120,7 +120,7 @@ Unlike portfolios relying on bulky audio files that lag behind user input, this 
 
 ---
 
-## 🔍 SEO & Web Standards Compliance
+## SEO & Web Standards Compliance
 
 The portfolio has been optimized for search discoverability, social sharing, and Core Web Vitals:
 - **Semantic Heading Hierarchy:** Exactly one semantic `<h1>` on every page, with accessible labels for screen readers and search bots.
@@ -132,7 +132,7 @@ The portfolio has been optimized for search discoverability, social sharing, and
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 Portfolio/
@@ -205,7 +205,7 @@ Portfolio/
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - **Node.js:** v18.0.0 or higher
@@ -244,7 +244,7 @@ Generates a minified production build in `frontend/dist/`.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Layer | Technologies |
 | :--- | :--- |

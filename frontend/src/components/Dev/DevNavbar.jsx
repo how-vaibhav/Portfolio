@@ -180,20 +180,20 @@ export default function DevNavbar() {
               height: isMobile ? '34px' : 'auto',
               minWidth: isMobile ? '34px' : 'auto',
               background: isMobile 
-                ? 'linear-gradient(135deg, rgba(255, 85, 0, 0.22) 0%, rgba(255, 140, 0, 0.28) 100%)'
-                : 'linear-gradient(135deg, #FF5500 0%, #FF8C00 100%)',
-              color: isMobile ? '#FF7700' : '#FFFFFF',
+                ? 'linear-gradient(135deg, rgba(0, 210, 255, 0.18) 0%, rgba(0, 112, 243, 0.26) 100%)'
+                : 'linear-gradient(135deg, #00D2FF 0%, #0070F3 100%)',
+              color: isMobile ? '#00D2FF' : '#050811',
               borderRadius: 9999,
               fontSize: '11.5px',
               fontWeight: 900,
-              letterSpacing: '0.06em',
+              letterSpacing: '0.08em',
               textTransform: 'uppercase',
               boxShadow: isMobile
-                ? '0 0 14px rgba(255, 85, 0, 0.35)'
-                : '0 2px 14px rgba(255, 85, 0, 0.45)',
+                ? '0 0 16px rgba(0, 210, 255, 0.4)'
+                : '0 2px 18px rgba(0, 210, 255, 0.5)',
               border: isMobile
-                ? '1.5px solid rgba(255, 119, 0, 0.6)'
-                : '1px solid rgba(255, 255, 255, 0.3)',
+                ? '1.5px solid rgba(0, 210, 255, 0.65)'
+                : '1px solid rgba(255, 255, 255, 0.45)',
               transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
               whiteSpace: 'nowrap',
               flexShrink: 0,
@@ -204,14 +204,14 @@ export default function DevNavbar() {
               try { soundFX.playHover(); } catch {}
               e.currentTarget.style.transform = isMobile ? 'scale(1.12)' : 'scale(1.06)';
               e.currentTarget.style.boxShadow = isMobile
-                ? '0 0 22px rgba(255, 85, 0, 0.7)'
-                : '0 4px 22px rgba(255, 85, 0, 0.7)';
+                ? '0 0 24px rgba(0, 210, 255, 0.8)'
+                : '0 4px 26px rgba(0, 210, 255, 0.8), 0 0 12px rgba(0, 210, 255, 0.5)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'scale(1)';
               e.currentTarget.style.boxShadow = isMobile
-                ? '0 0 14px rgba(255, 85, 0, 0.35)'
-                : '0 2px 14px rgba(255, 85, 0, 0.45)';
+                ? '0 0 16px rgba(0, 210, 255, 0.4)'
+                : '0 2px 18px rgba(0, 210, 255, 0.5)';
             }}
             title="Open Graphic Design Portfolio (Cinematic Transition)"
             aria-label="Switch to Graphic Design Mode"
@@ -226,7 +226,7 @@ export default function DevNavbar() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  filter: 'drop-shadow(0 0 5px #FF5500)',
+                  filter: 'drop-shadow(0 0 6px #00D2FF)',
                   lineHeight: 1,
                 }}
               >

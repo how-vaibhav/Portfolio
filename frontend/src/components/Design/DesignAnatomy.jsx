@@ -484,7 +484,7 @@ export default function DesignAnatomy() {
   const selectNodeByIndex = (idx) => {
     setMobileIndex(idx);
     setActiveNodeId(ANATOMY_NODES[idx].id);
-    try { soundFX.playTick(); } catch {}
+    try { soundFX.playSnap(); } catch {}
   };
 
   // Escape key listener to dismiss lightbox
@@ -497,6 +497,14 @@ export default function DesignAnatomy() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [lightboxNode]);
+
+  // Proactively unlock Web Audio context on mount
+  useEffect(() => {
+    try {
+      soundFX.init();
+      soundFX.unlock();
+    } catch {}
+  }, []);
 
   // IntersectionObserver: trigger lines drawing on scroll
   useEffect(() => {
@@ -511,6 +519,9 @@ export default function DesignAnatomy() {
   return (
     <section
       ref={sectionRef}
+      onPointerDown={() => {
+        try { soundFX.unlock(); } catch {}
+      }}
       style={{
         position: 'relative',
         width: '100%',
@@ -795,6 +806,14 @@ export default function DesignAnatomy() {
                   key={idx}
                   onMouseEnter={() => {
                     try { soundFX.playTick(); } catch {}
+                    setActiveNodeId(item.nodeId);
+                  }}
+                  onPointerDown={() => {
+                    try { soundFX.playSnap(); } catch {}
+                    setActiveNodeId(item.nodeId);
+                  }}
+                  onClick={() => {
+                    try { soundFX.playSnap(); } catch {}
                     setActiveNodeId(item.nodeId);
                   }}
                   onMouseLeave={() => setActiveNodeId(null)}
