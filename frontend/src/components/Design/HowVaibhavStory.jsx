@@ -217,6 +217,13 @@ export default function HowVaibhavStory() {
           cursor: pointer;
           position: relative;
         }
+        .tool-cartridge:focus,
+        .tool-cartridge:active,
+        button:focus,
+        button:active {
+          outline: none !important;
+          -webkit-tap-highlight-color: transparent !important;
+        }
         .tool-cartridge:hover {
           transform: translateY(-6px) scale(1.035);
         }
@@ -277,79 +284,6 @@ export default function HowVaibhavStory() {
               WebkitBackdropFilter: 'blur(16px)',
             }}
           >
-            {/* Top Mechanical Film Track Bar */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '2px 4px 6px',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span
-                  style={{
-                    fontFamily: "'Space Grotesk', monospace",
-                    fontSize: '9px',
-                    fontWeight: 900,
-                    letterSpacing: '0.14em',
-                    color: 'rgba(255, 255, 255, 0.45)',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  EXP 04 // 500T
-                </span>
-                <span style={{ color: 'rgba(255, 255, 255, 0.2)', fontSize: '10px' }}>•</span>
-                <span
-                  style={{
-                    fontFamily: "'Space Grotesk', monospace",
-                    fontSize: '8.5px',
-                    fontWeight: 700,
-                    color: '#00D2FF',
-                    letterSpacing: '0.08em',
-                  }}
-                >
-                  35MM LENS
-                </span>
-              </div>
-
-              {/* Pulsing Live Creator Status Pill */}
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  background: 'rgba(204, 255, 0, 0.1)',
-                  border: '1px solid rgba(204, 255, 0, 0.35)',
-                  padding: '2px 8px',
-                  borderRadius: '999px',
-                }}
-              >
-                <span
-                  style={{
-                    width: '5px',
-                    height: '5px',
-                    borderRadius: '50%',
-                    background: '#CCFF00',
-                    boxShadow: '0 0 8px #CCFF00',
-                    animation: 'ledBlink 2s infinite ease-in-out',
-                  }}
-                />
-                <span
-                  style={{
-                    fontFamily: "'Space Grotesk', monospace",
-                    fontSize: '8px',
-                    fontWeight: 900,
-                    color: '#CCFF00',
-                    letterSpacing: '0.12em',
-                  }}
-                >
-                  ACTIVE IN LAB
-                </span>
-              </div>
-            </div>
-
             {/* Viewfinder Viewport with Corner Reticles and Focus Target */}
             <div
               style={{
@@ -599,105 +533,6 @@ export default function HowVaibhavStory() {
               }}
             />
 
-            {/* Top Eyebrow Badge — Out of the box Creative Unbounded Emblem */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '22px', flexWrap: 'wrap', gap: '8px', position: 'relative', zIndex: 2 }}>
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  padding: '6px 16px',
-                  borderRadius: '999px',
-                  background: 'linear-gradient(135deg, rgba(204, 255, 0, 0.14) 0%, rgba(0, 210, 255, 0.08) 100%)',
-                  border: '1.5px solid rgba(204, 255, 0, 0.45)',
-                  boxShadow: '0 0 20px rgba(204, 255, 0, 0.15)',
-                }}
-              >
-                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#CCFF00', boxShadow: '0 0 8px #CCFF00' }} />
-                <span
-                  style={{
-                    fontFamily: "'Unbounded', 'Syne', sans-serif",
-                    fontSize: '11px',
-                    fontWeight: 900,
-                    color: '#CCFF00',
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  THE DESIGNER &amp; DEVELOPER
-                </span>
-                <span
-                  style={{
-                    fontFamily: "'Rozha One', 'Noto Serif Devanagari', serif",
-                    fontSize: '12px',
-                    color: '#00D2FF',
-                    marginLeft: '2px',
-                  }}
-                >
-                  // वास्तुकार
-                </span>
-              </div>
-
-              <span
-                style={{
-                  fontFamily: "'Space Grotesk', monospace",
-                  fontSize: '9.5px',
-                  fontWeight: 700,
-                  color: 'rgba(255, 255, 255, 0.4)',
-                  letterSpacing: '0.12em',
-                }}
-              >
-                HOWVAIBHAV ARCHIVE // MMXXVI
-              </span>
-            </div>
-
-            {/* Lead Statement — Out of the Box Sculpture: Italiana + Unbounded + Instrument Serif Italic */}
-            <h3
-              style={{
-                fontFamily: "'Italiana', 'Cinzel Decorative', serif",
-                fontSize: 'clamp(23px, 2.7vw, 32px)',
-                fontWeight: 400,
-                letterSpacing: '0.03em',
-                lineHeight: 1.32,
-                margin: '0 0 26px',
-                color: '#FFFFFF',
-                position: 'relative',
-                zIndex: 2,
-              }}
-            >
-              Bridging the chasm between{' '}
-              <span
-                style={{
-                  fontFamily: "'Unbounded', 'Syne', sans-serif",
-                  fontWeight: 900,
-                  fontSize: '0.88em',
-                  letterSpacing: '0.02em',
-                  background: 'linear-gradient(135deg, #00D2FF 0%, #38BDF8 60%, #60A5FA 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  display: 'inline-block',
-                  filter: 'drop-shadow(0 2px 14px rgba(0, 210, 255, 0.35))',
-                }}
-              >
-                RAW SOFTWARE ARCHITECTURE
-              </span>{' '}
-              and{' '}
-              <span
-                style={{
-                  fontFamily: "'Instrument Serif', 'Bodoni Moda', Georgia, serif",
-                  fontStyle: 'italic',
-                  fontSize: '1.24em',
-                  fontWeight: 400,
-                  background: 'linear-gradient(135deg, #CCFF00 0%, #F59E0B 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  display: 'inline-block',
-                  letterSpacing: '0.01em',
-                }}
-              >
-                expressive visual alchemy.
-              </span>
-            </h3>
 
             {/* The "HowVaibhav" Authentic Origin Story — Elevated Editorial Dossier */}
             <div
@@ -707,7 +542,7 @@ export default function HowVaibhavStory() {
                 borderLeft: '4px solid #00D2FF',
                 borderRadius: '16px',
                 padding: '24px 26px',
-                marginBottom: '24px',
+                margin: 0,
                 position: 'relative',
                 boxShadow: '0 14px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
                 zIndex: 2,
@@ -843,33 +678,6 @@ export default function HowVaibhavStory() {
               </div>
             </div>
 
-            {/* Philosophy Paragraph in Darker Grotesque + Instrument Serif */}
-            <p
-              style={{
-                fontFamily: "'Darker Grotesque', 'Bricolage Grotesque', sans-serif",
-                fontSize: 'clamp(17px, 1.5vw, 19px)',
-                fontWeight: 700,
-                color: '#CBD5E1',
-                lineHeight: 1.55,
-                letterSpacing: '0.015em',
-                margin: 0,
-                position: 'relative',
-                zIndex: 2,
-              }}
-            >
-              I care about the tiny details, the edge cases everyone else forgets, and shipping work that genuinely makes someone&apos;s day better.{' '}
-              <span
-                style={{
-                  fontFamily: "'Instrument Serif', 'Bodoni Moda', Georgia, serif",
-                  fontStyle: 'italic',
-                  fontSize: '1.2em',
-                  color: '#FF7597',
-                  fontWeight: 400,
-                }}
-              >
-                (Yes, I will spend hours obsessing over acoustic button micro-haptics. No, my sanity hasn&apos;t returned, but your users&apos; subconscious will thank us.)
-              </span>
-            </p>
           </div>
         </div>
 
@@ -946,25 +754,13 @@ export default function HowVaibhavStory() {
                   fontWeight: 400,
                   letterSpacing: '0.02em',
                   color: '#FFFFFF',
-                  margin: '0 0 6px',
+                  margin: 0,
                   lineHeight: 1.25,
                 }}
               >
                 The Software Stack Behind the Craft
               </h4>
 
-              <p
-                style={{
-                  fontFamily: "'Fraunces', 'Bodoni Moda', Georgia, serif",
-                  fontStyle: 'italic',
-                  fontSize: '14.5px',
-                  color: '#94A3B8',
-                  margin: 0,
-                  letterSpacing: '0.01em',
-                }}
-              >
-                10 calibrated instruments for vector architecture, motion design &amp; acoustic synthesis.
-              </p>
             </div>
 
             {/* Right: Minimalist Curatorial Category Pills */}
@@ -1168,40 +964,6 @@ export default function HowVaibhavStory() {
             })}
           </div>
 
-          {/* Minimalist Live Studio Status Telemetry */}
-          <div
-            style={{
-              position: 'relative',
-              zIndex: 2,
-              marginTop: '18px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '12px',
-              fontFamily: "'Space Grotesk', monospace",
-              fontSize: '10px',
-              color: '#64748B',
-              letterSpacing: '0.08em',
-              textAlign: 'center',
-              flexWrap: 'wrap',
-            }}
-          >
-            {hoveredTool ? (
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#CCFF00', fontWeight: 800 }}>
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#CCFF00', boxShadow: '0 0 8px #CCFF00' }} />
-                <span>
-                  ACTIVE SELECTION: {SOFTWARE_TOOLS.find((t) => t.id === hoveredTool)?.name.toUpperCase()} // READY IN PRODUCTION PIPELINE
-                </span>
-              </div>
-            ) : (
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#00D2FF', boxShadow: '0 0 6px #00D2FF' }} />
-                <span>10 PRODUCTION-READY INSTRUMENTS</span>
-                <span style={{ color: 'rgba(255, 255, 255, 0.2)' }}>•</span>
-                <span style={{ color: '#94A3B8' }}>VECTOR ARCHITECTURE &bull; MOTION CINEMA &bull; AUDIO SYNTHESIS</span>
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </section>

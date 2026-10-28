@@ -468,7 +468,7 @@ export default function ArtCirclesOrbit() {
                 >
                   <span>ROTATION: -{currentAngleDeg}°</span>
                   <span style={{ color: currentProject.color, fontWeight: 700 }}>
-                    YEAR {currentProject.year}
+                    {currentProject.category}
                   </span>
                 </div>
               </div>
@@ -805,7 +805,7 @@ export default function ArtCirclesOrbit() {
                       {proj.category}
                     </span>
                     <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '7.5px', color: proj.color, fontWeight: 700 }}>
-                      {proj.year}
+                      {proj.number}
                     </span>
                   </div>
                 </div>
@@ -965,7 +965,7 @@ export default function ArtCirclesOrbit() {
 
               {/* Caption Label underneath */}
               <div style={{ textAlign: isMobile ? 'center' : 'right', fontFamily: "'Space Grotesk', monospace", fontSize: '10px', color: '#94A3B8', letterSpacing: '0.04em' }}>
-                <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{currentProject.client}</span> &bull; {currentProject.year}
+                <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{currentProject.client}</span>
               </div>
             </div>
 
@@ -1201,7 +1201,7 @@ export default function ArtCirclesOrbit() {
                     &ldquo;{modalProject.conceptHeadline}&rdquo;
                   </div>
                   <div style={{ fontSize: '12px', color: '#94A3B8', lineHeight: 1.4 }}>
-                    {modalProject.client} &bull; {modalProject.year}
+                    {modalProject.client}
                   </div>
                 </div>
 
