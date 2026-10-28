@@ -6,7 +6,7 @@ import { soundFX } from './soundFX';
  * सृजन विन्यास // THE DADAIST KINETIC SYNTHESIS — MOVABLE MIXED-MEDIA POSTER
  * ─────────────────────────────────────────────────────────────────────────────
  * Theme: "Duality of Ancient Soul & Digital Brutalism"
- *  - 20 bespoke tactile artifacts fly in from the extreme screen edges on scroll:
+ *  - 32 bespoke tactile artifacts fly in from the extreme screen edges on scroll:
  *      * 35mm Giclée film plates (artwork-a.jpg) with Kodak sprocket holes
  *      * Secondary deckle photo cutout (artwork-v.jpg) & brass telescope aperture (artwork-o.jpg)
  *      * Washi tape, industrial masking tape, chrome safety pin
@@ -15,7 +15,7 @@ import { soundFX } from './soundFX';
  *      * EAN-13 barcode, CMYK litho density bar, gold Devanagari seal ("सृजन")
  *      * Stencil graffiti ("PURE SOUL"), red marker script ("Form follows soul.")
  *      * 3D embossed crimson wax seal stamp & museum colophon
- *  - ONCE ASSEMBLED (>=85% or 100%): ALL 20 ELEMENTS ARE FREELY MOVABLE / DRAGGABLE!
+ *  - ONCE ASSEMBLED (>=85% or 100%): ALL 32 ELEMENTS ARE FREELY MOVABLE / DRAGGABLE!
  *    The user can click, drag, pick up, reposition, and remix the physical collage!
  *  - "RESET COLLAGE" button instantly docks elements back to their masterwork coordinates.
  *  - Light beam shimmer sweep & aperture haptics on 100% completion.
@@ -23,28 +23,28 @@ import { soundFX } from './soundFX';
 
 // 6 Core Creation Phases
 const PHASES = [
-  { id: 1, range: [0, 0.14], name: 'ENTROPIC VOID', desc: 'Awaiting gravitational compression across 20 coordinates' },
-  { id: 2, range: [0.14, 0.34], name: 'STRUCTURAL BLUEPRINT', desc: 'Precision 0.75px crop marks & golden ratio curvature' },
-  { id: 3, range: [0.34, 0.54], name: 'PHOTOGRAPHIC PLATES', desc: '35mm Giclée film negatives & pop-art halftone screens' },
-  { id: 4, range: [0.54, 0.72], name: 'EDITORIAL TYPOGRAPHY', desc: 'Didone serifs, newsprint banners & sacred Devanagari' },
-  { id: 5, range: [0.72, 0.88], name: 'TACTILE MOUNTING', desc: 'Fluorescent washi tapes, chrome safety pin & barcodes' },
-  { id: 6, range: [0.88, 1.0], name: 'SYNTHESIS & SANDBOX', desc: 'Wax seal stamped — ALL 20 ELEMENTS UNLOCKED TO DRAG & REMIX! ✦' },
+  { id: 1, range: [0, 0.16], name: 'ENTROPIC VOID', subtitle: 'Cosmic Field', desc: 'Gravitational convergence across 32 coordinates' },
+  { id: 2, range: [0.16, 0.36], name: 'STRUCTURAL BLUEPRINT', subtitle: 'Modular Grid', desc: 'Precision 0.75px technical crop marks & golden ratios' },
+  { id: 3, range: [0.36, 0.56], name: 'PHOTOGRAPHIC PLATES', subtitle: 'Giclée Emulsions', desc: '35mm Kodak negatives & pop-art halftone rosettes' },
+  { id: 4, range: [0.56, 0.74], name: 'EDITORIAL TYPOGRAPHY', subtitle: 'Didone & Glyphs', desc: 'High-contrast Didone serifs & sacred Devanagari' },
+  { id: 5, range: [0.74, 0.90], name: 'TACTILE ARTIFACTS', subtitle: 'Craft Ephemera', desc: 'Washi catalog tape, chrome safety pin & barcodes' },
+  { id: 6, range: [0.90, 1.0], name: 'SYNTHESIS & SANDBOX', subtitle: 'Unified Assemblage', desc: 'Crimson wax seal stamped • Masterwork unified' },
 ];
 
-// 20 Distinct Mixed-Media Artifacts Definition
+// 32 Distinct Mixed-Media Artifacts Definition (Museum-Grade Kinetic Assemblage)
 const SHARDS = [
   {
     id: 1,
     name: 'Hero Photographic Film Plate',
-    material: 'Giclée Film Negative // 35mm Kodak Portra',
+    material: 'Neoclassical Dadaist Film // Holographic Kintsugi',
     category: 'Core Artwork',
     color: '#00D2FF',
-    w: 320,
-    h: 195,
-    zIndex: 10,
+    w: 290,
+    h: 180,
+    zIndex: 12,
     startP: 0.16,
-    endP: 0.48,
-    target: { x: 0, y: -80, rotate: -1.2, scale: 1 },
+    endP: 0.46,
+    target: { x: 0, y: -65, rotate: -1.2, scale: 1 },
     relOffset: { x: -0.05, y: -1.3, rot: -40 },
   },
   {
@@ -53,12 +53,12 @@ const SHARDS = [
     material: 'Aged Newsprint // Swiss Grotesque',
     category: 'Typography',
     color: '#CCFF00',
-    w: 380,
-    h: 36,
-    zIndex: 16,
-    startP: 0.44,
-    endP: 0.68,
-    target: { x: 0, y: -238, rotate: 0, scale: 1 },
+    w: 410,
+    h: 32,
+    zIndex: 25,
+    startP: 0.42,
+    endP: 0.65,
+    target: { x: 0, y: -270, rotate: 0, scale: 1 },
     relOffset: { x: -1.2, y: -1.1, rot: -55 },
   },
   {
@@ -67,54 +67,54 @@ const SHARDS = [
     material: 'Cold-Stamped Metallic Foil',
     category: 'Embossing',
     color: '#FFD700',
-    w: 78,
-    h: 78,
-    zIndex: 26,
+    w: 76,
+    h: 76,
+    zIndex: 30,
     startP: 0.78,
-    endP: 0.96,
-    target: { x: 140, y: -160, rotate: 14, scale: 1 },
+    endP: 0.95,
+    target: { x: 150, y: -195, rotate: 14, scale: 1 },
     relOffset: { x: 1.25, y: -1.1, rot: 180 },
   },
   {
     id: 4,
-    name: 'Acid-Lime Washi Tape (Top-Left)',
-    material: 'Fluorescent Washi Paper // Torn Edge',
+    name: 'Archival Japanese Washi Tape (Top-Left)',
+    material: 'Fibrous Japanese Washi Paper // Deckled Edge',
     category: 'Mounting',
     color: '#CCFF00',
-    w: 105,
+    w: 110,
     h: 28,
-    zIndex: 32,
+    zIndex: 35,
     startP: 0.66,
     endP: 0.84,
-    target: { x: -142, y: -168, rotate: -26, scale: 1 },
+    target: { x: -145, y: -215, rotate: -22, scale: 1 },
     relOffset: { x: -1.35, y: -0.2, rot: 85 },
   },
   {
     id: 5,
-    name: 'Hazard-Striped Masking Tape (Bottom-Right)',
+    name: 'Hazard-Striped Masking Tape (Mid-Right)',
     material: 'Cyan Industrial Tape // Crinkled',
     category: 'Mounting',
     color: '#00D2FF',
-    w: 100,
-    h: 26,
-    zIndex: 32,
+    w: 95,
+    h: 24,
+    zIndex: 35,
     startP: 0.7,
     endP: 0.86,
-    target: { x: 142, y: 15, rotate: 30, scale: 1 },
+    target: { x: 145, y: 12, rotate: 32, scale: 1 },
     relOffset: { x: 1.3, y: 0.9, rot: -75 },
   },
   {
     id: 6,
-    name: 'Editorial Didone Headline Shard',
+    name: 'Editorial Didone Headline Card',
     material: 'High-Contrast Didone Serif',
     category: 'Typography',
     color: '#FFFFFF',
-    w: 250,
-    h: 52,
-    zIndex: 15,
+    w: 240,
+    h: 50,
+    zIndex: 20,
     startP: 0.48,
     endP: 0.72,
-    target: { x: -75, y: 55, rotate: -3, scale: 1 },
+    target: { x: -85, y: 45, rotate: -2.5, scale: 1 },
     relOffset: { x: -1.4, y: 0.3, rot: -65 },
   },
   {
@@ -123,40 +123,40 @@ const SHARDS = [
     material: 'Screenprint Halftone Rosette',
     category: 'Texture',
     color: '#FF5500',
-    w: 160,
-    h: 120,
-    zIndex: 8,
+    w: 155,
+    h: 110,
+    zIndex: 9,
     startP: 0.18,
     endP: 0.38,
-    target: { x: 105, y: 50, rotate: 4, scale: 1 },
+    target: { x: 100, y: 25, rotate: 4, scale: 1 },
     relOffset: { x: 1.3, y: -0.4, rot: 55 },
   },
   {
     id: 8,
-    name: 'Secondary Artwork Shard Cutout',
-    material: 'Torn Cotton Rag Paper 300gsm',
+    name: 'Cybernetic Chronos Artwork Cutout',
+    material: 'Torn Cotton Rag Paper // Kala Mandal opt_21',
     category: 'Visual Collage',
-    color: '#FFB800',
-    w: 150,
-    h: 110,
-    zIndex: 18,
+    color: '#00D2FF',
+    w: 145,
+    h: 105,
+    zIndex: 22,
     startP: 0.28,
     endP: 0.52,
-    target: { x: 100, y: 95, rotate: 5, scale: 1 },
+    target: { x: 105, y: 80, rotate: 5, scale: 1 },
     relOffset: { x: 1.4, y: 0.1, rot: 70 },
   },
   {
     id: 9,
-    name: 'Circular Viewfinder Lens Aperture',
-    material: 'Brass Optical Loupe // Circular Crop',
-    category: 'Microscope',
+    name: 'Chronometer Iris Lens Aperture',
+    material: 'Brass Astrolabe Iris // Golden Ratio Spiral',
+    category: 'Optical Geometry',
     color: '#00D2FF',
     w: 86,
     h: 86,
-    zIndex: 22,
+    zIndex: 26,
     startP: 0.34,
     endP: 0.56,
-    target: { x: -110, y: 135, rotate: -8, scale: 1 },
+    target: { x: -120, y: 125, rotate: -8, scale: 1 },
     relOffset: { x: -1.25, y: 1.0, rot: -120 },
   },
   {
@@ -165,12 +165,12 @@ const SHARDS = [
     material: 'Thermal Adhesive Label',
     category: 'Spec Sheet',
     color: '#FFFFFF',
-    w: 135,
-    h: 48,
-    zIndex: 20,
+    w: 130,
+    h: 44,
+    zIndex: 24,
     startP: 0.68,
     endP: 0.85,
-    target: { x: -120, y: 225, rotate: 0, scale: 1 },
+    target: { x: -125, y: 230, rotate: 0, scale: 1 },
     relOffset: { x: -1.15, y: 1.25, rot: -40 },
   },
   {
@@ -179,12 +179,12 @@ const SHARDS = [
     material: 'Lithographic Test Swatch',
     category: 'Print Tech',
     color: '#CCFF00',
-    w: 155,
+    w: 150,
     h: 20,
-    zIndex: 21,
+    zIndex: 25,
     startP: 0.72,
     endP: 0.88,
-    target: { x: 60, y: 236, rotate: 0, scale: 1 },
+    target: { x: 45, y: 232, rotate: 0, scale: 1 },
     relOffset: { x: 0.3, y: 1.35, rot: 45 },
   },
   {
@@ -195,10 +195,10 @@ const SHARDS = [
     color: '#FFB800',
     w: 64,
     h: 64,
-    zIndex: 24,
+    zIndex: 28,
     startP: 0.52,
     endP: 0.74,
-    target: { x: -155, y: -20, rotate: -10, scale: 1 },
+    target: { x: -165, y: 10, rotate: -8, scale: 1 },
     relOffset: { x: -1.45, y: -0.4, rot: -90 },
   },
   {
@@ -208,7 +208,7 @@ const SHARDS = [
     category: 'Grid Architecture',
     color: '#94A3B8',
     w: 420,
-    h: 560,
+    h: 570,
     zIndex: 5,
     startP: 0.08,
     endP: 0.28,
@@ -221,12 +221,12 @@ const SHARDS = [
     material: 'Forged Steel Wire & Clasp',
     category: 'Tactile Fastener',
     color: '#E2E8F0',
-    w: 62,
+    w: 58,
     h: 22,
-    zIndex: 36,
+    zIndex: 38,
     startP: 0.74,
     endP: 0.9,
-    target: { x: 55, y: 46, rotate: -36, scale: 1 },
+    target: { x: 52, y: 34, rotate: -36, scale: 1 },
     relOffset: { x: 1.25, y: 0.6, rot: 140 },
   },
   {
@@ -235,12 +235,12 @@ const SHARDS = [
     material: 'Aerosol Stencil Pigment',
     category: 'Street Art',
     color: '#CCFF00',
-    w: 190,
+    w: 180,
     h: 36,
-    zIndex: 23,
+    zIndex: 27,
     startP: 0.82,
     endP: 0.95,
-    target: { x: -10, y: 172, rotate: -5, scale: 1 },
+    target: { x: -15, y: 175, rotate: -4, scale: 1 },
     relOffset: { x: -0.3, y: 1.3, rot: -45 },
   },
   {
@@ -251,10 +251,10 @@ const SHARDS = [
     color: '#FFFFFF',
     w: 125,
     h: 68,
-    zIndex: 14,
+    zIndex: 18,
     startP: 0.5,
     endP: 0.72,
-    target: { x: -130, y: -90, rotate: -4, scale: 1 },
+    target: { x: -135, y: -145, rotate: -5, scale: 1 },
     relOffset: { x: -1.3, y: -0.8, rot: -80 },
   },
   {
@@ -264,11 +264,11 @@ const SHARDS = [
     category: 'Artist Annotation',
     color: '#FF2453',
     w: 165,
-    h: 40,
-    zIndex: 28,
+    h: 38,
+    zIndex: 32,
     startP: 0.85,
     endP: 0.97,
-    target: { x: 25, y: 122, rotate: 2, scale: 1 },
+    target: { x: 20, y: 125, rotate: 2, scale: 1 },
     relOffset: { x: -1.0, y: 1.15, rot: 60 },
   },
   {
@@ -277,12 +277,12 @@ const SHARDS = [
     material: 'Melted Burgundy Sealing Wax',
     category: 'Artist Seal',
     color: '#D91438',
-    w: 52,
-    h: 52,
-    zIndex: 34,
+    w: 54,
+    h: 54,
+    zIndex: 36,
     startP: 0.88,
     endP: 0.99,
-    target: { x: 165, y: 215, rotate: -14, scale: 1 },
+    target: { x: 160, y: 215, rotate: -12, scale: 1 },
     relOffset: { x: 1.35, y: 1.25, rot: -180 },
   },
   {
@@ -291,12 +291,12 @@ const SHARDS = [
     material: 'Drafting Film Blueprint',
     category: 'Geometry',
     color: '#00D2FF',
-    w: 145,
-    h: 145,
+    w: 140,
+    h: 140,
     zIndex: 7,
     startP: 0.1,
     endP: 0.32,
-    target: { x: 115, y: -45, rotate: 16, scale: 1 },
+    target: { x: 115, y: -60, rotate: 16, scale: 1 },
     relOffset: { x: 1.2, y: -1.2, rot: 120 },
   },
   {
@@ -305,13 +305,181 @@ const SHARDS = [
     material: 'Archival Museum Placard',
     category: 'Colophon',
     color: '#FFFFFF',
-    w: 360,
+    w: 390,
     h: 28,
-    zIndex: 25,
+    zIndex: 28,
     startP: 0.9,
     endP: 1.0,
     target: { x: 0, y: 275, rotate: 0, scale: 1 },
     relOffset: { x: 0, y: 1.45, rot: 0 },
+  },
+  {
+    id: 21,
+    name: 'Kala Mandal Poster Fragment A',
+    material: 'Authentic Swiss Typographic Poster // opt_05',
+    category: 'Visual Collage',
+    color: '#FF4500',
+    w: 135,
+    h: 100,
+    zIndex: 14,
+    startP: 0.22,
+    endP: 0.46,
+    target: { x: -125, y: -65, rotate: -6, scale: 1 },
+    relOffset: { x: -1.4, y: -0.9, rot: 65 },
+  },
+  {
+    id: 22,
+    name: 'Kala Mandal Poster Fragment B',
+    material: 'Deconstructivist Art Print // opt_12',
+    category: 'Visual Collage',
+    color: '#FF70A6',
+    w: 135,
+    h: 105,
+    zIndex: 16,
+    startP: 0.26,
+    endP: 0.50,
+    target: { x: 125, y: -130, rotate: 8, scale: 1 },
+    relOffset: { x: 1.3, y: -1.3, rot: -75 },
+  },
+  {
+    id: 23,
+    name: 'Kala Mandal Poster Fragment C',
+    material: 'Constructivist Poster Print // opt_01',
+    category: 'Visual Collage',
+    color: '#CCFF00',
+    w: 125,
+    h: 92,
+    zIndex: 19,
+    startP: 0.32,
+    endP: 0.54,
+    target: { x: -45, y: 105, rotate: -4, scale: 1 },
+    relOffset: { x: -0.8, y: 1.2, rot: -45 },
+  },
+  {
+    id: 24,
+    name: 'Artist Persona Pop-Art Cutout',
+    material: 'Vaibhav Tiwari Halftone Silhouette Cutout',
+    category: 'Artist Identity',
+    color: '#CCFF00',
+    w: 110,
+    h: 140,
+    zIndex: 23,
+    startP: 0.38,
+    endP: 0.60,
+    target: { x: -55, y: -20, rotate: 2, scale: 1 },
+    relOffset: { x: -1.1, y: 0.5, rot: 50 },
+  },
+  {
+    id: 25,
+    name: 'Photographic Filmstrip Negative',
+    material: 'Horizontal 35mm Frame Negative // artwork-w',
+    category: 'Photography',
+    color: '#00D2FF',
+    w: 140,
+    h: 55,
+    zIndex: 21,
+    startP: 0.42,
+    endP: 0.66,
+    target: { x: 110, y: 165, rotate: 6, scale: 1 },
+    relOffset: { x: 1.2, y: 1.1, rot: -60 },
+  },
+  {
+    id: 26,
+    name: 'Yellow Acid Drafting Tape',
+    material: 'Industrial Drafting Masking Tab',
+    category: 'Mounting',
+    color: '#FFE600',
+    w: 80,
+    h: 22,
+    zIndex: 34,
+    startP: 0.65,
+    endP: 0.82,
+    target: { x: 45, y: -148, rotate: 14, scale: 1 },
+    relOffset: { x: 0.6, y: -1.2, rot: -80 },
+  },
+  {
+    id: 27,
+    name: 'Translucent Vellum Catalog Label',
+    material: 'Drafting Vellum Archive Strip',
+    category: 'Spec Sheet',
+    color: '#FFFFFF',
+    w: 110,
+    h: 30,
+    zIndex: 26,
+    startP: 0.55,
+    endP: 0.76,
+    target: { x: 145, y: -50, rotate: -3, scale: 1 },
+    relOffset: { x: 1.4, y: -0.2, rot: 40 },
+  },
+  {
+    id: 28,
+    name: 'Metallic Red Thumbtack / Pin',
+    material: 'Lacquered Steel Drawing Pin',
+    category: 'Tactile Fastener',
+    color: '#FF2453',
+    w: 24,
+    h: 24,
+    zIndex: 40,
+    startP: 0.76,
+    endP: 0.92,
+    target: { x: 160, y: -170, rotate: 0, scale: 1 },
+    relOffset: { x: 1.5, y: -1.4, rot: 180 },
+  },
+  {
+    id: 29,
+    name: 'Japanese Red Hanko Seal ("वैभव")',
+    material: 'Carved Vermilion Cinnabar Chop',
+    category: 'Artist Seal',
+    color: '#FF2453',
+    w: 38,
+    h: 38,
+    zIndex: 35,
+    startP: 0.86,
+    endP: 0.98,
+    target: { x: -30, y: 222, rotate: 4, scale: 1 },
+    relOffset: { x: -0.6, y: 1.3, rot: -90 },
+  },
+  {
+    id: 30,
+    name: 'Kala Mandal Poster Fragment D',
+    material: 'Typography Artwork Print // opt_28',
+    category: 'Visual Collage',
+    color: '#FFB800',
+    w: 115,
+    h: 82,
+    zIndex: 15,
+    startP: 0.24,
+    endP: 0.48,
+    target: { x: 65, y: -205, rotate: -7, scale: 1 },
+    relOffset: { x: 0.8, y: -1.4, rot: 75 },
+  },
+  {
+    id: 31,
+    name: 'Masking Tape Deckled Strip',
+    material: 'Kraft Paper Packaging Tape',
+    category: 'Mounting',
+    color: '#D4B996',
+    w: 85,
+    h: 22,
+    zIndex: 33,
+    startP: 0.75,
+    endP: 0.90,
+    target: { x: -145, y: 252, rotate: -10, scale: 1 },
+    relOffset: { x: -1.3, y: 1.4, rot: 45 },
+  },
+  {
+    id: 32,
+    name: 'Chromatic Registration Target Crosshair',
+    material: 'Lithographic 4-Color Target Film',
+    category: 'Grid Architecture',
+    color: '#00D2FF',
+    w: 44,
+    h: 44,
+    zIndex: 11,
+    startP: 0.12,
+    endP: 0.32,
+    target: { x: -170, y: -225, rotate: 45, scale: 1 },
+    relOffset: { x: -1.5, y: -1.2, rot: -120 },
   },
 ];
 
@@ -322,7 +490,6 @@ export default function MixedMediaAssembly() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [targetProgress, setTargetProgress] = useState(0);
   const [hoveredShard, setHoveredShard] = useState(null);
-  const [modalOpen, setModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [windowDimensions, setWindowDimensions] = useState({
     w: typeof window !== 'undefined' ? window.innerWidth : 1200,
@@ -330,7 +497,7 @@ export default function MixedMediaAssembly() {
   });
 
   // ── DRAGGABLE REMIX STATE ──
-  // Allows user to freely drag any of the 20 shards once assembled!
+  // Allows user to freely drag any of the 32 shards once assembled!
   const [dragOffsets, setDragOffsets] = useState({});
   const [activeDragId, setActiveDragId] = useState(null);
   const dragStartRef = useRef({ pointerId: null, startX: 0, startY: 0, initX: 0, initY: 0 });
@@ -407,10 +574,10 @@ export default function MixedMediaAssembly() {
       const p = Math.max(0, Math.min(1, scrolled / scrollableDistance));
       setTargetProgress(p);
 
-      const step = Math.floor(p * 20);
+      const step = Math.floor(p * 32);
       if (step !== lastReportedStep) {
         lastReportedStep = step;
-        if (step === 20) {
+        if (step === 32) {
           try { soundFX.playAperture(); } catch {}
         } else if (step > 0) {
           try { soundFX.playTick(); } catch {}
@@ -447,7 +614,7 @@ export default function MixedMediaAssembly() {
           if (accumulatedDelta >= 35 && !wheelCooldown) {
             wheelCooldown = true;
             accumulatedDelta = 0;
-            const nextStep = Math.min(1, Math.round(targetProgress * 20 + 1) / 20);
+            const nextStep = Math.min(1, Math.round(targetProgress * 32 + 1) / 32);
             goToProgress(nextStep);
             setTimeout(() => { wheelCooldown = false; }, 140);
           }
@@ -459,7 +626,7 @@ export default function MixedMediaAssembly() {
           if (accumulatedDelta <= -35 && !wheelCooldown) {
             wheelCooldown = true;
             accumulatedDelta = 0;
-            const prevStep = Math.max(0, Math.round(targetProgress * 20 - 1) / 20);
+            const prevStep = Math.max(0, Math.round(targetProgress * 32 - 1) / 32);
             goToProgress(prevStep);
             setTimeout(() => { wheelCooldown = false; }, 140);
           }
@@ -477,13 +644,56 @@ export default function MixedMediaAssembly() {
     return t >= 0.92;
   }).length;
 
-  const isFullAssembly = assembledCount === 20;
-  const isDraggableUnlocked = scrollProgress >= 0.82;
+  const isFullAssembly = assembledCount === 32;
+  const isDraggableUnlocked = scrollProgress >= 0.88 || isFullAssembly;
 
   // Active Creation Phase
   const currentPhase = PHASES.find(
     (ph) => scrollProgress >= ph.range[0] && scrollProgress <= ph.range[1]
   ) || PHASES[PHASES.length - 1];
+
+  // Dynamic Curatorial Phase HUD Logic
+  const getPhaseDetails = () => {
+    // 1. When actively dragging an artifact
+    if (activeDragId !== null) {
+      const draggedShard = SHARDS.find((s) => s.id === activeDragId);
+      return {
+        badge: 'INTERACTIVE REMIX',
+        title: `REPOSITIONING SHARD 0${activeDragId}`,
+        desc: `Moving "${draggedShard?.name || 'Artifact'}" • Release anywhere on board`,
+        glow: true,
+      };
+    }
+
+    // 2. When in Phase 6 / Masterwork Unified
+    if (scrollProgress >= 0.90 || isFullAssembly) {
+      const displacedCount = Object.keys(dragOffsets).length;
+      if (displacedCount > 0) {
+        return {
+          badge: 'CUSTOM COLLAGE',
+          title: 'SANDBOX REMIX ACTIVE',
+          desc: `${displacedCount} artifact${displacedCount > 1 ? 's' : ''} rearranged • Drag freely or click Reset`,
+          glow: true,
+        };
+      }
+      return {
+        badge: 'PHASE 6/6: COMPLETE',
+        title: 'SYNTHESIS UNIFIED',
+        desc: 'All 32 artifacts anchored in masterwork harmony • Drag & remix unlocked',
+        glow: true,
+      };
+    }
+
+    // 3. Intermediate convergence phases (1 to 5) with live count
+    return {
+      badge: `PHASE ${currentPhase.id}/6: ${currentPhase.subtitle.toUpperCase()}`,
+      title: currentPhase.name,
+      desc: `${currentPhase.desc} (${assembledCount}/32 docked)`,
+      glow: false,
+    };
+  };
+
+  const phaseDetails = getPhaseDetails();
 
   // Responsive scale factor for mobile screens
   const posterScale = isMobile ? Math.min(0.82, (windowDimensions.w - 32) / 460) : 1;
@@ -614,30 +824,33 @@ export default function MixedMediaAssembly() {
             </h2>
           </div>
 
-          {/* Center Dynamic Phase Narrative Pill */}
+          {/* Center Dynamic Curatorial Phase HUD */}
           <div
             style={{
               display: isMobile ? 'none' : 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              padding: '6px 16px',
+              padding: '6px 20px',
               borderRadius: '999px',
-              background: 'rgba(13, 17, 26, 0.85)',
-              border: isDraggableUnlocked ? '1px solid #CCFF00' : '1px solid rgba(255, 255, 255, 0.12)',
-              boxShadow: isDraggableUnlocked ? '0 0 20px rgba(204, 255, 0, 0.25)' : '0 8px 24px rgba(0,0,0,0.45)',
-              transition: 'all 0.3s ease',
+              background: phaseDetails.glow ? 'rgba(10, 16, 12, 0.94)' : 'rgba(13, 17, 26, 0.88)',
+              border: phaseDetails.glow ? '1.5px solid #CCFF00' : '1px solid rgba(255, 255, 255, 0.14)',
+              boxShadow: phaseDetails.glow ? '0 0 24px rgba(204, 255, 0, 0.28), 0 8px 24px rgba(0,0,0,0.6)' : '0 8px 24px rgba(0,0,0,0.45)',
+              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', fontWeight: 900, color: '#CCFF00', textTransform: 'uppercase', letterSpacing: '0.12em' }}>
-                PHASE {currentPhase.id}/6:
+                {phaseDetails.badge}
               </span>
+              <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '10px' }}>•</span>
               <span style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '11px', fontWeight: 800, color: '#FFFFFF', letterSpacing: '0.04em' }}>
-                {currentPhase.name}
+                {phaseDetails.title}
               </span>
             </div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '9px', color: '#94A3B8' }}>
-              {currentPhase.desc}
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '9.5px', color: phaseDetails.glow ? '#E2E8F0' : '#94A3B8', marginTop: '1px' }}>
+              {phaseDetails.desc}
             </div>
           </div>
 
@@ -676,7 +889,7 @@ export default function MixedMediaAssembly() {
                   letterSpacing: '0.08em',
                 }}
               >
-                {assembledCount}/20 {isFullAssembly ? 'UNIFIED ✦' : 'CONVERGING'}
+                {assembledCount}/32 {isFullAssembly ? 'UNIFIED ✦' : 'CONVERGING'}
               </span>
             </div>
 
@@ -755,42 +968,7 @@ export default function MixedMediaAssembly() {
             minHeight: isMobile ? '380px' : '480px',
           }}
         >
-          {/* Subtle Outer Watermarks */}
-          <div
-            style={{
-              position: 'absolute',
-              left: '8px',
-              top: '50%',
-              transform: 'translateY(-50%) rotate(-90deg)',
-              fontFamily: "'Space Grotesk', monospace",
-              fontSize: '10px',
-              fontWeight: 900,
-              letterSpacing: '0.3em',
-              color: 'rgba(255, 255, 255, 0.12)',
-              pointerEvents: 'none',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            DADAIST KINETIC MATRIX // MMXXVI
-          </div>
 
-          <div
-            style={{
-              position: 'absolute',
-              right: '8px',
-              top: '50%',
-              transform: 'translateY(-50%) rotate(90deg)',
-              fontFamily: "'Space Grotesk', monospace",
-              fontSize: '10px',
-              fontWeight: 900,
-              letterSpacing: '0.3em',
-              color: 'rgba(255, 255, 255, 0.12)',
-              pointerEvents: 'none',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            20-COMPONENT MOVABLE COLLAGE // VAIBHAV
-          </div>
 
           {/* ── SVG LASER TRAJECTORY BEACON GUIDES ── */}
           <svg
@@ -906,7 +1084,7 @@ export default function MixedMediaAssembly() {
             </div>
 
             {/* ═══════════════════════════════════════════════════════════════
-                THE 20 KINETIC MIXED-MEDIA COMPONENTS (DRAGGABLE & MOVABLE!)
+                THE 32 KINETIC MIXED-MEDIA COMPONENTS (DRAGGABLE & MOVABLE!)
                 ═══════════════════════════════════════════════════════════════ */}
             {SHARDS.map((shard) => {
               const rawT = (scrollProgress - shard.startP) / (shard.endP - shard.startP);
@@ -947,12 +1125,6 @@ export default function MixedMediaAssembly() {
                   onPointerMove={handleShardPointerMove}
                   onPointerUp={handleShardPointerUp}
                   onPointerCancel={handleShardPointerUp}
-                  onClick={() => {
-                    // Only open modal if not actively dragging
-                    if (isFullAssembly && !isBeingDragged && Math.abs(dragX) < 3 && Math.abs(dragY) < 3) {
-                      setModalOpen(true);
-                    }
-                  }}
                   onMouseEnter={() => {
                     if (activeDragId === null) {
                       try { soundFX.playHover(); } catch {}
@@ -980,7 +1152,7 @@ export default function MixedMediaAssembly() {
                     filter: isBeingDragged ? 'drop-shadow(0 20px 40px rgba(0,0,0,0.9))' : 'none',
                     transition: isBeingDragged ? 'none' : 'box-shadow 0.2s ease, filter 0.2s ease',
                   }}
-                  title={isDraggableUnlocked ? `[ ${shard.id}/20 ] ${shard.name} • Click & Drag to Move!` : `[ ${shard.id}/20 ] ${shard.name}`}
+                  title={isDraggableUnlocked ? `[ ${shard.id}/32 ] ${shard.name} • Click & Drag to Move!` : `[ ${shard.id}/32 ] ${shard.name}`}
                 >
                   {/* Contextual Micro Tooltip on Hover */}
                   {isHovered && !isBeingDragged && (
@@ -1017,7 +1189,7 @@ export default function MixedMediaAssembly() {
                   )}
 
                   {/* ─────────────────────────────────────────────────────────
-                      SHARD CONTENT RENDERING (20 BESPOKE ARTIFACTS)
+                      SHARD CONTENT RENDERING (32 BESPOKE ARTIFACTS)
                       ───────────────────────────────────────────────────────── */}
                   {/* SHARD 1: Hero Photographic Film Plate */}
                   {shard.id === 1 && (
@@ -1026,11 +1198,11 @@ export default function MixedMediaAssembly() {
                         width: '100%',
                         height: '100%',
                         background: '#040609',
-                        border: '2px solid rgba(255, 255, 255, 0.25)',
+                        border: '2px solid rgba(255, 255, 255, 0.35)',
                         borderRadius: '6px',
                         overflow: 'hidden',
                         position: 'relative',
-                        boxShadow: '0 18px 40px rgba(0, 0, 0, 0.8)',
+                        boxShadow: '0 22px 50px rgba(0, 0, 0, 0.85), 0 0 25px rgba(204, 255, 0, 0.18)',
                       }}
                     >
                       <div style={{ height: '14px', background: '#000000', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 8px' }}>
@@ -1046,13 +1218,14 @@ export default function MixedMediaAssembly() {
 
                       <div style={{ position: 'relative', width: '100%', height: 'calc(100% - 28px)', overflow: 'hidden' }}>
                         <img
-                          src="/assets/text_image/artwork-a.jpg"
-                          alt="Tactile Mixed Media Collage Artwork by Vaibhav"
+                          src="/assets/text_image/dadaist-hero.jpg"
+                          alt="Museum-grade Dadaist Masterwork by Vaibhav"
                           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
                         />
-                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 65%, rgba(4, 6, 9, 0.7) 100%)' }} />
-                        <div style={{ position: 'absolute', bottom: '6px', left: '8px', fontFamily: "'Space Grotesk', monospace", fontSize: '9px', fontWeight: 800, color: '#FFFFFF', textShadow: '0 2px 4px #000' }}>
-                          HOWVAIBHAV ARCHIVE // FRAME 24A
+                        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 65%, rgba(4, 6, 9, 0.75) 100%)' }} />
+                        <div style={{ position: 'absolute', bottom: '6px', left: '8px', fontFamily: "'Space Grotesk', monospace", fontSize: '9px', fontWeight: 800, color: '#FFFFFF', textShadow: '0 2px 4px #000', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <span>HOWVAIBHAV ARCHIVE // FRAME 24A</span>
+                          <span style={{ color: '#CCFF00', fontSize: '7px' }}>• EMULSION 5219</span>
                         </div>
                       </div>
 
@@ -1102,42 +1275,46 @@ export default function MixedMediaAssembly() {
                         width: '100%',
                         height: '100%',
                         borderRadius: '50%',
-                        background: 'radial-gradient(circle at 35% 35%, #FFF099 0%, #FFB800 50%, #C78200 100%)',
+                        background: 'radial-gradient(circle at 35% 30%, #FFFDE0 0%, #FFD700 35%, #C99700 70%, #7A5500 100%)',
                         border: '2px solid #FFF8CC',
-                        boxShadow: '0 10px 24px rgba(255, 184, 0, 0.45), inset 0 2px 4px rgba(255,255,255,0.8)',
+                        boxShadow: '0 12px 28px rgba(255, 184, 0, 0.5), inset 0 2px 5px rgba(255,255,255,0.9), inset 0 -3px 6px rgba(0,0,0,0.4)',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: '#422800',
+                        color: '#382200',
                         position: 'relative',
                       }}
                     >
-                      <span style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: '19px', fontWeight: 900, lineHeight: 1 }}>HV</span>
-                      <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '6px', fontWeight: 900, letterSpacing: '0.08em', marginTop: '1px' }}>
-                        AUTHENTIC
+                      <div style={{ position: 'absolute', inset: '4px', borderRadius: '50%', border: '1px dashed rgba(255,255,255,0.7)' }} />
+                      <span style={{ fontFamily: "'Cinzel Decorative', serif", fontSize: '18px', fontWeight: 900, lineHeight: 1, textShadow: '0 1px 2px rgba(255,255,255,0.6)' }}>HV</span>
+                      <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '5.5px', fontWeight: 900, letterSpacing: '0.14em', marginTop: '2px', opacity: 0.9 }}>
+                        ★ ATELIER ★
                       </span>
                     </div>
                   )}
 
-                  {/* SHARD 4: Acid-Lime Washi Tape (Top-Left) */}
+                  {/* SHARD 4: Archival Japanese Washi Tape */}
                   {shard.id === 4 && (
                     <div
                       style={{
                         width: '100%',
                         height: '100%',
-                        background: 'rgba(204, 255, 0, 0.88)',
-                        boxShadow: '0 4px 14px rgba(0, 0, 0, 0.4)',
-                        clipPath: 'polygon(4% 0%, 96% 2%, 100% 98%, 2% 95%)',
+                        background: 'linear-gradient(90deg, rgba(204, 255, 0, 0.85) 0%, rgba(220, 255, 77, 0.9) 50%, rgba(204, 255, 0, 0.85) 100%)',
+                        backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 6px)',
+                        boxShadow: '0 6px 18px rgba(0, 0, 0, 0.45)',
+                        clipPath: 'polygon(0% 4%, 3% 0%, 97% 2%, 100% 94%, 97% 98%, 2% 96%)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        borderLeft: '2px dashed rgba(0, 0, 0, 0.35)',
-                        borderRight: '2px dashed rgba(0, 0, 0, 0.35)',
+                        padding: '0 10px',
+                        borderTop: '1px dashed rgba(0, 0, 0, 0.25)',
+                        borderBottom: '1px dashed rgba(0, 0, 0, 0.25)',
+                        position: 'relative',
                       }}
                     >
-                      <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '8px', fontWeight: 900, color: '#07080B', letterSpacing: '0.12em' }}>
-                        [ TACTILE WASHI TAPE ]
+                      <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '7.5px', fontWeight: 900, color: '#07080B', letterSpacing: '0.12em', whiteSpace: 'nowrap' }}>
+                        KALA MANDAL // ARCHIVE № 09 ✦
                       </span>
                     </div>
                   )}
@@ -1162,21 +1339,25 @@ export default function MixedMediaAssembly() {
                       style={{
                         width: '100%',
                         height: '100%',
-                        background: 'rgba(9, 12, 18, 0.94)',
+                        background: 'rgba(8, 11, 18, 0.96)',
                         borderLeft: '4px solid #CCFF00',
+                        borderTop: '1px solid rgba(255, 255, 255, 0.12)',
+                        borderRight: '1px solid rgba(255, 255, 255, 0.08)',
+                        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
                         borderRadius: '0 6px 6px 0',
-                        padding: '6px 12px',
+                        padding: '6px 14px',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
-                        boxShadow: '0 8px 24px rgba(0,0,0,0.65)',
+                        boxShadow: '0 10px 28px rgba(0,0,0,0.7)',
+                        backdropFilter: 'blur(8px)',
                       }}
                     >
-                      <div style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '15px', fontWeight: 900, color: '#FFFFFF', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
+                      <div style={{ fontFamily: "'Italiana', 'Cinzel Decorative', 'Cinzel', serif", fontSize: '16px', fontWeight: 700, color: '#FFFFFF', letterSpacing: '0.04em', lineHeight: 1.15 }}>
                         CHAOS INTO SYSTEM
                       </div>
-                      <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '8px', color: '#94A3B8', marginTop: '2px' }}>
-                        Duality of Intuition &amp; Code
+                      <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '7.5px', color: '#94A3B8', marginTop: '3px', letterSpacing: '0.08em' }}>
+                        THE DUALITY OF INTUITION &amp; CODE
                       </div>
                     </div>
                   )}
@@ -1208,20 +1389,20 @@ export default function MixedMediaAssembly() {
                         width: '100%',
                         height: '100%',
                         background: '#070A10',
-                        border: '2px solid #FFFFFF',
-                        borderRadius: '4px',
+                        border: '2.5px solid #FFFFFF',
+                        borderRadius: '3px',
                         overflow: 'hidden',
-                        boxShadow: '0 12px 28px rgba(0,0,0,0.7)',
+                        boxShadow: '0 14px 32px rgba(0,0,0,0.75), 0 0 16px rgba(0, 210, 255, 0.25)',
                         position: 'relative',
                       }}
                     >
                       <img
-                        src="/assets/text_image/artwork-v.jpg"
-                        alt="Experimental Graphic Design Fragment by Vaibhav"
+                        src="/assets/Kala%20Mandal/optimized/opt_21.jpg"
+                        alt="Cybernetic Chronos Mixed Media Fragment by Vaibhav"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
                       />
-                      <div style={{ position: 'absolute', top: '4px', left: '4px', background: 'rgba(0,0,0,0.75)', color: '#FFB800', fontFamily: "'Space Grotesk', monospace", fontSize: '7px', fontWeight: 900, padding: '1px 4px', borderRadius: '2px' }}>
-                        SHARD 08 // ABSTRACT
+                      <div style={{ position: 'absolute', top: '5px', left: '5px', background: 'rgba(0,0,0,0.82)', color: '#00D2FF', fontFamily: "'Space Grotesk', monospace", fontSize: '7px', fontWeight: 900, padding: '2px 5px', borderRadius: '2px', border: '1px solid rgba(0, 210, 255, 0.4)' }}>
+                        SHARD 08 // CHRONOS &amp; CODE
                       </div>
                     </div>
                   )}
@@ -1236,17 +1417,17 @@ export default function MixedMediaAssembly() {
                         border: '2.5px solid #00D2FF',
                         overflow: 'hidden',
                         position: 'relative',
-                        boxShadow: '0 8px 24px rgba(0, 210, 255, 0.45)',
+                        boxShadow: '0 10px 28px rgba(0, 210, 255, 0.5), inset 0 0 12px rgba(0,0,0,0.85)',
                       }}
                     >
                       <img
-                        src="/assets/text_image/artwork-o.jpg"
-                        alt="Optical Graphic Shard and Vignette by Vaibhav"
+                        src="/assets/text_image/dadaist-lens.jpg"
+                        alt="Chronometer Iris Lens Aperture by Vaibhav"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
                       />
-                      <div style={{ position: 'absolute', inset: 0, border: '1px dashed rgba(255,255,255,0.6)', borderRadius: '50%' }} />
-                      <span style={{ position: 'absolute', top: '2px', left: '50%', transform: 'translateX(-50%)', fontFamily: "'Space Grotesk', monospace", fontSize: '6px', color: '#00D2FF', fontWeight: 900 }}>
-                        0° N
+                      <div style={{ position: 'absolute', inset: '3px', border: '1px dashed rgba(0, 210, 255, 0.65)', borderRadius: '50%' }} />
+                      <span style={{ position: 'absolute', top: '3px', left: '50%', transform: 'translateX(-50%)', fontFamily: "'Space Grotesk', monospace", fontSize: '6.5px', color: '#00D2FF', fontWeight: 900, textShadow: '0 1px 3px #000' }}>
+                        φ 1.618
                       </span>
                     </div>
                   )}
@@ -1313,16 +1494,16 @@ export default function MixedMediaAssembly() {
                         width: '100%',
                         height: '100%',
                         borderRadius: '50%',
-                        background: 'radial-gradient(circle, #FFE57F 0%, #FFB800 60%, #996B00 100%)',
-                        border: '2px solid #FFF',
-                        boxShadow: '0 8px 24px rgba(255, 184, 0, 0.45)',
+                        background: 'radial-gradient(circle at 40% 35%, #FFEBA0 0%, #E6A100 50%, #8A5200 100%)',
+                        border: '2px solid #FFF8D6',
+                        boxShadow: '0 10px 26px rgba(230, 161, 0, 0.5), inset 0 2px 5px rgba(255,255,255,0.8), inset 0 -3px 6px rgba(0,0,0,0.4)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: '#382200',
+                        color: '#2E1A00',
                       }}
                     >
-                      <span style={{ fontFamily: "'Rozha One', 'Noto Serif Devanagari', serif", fontSize: '22px', fontWeight: 400, transform: 'translateY(-2px)' }}>
+                      <span style={{ fontFamily: "'Rozha One', 'Noto Serif Devanagari', serif", fontSize: '22px', fontWeight: 400, transform: 'translateY(-2px)', textShadow: '0 1px 2px rgba(255,255,255,0.7)' }}>
                         सृजन
                       </span>
                     </div>
@@ -1368,22 +1549,31 @@ export default function MixedMediaAssembly() {
                         background: 'transparent',
                       }}
                     >
-                      <span
+                      <div
                         style={{
-                          fontFamily: "'Space Grotesk', system-ui, sans-serif",
-                          fontSize: '18px',
-                          fontWeight: 900,
-                          color: '#CCFF00',
-                          letterSpacing: '0.18em',
-                          textTransform: 'uppercase',
-                          textShadow: '0 0 14px #CCFF00, 0 0 28px rgba(204, 255, 0, 0.65)',
-                          border: '2px solid #CCFF00',
-                          padding: '2px 14px',
+                          background: 'rgba(4, 6, 9, 0.92)',
+                          padding: '4px 14px',
+                          border: '1.5px solid #CCFF00',
+                          borderRadius: '2px',
+                          boxShadow: '0 8px 24px rgba(0,0,0,0.75), 0 0 16px rgba(204, 255, 0, 0.35)',
                           transform: 'skewX(-8deg)',
                         }}
                       >
-                        PURE SOUL
-                      </span>
+                        <span
+                          style={{
+                            fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                            fontSize: '15px',
+                            fontWeight: 900,
+                            color: '#CCFF00',
+                            letterSpacing: '0.18em',
+                            textTransform: 'uppercase',
+                            textShadow: '0 0 10px #CCFF00, 0 0 24px rgba(204, 255, 0, 0.65)',
+                            display: 'block',
+                          }}
+                        >
+                          PURE SOUL
+                        </span>
+                      </div>
                     </div>
                   )}
 
@@ -1393,26 +1583,34 @@ export default function MixedMediaAssembly() {
                       style={{
                         width: '100%',
                         height: '100%',
-                        background: 'rgba(255, 255, 255, 0.95)',
+                        background: '#FAF9F6',
+                        backgroundImage: 'linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)',
+                        backgroundSize: '10px 10px',
                         color: '#07080A',
                         borderRadius: '4px',
-                        padding: '6px 8px',
-                        boxShadow: '0 8px 20px rgba(0,0,0,0.6)',
+                        padding: '6px 9px',
+                        boxShadow: '0 10px 24px rgba(0,0,0,0.6)',
+                        border: '1px solid rgba(0,0,0,0.12)',
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
                       }}
                     >
-                      <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '7.5px', fontWeight: 900 }}>
-                        SWISS MATRIX SPEC
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '7.5px', fontWeight: 900, color: '#0F172A' }}>
+                          SWISS MATRIX SPEC
+                        </span>
+                        <span style={{ color: '#FF2453', fontSize: '6px', fontWeight: 900, border: '1px solid #FF2453', padding: '0 3px', borderRadius: '1px' }}>
+                          PASS ✦
+                        </span>
                       </div>
-                      <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '8px', lineHeight: 1.2, color: '#334155' }}>
-                        Grid: 12-Col Modular<br />
+                      <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '7.5px', lineHeight: 1.25, color: '#334155' }}>
+                        Grid: 12-Col Modular Matrix<br />
                         Type: Helvetica &amp; Rozha<br />
-                        Paper: 350gsm Heavy
+                        Paper: 350gsm Heavy Rag
                       </div>
                       <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '6.5px', color: '#64748B' }}>
-                        ISO 216 // A2 ARCHIVE
+                        ISO 216 // A2 ARCHIVE № 24
                       </div>
                     </div>
                   )}
@@ -1496,13 +1694,501 @@ export default function MixedMediaAssembly() {
                       }}
                     >
                       <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '8px', color: '#94A3B8', letterSpacing: '0.06em' }}>
-                        HOWVAIBHAV STUDIO ARCHIVE // SYNTHESIS N° 20
+                        HOWVAIBHAV STUDIO ARCHIVE // SYNTHESIS N° 32
                       </span>
                       <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '8.5px', color: '#CCFF00', fontWeight: 800 }}>
                         © 2026 VAIBHAV TIWARI
                       </span>
                     </div>
                   )}
+                  {/* SHARD 21: Kala Mandal Poster Fragment A (opt_05) */}
+                  {shard.id === 21 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        background: '#0B0F17',
+                        border: '1.5px solid rgba(255, 255, 255, 0.4)',
+                        borderRadius: '2px',
+                        overflow: 'hidden',
+                        boxShadow: '0 16px 36px rgba(0,0,0,0.85), 0 0 12px rgba(255, 69, 0, 0.25)',
+                        position: 'relative',
+                      }}
+                    >
+                      <img
+                        src="/assets/Kala%20Mandal/optimized/opt_05.jpg"
+                        alt="Kala Mandal Swiss Typographic Poster #05 by Vaibhav"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '4px',
+                          left: '4px',
+                          background: 'rgba(0, 0, 0, 0.85)',
+                          color: '#FF6B4A',
+                          fontFamily: "'Space Grotesk', monospace",
+                          fontSize: '6.5px',
+                          fontWeight: 900,
+                          padding: '1px 4px',
+                          borderRadius: '2px',
+                          letterSpacing: '0.08em',
+                          border: '0.75px solid rgba(255, 107, 74, 0.4)',
+                        }}
+                      >
+                        KALA MANDAL // #05
+                      </div>
+                      <div
+                        style={{
+                          position: 'absolute',
+                          inset: 0,
+                          background: 'radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), transparent 70%)',
+                          pointerEvents: 'none',
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  {/* SHARD 22: Kala Mandal Poster Fragment B (opt_12) */}
+                  {shard.id === 22 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        background: '#0A0E18',
+                        border: '2px solid #FFFFFF',
+                        borderRadius: '2px',
+                        overflow: 'hidden',
+                        boxShadow: '0 16px 38px rgba(0,0,0,0.85), 0 0 16px rgba(255, 112, 166, 0.3)',
+                        position: 'relative',
+                      }}
+                    >
+                      <img
+                        src="/assets/Kala%20Mandal/optimized/opt_12.jpg"
+                        alt="Kala Mandal Brutalist Deconstruction Poster #12 by Vaibhav"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          bottom: '4px',
+                          right: '4px',
+                          background: 'rgba(10, 14, 24, 0.9)',
+                          color: '#FF70A6',
+                          fontFamily: "'Space Grotesk', monospace",
+                          fontSize: '6.5px',
+                          fontWeight: 800,
+                          padding: '2px 5px',
+                          borderRadius: '2px',
+                          border: '0.75px solid rgba(255, 112, 166, 0.5)',
+                        }}
+                      >
+                        EXHIBIT // #12
+                      </div>
+                    </div>
+                  )}
+
+                  {/* SHARD 23: Kala Mandal Poster Fragment C (opt_01) */}
+                  {shard.id === 23 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        background: '#0D1117',
+                        border: '1.5px solid rgba(204, 255, 0, 0.65)',
+                        borderRadius: '2px',
+                        overflow: 'hidden',
+                        boxShadow: '0 14px 34px rgba(0,0,0,0.85), 0 0 15px rgba(204, 255, 0, 0.22)',
+                        position: 'relative',
+                      }}
+                    >
+                      <img
+                        src="/assets/Kala%20Mandal/optimized/opt_01.jpg"
+                        alt="Kala Mandal Constructivist Graphic #01 by Vaibhav"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '4px',
+                          right: '4px',
+                          background: '#CCFF00',
+                          color: '#000000',
+                          fontFamily: "'Space Grotesk', monospace",
+                          fontSize: '6.5px',
+                          fontWeight: 900,
+                          padding: '1px 5px',
+                          borderRadius: '2px',
+                          letterSpacing: '0.05em',
+                        }}
+                      >
+                        SWISS № 01
+                      </div>
+                    </div>
+                  )}
+
+                  {/* SHARD 24: Artist Persona Pop-Art Cutout (Vaibhav Tiwari) */}
+                  {shard.id === 24 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        position: 'relative',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        filter: 'drop-shadow(0 14px 28px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 16px rgba(204, 255, 0, 0.45))',
+                      }}
+                    >
+                      <img
+                        src="/assets/vaibhav-hero-cutout.png"
+                        alt="Vaibhav Tiwari Artist Cutout"
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'contain',
+                          display: 'block',
+                          pointerEvents: 'none',
+                          filter: 'contrast(1.15) brightness(1.05)',
+                        }}
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          bottom: '8px',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          background: 'rgba(0, 0, 0, 0.88)',
+                          border: '1px solid #CCFF00',
+                          borderRadius: '3px',
+                          padding: '1px 6px',
+                          color: '#CCFF00',
+                          fontFamily: "'Space Grotesk', monospace",
+                          fontSize: '7px',
+                          fontWeight: 900,
+                          letterSpacing: '0.12em',
+                          whiteSpace: 'nowrap',
+                          boxShadow: '0 0 8px rgba(204, 255, 0, 0.5)',
+                        }}
+                      >
+                        VAIBHAV // ARCHITECT
+                      </div>
+                    </div>
+                  )}
+
+                  {/* SHARD 25: Photographic Filmstrip Negative (artwork-w) */}
+                  {shard.id === 25 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        background: '#040608',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        borderRadius: '2px',
+                        overflow: 'hidden',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        boxShadow: '0 12px 30px rgba(0,0,0,0.85), 0 0 14px rgba(0, 210, 255, 0.25)',
+                        position: 'relative',
+                      }}
+                    >
+                      {/* 35mm Top Perforation Bar */}
+                      <div
+                        style={{
+                          width: '100%',
+                          height: '9px',
+                          background: '#0A0D12',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-around',
+                          padding: '0 4px',
+                          borderBottom: '0.5px solid rgba(255,255,255,0.15)',
+                        }}
+                      >
+                        {[...Array(8)].map((_, i) => (
+                          <div key={i} style={{ width: '4.5px', height: '4px', background: '#FFFFFF', borderRadius: '0.5px', opacity: 0.85 }} />
+                        ))}
+                      </div>
+                      {/* Image Exposure */}
+                      <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+                        <img
+                          src="/assets/text_image/artwork-w.jpg"
+                          alt="35mm Film Exposure Artwork-W by Vaibhav"
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
+                        />
+                        <div
+                          style={{
+                            position: 'absolute',
+                            bottom: '2px',
+                            left: '4px',
+                            color: '#00D2FF',
+                            fontFamily: "'Space Grotesk', monospace",
+                            fontSize: '6px',
+                            fontWeight: 800,
+                            background: 'rgba(0,0,0,0.7)',
+                            padding: '0 3px',
+                          }}
+                        >
+                          SAFETY FILM ▶ 28A
+                        </div>
+                      </div>
+                      {/* 35mm Bottom Perforation Bar */}
+                      <div
+                        style={{
+                          width: '100%',
+                          height: '9px',
+                          background: '#0A0D12',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-around',
+                          padding: '0 4px',
+                          borderTop: '0.5px solid rgba(255,255,255,0.15)',
+                        }}
+                      >
+                        {[...Array(8)].map((_, i) => (
+                          <div key={i} style={{ width: '4.5px', height: '4px', background: '#FFFFFF', borderRadius: '0.5px', opacity: 0.85 }} />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* SHARD 26: Yellow Acid Drafting Tape */}
+                  {shard.id === 26 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        background: 'linear-gradient(135deg, #FFE600 0%, #FFCC00 100%)',
+                        opacity: 0.9,
+                        clipPath: 'polygon(0% 4%, 4% 0%, 96% 2%, 100% 92%, 97% 100%, 3% 98%, 0% 88%)',
+                        boxShadow: '0 6px 14px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.6)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderLeft: '1px dashed rgba(0,0,0,0.25)',
+                        borderRight: '1px dashed rgba(0,0,0,0.25)',
+                      }}
+                    >
+                      <span
+                        style={{
+                          fontFamily: "'Space Grotesk', monospace",
+                          fontSize: '7.5px',
+                          color: '#382A00',
+                          fontWeight: 800,
+                          letterSpacing: '0.12em',
+                        }}
+                      >
+                        // ARCHIVAL_TAPE //
+                      </span>
+                    </div>
+                  )}
+
+                  {/* SHARD 27: Translucent Vellum Catalog Label */}
+                  {shard.id === 27 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        background: 'rgba(255, 255, 255, 0.14)',
+                        backdropFilter: 'blur(8px)',
+                        border: '1px solid rgba(255, 255, 255, 0.35)',
+                        borderRadius: '2px',
+                        padding: '3px 8px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        boxShadow: '0 8px 18px rgba(0,0,0,0.6)',
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#00D2FF', boxShadow: '0 0 6px #00D2FF' }} />
+                        <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '7px', color: '#E2E8F0', fontWeight: 700, letterSpacing: '0.06em' }}>
+                          CATALOG // 032
+                        </span>
+                      </div>
+                      <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '8px', color: '#FFFFFF', fontStyle: 'italic' }}>
+                        Vaibhav Studio
+                      </span>
+                    </div>
+                  )}
+
+                  {/* SHARD 28: Metallic Red Thumbtack / Pin */}
+                  {shard.id === 28 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        borderRadius: '50%',
+                        background: 'radial-gradient(circle at 35% 35%, #FF859A 0%, #FF2453 45%, #9E0024 85%, #4A0010 100%)',
+                        boxShadow: '0 8px 16px rgba(0,0,0,0.9), 0 0 8px rgba(255, 36, 83, 0.6), inset 0 1px 2px rgba(255,255,255,0.7)',
+                        border: '1px solid rgba(255,255,255,0.4)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: 'relative',
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: '7px',
+                          height: '7px',
+                          borderRadius: '50%',
+                          background: 'rgba(255,255,255,0.85)',
+                          boxShadow: '0 0 4px #FFFFFF',
+                          transform: 'translate(-2px, -2px)',
+                        }}
+                      />
+                    </div>
+                  )}
+
+                  {/* SHARD 29: Japanese Red Hanko Seal ("वैभव") */}
+                  {shard.id === 29 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        border: '2px solid #FF2453',
+                        borderRadius: '3px',
+                        background: 'rgba(255, 36, 83, 0.08)',
+                        padding: '2px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 6px 16px rgba(0,0,0,0.7), inset 0 0 10px rgba(255, 36, 83, 0.25)',
+                        position: 'relative',
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          border: '1px dashed rgba(255, 36, 83, 0.55)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: "'Rozha One', 'Yatra One', serif",
+                            fontSize: '12px',
+                            color: '#FF2453',
+                            fontWeight: 900,
+                            lineHeight: 1,
+                            letterSpacing: '0.04em',
+                            filter: 'drop-shadow(0 0 4px rgba(255, 36, 83, 0.5))',
+                          }}
+                        >
+                          वैभव
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* SHARD 30: Kala Mandal Poster Fragment D (opt_28) */}
+                  {shard.id === 30 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        background: '#0B0D13',
+                        border: '1.5px solid rgba(255, 184, 0, 0.65)',
+                        borderRadius: '2px',
+                        overflow: 'hidden',
+                        boxShadow: '0 14px 32px rgba(0,0,0,0.85), 0 0 14px rgba(255, 184, 0, 0.25)',
+                        position: 'relative',
+                      }}
+                    >
+                      <img
+                        src="/assets/Kala%20Mandal/optimized/opt_28.jpg"
+                        alt="Kala Mandal Typographic Print #28 by Vaibhav"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '3px',
+                          left: '3px',
+                          background: 'rgba(0,0,0,0.85)',
+                          color: '#FFB800',
+                          fontFamily: "'Space Grotesk', monospace",
+                          fontSize: '6.5px',
+                          fontWeight: 800,
+                          padding: '1px 4px',
+                          borderRadius: '2px',
+                          border: '0.5px solid rgba(255, 184, 0, 0.5)',
+                        }}
+                      >
+                        KM-28 // ARCHIVE
+                      </div>
+                    </div>
+                  )}
+
+                  {/* SHARD 31: Kraft Packaging Tape Strip */}
+                  {shard.id === 31 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        background: 'linear-gradient(90deg, #D4B996 0%, #C4A57E 50%, #D4B996 100%)',
+                        opacity: 0.88,
+                        clipPath: 'polygon(0% 0%, 100% 2%, 97% 98%, 2% 100%)',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: 'relative',
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          background: 'repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(0,0,0,0.06) 4px, rgba(0,0,0,0.06) 5px)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontFamily: "'Space Grotesk', monospace",
+                            fontSize: '7px',
+                            color: '#5C3E1B',
+                            fontWeight: 800,
+                            letterSpacing: '0.14em',
+                          }}
+                        >
+                          // ARCHIVE FRAGILE //
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* SHARD 32: Chromatic Registration Target Crosshair */}
+                  {shard.id === 32 && (
+                    <div
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        position: 'relative',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        filter: 'drop-shadow(0 0 8px rgba(0, 210, 255, 0.4))',
+                      }}
+                    >
+                      <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                        <circle cx="22" cy="22" r="19" stroke="#00D2FF" strokeWidth="1" strokeDasharray="3 2" />
+                        <circle cx="22" cy="22" r="11" stroke="#CCFF00" strokeWidth="1" />
+                        <circle cx="22" cy="22" r="3" fill="#FF2453" />
+                        <line x1="22" y1="0" x2="22" y2="44" stroke="#FFFFFF" strokeWidth="1" />
+                        <line x1="0" y1="22" x2="44" y2="22" stroke="#FFFFFF" strokeWidth="1" />
+                        <text x="24" y="11" fill="#00D2FF" fontSize="5" fontFamily="'Space Grotesk', monospace">REG.4C</text>
+                      </svg>
+                    </div>
+                  )}
+
                 </div>
               );
             })}
@@ -1521,66 +2207,67 @@ export default function MixedMediaAssembly() {
             zIndex: 40,
           }}
         >
-          {/* Draggable Active Sandbox Notice */}
-          {isDraggableUnlocked ? (
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '4px 16px',
-                borderRadius: '999px',
-                background: 'rgba(204, 255, 0, 0.12)',
-                border: '1px solid #CCFF00',
-                color: '#CCFF00',
-                fontFamily: "'Space Grotesk', monospace",
-                fontSize: '10px',
-                fontWeight: 900,
-                letterSpacing: '0.06em',
-                animation: 'pulse 2s infinite',
-              }}
-            >
-              <span>✋ DRAGGABLE SANDBOX UNLOCKED</span>
-              <span>&bull;</span>
-              <span>CLICK &amp; DRAG ANY ELEMENT TO REMIX YOUR COLLAGE</span>
-            </div>
-          ) : (
-            /* Phase Quick-Jump Navigation Pills */
-            <div
-              style={{
-                display: 'flex',
-                gap: isMobile ? '4px' : '6px',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-              }}
-            >
-              {PHASES.map((ph) => {
-                const isActive = currentPhase.id === ph.id;
-                return (
-                  <button
-                    key={ph.id}
-                    type="button"
-                    onClick={() => goToProgress((ph.range[0] + ph.range[1]) / 2)}
-                    style={{
-                      background: isActive ? '#CCFF00' : 'rgba(255, 255, 255, 0.05)',
-                      color: isActive ? '#07080A' : '#94A3B8',
-                      border: isActive ? '1px solid #CCFF00' : '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '999px',
-                      padding: isMobile ? '3px 8px' : '4px 12px',
-                      fontFamily: "'Space Grotesk', monospace",
-                      fontSize: isMobile ? '8.5px' : '9.5px',
-                      fontWeight: 800,
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease',
-                    }}
-                    title={`Jump to ${ph.name}`}
-                  >
-                    0{ph.id} {isMobile ? '' : ph.name.split(' ')[0]}
-                  </button>
-                );
-              })}
-            </div>
-          )}
+          {/* Phase Quick-Jump Navigation Pills (Always Accessible) & Drag Status Chip */}
+          <div
+            style={{
+              display: 'flex',
+              gap: isMobile ? '4px' : '6px',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            {PHASES.map((ph) => {
+              const isActive = currentPhase.id === ph.id;
+              return (
+                <button
+                  key={ph.id}
+                  type="button"
+                  onClick={() => {
+                    goToProgress((ph.range[0] + ph.range[1]) / 2);
+                    try { soundFX.playTick(); } catch {}
+                  }}
+                  style={{
+                    background: isActive ? '#CCFF00' : 'rgba(255, 255, 255, 0.05)',
+                    color: isActive ? '#07080A' : '#94A3B8',
+                    border: isActive ? '1px solid #CCFF00' : '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '999px',
+                    padding: isMobile ? '3px 8px' : '4px 12px',
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: isMobile ? '8.5px' : '9.5px',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                  }}
+                  title={`Jump to Phase 0${ph.id}: ${ph.name}`}
+                >
+                  0{ph.id} {isMobile ? '' : ph.name.split(' ')[0]}
+                </button>
+              );
+            })}
+
+            {/* Subtle Sandbox Active Indicator Chip in Phase 6 */}
+            {isDraggableUnlocked && (
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  padding: '3px 10px',
+                  borderRadius: '999px',
+                  background: 'rgba(204, 255, 0, 0.14)',
+                  border: '1px solid #CCFF00',
+                  color: '#CCFF00',
+                  fontFamily: "'Space Grotesk', monospace",
+                  fontSize: isMobile ? '8px' : '9px',
+                  fontWeight: 900,
+                  letterSpacing: '0.06em',
+                }}
+              >
+                <span>✋ DRAG &amp; REMIX</span>
+              </span>
+            )}
+          </div>
 
           {/* Scrubber Track */}
           <div
@@ -1655,98 +2342,6 @@ export default function MixedMediaAssembly() {
         </footer>
       </div>
 
-      {/* ── 4. FULLSCREEN MASTERWORK MODAL INSPECTION ── */}
-      {modalOpen && (
-        <div
-          onClick={() => setModalOpen(false)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(5, 7, 10, 0.94)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            zIndex: 99999,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '24px',
-            animation: 'fadeIn 0.25s ease',
-          }}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              maxWidth: '900px',
-              width: '100%',
-              background: '#0B0F17',
-              border: '2px solid #CCFF00',
-              borderRadius: '20px',
-              padding: '24px',
-              display: 'flex',
-              flexDirection: isMobile ? 'column' : 'row',
-              gap: '24px',
-              boxShadow: '0 30px 90px rgba(0,0,0,0.9), 0 0 60px rgba(204,255,0,0.35)',
-            }}
-          >
-            {/* Modal Left Artwork Preview */}
-            <div style={{ flex: '1.2', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.15)' }}>
-              <img
-                src="/assets/text_image/artwork-a.jpg"
-                alt="HowVaibhav Masterwork Dadaist Assemblage by Vaibhav"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-            </div>
-
-            {/* Modal Right Curatorial Dossier */}
-            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '10px', color: '#CCFF00', fontWeight: 900 }}>
-                    EXHIBIT 02 // DADAIST SYNTHESIS
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setModalOpen(false)}
-                    style={{
-                      background: 'transparent',
-                      border: 'none',
-                      color: '#94A3B8',
-                      fontSize: '18px',
-                      cursor: 'pointer',
-                      padding: '4px',
-                    }}
-                  >
-                    ✕
-                  </button>
-                </div>
-
-                <h3 style={{ fontFamily: "'Space Grotesk', system-ui, sans-serif", fontSize: '24px', fontWeight: 900, color: '#FFF', margin: '0 0 8px' }}>
-                  सृजन विन्यास — Chaos Into Form
-                </h3>
-
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#CBD5E1', lineHeight: 1.6 }}>
-                  An authentic mixed-media exploration combining 35mm film negatives, torn washi tapes,
-                  CMYK rosette halftone screens, Swiss modernist type hierarchies, and physical crimson wax seals.
-                  Conceived and sculpted by Vaibhav Tiwari as a physical metaphor for breaking and restoring digital order.
-                </p>
-              </div>
-
-              <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '16px' }}>
-                <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', color: '#94A3B8', textTransform: 'uppercase', marginBottom: '8px' }}>
-                  Archive Verification
-                </div>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                  {['35MM GICLÉE', 'PANTONE 802C', 'ISO 216 // A2', 'AUTHENTICATED'].map((tag, i) => (
-                    <span key={i} style={{ background: 'rgba(204,255,0,0.12)', border: '1px solid #CCFF00', color: '#CCFF00', fontSize: '9px', padding: '3px 8px', borderRadius: '4px', fontFamily: "'Space Grotesk', monospace", fontWeight: 700 }}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
+      </section>
   );
 }

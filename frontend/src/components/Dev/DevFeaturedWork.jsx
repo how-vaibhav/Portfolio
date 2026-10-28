@@ -254,7 +254,7 @@ function ProjectCard({ p, i, isMobile, isTablet }) {
 
           {/* Action Links */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '4px' }}>
-            <span style={{ fontSize: '11px', fontWeight: 800, color: p.accent, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <span onMouseEnter={() => { try { soundFX.playTick(); } catch {} }} style={{ fontSize: '11px', fontWeight: 800, color: p.accent, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
               <span>Live Application</span>
               <span>↗</span>
             </span>
@@ -275,7 +275,7 @@ function ProjectCard({ p, i, isMobile, isTablet }) {
                   gap: '4px',
                   transition: 'color 0.2s',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                onMouseEnter={(e) => { try { soundFX.playTick(); } catch {} e.currentTarget.style.color = '#ffffff'; }}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
               >
                 <span>GitHub Source</span>
@@ -356,7 +356,8 @@ export default function DevFeaturedWork() {
               borderBottom: '1px solid rgba(255,255,255,0.1)',
               transition: 'color 0.2s, border-color 0.2s',
             }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#CCFF00'; e.currentTarget.style.borderBottomColor = '#CCFF00'; }}
+            onMouseEnter={e => { try { soundFX.playHover(); } catch {} e.currentTarget.style.color = '#CCFF00'; e.currentTarget.style.borderBottomColor = '#CCFF00'; }}
+            onClick={() => { try { soundFX.playAperture(); } catch {} }}
             onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)'; e.currentTarget.style.borderBottomColor = 'rgba(255,255,255,0.1)'; }}
           >
             All Projects ↗

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { soundFX } from '../Design/soundFX';
 import { motion } from 'motion/react';
 import useResponsive from './useResponsive';
 import './dev.css';
@@ -127,7 +128,8 @@ export default function DevContactCta() {
             <motion.a
               href="mailto:howvaibhav@gmail.com?subject=Project%20Inquiry%20%2F%20Collaboration"
               className="dev-contact-row"
-              onMouseEnter={() => setEmailHovered(true)}
+              onMouseEnter={() => { try { soundFX.playHover(); } catch {} setEmailHovered(true); }}
+              onClick={() => { try { soundFX.playKeypress(); } catch {} }}
               onMouseLeave={() => setEmailHovered(false)}
               whileHover={{ x: 3 }}
               transition={{ type: 'spring', stiffness: 400, damping: 28 }}
@@ -190,7 +192,8 @@ export default function DevContactCta() {
             <motion.a
               href="tel:+916387636285"
               className="dev-contact-row dev-contact-row--blue"
-              onMouseEnter={() => setPhoneHovered(true)}
+              onMouseEnter={() => { try { soundFX.playHover(); } catch {} setPhoneHovered(true); }}
+              onClick={() => { try { soundFX.playKeypress(); } catch {} }}
               onMouseLeave={() => setPhoneHovered(false)}
               whileHover={{ x: 3 }}
               transition={{ type: 'spring', stiffness: 400, damping: 28 }}
@@ -329,7 +332,8 @@ export default function DevContactCta() {
                   borderRadius: '6px',
                   border: '1px solid rgba(255,255,255,0.1)',
                 }}
-                onMouseEnter={(e) => {
+                onClick={() => { try { soundFX.playSuccess(); } catch {} }}
+                onMouseEnter={(e) => { try { soundFX.playTick(); } catch {}
                   e.currentTarget.style.color = '#080808';
                   e.currentTarget.style.background = '#CCFF00';
                   e.currentTarget.style.borderColor = '#CCFF00';

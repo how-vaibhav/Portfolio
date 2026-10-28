@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useModeTransition } from '../../context/ModeTransitionContext';
+import { soundFX } from '../Design/soundFX';
 
 /**
  * ModeTransitionOverlay — Pure Element Motion Transition.
@@ -22,17 +23,24 @@ export default function ModeTransitionOverlay() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Animate progress bar during the transition
+  // Animate progress bar during the transition & trigger mode sound FX
   useEffect(() => {
     if (!isTransitioning) {
       setProgress(0);
       return;
     }
+    try {
+      if (targetMode === 'dev') {
+        soundFX.playWarp();
+      } else {
+        soundFX.playAperture();
+      }
+    } catch {}
     const interval = setInterval(() => {
       setProgress((prev) => (prev < 100 ? prev + 15 : 100));
     }, 25);
     return () => clearInterval(interval);
-  }, [isTransitioning]);
+  }, [isTransitioning, targetMode]);
 
   if (!isTransitioning || !targetMode) return null;
 

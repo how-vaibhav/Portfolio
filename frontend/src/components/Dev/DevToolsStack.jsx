@@ -143,7 +143,8 @@ function TechCard({ item }) {
 
   return (
     <div
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => { try { soundFX.playHover(); } catch {} setIsHovered(true); }}
+      onClick={() => { try { soundFX.playCyberBlip(); } catch {} }}
       onMouseLeave={() => setIsHovered(false)}
       style={{
         width: '180px',

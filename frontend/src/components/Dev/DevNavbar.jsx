@@ -95,9 +95,6 @@ export default function DevNavbar() {
               <a
                 key={item.label}
                 href={item.href}
-                onClick={() => {
-                  try { soundFX.playTick(); } catch {}
-                }}
                 style={{
                   position: 'relative',
                   display: 'flex',
@@ -118,7 +115,11 @@ export default function DevNavbar() {
                   whiteSpace: 'nowrap',
                 }}
                 onMouseEnter={(e) => {
+                  try { soundFX.playHover(); } catch {}
                   if (!isActive) e.currentTarget.style.color = '#ffffff';
+                }}
+                onClick={() => {
+                  try { soundFX.playSnap(); } catch {}
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive) e.currentTarget.style.color = 'rgba(255, 255, 255, 0.65)';
@@ -164,7 +165,7 @@ export default function DevNavbar() {
           <button
             type="button"
             onClick={() => {
-              try { soundFX.playAperture(); } catch {}
+              try { soundFX.playWarp(); } catch {}
               transitionTo('/design');
             }}
             className="dev-design-mode-btn"

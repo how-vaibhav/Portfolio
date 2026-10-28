@@ -83,19 +83,34 @@ export default function ArtCirclesOrbit() {
     }
   }, [total]);
 
-  // Jump to first project in selected category
+  // Intelligently cycle through projects in selected category according to each design
   const filterByCategory = useCallback((cat) => {
     setSelectedCategory(cat);
     try { soundFX.playSnap(); } catch {}
-    if (cat === 'ALL') return;
-
-    const matchIdx = ART_CIRCLES_PROJECTS.findIndex((p) =>
-      p.category.toUpperCase().includes(cat)
-    );
-    if (matchIdx !== -1) {
-      goToIndex(matchIdx);
+    if (cat === 'ALL') {
+      goToIndex(0);
+      return;
     }
-  }, [goToIndex]);
+
+    const matchingIndices = [];
+    ART_CIRCLES_PROJECTS.forEach((p, idx) => {
+      if (p.category.toUpperCase() === cat) {
+        matchingIndices.push(idx);
+      }
+    });
+
+    if (matchingIndices.length > 0) {
+      const cur = Math.round(targetIndex);
+      // Find the next project in this category after current
+      const next = matchingIndices.find((idx) => idx > cur);
+      if (next !== undefined) {
+        goToIndex(next);
+      } else {
+        // Cycle back to the first one in this category
+        goToIndex(matchingIndices[0]);
+      }
+    }
+  }, [goToIndex, targetIndex]);
 
   // Passive Page Scroll Listener
   useEffect(() => {
@@ -214,6 +229,23 @@ export default function ArtCirclesOrbit() {
   };
 
   const currentProject = ART_CIRCLES_PROJECTS[Math.round(activeIndex)] || ART_CIRCLES_PROJECTS[0];
+
+  // Derive category counts and current design's position within its category
+  const currentCat = (currentProject.category || '').toUpperCase();
+  const categoryProjects = ART_CIRCLES_PROJECTS.filter(
+    (p) => (p.category || '').toUpperCase() === currentCat
+  );
+  const currentCatIndex = Math.max(0, categoryProjects.findIndex((p) => p.id === currentProject.id));
+  const totalInCat = categoryProjects.length;
+
+  const CATEGORY_COUNTS = {
+    ALL: total,
+    SURREALISM: ART_CIRCLES_PROJECTS.filter((p) => p.category.toUpperCase() === 'SURREALISM').length,
+    EDITORIAL: ART_CIRCLES_PROJECTS.filter((p) => p.category.toUpperCase() === 'EDITORIAL').length,
+    POSTERS: ART_CIRCLES_PROJECTS.filter((p) => p.category.toUpperCase() === 'POSTERS').length,
+    PHOTOGRAPHY: ART_CIRCLES_PROJECTS.filter((p) => p.category.toUpperCase() === 'PHOTOGRAPHY').length,
+    TYPOGRAPHY: ART_CIRCLES_PROJECTS.filter((p) => p.category.toUpperCase() === 'TYPOGRAPHY').length,
+  };
 
   // Mathematical Geometry for Wide Horizontal Arena Utilization
   const focalXOffset = isMobile
@@ -356,61 +388,159 @@ export default function ArtCirclesOrbit() {
                 maxWidth: '210px',
               }}
             >
-              {/* Telemetry Header */}
+              {/* Telemetry Header: Tailored directly to EACH Active Design */}
               <div
                 style={{
-                  padding: '8px 12px',
+                  padding: '9px 12px',
                   borderRadius: '10px',
-                  background: 'rgba(11, 15, 25, 0.85)',
-                  border: '1px solid rgba(0, 210, 255, 0.28)',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+                  background: 'rgba(11, 15, 25, 0.88)',
+                  border: `1.5px solid ${currentProject.color}45`,
+                  boxShadow: `0 8px 24px rgba(0,0,0,0.65), 0 0 18px ${currentProject.color}15`,
+                  backdropFilter: 'blur(12px)',
+                  WebkitBackdropFilter: 'blur(12px)',
+                  transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00D2FF', boxShadow: '0 0 6px #00D2FF' }} />
-                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', fontWeight: 900, color: '#00D2FF', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                    01 // CONCEPTS
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span
+                      style={{
+                        width: '6px',
+                        height: '6px',
+                        borderRadius: '50%',
+                        background: currentProject.color,
+                        boxShadow: `0 0 8px ${currentProject.color}`,
+                        transition: 'background 0.25s ease, box-shadow 0.25s ease',
+                      }}
+                    />
+                    <span
+                      style={{
+                        fontFamily: "'Space Grotesk', monospace",
+                        fontSize: '9px',
+                        fontWeight: 900,
+                        color: currentProject.color,
+                        letterSpacing: '0.12em',
+                        textTransform: 'uppercase',
+                        transition: 'color 0.25s ease',
+                      }}
+                    >
+                      EXHIBIT {currentProject.number} // {currentProject.category.toUpperCase()}
+                    </span>
+                  </div>
+                  <span
+                    style={{
+                      fontFamily: "'Space Grotesk', monospace",
+                      fontSize: '8px',
+                      color: '#94A3B8',
+                      fontWeight: 700,
+                    }}
+                  >
+                    {currentCatIndex + 1}/{totalInCat}
                   </span>
                 </div>
-                <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '11px', fontWeight: 800, color: '#FFFFFF' }}>
-                  {currentProject.category}
+
+                <div
+                  style={{
+                    fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                    fontSize: '11.5px',
+                    fontWeight: 800,
+                    color: '#FFFFFF',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    lineHeight: 1.25,
+                  }}
+                  title={currentProject.title}
+                >
+                  {currentProject.title.split('//')[0].trim()}
                 </div>
-                <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '8px', color: '#64748B', marginTop: '2px' }}>
-                  DIAL ROTATION: -{currentAngleDeg}°
+
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    marginTop: '4px',
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '8px',
+                    color: '#64748B',
+                  }}
+                >
+                  <span>ROTATION: -{currentAngleDeg}°</span>
+                  <span style={{ color: currentProject.color, fontWeight: 700 }}>
+                    YEAR {currentProject.year}
+                  </span>
                 </div>
               </div>
 
-              {/* Quick Category Jump Pills */}
+              {/* Quick Category Jump & Cycle Index (Strictly 1 Active Category per Design) */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '7.5px', color: '#64748B', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                  Curatorial Index
-                </span>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 2px' }}>
+                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '7.5px', color: '#64748B', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                    Curatorial Index
+                  </span>
+                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '7px', color: '#475569', letterSpacing: '0.04em' }}>
+                    CYCLE ON CLICK
+                  </span>
+                </div>
+
                 {CATEGORIES.map((cat) => {
-                  const isActive = selectedCategory === cat || (cat !== 'ALL' && currentProject.category.toUpperCase().includes(cat));
+                  const isCatActive = cat === currentCat;
+                  const count = CATEGORY_COUNTS[cat] || 0;
+
                   return (
                     <button
                       key={cat}
                       type="button"
                       onClick={() => filterByCategory(cat)}
                       style={{
-                        background: isActive ? 'rgba(0, 210, 255, 0.18)' : 'rgba(255, 255, 255, 0.03)',
-                        color: isActive ? '#00D2FF' : '#94A3B8',
-                        border: isActive ? '1px solid #00D2FF' : '1px solid rgba(255, 255, 255, 0.08)',
+                        background: isCatActive
+                          ? `${currentProject.color}20`
+                          : 'rgba(255, 255, 255, 0.03)',
+                        color: isCatActive ? '#FFFFFF' : '#94A3B8',
+                        border: isCatActive
+                          ? `1.5px solid ${currentProject.color}`
+                          : '1px solid rgba(255, 255, 255, 0.08)',
                         borderRadius: '6px',
                         padding: '4px 8px',
                         fontFamily: "'Space Grotesk', monospace",
                         fontSize: '9px',
-                        fontWeight: 800,
+                        fontWeight: isCatActive ? 900 : 700,
                         textAlign: 'left',
                         cursor: 'pointer',
                         transition: 'all 0.2s ease',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
+                        boxShadow: isCatActive ? `0 0 12px ${currentProject.color}35` : 'none',
                       }}
+                      title={cat === 'ALL' ? 'Jump to Exhibit 01' : `Cycle through ${cat} exhibits`}
                     >
-                      <span>{cat}</span>
-                      {isActive && <span style={{ fontSize: '7px' }}>●</span>}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        {isCatActive && (
+                          <span
+                            style={{
+                              width: '4px',
+                              height: '4px',
+                              borderRadius: '50%',
+                              background: currentProject.color,
+                              boxShadow: `0 0 6px ${currentProject.color}`,
+                            }}
+                          />
+                        )}
+                        <span>{cat}</span>
+                      </div>
+                      <span
+                        style={{
+                          fontSize: '7.5px',
+                          fontFamily: "'Space Grotesk', monospace",
+                          fontWeight: 700,
+                          opacity: isCatActive ? 1 : 0.45,
+                          color: isCatActive ? currentProject.color : '#94A3B8',
+                        }}
+                      >
+                        {count}
+                      </span>
                     </button>
                   );
                 })}
@@ -443,21 +573,36 @@ export default function ArtCirclesOrbit() {
                   padding: '8px 12px',
                   borderRadius: '10px',
                   background: 'rgba(11, 15, 25, 0.85)',
-                  border: '1px solid rgba(204, 255, 0, 0.28)',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.6)',
+                  border: `1.5px solid ${currentProject.color}45`,
+                  boxShadow: `0 8px 24px rgba(0,0,0,0.6), 0 0 16px ${currentProject.color}15`,
+                  transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#CCFF00', boxShadow: '0 0 6px #CCFF00' }} />
-                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', fontWeight: 900, color: '#CCFF00', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                  <span
+                    style={{
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      background: currentProject.color,
+                      boxShadow: `0 0 6px ${currentProject.color}`,
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "'Space Grotesk', monospace",
+                      fontSize: '9px',
+                      fontWeight: 900,
+                      color: currentProject.color,
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
                     02 // ARTWORK PLATES
                   </span>
                 </div>
                 <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '11px', fontWeight: 800, color: '#FFFFFF' }}>
                   EXHIBIT {currentProject.number} / {total}
-                </div>
-                <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '8px', color: '#64748B', marginTop: '2px' }}>
-                  DIAL ROTATION: +{currentAngleDeg}°
                 </div>
               </div>
 
@@ -495,10 +640,6 @@ export default function ArtCirclesOrbit() {
                       />
                     );
                   })}
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '6px', fontFamily: "'Space Grotesk', monospace", fontSize: '7.5px', color: '#94A3B8' }}>
-                  <span>RES: 4K HIGH-DEF</span>
-                  <span style={{ color: '#CCFF00', fontWeight: 800 }}>RATIO: 1:1</span>
                 </div>
               </div>
             </div>
@@ -886,34 +1027,34 @@ export default function ArtCirclesOrbit() {
                 {currentProject.explanation}
               </p>
 
-              {/* Action Button: [ VIEW COLLECTION / DOSSIER ] */}
+              {/* Action Button: Compact Symbol Button [ ↗ ] */}
               <button
                 type="button"
                 onClick={() => {
                   try { soundFX.playSnap(); } catch {}
                   setModalProject(currentProject);
                 }}
+                title={`View Dossier for ${currentProject.title}`}
+                aria-label={`View Dossier for ${currentProject.title}`}
                 style={{
                   marginTop: '2px',
+                  width: '36px',
+                  height: '36px',
                   background: 'linear-gradient(145deg, #1A202C 0%, #0D111A 100%)',
                   color: '#FFFFFF',
                   border: `1.5px solid ${currentProject.color}`,
-                  borderRadius: '999px',
-                  padding: '7px 22px',
-                  fontFamily: "'Space Grotesk', monospace",
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
+                  borderRadius: '50%',
                   cursor: 'pointer',
                   boxShadow: `0 6px 18px rgba(0,0,0,0.6), 0 0 16px ${currentProject.color}30`,
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '6px',
+                  justifyContent: 'center',
+                  fontSize: '15px',
+                  fontWeight: 900,
                   transition: 'transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.transform = 'scale(1.12)';
                   e.currentTarget.style.background = currentProject.color;
                   e.currentTarget.style.color = '#07080B';
                   e.currentTarget.style.boxShadow = `0 8px 24px ${currentProject.color}70`;
@@ -925,8 +1066,7 @@ export default function ArtCirclesOrbit() {
                   e.currentTarget.style.boxShadow = `0 6px 18px rgba(0,0,0,0.6), 0 0 16px ${currentProject.color}30`;
                 }}
               >
-                <span>VIEW DOSSIER</span>
-                <span>↗</span>
+                <span style={{ transform: 'translateY(-0.5px)' }}>↗</span>
               </button>
 
               {/* Bottom Horizontal Rule Line */}
@@ -976,96 +1116,7 @@ export default function ArtCirclesOrbit() {
           </div>
         </div>
 
-        {/* ── BOTTOM DOCK CONTROLS: STEPPERS, DOTS & NAVIGATION ── */}
-        <footer
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '8px',
-            zIndex: 30,
-            userSelect: 'none',
-            maxWidth: '680px',
-            width: '100%',
-          }}
-        >
-          {/* Main Controls Row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            {/* Prev Button */}
-            <button
-              type="button"
-              onClick={() => goToIndex(Math.round(targetIndex) - 1)}
-              disabled={Math.round(targetIndex) <= 0}
-              style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                background: Math.round(targetIndex) <= 0 ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                color: Math.round(targetIndex) <= 0 ? '#475569' : '#FFFFFF',
-                fontSize: '14px',
-                cursor: Math.round(targetIndex) <= 0 ? 'not-allowed' : 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.2s ease',
-              }}
-              title="Previous exhibit (Arrow Left)"
-            >
-              ‹
-            </button>
 
-            {/* Pagination Step Dots */}
-            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-              {ART_CIRCLES_PROJECTS.map((proj, idx) => {
-                const isActive = Math.round(activeIndex) === idx;
-                return (
-                  <button
-                    key={proj.id}
-                    type="button"
-                    onClick={() => goToIndex(idx)}
-                    style={{
-                      width: isActive ? '20px' : '6px',
-                      height: '6px',
-                      borderRadius: '999px',
-                      background: isActive ? currentProject.color : 'rgba(255, 255, 255, 0.22)',
-                      border: 'none',
-                      padding: 0,
-                      cursor: 'pointer',
-                      transition: 'all 0.22s ease',
-                      boxShadow: isActive ? `0 0 8px ${currentProject.color}` : 'none',
-                    }}
-                    title={`Go to exhibit ${proj.number}: ${proj.title}`}
-                  />
-                );
-              })}
-            </div>
-
-            {/* Next Button */}
-            <button
-              type="button"
-              onClick={() => goToIndex(Math.round(targetIndex) + 1)}
-              disabled={Math.round(targetIndex) >= total - 1}
-              style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '50%',
-                background: Math.round(targetIndex) >= total - 1 ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.08)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                color: Math.round(targetIndex) >= total - 1 ? '#475569' : '#FFFFFF',
-                fontSize: '14px',
-                cursor: Math.round(targetIndex) >= total - 1 ? 'not-allowed' : 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'all 0.2s ease',
-              }}
-              title="Next exhibit (Arrow Right)"
-            >
-              ›
-            </button>
-          </div>
-        </footer>
       </div>
 
       {/* ── FULLSCREEN EXHIBIT DOSSIER MODAL ── */}

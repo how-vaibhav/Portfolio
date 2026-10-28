@@ -164,6 +164,7 @@ export default function DevHero() {
                 <motion.div
                   variants={lineV}
                   style={{ display: 'inline-block', cursor: 'default', transformOrigin: 'left center' }}
+                  onMouseEnter={() => { try { soundFX.playHover(); } catch {} }}
                   whileHover={{
                     color: 'transparent',
                     WebkitTextStroke: isMobile ? '1px #ffffff' : '2px #ffffff',
@@ -187,7 +188,8 @@ export default function DevHero() {
                   boxShadow: '10px 10px 0px rgba(204,255,0,0.9)',
                   position: 'relative', overflow: 'hidden', cursor: 'default'
                 }}
-                whileHover={{
+                onMouseEnter={() => { try { soundFX.playHover(); } catch {} }}
+                  whileHover={{
                   scale: 1.05,
                   rotate: -2,
                   boxShadow: '15px 15px 0px rgba(255,112,166,1)',
@@ -219,7 +221,8 @@ export default function DevHero() {
                   height: isMobile ? '60px' : isTablet ? '90px' : '120px',
                   position: 'relative'
                 }}
-                whileHover={{
+                onMouseEnter={() => { try { soundFX.playHover(); } catch {} }}
+                  whileHover={{
                   rotate: 2,
                   scale: 1.05,
                   color: '#FF70A6',
@@ -245,7 +248,7 @@ export default function DevHero() {
               { val: clients, label: 'Clients' },
               { val: years, label: 'Yrs Exp' },
             ].map(({ val, label }) => (
-              <motion.div key={label} variants={fadeV} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <motion.div key={label} variants={fadeV} onMouseEnter={() => { try { soundFX.playTick(); } catch {} }} onClick={() => { try { soundFX.playCyberBlip(); } catch {} }} style={{ display: 'flex', flexDirection: 'column', gap: '4px', cursor: 'pointer' }}>
                 <span style={{
                   fontFamily: "'Archivo Black', sans-serif",
                   fontSize: isMobile ? '36px' : '48px',
@@ -291,6 +294,7 @@ export default function DevHero() {
 
           {/* Spinning dashed ring — pure CSS via className */}
           <motion.div
+            onMouseEnter={() => { try { soundFX.playTick(); } catch {} }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}

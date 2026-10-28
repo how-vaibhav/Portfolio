@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { soundFX } from '../Design/soundFX';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import useResponsive from './useResponsive';
 import './dev.css';
@@ -250,7 +251,8 @@ export default function DevExperience() {
                     }}
                     viewport={{ once: true, amount: 0.1 }}
                     transition={{ duration: 0.5, type: 'spring', stiffness: 300, damping: 25 }}
-                    onClick={() => setActiveIdx(index)}
+                    onMouseEnter={() => { try { soundFX.playHover(); } catch {} }}
+                    onClick={() => { try { soundFX.playSnap(); } catch {} setActiveIdx(index); }}
                     className="dev-hover-card"
                     style={{
                       background: '#080808',

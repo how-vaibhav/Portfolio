@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { soundFX } from '../Design/soundFX';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import useResponsive from './useResponsive';
 import './dev.css';
@@ -90,7 +91,7 @@ function PhysicsTestimonialCard({ item, index, progress, isHovered, onHover, onL
 
   return (
     <motion.div
-      onMouseEnter={onHover}
+      onMouseEnter={() => { try { soundFX.playSnap(); } catch {} onHover(); }}
       onMouseLeave={onLeave}
       style={{
         position: 'relative',
