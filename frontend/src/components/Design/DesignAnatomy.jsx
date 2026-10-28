@@ -519,6 +519,7 @@ export default function DesignAnatomy() {
   return (
     <section
       ref={sectionRef}
+      className="anatomy-section-root"
       onPointerDown={() => {
         try { soundFX.unlock(); } catch {}
       }}
@@ -540,6 +541,7 @@ export default function DesignAnatomy() {
 
       {/* ─── SVG CONNECTOR LAYER (Curved Architectural Laser Pathways — Zero Overlap) ─── */}
       <svg
+        className="anatomy-laser-svg"
         viewBox="0 0 1200 900"
         preserveAspectRatio="xMidYMid meet"
         style={{
@@ -697,8 +699,13 @@ export default function DesignAnatomy() {
             .anatomy-mobile-grid   { display: none !important; }
           }
           @media (max-width: 959px) {
+            .anatomy-section-root {
+              min-height: auto !important;
+              padding: 24px 0 32px !important;
+            }
             .anatomy-desktop-stage { display: none !important; }
             .anatomy-mobile-grid   { display: flex !important; }
+            .anatomy-laser-svg     { display: none !important; }
           }
 
           @keyframes doodleFloatSlow {
@@ -1107,14 +1114,14 @@ export default function DesignAnatomy() {
         }}
       >
         {/* Mobile Header Badge with Flanking Neon Doodles */}
-        <div style={{ textAlign: 'center', paddingTop: '6px', position: 'relative', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ textAlign: 'center', paddingTop: '4px', position: 'relative', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           {/* Subtle Mobile Top-Left Mini Lightning Bolt */}
-          <div style={{ position: 'absolute', left: '8px', top: '2px', opacity: 0.85 }}>
-            <Doodle_NeonLightningBolt color="#1E6BFF" width={32} height={48} rotation={-10} interactive={false} />
+          <div style={{ position: 'absolute', left: '4px', top: '2px', opacity: 0.85 }}>
+            <Doodle_NeonLightningBolt color="#1E6BFF" width={26} height={38} rotation={-10} interactive={false} />
           </div>
           {/* Subtle Mobile Top-Right Mini Star */}
-          <div style={{ position: 'absolute', right: '8px', top: '6px', opacity: 0.85 }}>
-            <Doodle_ModernistStarCluster color="#CCFF00" size={32} rotation={15} interactive={false} />
+          <div style={{ position: 'absolute', right: '4px', top: '4px', opacity: 0.85 }}>
+            <Doodle_ModernistStarCluster color="#CCFF00" size={26} rotation={15} interactive={false} />
           </div>
           <div
             style={{
@@ -1124,8 +1131,8 @@ export default function DesignAnatomy() {
               background: 'rgba(0, 229, 195, 0.12)',
               border: '1px solid rgba(0, 229, 195, 0.4)',
               borderRadius: '999px',
-              padding: '4px 14px',
-              fontSize: '10px',
+              padding: '3px 12px',
+              fontSize: '9.5px',
               fontFamily: "'Space Grotesk', monospace",
               fontWeight: 800,
               color: '#00E5C3',
@@ -1137,12 +1144,28 @@ export default function DesignAnatomy() {
             <span>Typographic Anatomy</span>
             <span>✦</span>
           </div>
+
+          <h2
+            style={{
+              fontFamily: "'Rozha One', 'Cinzel Decorative', serif",
+              fontSize: 'clamp(22px, 6vw, 30px)',
+              fontWeight: 400,
+              letterSpacing: '0.02em',
+              color: '#FFFFFF',
+              margin: '6px 0 2px',
+              lineHeight: 1.2,
+              textAlign: 'center',
+            }}
+          >
+            The Anatomy of <span style={{ color: '#00D2FF', fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>HowVaibhav</span>
+          </h2>
+
           <div
             style={{
               fontSize: '11px',
               color: 'rgba(255, 255, 255, 0.55)',
               fontFamily: "'Space Grotesk', sans-serif",
-              marginTop: '5px',
+              marginTop: '2px',
               letterSpacing: '0.02em',
             }}
           >

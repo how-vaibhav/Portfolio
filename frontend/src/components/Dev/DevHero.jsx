@@ -389,7 +389,7 @@ export default function DevHero() {
             }}
           >
             <PixelImage
-              src="/assets/vaibhav-hero-cutout.png"
+              src="/assets/vaibhav-hero-cutout.webp"
               grid="6x4"
               pixelFadeInDuration={800}
               colorRevealDelay={1000}

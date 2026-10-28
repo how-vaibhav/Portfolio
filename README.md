@@ -65,8 +65,11 @@ An homage to Swiss editorial specimen posters and anatomical typography guides:
 
 ### 2. The Origin Story & What's Up (`HowVaibhavStory.jsx`)
 - **Tactile Washi-Tape Polaroids:** Analog photo showcase featuring authentic portrait photography pinned with textured semi-transparent washi tape and realistic dropshadows.
-- **The Story Behind "HowVaibhav":**
-  > *“People often ask: ‘Why the name HowVaibhav?’ Because whether deploying distributed cloud backends at 3 AM or fine-tuning a display serif’s bezier tangent by 0.2 millimeters, the reaction from peers has always been: ‘Wait, how did you pull that off?’ ...Well. How? Vaibhav.”*
+- **The Story Behind "HowVaibhav" (THE ORIGIN STORY // आत्मसंशय का अंत):**
+  - **01** — When things fell apart and experiments failed, they asked with pity: *“How, Vaibhav?”*
+  - **02** — When I claimed a blank canvas and started designing, they asked with disbelief: *“How, Vaibhav?”*
+  - **03** — When I took my craft dead seriously to build my personal brand, they asked with resistance: *“How, Vaibhav?”*
+  > The name **HowVaibhav** is not just a creative handle. It is the definitive answer to every small-minded ego that doubted ambition, and the burial of all self-doubt. It began as their question of disbelief — it became my living declaration of proof.
 - **Software & Creative Instruments Stack:**
   - Photoshop, Illustrator, InDesign, Figma, Premiere Pro, After Effects, Picsart, CapCut, Audition, and Blender with authentic branded SVG badges and subtle hover lift physics.
 

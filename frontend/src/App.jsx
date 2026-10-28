@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useSearchParams, useLocation } from 'react-router-dom';
-import DevPage from './pages/DevPage';
-import DesignPage from './pages/DesignPage';
-import DesignUnderWorkPage from './pages/DesignUnderWorkPage';
 import { ModeTransitionProvider } from './context/ModeTransitionContext';
 import ModeTransitionOverlay from './components/Transitions/ModeTransitionOverlay';
+
+// ── Route-Based Code Splitting: Lazy-load route pages on-demand ──
+const DevPage = lazy(() => import('./pages/DevPage'));
+const DesignPage = lazy(() => import('./pages/DesignPage'));
+const DesignUnderWorkPage = lazy(() => import('./pages/DesignUnderWorkPage'));
 
 /**
  * DesignRouteController:
@@ -30,12 +32,14 @@ export default function App() {
     <BrowserRouter>
       <ModeTransitionProvider>
         <ModeTransitionOverlay />
-        <Routes>
-          <Route path="/" element={<DevPage />} />
-          <Route path="/design" element={<DesignRouteController />} />
-          <Route path="/design/studio" element={<DesignPage />} />
-          <Route path="/design/wip" element={<DesignUnderWorkPage />} />
-        </Routes>
+        <Suspense fallback={<div style={{ minHeight: '100vh', background: '#080808' }} />}>
+          <Routes>
+            <Route path="/" element={<DevPage />} />
+            <Route path="/design" element={<DesignRouteController />} />
+            <Route path="/design/studio" element={<DesignPage />} />
+            <Route path="/design/wip" element={<DesignUnderWorkPage />} />
+          </Routes>
+        </Suspense>
       </ModeTransitionProvider>
     </BrowserRouter>
   );

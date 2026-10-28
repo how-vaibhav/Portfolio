@@ -10,7 +10,7 @@ const PROJECTS = [
     title: 'eMineral Pass',
     tag: 'SaaS Platform',
     accent: '#2555FF',
-    image: '/assets/project-emineral-screenshot.png',
+    image: '/assets/project-emineral-screenshot.webp',
     url: 'https://www.mineraltrack.shop/',
     desc: 'Gov-compliant mineral transport permit with QR verification & real-time tracking.',
     year: '2026',
@@ -21,7 +21,7 @@ const PROJECTS = [
     title: 'GOVAID',
     tag: 'GovTech Portal',
     accent: '#CCFF00',
-    image: '/assets/project-govaid-screenshot.png',
+    image: '/assets/project-govaid-screenshot.webp',
     url: 'https://govaid-5n3k.onrender.com/',
     desc: 'Welfare scheme evaluation engine with Fernet encryption & eligibility scoring.',
     year: '2025',
@@ -32,7 +32,7 @@ const PROJECTS = [
     title: 'LOG DETECTOR',
     tag: 'Security & Forensics',
     accent: '#FF4D4D',
-    image: '/assets/project-logdetector-screenshot.png',
+    image: '/assets/project-logdetector-screenshot.webp',
     url: 'https://github.com/SkylerOnRadio/log-checker',
     desc: 'Multiprocessed log analyzer using Shannon entropy & MITRE Kill-Chain mapping.',
     year: '2026',
@@ -43,7 +43,7 @@ const PROJECTS = [
     title: 'LoanIQ — AI Predictor',
     tag: 'ML & FinTech Stacking Ensemble',
     accent: '#00E5FF',
-    image: '/assets/project-loaniq-screenshot.png',
+    image: '/assets/project-loaniq-screenshot.webp',
     url: 'https://loan-approval-predictor-8p0v.onrender.com',
     githubUrl: 'https://github.com/how-vaibhav/Loan-Approval-Predictor',
     desc: 'Calibrated stacking ensemble (XGBoost + LightGBM + Random Forest) evaluating retail loan solvency with 83.9% ROC-AUC, automated SMOTE balancing & real-time Flask API.',
@@ -147,6 +147,8 @@ function ProjectCard({ p, i, isMobile, isTablet }) {
           <motion.img
             src={p.image}
             alt={p.title}
+            loading="lazy"
+            decoding="async"
             style={{
               width: '100%',
               height: '100%',

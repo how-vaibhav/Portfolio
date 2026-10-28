@@ -210,16 +210,22 @@ export default function ArtCirclesOrbit() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [targetIndex, modalProject, goToIndex]);
 
-  // Touch swipe handling
+  // Touch swipe handling with horizontal flick support
   const touchStartY = useRef(0);
+  const touchStartX = useRef(0);
   const handleTouchStart = (e) => {
-    if (e.touches.length === 1) touchStartY.current = e.touches[0].clientY;
+    if (e.touches.length === 1) {
+      touchStartY.current = e.touches[0].clientY;
+      touchStartX.current = e.touches[0].clientX;
+    }
   };
   const handleTouchEnd = (e) => {
     if (e.changedTouches.length === 1) {
+      const deltaX = e.changedTouches[0].clientX - touchStartX.current;
       const deltaY = e.changedTouches[0].clientY - touchStartY.current;
-      if (Math.abs(deltaY) > 35) {
-        if (deltaY < 0) {
+      // Cycle exhibits when swiping horizontally left or right
+      if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 0.75) {
+        if (deltaX < 0) {
           if (targetIndex < total - 1) goToIndex(Math.round(targetIndex) + 1);
         } else {
           if (targetIndex > 0) goToIndex(Math.round(targetIndex) - 1);
@@ -893,227 +899,440 @@ export default function ArtCirclesOrbit() {
               THE CENTER STAGE: TWO ITEMS SIDE BY SIDE (EXACT REFERENCE RECREATION)
               [ LEFT: DESIGN EXPLANATION ] ── [ CENTER: TEXT & BUTTON ] ── [ RIGHT: DESIGN ARTWORK ]
               ═══════════════════════════════════════════════════════════════ */}
-          <div
-            className="art-circles-center-triptych"
-            style={{
-              position: 'relative',
-              zIndex: 40,
-              display: 'flex',
-              flexDirection: isMobile ? 'column' : 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: isMobile ? '12px' : '22px',
-              maxWidth: '1060px',
-              width: '100%',
-              padding: '0 10px',
-            }}
-          >
-            {/* ── 1. LEFT ITEM: ACTIVE DESIGN EXPLANATION CARD ── */}
+          {isMobile ? (
+            /* ── MOBILE STREAMLINED EXHIBIT DECK (Fits Screen Perfectly with Zero Overflow) ── */
             <div
+              className="art-circles-mobile-hub"
               style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: isMobile ? 'center' : 'flex-end',
-                gap: '6px',
-              }}
-            >
-              <div
-                className="center-focal-card"
-                onClick={() => setModalProject(currentProject)}
-                style={{
-                  width: isMobile ? '150px' : '210px',
-                  height: isMobile ? '150px' : '210px',
-                  background: 'rgba(12, 16, 26, 0.94)',
-                  border: `2px solid ${currentProject.color}`,
-                  borderRadius: '16px',
-                  padding: isMobile ? '12px' : '16px',
-                  boxShadow: `0 20px 45px rgba(0, 0, 0, 0.8), 0 0 30px ${currentProject.color}35`,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  userSelect: 'none',
-                }}
-                title="Click to inspect explanation dossier"
-              >
-                {/* Top Badge */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '10px', fontWeight: 900, color: currentProject.color, letterSpacing: '0.08em' }}>
-                    EXPLANATION // {currentProject.number}
-                  </span>
-                  <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: currentProject.color, boxShadow: `0 0 8px ${currentProject.color}` }} />
-                </div>
-
-                {/* Core Concept Headline */}
-                <div>
-                  <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? '12px' : '14px', fontWeight: 800, color: '#FFFFFF', lineHeight: 1.25, marginBottom: '6px' }}>
-                    &ldquo;{currentProject.conceptHeadline}&rdquo;
-                  </div>
-                  <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: isMobile ? '9px' : '10px', color: '#94A3B8' }}>
-                    {currentProject.category}
-                  </div>
-                </div>
-
-                {/* Bottom Spec Badge */}
-                <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
-                  {currentProject.metrics.slice(0, 2).map((m, i) => (
-                    <span key={i} style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '8.5px', color: currentProject.color, background: `${currentProject.color}18`, padding: '2px 6px', borderRadius: '4px' }}>
-                      {m}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Caption Label underneath */}
-              <div style={{ textAlign: isMobile ? 'center' : 'right', fontFamily: "'Space Grotesk', monospace", fontSize: '10px', color: '#94A3B8', letterSpacing: '0.04em' }}>
-                <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{currentProject.client}</span>
-              </div>
-            </div>
-
-            {/* ── 2. CENTER ITEM: CURATORIAL TEXT BLOCK WITH FRAMING RULES ── */}
-            <div
-              style={{
-                width: isMobile ? 'min(92%, 360px)' : '320px',
-                textAlign: 'center',
-                padding: '12px 14px',
                 position: 'relative',
+                zIndex: 40,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 gap: '8px',
+                width: '100%',
+                maxWidth: '420px',
+                padding: '0 8px',
+                boxSizing: 'border-box',
               }}
             >
-              {/* Top Horizontal Rule Line */}
-              <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.22) 20%, rgba(255, 255, 255, 0.22) 80%, transparent 100%)' }} />
-
-              {/* Step / Category Tag */}
-              <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '10px', fontWeight: 900, color: currentProject.color, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                EXHIBIT {currentProject.number} / {total}
-              </div>
-
-              {/* Title */}
-              <h3
-                style={{
-                  fontFamily: "'Space Grotesk', system-ui, sans-serif",
-                  fontSize: isMobile ? '18px' : '23px',
-                  fontWeight: 900,
-                  color: '#FFFFFF',
-                  letterSpacing: '-0.02em',
-                  lineHeight: 1.15,
-                  margin: 0,
-                }}
-              >
-                {currentProject.title}
-              </h3>
-
-              {/* Curated By attribution */}
-              <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9.5px', color: '#94A3B8', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-                CURATED BY HOWVAIBHAV &bull; {currentProject.category}
-              </div>
-
-              {/* Curatorial Rationale Paragraph */}
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: isMobile ? '11px' : '11.5px',
-                  color: '#CBD5E1',
-                  lineHeight: 1.45,
-                  margin: 0,
-                  display: '-webkit-box',
-                  WebkitLineClamp: isMobile ? 2 : 3,
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden',
-                }}
-              >
-                {currentProject.explanation}
-              </p>
-
-              {/* Action Button: Compact Symbol Button [ ↗ ] */}
-              <button
-                type="button"
-                onClick={() => {
-                  try { soundFX.playSnap(); } catch {}
-                  setModalProject(currentProject);
-                }}
-                title={`View Dossier for ${currentProject.title}`}
-                aria-label={`View Dossier for ${currentProject.title}`}
-                style={{
-                  marginTop: '2px',
-                  width: '36px',
-                  height: '36px',
-                  background: 'linear-gradient(145deg, #1A202C 0%, #0D111A 100%)',
-                  color: '#FFFFFF',
-                  border: `1.5px solid ${currentProject.color}`,
-                  borderRadius: '50%',
-                  cursor: 'pointer',
-                  boxShadow: `0 6px 18px rgba(0,0,0,0.6), 0 0 16px ${currentProject.color}30`,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '15px',
-                  fontWeight: 900,
-                  transition: 'transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'scale(1.12)';
-                  e.currentTarget.style.background = currentProject.color;
-                  e.currentTarget.style.color = '#07080B';
-                  e.currentTarget.style.boxShadow = `0 8px 24px ${currentProject.color}70`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.background = 'linear-gradient(145deg, #1A202C 0%, #0D111A 100%)';
-                  e.currentTarget.style.color = '#FFFFFF';
-                  e.currentTarget.style.boxShadow = `0 6px 18px rgba(0,0,0,0.6), 0 0 16px ${currentProject.color}30`;
-                }}
-              >
-                <span style={{ transform: 'translateY(-0.5px)' }}>↗</span>
-              </button>
-
-              {/* Bottom Horizontal Rule Line */}
-              <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.22) 20%, rgba(255, 255, 255, 0.22) 80%, transparent 100%)' }} />
-            </div>
-
-            {/* ── 3. RIGHT ITEM: ACTIVE DESIGN ARTWORK PLATE ── */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: isMobile ? 'center' : 'flex-start',
-                gap: '6px',
-              }}
-            >
-              <div
-                className="center-focal-card"
-                onClick={() => setModalProject(currentProject)}
-                style={{
-                  width: isMobile ? '150px' : '210px',
-                  height: isMobile ? '150px' : '210px',
-                  background: '#070A10',
-                  border: `2px solid ${currentProject.color}`,
-                  borderRadius: '16px',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  boxShadow: `0 20px 45px rgba(0, 0, 0, 0.8), 0 0 30px ${currentProject.color}35`,
-                  userSelect: 'none',
-                }}
-                title="Click to view full uncropped artwork"
-              >
-                <img
-                  src={currentProject.designImage}
-                  alt={currentProject.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
-                <div style={{ position: 'absolute', top: '8px', right: '8px', background: 'rgba(0, 0, 0, 0.78)', color: currentProject.color, fontSize: '10px', fontWeight: 900, fontFamily: "'Space Grotesk', monospace", padding: '2px 8px', borderRadius: '4px', border: `1px solid ${currentProject.color}50` }}>
-                  #{currentProject.number}
+              {/* Exhibit Eyebrow & Title */}
+              <div style={{ textAlign: 'center', width: '100%' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: currentProject.color, boxShadow: `0 0 6px ${currentProject.color}` }} />
+                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', fontWeight: 900, color: currentProject.color, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                    EXHIBIT {currentProject.number} / {total} • {currentProject.category}
+                  </span>
+                </div>
+                <h3
+                  style={{
+                    fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                    fontSize: 'clamp(17px, 5vw, 21px)',
+                    fontWeight: 900,
+                    color: '#FFFFFF',
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1.15,
+                    margin: '0 0 2px',
+                  }}
+                >
+                  {currentProject.title}
+                </h3>
+                <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', color: '#94A3B8', letterSpacing: '0.03em' }}>
+                  &ldquo;{currentProject.conceptHeadline}&rdquo;
                 </div>
               </div>
 
-              {/* Artwork Plate Sub-label */}
-              <div style={{ textAlign: isMobile ? 'center' : 'left', fontFamily: "'Space Grotesk', monospace", fontSize: '10px', color: '#94A3B8', letterSpacing: '0.04em' }}>
-                <span style={{ color: '#FFFFFF', fontWeight: 700 }}>HIGH-RES UNCOMPRESSED</span> &bull; 1:1
+              {/* Two Focal Cards Side-by-Side in 1 Row */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  width: '100%',
+                }}
+              >
+                {/* Left: Explanation Card */}
+                <div
+                  className="center-focal-card"
+                  onClick={() => setModalProject(currentProject)}
+                  style={{
+                    flex: 1,
+                    maxWidth: '180px',
+                    height: 'clamp(135px, 36vw, 165px)',
+                    background: 'rgba(12, 16, 26, 0.94)',
+                    border: `1.5px solid ${currentProject.color}`,
+                    borderRadius: '14px',
+                    padding: '10px 12px',
+                    boxShadow: `0 12px 30px rgba(0, 0, 0, 0.75), 0 0 20px ${currentProject.color}25`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    userSelect: 'none',
+                    cursor: 'pointer',
+                    boxSizing: 'border-box',
+                  }}
+                  title="Click to view explanation"
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', fontWeight: 900, color: currentProject.color }}>
+                      EXPLANATION
+                    </span>
+                    <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: currentProject.color }} />
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: '9.5px',
+                      color: '#CBD5E1',
+                      lineHeight: 1.35,
+                      margin: 0,
+                      display: '-webkit-box',
+                      WebkitLineClamp: 3,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {currentProject.explanation}
+                  </p>
+                  <div style={{ display: 'flex', gap: '3px', flexWrap: 'wrap' }}>
+                    {currentProject.metrics.slice(0, 1).map((m, i) => (
+                      <span key={i} style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '8px', color: currentProject.color, background: `${currentProject.color}18`, padding: '1px 5px', borderRadius: '3px' }}>
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right: Artwork Plate Card */}
+                <div
+                  className="center-focal-card"
+                  onClick={() => setModalProject(currentProject)}
+                  style={{
+                    flex: 1,
+                    maxWidth: '180px',
+                    height: 'clamp(135px, 36vw, 165px)',
+                    background: '#070A10',
+                    border: `1.5px solid ${currentProject.color}`,
+                    borderRadius: '14px',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    boxShadow: `0 12px 30px rgba(0, 0, 0, 0.75), 0 0 20px ${currentProject.color}25`,
+                    userSelect: 'none',
+                    cursor: 'pointer',
+                    boxSizing: 'border-box',
+                  }}
+                  title="Click to zoom artwork"
+                >
+                  <img
+                    src={currentProject.designImage}
+                    alt={currentProject.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                  <div style={{ position: 'absolute', top: '6px', right: '6px', background: 'rgba(0, 0, 0, 0.78)', color: currentProject.color, fontSize: '9px', fontWeight: 900, fontFamily: "'Space Grotesk', monospace", padding: '1px 6px', borderRadius: '4px', border: `1px solid ${currentProject.color}50` }}>
+                    #{currentProject.number}
+                  </div>
+                  <div style={{ position: 'absolute', bottom: '6px', left: '6px', background: 'rgba(0, 0, 0, 0.72)', color: '#FFFFFF', fontSize: '8px', fontFamily: "'Space Grotesk', monospace", padding: '2px 5px', borderRadius: '3px', backdropFilter: 'blur(4px)' }}>
+                    TAP TO ZOOM
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile Carousel Navigation Controls */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  width: '100%',
+                  paddingTop: '2px',
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => goToIndex(Math.max(0, Math.round(activeIndex) - 1))}
+                  disabled={Math.round(activeIndex) <= 0}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    color: Math.round(activeIndex) <= 0 ? '#475569' : '#FFFFFF',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    borderRadius: '999px',
+                    padding: '8px 14px',
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    cursor: Math.round(activeIndex) <= 0 ? 'not-allowed' : 'pointer',
+                    minHeight: '38px',
+                  }}
+                >
+                  ‹ PREV
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setModalProject(currentProject)}
+                  style={{
+                    background: `${currentProject.color}18`,
+                    color: currentProject.color,
+                    border: `1.5px solid ${currentProject.color}`,
+                    borderRadius: '999px',
+                    padding: '8px 16px',
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '11px',
+                    fontWeight: 900,
+                    cursor: 'pointer',
+                    minHeight: '38px',
+                  }}
+                >
+                  DOSSIER ↗
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => goToIndex(Math.min(total - 1, Math.round(activeIndex) + 1))}
+                  disabled={Math.round(activeIndex) >= total - 1}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    color: Math.round(activeIndex) >= total - 1 ? '#475569' : '#FFFFFF',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    borderRadius: '999px',
+                    padding: '8px 14px',
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    cursor: Math.round(activeIndex) >= total - 1 ? 'not-allowed' : 'pointer',
+                    minHeight: '38px',
+                  }}
+                >
+                  NEXT ›
+                </button>
               </div>
             </div>
-          </div>
+          ) : (
+            /* ── DESKTOP TRIPTYCH (Original 3-Column Studio Layout) ── */
+            <div
+              className="art-circles-center-triptych"
+              style={{
+                position: 'relative',
+                zIndex: 40,
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '22px',
+                maxWidth: '1060px',
+                width: '100%',
+                padding: '0 10px',
+              }}
+            >
+              {/* ── 1. LEFT ITEM: ACTIVE DESIGN EXPLANATION CARD ── */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  gap: '6px',
+                }}
+              >
+                <div
+                  className="center-focal-card"
+                  onClick={() => setModalProject(currentProject)}
+                  style={{
+                    width: '210px',
+                    height: '210px',
+                    background: 'rgba(12, 16, 26, 0.94)',
+                    border: `2px solid ${currentProject.color}`,
+                    borderRadius: '16px',
+                    padding: '16px',
+                    boxShadow: `0 20px 45px rgba(0, 0, 0, 0.8), 0 0 30px ${currentProject.color}35`,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    userSelect: 'none',
+                  }}
+                  title="Click to inspect explanation dossier"
+                >
+                  {/* Top Badge */}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '10px', fontWeight: 900, color: currentProject.color, letterSpacing: '0.08em' }}>
+                      EXPLANATION // {currentProject.number}
+                    </span>
+                    <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: currentProject.color, boxShadow: `0 0 8px ${currentProject.color}` }} />
+                  </div>
+
+                  {/* Core Concept Headline */}
+                  <div>
+                    <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '14px', fontWeight: 800, color: '#FFFFFF', lineHeight: 1.25, marginBottom: '6px' }}>
+                      &ldquo;{currentProject.conceptHeadline}&rdquo;
+                    </div>
+                    <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '10px', color: '#94A3B8' }}>
+                      {currentProject.category}
+                    </div>
+                  </div>
+
+                  {/* Bottom Spec Badge */}
+                  <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
+                    {currentProject.metrics.slice(0, 2).map((m, i) => (
+                      <span key={i} style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '8.5px', color: currentProject.color, background: `${currentProject.color}18`, padding: '2px 6px', borderRadius: '4px' }}>
+                        {m}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Caption Label underneath */}
+                <div style={{ textAlign: 'right', fontFamily: "'Space Grotesk', monospace", fontSize: '10px', color: '#94A3B8', letterSpacing: '0.04em' }}>
+                  <span style={{ color: '#FFFFFF', fontWeight: 700 }}>{currentProject.client}</span>
+                </div>
+              </div>
+
+              {/* ── 2. CENTER ITEM: CURATORIAL TEXT BLOCK WITH FRAMING RULES ── */}
+              <div
+                style={{
+                  width: '320px',
+                  textAlign: 'center',
+                  padding: '12px 14px',
+                  position: 'relative',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '8px',
+                }}
+              >
+                {/* Top Horizontal Rule Line */}
+                <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.22) 20%, rgba(255, 255, 255, 0.22) 80%, transparent 100%)' }} />
+
+                {/* Step / Category Tag */}
+                <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '10px', fontWeight: 900, color: currentProject.color, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                  EXHIBIT {currentProject.number} / {total}
+                </div>
+
+                {/* Title */}
+                <h3
+                  style={{
+                    fontFamily: "'Space Grotesk', system-ui, sans-serif",
+                    fontSize: '23px',
+                    fontWeight: 900,
+                    color: '#FFFFFF',
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1.15,
+                    margin: 0,
+                  }}
+                >
+                  {currentProject.title}
+                </h3>
+
+                {/* Curated By attribution */}
+                <div style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9.5px', color: '#94A3B8', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                  CURATED BY HOWVAIBHAV &bull; {currentProject.category}
+                </div>
+
+                {/* Curatorial Rationale Paragraph */}
+                <p
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '11.5px',
+                    color: '#CBD5E1',
+                    lineHeight: 1.45,
+                    margin: 0,
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {currentProject.explanation}
+                </p>
+
+                {/* Action Button: Compact Symbol Button [ ↗ ] */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    try { soundFX.playSnap(); } catch {}
+                    setModalProject(currentProject);
+                  }}
+                  title={`View Dossier for ${currentProject.title}`}
+                  aria-label={`View Dossier for ${currentProject.title}`}
+                  style={{
+                    marginTop: '2px',
+                    width: '36px',
+                    height: '36px',
+                    background: 'linear-gradient(145deg, #1A202C 0%, #0D111A 100%)',
+                    color: '#FFFFFF',
+                    border: `1.5px solid ${currentProject.color}`,
+                    borderRadius: '50%',
+                    cursor: 'pointer',
+                    boxShadow: `0 6px 18px rgba(0,0,0,0.6), 0 0 16px ${currentProject.color}30`,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '15px',
+                    fontWeight: 900,
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.12)';
+                    e.currentTarget.style.background = currentProject.color;
+                    e.currentTarget.style.color = '#07080B';
+                    e.currentTarget.style.boxShadow = `0 8px 24px ${currentProject.color}70`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.background = 'linear-gradient(145deg, #1A202C 0%, #0D111A 100%)';
+                    e.currentTarget.style.color = '#FFFFFF';
+                    e.currentTarget.style.boxShadow = `0 6px 18px rgba(0,0,0,0.6), 0 0 16px ${currentProject.color}30`;
+                  }}
+                >
+                  <span style={{ transform: 'translateY(-0.5px)' }}>↗</span>
+                </button>
+
+                {/* Bottom Horizontal Rule Line */}
+                <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.22) 20%, rgba(255, 255, 255, 0.22) 80%, transparent 100%)' }} />
+              </div>
+
+              {/* ── 3. RIGHT ITEM: ACTIVE DESIGN ARTWORK PLATE ── */}
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  gap: '6px',
+                }}
+              >
+                <div
+                  className="center-focal-card"
+                  onClick={() => setModalProject(currentProject)}
+                  style={{
+                    width: '210px',
+                    height: '210px',
+                    background: '#070A10',
+                    border: `2px solid ${currentProject.color}`,
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    position: 'relative',
+                    boxShadow: `0 20px 45px rgba(0, 0, 0, 0.8), 0 0 30px ${currentProject.color}35`,
+                    userSelect: 'none',
+                  }}
+                  title="Click to view full uncropped artwork"
+                >
+                  <img
+                    src={currentProject.designImage}
+                    alt={currentProject.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                  <div style={{ position: 'absolute', top: '8px', right: '8px', background: 'rgba(0, 0, 0, 0.78)', color: currentProject.color, fontSize: '10px', fontWeight: 900, fontFamily: "'Space Grotesk', monospace", padding: '2px 8px', borderRadius: '4px', border: `1px solid ${currentProject.color}50` }}>
+                    #{currentProject.number}
+                  </div>
+                </div>
+
+                {/* Artwork Plate Sub-label */}
+                <div style={{ textAlign: 'left', fontFamily: "'Space Grotesk', monospace", fontSize: '10px', color: '#94A3B8', letterSpacing: '0.04em' }}>
+                  <span style={{ color: '#FFFFFF', fontWeight: 700 }}>HIGH-RES UNCOMPRESSED</span> &bull; 1:1
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
 
@@ -1142,13 +1361,15 @@ export default function ArtCirclesOrbit() {
             style={{
               maxWidth: '920px',
               width: '100%',
+              maxHeight: isMobile ? '92vh' : '88vh',
+              overflowY: 'auto',
               background: '#0D111A',
               border: `2px solid ${modalProject.color}`,
-              borderRadius: '20px',
-              padding: '28px',
+              borderRadius: isMobile ? '16px' : '20px',
+              padding: isMobile ? '18px 16px' : '28px',
               display: 'flex',
               flexDirection: isMobile ? 'column' : 'row',
-              gap: '24px',
+              gap: isMobile ? '16px' : '24px',
               boxShadow: `0 30px 90px rgba(0, 0, 0, 0.9), 0 0 60px ${modalProject.color}35`,
             }}
           >

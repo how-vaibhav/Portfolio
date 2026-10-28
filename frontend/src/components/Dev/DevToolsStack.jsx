@@ -260,9 +260,11 @@ export default function DevToolsStack() {
       {/* Banner image dictates the exact height on desktop, but covers on mobile to prevent squishing */}
       <div style={{ position: 'relative', width: '100%', display: 'flex' }}>
         <img
-          src="/assets/footer-banner.png"
+          src="/assets/footer-banner.webp"
           alt="Tools and Stack Background"
           aria-hidden="true"
+          loading="lazy"
+          decoding="async"
           style={{
             display: 'block',
             width: '100%',
@@ -279,7 +281,7 @@ export default function DevToolsStack() {
           transformOrigin: 'center center'
         }}>
           <PixelImage 
-            src="/assets/footer-banner.png" 
+            src="/assets/footer-banner.webp" 
             customGrid={{ rows: 3, cols: 12 }} 
             pixelFadeInDuration={800}
             colorRevealDelay={1200}

@@ -190,7 +190,7 @@ export default function HowVaibhavStory() {
       className="howvaibhav-story-section"
       style={{
         width: '100%',
-        padding: '60px 16px 80px',
+        padding: 'clamp(36px, 6vw, 70px) clamp(12px, 3vw, 24px)',
         position: 'relative',
         zIndex: 10,
         boxSizing: 'border-box',
@@ -246,11 +246,35 @@ export default function HowVaibhavStory() {
         @media (max-width: 1040px) {
           .story-layout-grid {
             grid-template-columns: 1fr !important;
-            gap: 36px !important;
+            gap: 28px !important;
+            margin-bottom: 36px !important;
           }
           .story-polaroid-wrap {
             margin: 0 auto !important;
-            max-width: 380px !important;
+            max-width: min(100%, 360px) !important;
+          }
+          .story-editorial-card {
+            padding: clamp(20px, 4.5vw, 32px) clamp(16px, 4vw, 28px) !important;
+            border-radius: 18px !important;
+          }
+          .story-origin-dossier {
+            padding: clamp(16px, 3.5vw, 22px) clamp(14px, 3.5vw, 20px) !important;
+            border-radius: 14px !important;
+          }
+          .origin-beat-row {
+            gap: 6px !important;
+            padding: 3px 0 !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .story-polaroid-wrap {
+            max-width: 100% !important;
+          }
+          .tools-dock-row {
+            padding: 12px 2px 20px !important;
+          }
+          .tools-mobile-hint {
+            display: flex !important;
           }
         }
       `}</style>
@@ -401,8 +425,10 @@ export default function HowVaibhavStory() {
 
               {/* Profile Image Itself */}
               <img
-                src="/assets/vaibhav-profile-pic.png"
+                src="/assets/vaibhav-profile-pic.webp"
                 alt="Vaibhav Tiwari — The Human Behind the Pixels"
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: '100%',
                   height: '100%',
@@ -510,6 +536,7 @@ export default function HowVaibhavStory() {
 
           {/* ── EDITORIAL CREATIVE STORY / MANIFESTO ── */}
           <div
+            className="story-editorial-card"
             style={{
               background: 'radial-gradient(ellipse at 50% 20%, rgba(18, 24, 38, 0.94) 0%, rgba(10, 13, 20, 0.98) 100%)',
               border: '1.5px solid rgba(255, 255, 255, 0.12)',
@@ -536,6 +563,7 @@ export default function HowVaibhavStory() {
 
             {/* The "HowVaibhav" Authentic Origin Story — Elevated Editorial Dossier */}
             <div
+              className="story-origin-dossier"
               style={{
                 background: 'linear-gradient(145deg, rgba(0, 210, 255, 0.08) 0%, rgba(14, 20, 32, 0.96) 100%)',
                 border: '1.5px solid rgba(0, 210, 255, 0.35)',
@@ -591,10 +619,11 @@ export default function HowVaibhavStory() {
                 ].map((beat, bIdx) => (
                   <div
                     key={bIdx}
+                    className="origin-beat-row"
                     style={{
                       display: 'flex',
                       alignItems: 'baseline',
-                      gap: '10px',
+                      gap: '8px',
                       flexWrap: 'wrap',
                       padding: '4px 0',
                     }}
@@ -602,10 +631,11 @@ export default function HowVaibhavStory() {
                     <span
                       style={{
                         fontFamily: "'Unbounded', sans-serif",
-                        fontSize: '9.5px',
+                        fontSize: '9px',
                         fontWeight: 900,
                         color: beat.color,
                         letterSpacing: '0.05em',
+                        flexShrink: 0,
                       }}
                     >
                       {beat.num}
@@ -613,7 +643,7 @@ export default function HowVaibhavStory() {
                     <span
                       style={{
                         fontFamily: "'Darker Grotesque', 'Bricolage Grotesque', sans-serif",
-                        fontSize: '17px',
+                        fontSize: 'clamp(15px, 3.6vw, 17px)',
                         fontWeight: 700,
                         color: '#94A3B8',
                         letterSpacing: '0.01em',
@@ -626,7 +656,7 @@ export default function HowVaibhavStory() {
                       style={{
                         fontFamily: "'Cinzel Decorative', 'Bodoni Moda', serif",
                         fontWeight: 700,
-                        fontSize: '17px',
+                        fontSize: 'clamp(15px, 3.6vw, 17px)',
                         color: beat.color,
                         whiteSpace: 'nowrap',
                         letterSpacing: '0.03em',
@@ -652,7 +682,7 @@ export default function HowVaibhavStory() {
                 <p
                   style={{
                     fontFamily: "'Darker Grotesque', 'Bricolage Grotesque', sans-serif",
-                    fontSize: '18px',
+                    fontSize: 'clamp(15px, 3.6vw, 18px)',
                     fontWeight: 700,
                     color: '#F8FAFC',
                     lineHeight: 1.5,
@@ -962,6 +992,24 @@ export default function HowVaibhavStory() {
                 </div>
               );
             })}
+          </div>
+
+          {/* Subtle Mobile Scroll Cue */}
+          <div
+            className="tools-mobile-hint"
+            style={{
+              display: 'none',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '6px',
+              paddingTop: '6px',
+              fontSize: '10px',
+              fontFamily: "'Space Grotesk', monospace",
+              color: 'rgba(204, 255, 0, 0.75)',
+              letterSpacing: '0.08em',
+            }}
+          >
+            <span>⇄ SWIPE TOOLS HORIZONTALLY</span>
           </div>
 
         </div>

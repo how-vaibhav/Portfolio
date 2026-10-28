@@ -695,8 +695,10 @@ export default function MixedMediaAssembly() {
 
   const phaseDetails = getPhaseDetails();
 
-  // Responsive scale factor for mobile screens
-  const posterScale = isMobile ? Math.min(0.82, (windowDimensions.w - 32) / 460) : 1;
+  // Responsive scale factor for mobile screens (fits both width and height)
+  const posterScale = isMobile
+    ? Math.min(0.76, (windowDimensions.w - 24) / 460, (windowDimensions.h - 130) / 620)
+    : 1;
 
   // Viewport half-extents
   const halfW = windowDimensions.w * 0.5;
@@ -1091,9 +1093,10 @@ export default function MixedMediaAssembly() {
               const t = Math.max(0, Math.min(1, rawT));
               const ease = 1 - Math.pow(1 - t, 3);
 
-              // Extreme Viewport Origins
-              const originX = shard.relOffset.x * (halfW + 160);
-              const originY = shard.relOffset.y * (halfH + 160);
+              // Extreme Viewport Origins with mobile containment
+              const spreadFactor = isMobile ? 0.42 : 1;
+              const originX = shard.relOffset.x * (halfW * spreadFactor + 36);
+              const originY = shard.relOffset.y * (halfH * spreadFactor + 36);
               const originRotate = shard.relOffset.rot;
 
               // Interpolated trajectory
@@ -1147,7 +1150,7 @@ export default function MixedMediaAssembly() {
                       ? (isBeingDragged ? 'grabbing' : 'grab')
                       : 'default',
                     userSelect: 'none',
-                    touchAction: 'none', // Critical for smooth pointer dragging on touch & mouse
+                    touchAction: isDraggableUnlocked && !isMobile ? 'none' : 'auto', // Never block page scroll on mobile touch
                     willChange: 'transform, opacity',
                     filter: isBeingDragged ? 'drop-shadow(0 20px 40px rgba(0,0,0,0.9))' : 'none',
                     transition: isBeingDragged ? 'none' : 'box-shadow 0.2s ease, filter 0.2s ease',
