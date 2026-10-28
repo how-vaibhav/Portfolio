@@ -319,21 +319,7 @@ export default function ArtCirclesOrbit() {
               <span style={{ fontSize: isMobile ? '16px' : '22px', color: '#CCFF00', WebkitTextFillColor: '#CCFF00', opacity: 0.85, transform: 'translateY(-2px)' }}>✦</span>
             </h2>
 
-            {/* High-End Editorial English Lockup */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginTop: '2px', flexWrap: 'wrap' }}>
-              <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: isMobile ? '10px' : '12px', fontWeight: 800, color: '#CCFF00', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
-                ART CIRCLES
-              </span>
-              <span style={{ color: 'rgba(255, 255, 255, 0.3)', fontSize: '10px' }}>&bull;</span>
-              <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: isMobile ? '9.5px' : '11px', color: '#94A3B8', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                DUAL REVOLVING EXHIBITS // 35 SCULPTURAL PLATES
-              </span>
-            </div>
           </div>
-
-          <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: isMobile ? '10px' : '11.5px', color: '#64748B', margin: '4px 0 0', letterSpacing: '0.02em' }}>
-            Scroll or swipe to revolve &bull; Left: वैचारिक विश्लेषण (Explanation) &bull; Right: दृश्य विन्यास (Design Plate)
-          </p>
         </header>
 
         {/* ── CENTRAL ORBITAL ARENA (FULL-BLEED SCREEN SPAN) ── */}

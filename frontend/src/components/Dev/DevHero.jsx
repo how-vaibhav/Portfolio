@@ -150,6 +150,7 @@ export default function DevHero() {
 
           {/* Headline */}
           <motion.h1
+            aria-label="Vaibhav — Full-Stack Developer & Creative Engineer. I Design, I Code, I Elevate Brands, Ideas, and Systems."
             variants={stagger} initial="hidden" animate="visible"
             style={{
               fontFamily: "'Archivo Black', 'Inter', sans-serif",

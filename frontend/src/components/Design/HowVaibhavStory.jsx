@@ -199,6 +199,13 @@ export default function HowVaibhavStory() {
       aria-label="The Story & Creative Arsenal of HowVaibhav"
     >
       <style>{`
+        .tools-dock-row {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+        }
+        .tools-dock-row::-webkit-scrollbar {
+          display: none;
+        }
         .story-polaroid {
           transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, filter 0.28s ease;
           user-select: none;
@@ -224,19 +231,19 @@ export default function HowVaibhavStory() {
         }
         .story-layout-grid {
           display: grid;
-          grid-template-columns: 320px 1fr;
-          gap: 36px;
+          grid-template-columns: 360px 1fr;
+          gap: 40px;
           align-items: center;
           margin-bottom: 56px;
         }
-        @media (max-width: 980px) {
+        @media (max-width: 1040px) {
           .story-layout-grid {
             grid-template-columns: 1fr !important;
-            gap: 32px !important;
+            gap: 36px !important;
           }
           .story-polaroid-wrap {
             margin: 0 auto !important;
-            max-width: 320px !important;
+            max-width: 380px !important;
           }
         }
       `}</style>
@@ -244,104 +251,326 @@ export default function HowVaibhavStory() {
       <div style={{ maxWidth: '1240px', margin: '0 auto', position: 'relative' }}>
         {/* ── 1. STUDIO DESK: THE HUMAN BEHIND PIXELS + EDITORIAL CREATIVE STORY ── */}
         <div className="story-layout-grid">
-          {/* ── SINGLE POLAROID: The Human Behind the Pixels (Profile Pic 3) ── */}
+          {/* ── ELEVATED CREATOR ARTIFACT: The Mind Behind the Pixels (Obsidian Archival Chassis) ── */}
           <div
             className="story-polaroid story-polaroid-wrap"
             onMouseEnter={() => {
               setPolaroidHovered(true);
-              try { soundFX.playSnap(); } catch {}
+              try { soundFX.playAperture(); } catch {}
             }}
             onMouseLeave={() => setPolaroidHovered(false)}
             style={{
               position: 'relative',
-              background: '#FFFFFF',
-              borderRadius: '8px',
-              padding: '14px 14px 22px 14px',
+              background: 'linear-gradient(165deg, rgba(16, 22, 34, 0.98) 0%, rgba(6, 9, 15, 0.99) 100%)',
+              border: '1.5px solid rgba(255, 255, 255, 0.14)',
+              borderRadius: '20px',
+              padding: '16px 16px 18px 16px',
               boxShadow: polaroidHovered
-                ? '0 28px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 210, 255, 0.35)'
-                : '0 18px 40px rgba(0, 0, 0, 0.65)',
-              transform: polaroidHovered ? 'rotate(0deg) scale(1.03)' : 'rotate(-2.5deg)',
-              transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease',
+                ? '0 32px 80px rgba(0, 0, 0, 0.92), 0 0 45px rgba(0, 210, 255, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                : '0 20px 50px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+              transform: polaroidHovered ? 'rotate(0deg) translateY(-6px) scale(1.02)' : 'rotate(-1.5deg)',
+              transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
             }}
           >
-            {/* Washi Tape Strip */}
+            {/* Top Mechanical Film Track Bar */}
             <div
               style={{
-                position: 'absolute',
-                top: '-14px',
-                left: '50%',
-                transform: 'translateX(-50%) rotate(-3deg)',
-                width: '100px',
-                height: '26px',
-                background: 'rgba(204, 255, 0, 0.92)',
-                border: '1px dashed rgba(184, 230, 0, 0.6)',
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.25)',
-                zIndex: 2,
-              }}
-            />
-
-            {/* Corner Badge */}
-            <div
-              style={{
-                position: 'absolute',
-                top: '-8px',
-                right: '14px',
-                padding: '3px 8px',
-                background: '#00D2FF',
-                color: '#07080A',
-                fontFamily: "'Space Grotesk', monospace",
-                fontSize: '9px',
-                fontWeight: 900,
-                letterSpacing: '0.08em',
-                borderRadius: '3px',
-                transform: 'rotate(8deg)',
-                boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
-                zIndex: 3,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '2px 4px 6px',
+                borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
               }}
             >
-              PORTRAIT
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span
+                  style={{
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '9px',
+                    fontWeight: 900,
+                    letterSpacing: '0.14em',
+                    color: 'rgba(255, 255, 255, 0.45)',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  EXP 04 // 500T
+                </span>
+                <span style={{ color: 'rgba(255, 255, 255, 0.2)', fontSize: '10px' }}>•</span>
+                <span
+                  style={{
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '8.5px',
+                    fontWeight: 700,
+                    color: '#00D2FF',
+                    letterSpacing: '0.08em',
+                  }}
+                >
+                  35MM LENS
+                </span>
+              </div>
+
+              {/* Pulsing Live Creator Status Pill */}
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  background: 'rgba(204, 255, 0, 0.1)',
+                  border: '1px solid rgba(204, 255, 0, 0.35)',
+                  padding: '2px 8px',
+                  borderRadius: '999px',
+                }}
+              >
+                <span
+                  style={{
+                    width: '5px',
+                    height: '5px',
+                    borderRadius: '50%',
+                    background: '#CCFF00',
+                    boxShadow: '0 0 8px #CCFF00',
+                    animation: 'ledBlink 2s infinite ease-in-out',
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '8px',
+                    fontWeight: 900,
+                    color: '#CCFF00',
+                    letterSpacing: '0.12em',
+                  }}
+                >
+                  ACTIVE IN LAB
+                </span>
+              </div>
             </div>
 
-            {/* Photo Viewport with Vaibhav Tiwari Profile Pic */}
+            {/* Viewfinder Viewport with Corner Reticles and Focus Target */}
             <div
               style={{
-                width: '100%',
-                height: '310px',
-                borderRadius: '4px',
-                overflow: 'hidden',
-                background: '#0B0F19',
                 position: 'relative',
+                width: '100%',
+                aspectRatio: '4 / 5',
+                borderRadius: '12px',
+                overflow: 'hidden',
+                background: '#04060A',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.8)',
               }}
             >
+              {/* Backlit Ambient Silhouette Halo */}
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: polaroidHovered
+                    ? 'radial-gradient(ellipse at 50% 35%, rgba(0, 210, 255, 0.22) 0%, rgba(204, 255, 0, 0.12) 40%, transparent 75%)'
+                    : 'radial-gradient(ellipse at 50% 35%, rgba(0, 210, 255, 0.1) 0%, transparent 65%)',
+                  transition: 'background 0.5s ease',
+                  pointerEvents: 'none',
+                  zIndex: 1,
+                }}
+              />
+
+              {/* Viewfinder Reticles — Top Left */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '12px',
+                  left: '12px',
+                  width: '14px',
+                  height: '14px',
+                  borderTop: '2px solid #00D2FF',
+                  borderLeft: '2px solid #00D2FF',
+                  zIndex: 3,
+                  pointerEvents: 'none',
+                }}
+              />
+              {/* Viewfinder Reticles — Top Right */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '12px',
+                  right: '12px',
+                  width: '14px',
+                  height: '14px',
+                  borderTop: '2px solid #00D2FF',
+                  borderRight: '2px solid #00D2FF',
+                  zIndex: 3,
+                  pointerEvents: 'none',
+                }}
+              />
+              {/* Viewfinder Reticles — Bottom Left */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '12px',
+                  left: '12px',
+                  width: '14px',
+                  height: '14px',
+                  borderBottom: '2px solid #00D2FF',
+                  borderLeft: '2px solid #00D2FF',
+                  zIndex: 3,
+                  pointerEvents: 'none',
+                }}
+              />
+              {/* Viewfinder Reticles — Bottom Right */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '12px',
+                  right: '12px',
+                  width: '14px',
+                  height: '14px',
+                  borderBottom: '2px solid #00D2FF',
+                  borderRight: '2px solid #00D2FF',
+                  zIndex: 3,
+                  pointerEvents: 'none',
+                }}
+              />
+
+              {/* Viewfinder Center Crosshair */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: '28px',
+                  height: '28px',
+                  border: '1px dashed rgba(255, 255, 255, 0.25)',
+                  borderRadius: '50%',
+                  zIndex: 3,
+                  pointerEvents: 'none',
+                  opacity: polaroidHovered ? 0.85 : 0.35,
+                  transition: 'opacity 0.3s ease',
+                }}
+              >
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    width: '4px',
+                    height: '4px',
+                    background: '#00D2FF',
+                    borderRadius: '50%',
+                  }}
+                />
+              </div>
+
+              {/* Profile Image Itself */}
               <img
                 src="/assets/vaibhav-profile-pic.png"
-                alt="Vaibhav Tiwari — Human Behind Pixels"
+                alt="Vaibhav Tiwari — The Human Behind the Pixels"
                 style={{
                   width: '100%',
                   height: '100%',
                   objectFit: 'cover',
-                  objectPosition: 'center 18%',
-                  filter: 'contrast(1.04)',
-                  transition: 'transform 0.4s ease',
-                  transform: polaroidHovered ? 'scale(1.05)' : 'scale(1)',
+                  objectPosition: 'center 16%',
+                  filter: polaroidHovered
+                    ? 'contrast(1.08) brightness(1.02)'
+                    : 'contrast(1.03) brightness(0.97)',
+                  transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease',
+                  transform: polaroidHovered ? 'scale(1.06)' : 'scale(1)',
+                  display: 'block',
                 }}
               />
+
+              {/* Bottom Lens Metadata Bar inside Viewfinder */}
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '10px',
+                  left: '0',
+                  right: '0',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  gap: '10px',
+                  zIndex: 3,
+                  pointerEvents: 'none',
+                }}
+              >
+                <span
+                  style={{
+                    background: 'rgba(0, 0, 0, 0.72)',
+                    backdropFilter: 'blur(6px)',
+                    WebkitBackdropFilter: 'blur(6px)',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    padding: '2px 8px',
+                    borderRadius: '4px',
+                    fontFamily: "'Space Grotesk', monospace",
+                    fontSize: '8px',
+                    fontWeight: 800,
+                    color: 'rgba(255, 255, 255, 0.85)',
+                    letterSpacing: '0.1em',
+                  }}
+                >
+                  F/1.4 • 1/250s • ISO 400
+                </span>
+              </div>
             </div>
 
-            {/* Handwritten Authentic Caption */}
+            {/* Bottom Titanium Engraved Plaque */}
             <div
               style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: '22px',
-                fontWeight: 700,
-                color: '#0F172A',
+                background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                borderRadius: '10px',
+                padding: '10px 14px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
                 textAlign: 'center',
-                marginTop: '12px',
-                lineHeight: 1.1,
-                letterSpacing: '0.02em',
               }}
             >
-              human behind pixels ✦
+              <div
+                style={{
+                  fontFamily: "'Unbounded', 'Syne', sans-serif",
+                  fontSize: '13px',
+                  fontWeight: 900,
+                  letterSpacing: '0.12em',
+                  color: '#FFFFFF',
+                  textTransform: 'uppercase',
+                }}
+              >
+                VAIBHAV TIWARI
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Instrument Serif', 'Italiana', Georgia, serif",
+                  fontStyle: 'italic',
+                  fontSize: '16px',
+                  color: '#00D2FF',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                }}
+              >
+                <span>the mind behind the pixels</span>
+                <span style={{ fontStyle: 'normal', fontSize: '11px', color: '#CCFF00' }}>✦</span>
+              </div>
+              <div
+                style={{
+                  fontFamily: "'Space Grotesk', monospace",
+                  fontSize: '8px',
+                  fontWeight: 700,
+                  color: 'rgba(255, 255, 255, 0.35)',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  marginTop: '2px',
+                }}
+              >
+                CREATIVE ARCHITECT • BHARAT
+              </div>
             </div>
           </div>
 
@@ -350,212 +579,282 @@ export default function HowVaibhavStory() {
             style={{
               background: 'radial-gradient(ellipse at 50% 20%, rgba(18, 24, 38, 0.94) 0%, rgba(10, 13, 20, 0.98) 100%)',
               border: '1.5px solid rgba(255, 255, 255, 0.12)',
-              borderRadius: '20px',
+              borderRadius: '24px',
               padding: '38px 40px 36px',
-              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.75)',
+              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
               position: 'relative',
+              overflow: 'hidden',
             }}
           >
-            {/* Top Eyebrow Badge */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px', flexWrap: 'wrap', gap: '8px' }}>
+            {/* Top Atmospheric Corner Glow */}
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: '280px',
+                height: '180px',
+                background: 'radial-gradient(ellipse at 100% 0%, rgba(0, 210, 255, 0.12) 0%, transparent 70%)',
+                pointerEvents: 'none',
+              }}
+            />
+
+            {/* Top Eyebrow Badge — Out of the box Creative Unbounded Emblem */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '22px', flexWrap: 'wrap', gap: '8px', position: 'relative', zIndex: 2 }}>
               <div
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '8px',
-                  padding: '4px 14px',
+                  gap: '10px',
+                  padding: '6px 16px',
                   borderRadius: '999px',
-                  background: 'rgba(204, 255, 0, 0.08)',
-                  border: '1px solid rgba(204, 255, 0, 0.35)',
+                  background: 'linear-gradient(135deg, rgba(204, 255, 0, 0.14) 0%, rgba(0, 210, 255, 0.08) 100%)',
+                  border: '1.5px solid rgba(204, 255, 0, 0.45)',
+                  boxShadow: '0 0 20px rgba(204, 255, 0, 0.15)',
                 }}
               >
-                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#CCFF00', boxShadow: '0 0 6px #CCFF00' }} />
-                <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '10.5px', fontWeight: 800, color: '#CCFF00', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                  THE DESIGNER & DEVELOPER
+                <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#CCFF00', boxShadow: '0 0 8px #CCFF00' }} />
+                <span
+                  style={{
+                    fontFamily: "'Unbounded', 'Syne', sans-serif",
+                    fontSize: '11px',
+                    fontWeight: 900,
+                    color: '#CCFF00',
+                    letterSpacing: '0.2em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  THE DESIGNER &amp; DEVELOPER
+                </span>
+                <span
+                  style={{
+                    fontFamily: "'Rozha One', 'Noto Serif Devanagari', serif",
+                    fontSize: '12px',
+                    color: '#00D2FF',
+                    marginLeft: '2px',
+                  }}
+                >
+                  // वास्तुकार
                 </span>
               </div>
 
-              <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '10px', color: '#64748B', letterSpacing: '0.08em' }}>
+              <span
+                style={{
+                  fontFamily: "'Space Grotesk', monospace",
+                  fontSize: '9.5px',
+                  fontWeight: 700,
+                  color: 'rgba(255, 255, 255, 0.4)',
+                  letterSpacing: '0.12em',
+                }}
+              >
                 HOWVAIBHAV ARCHIVE // MMXXVI
               </span>
             </div>
 
-            {/* Lead Statement — Bespoke Regal Devanagari & Italic Didone Editorial Typography */}
+            {/* Lead Statement — Out of the Box Sculpture: Italiana + Unbounded + Instrument Serif Italic */}
             <h3
               style={{
-                fontFamily: "'Rozha One', 'Bodoni Moda', 'Cinzel Decorative', serif",
-                fontSize: 'clamp(21px, 2.5vw, 29px)',
+                fontFamily: "'Italiana', 'Cinzel Decorative', serif",
+                fontSize: 'clamp(23px, 2.7vw, 32px)',
                 fontWeight: 400,
-                letterSpacing: '0.02em',
-                lineHeight: 1.35,
-                margin: '0 0 22px',
+                letterSpacing: '0.03em',
+                lineHeight: 1.32,
+                margin: '0 0 26px',
                 color: '#FFFFFF',
+                position: 'relative',
+                zIndex: 2,
               }}
             >
               Bridging the chasm between{' '}
               <span
                 style={{
-                  fontFamily: "'Instrument Serif', 'Bodoni Moda', Georgia, serif",
-                  fontStyle: 'italic',
-                  fontSize: '1.14em',
-                  background: 'linear-gradient(135deg, #00D2FF 0%, #38BDF8 100%)',
+                  fontFamily: "'Unbounded', 'Syne', sans-serif",
+                  fontWeight: 900,
+                  fontSize: '0.88em',
+                  letterSpacing: '0.02em',
+                  background: 'linear-gradient(135deg, #00D2FF 0%, #38BDF8 60%, #60A5FA 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                  fontWeight: 400,
+                  display: 'inline-block',
+                  filter: 'drop-shadow(0 2px 14px rgba(0, 210, 255, 0.35))',
                 }}
               >
-                raw software architecture
+                RAW SOFTWARE ARCHITECTURE
               </span>{' '}
               and{' '}
               <span
                 style={{
                   fontFamily: "'Instrument Serif', 'Bodoni Moda', Georgia, serif",
                   fontStyle: 'italic',
-                  fontSize: '1.14em',
-                  background: 'linear-gradient(135deg, #CCFF00 0%, #A3E635 100%)',
+                  fontSize: '1.24em',
+                  fontWeight: 400,
+                  background: 'linear-gradient(135deg, #CCFF00 0%, #F59E0B 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
-                  fontWeight: 400,
+                  display: 'inline-block',
+                  letterSpacing: '0.01em',
                 }}
               >
                 expressive visual alchemy.
               </span>
             </h3>
 
-            {/* The "HowVaibhav" Authentic Origin Story — From Skepticism to Sovereignty */}
+            {/* The "HowVaibhav" Authentic Origin Story — Elevated Editorial Dossier */}
             <div
               style={{
-                background: 'linear-gradient(145deg, rgba(0, 210, 255, 0.07) 0%, rgba(16, 22, 34, 0.95) 100%)',
-                border: '1px solid rgba(0, 210, 255, 0.35)',
+                background: 'linear-gradient(145deg, rgba(0, 210, 255, 0.08) 0%, rgba(14, 20, 32, 0.96) 100%)',
+                border: '1.5px solid rgba(0, 210, 255, 0.35)',
                 borderLeft: '4px solid #00D2FF',
-                borderRadius: '14px',
-                padding: '22px 24px',
-                marginBottom: '22px',
+                borderRadius: '16px',
+                padding: '24px 26px',
+                marginBottom: '24px',
                 position: 'relative',
-                boxShadow: '0 12px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
+                boxShadow: '0 14px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
+                zIndex: 2,
               }}
             >
-              {/* Badge & Timestamp */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '6px', marginBottom: '14px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00D2FF', boxShadow: '0 0 8px #00D2FF' }} />
-                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9.5px', fontWeight: 900, color: '#00D2FF', letterSpacing: '0.14em', textTransform: 'uppercase' }}>
+              {/* Badge */}
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#00D2FF', boxShadow: '0 0 10px #00D2FF' }} />
+                  <span
+                    style={{
+                      fontFamily: "'Unbounded', 'Space Grotesk', sans-serif",
+                      fontSize: '10px',
+                      fontWeight: 900,
+                      color: '#00D2FF',
+                      letterSpacing: '0.16em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
                     THE ORIGIN STORY // आत्मसंशय का अंत
                   </span>
                 </div>
-                <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', color: '#64748B', letterSpacing: '0.06em' }}>
-                  DEFYING SKEPTICS &bull; MMXXVI
-                </span>
               </div>
 
-              {/* The 3-Beat Doubt to Defiance Progression */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '14px' }}>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', flexWrap: 'wrap' }}>
-                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', fontWeight: 900, color: 'rgba(255,255,255,0.3)' }}>01</span>
-                  <span style={{ fontFamily: "'Fraunces', 'Bodoni Moda', serif", fontSize: '13.5px', color: '#94A3B8' }}>
-                    When things fell apart and experiments failed, they asked with pity:
-                  </span>
-                  <span style={{ fontFamily: "'Instrument Serif', 'Bodoni Moda', serif", fontStyle: 'italic', fontSize: '16px', fontWeight: 700, color: '#F43F5E', whiteSpace: 'nowrap' }}>
-                    &ldquo;How, Vaibhav?&rdquo;
-                  </span>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', flexWrap: 'wrap' }}>
-                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', fontWeight: 900, color: 'rgba(255,255,255,0.3)' }}>02</span>
-                  <span style={{ fontFamily: "'Fraunces', 'Bodoni Moda', serif", fontSize: '13.5px', color: '#94A3B8' }}>
-                    When I claimed a blank canvas and started designing, they asked with disbelief:
-                  </span>
-                  <span style={{ fontFamily: "'Instrument Serif', 'Bodoni Moda', serif", fontStyle: 'italic', fontSize: '16px', fontWeight: 700, color: '#38BDF8', whiteSpace: 'nowrap' }}>
-                    &ldquo;How, Vaibhav?&rdquo;
-                  </span>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', flexWrap: 'wrap' }}>
-                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '9px', fontWeight: 900, color: 'rgba(255,255,255,0.3)' }}>03</span>
-                  <span style={{ fontFamily: "'Fraunces', 'Bodoni Moda', serif", fontSize: '13.5px', color: '#94A3B8' }}>
-                    When I took my craft dead seriously to build my personal brand, they asked with resistance:
-                  </span>
-                  <span style={{ fontFamily: "'Instrument Serif', 'Bodoni Moda', serif", fontStyle: 'italic', fontSize: '16px', fontWeight: 700, color: '#CCFF00', whiteSpace: 'nowrap' }}>
-                    &ldquo;How, Vaibhav?&rdquo;
-                  </span>
-                </div>
+              {/* The 3-Beat Doubt to Defiance Progression — Elevated with Darker Grotesque & Cinzel Decorative */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '16px' }}>
+                {[
+                  {
+                    num: '01',
+                    context: 'When things fell apart and experiments failed, they asked with pity:',
+                    quote: '“How, Vaibhav?”',
+                    color: '#F43F5E',
+                  },
+                  {
+                    num: '02',
+                    context: 'When I claimed a blank canvas and started designing, they asked with disbelief:',
+                    quote: '“How, Vaibhav?”',
+                    color: '#38BDF8',
+                  },
+                  {
+                    num: '03',
+                    context: 'When I took my craft dead seriously to build my personal brand, they asked with resistance:',
+                    quote: '“How, Vaibhav?”',
+                    color: '#CCFF00',
+                  },
+                ].map((beat, bIdx) => (
+                  <div
+                    key={bIdx}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      gap: '10px',
+                      flexWrap: 'wrap',
+                      padding: '4px 0',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "'Unbounded', sans-serif",
+                        fontSize: '9.5px',
+                        fontWeight: 900,
+                        color: beat.color,
+                        letterSpacing: '0.05em',
+                      }}
+                    >
+                      {beat.num}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "'Darker Grotesque', 'Bricolage Grotesque', sans-serif",
+                        fontSize: '17px',
+                        fontWeight: 700,
+                        color: '#94A3B8',
+                        letterSpacing: '0.01em',
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      {beat.context}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "'Cinzel Decorative', 'Bodoni Moda', serif",
+                        fontWeight: 700,
+                        fontSize: '17px',
+                        color: beat.color,
+                        whiteSpace: 'nowrap',
+                        letterSpacing: '0.03em',
+                        textShadow: `0 0 12px ${beat.color}60`,
+                      }}
+                    >
+                      {beat.quote}
+                    </span>
+                  </div>
+                ))}
               </div>
 
               {/* The Sovereign Revelation Quote */}
               <div
                 style={{
-                  padding: '12px 16px',
-                  background: 'rgba(255, 255, 255, 0.035)',
+                  padding: '14px 18px',
+                  background: 'rgba(255, 255, 255, 0.04)',
                   borderLeft: '3px solid #CCFF00',
-                  borderRadius: '4px 8px 8px 4px',
-                  marginBottom: '12px',
+                  borderRadius: '6px 12px 12px 6px',
+                  marginBottom: 0,
                 }}
               >
                 <p
                   style={{
-                    fontFamily: "'Fraunces', 'Bodoni Moda', Georgia, serif",
-                    fontSize: '14.5px',
-                    color: '#F1F5F9',
-                    lineHeight: 1.6,
+                    fontFamily: "'Darker Grotesque', 'Bricolage Grotesque', sans-serif",
+                    fontSize: '18px',
+                    fontWeight: 700,
+                    color: '#F8FAFC',
+                    lineHeight: 1.5,
                     margin: 0,
-                    letterSpacing: '0.01em',
+                    letterSpacing: '0.015em',
                   }}
                 >
-                  The name <strong style={{ color: '#CCFF00', fontWeight: 800, fontFamily: "'Space Grotesk', monospace" }}>HowVaibhav</strong> is not just a creative handle. It is the definitive answer to every small-minded ego that doubted ambition, and the burial of all self-doubt. It began as their question of disbelief &mdash; it became my living declaration of proof.
+                  The name{' '}
+                  <strong
+                    style={{
+                      color: '#CCFF00',
+                      fontWeight: 900,
+                      fontFamily: "'Unbounded', 'Syne', sans-serif",
+                      fontSize: '0.9em',
+                      letterSpacing: '0.04em',
+                      textShadow: '0 0 12px rgba(204, 255, 0, 0.4)',
+                    }}
+                  >
+                    HowVaibhav
+                  </strong>{' '}
+                  is not just a creative handle. It is the definitive answer to every small-minded ego that doubted ambition, and the burial of all self-doubt. It began as their question of disbelief &mdash; it became my living declaration of proof.
                 </p>
-              </div>
-
-              {/* The Resolution Lockup */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  flexWrap: 'wrap',
-                  gap: '8px',
-                  paddingTop: '6px',
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "'Rozha One', 'Noto Serif Devanagari', serif",
-                    fontSize: '14.5px',
-                    color: '#00D2FF',
-                    letterSpacing: '0.04em',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                  }}
-                >
-                  <span>सृजन ही उत्तर है</span>
-                  <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '10px' }}>//</span>
-                  <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '11.5px', fontWeight: 900, color: '#CCFF00', letterSpacing: '0.08em' }}>
-                    NO SELF-DOUBT. ONLY CRAFT. ✦
-                  </span>
-                </div>
-
-                <span
-                  style={{
-                    fontFamily: "'Instrument Serif', 'Bodoni Moda', serif",
-                    fontStyle: 'italic',
-                    fontSize: '14px',
-                    color: '#94A3B8',
-                  }}
-                >
-                  From doubt into permanence.
-                </span>
               </div>
             </div>
 
-            {/* Sarcastic / Soulful Philosophy Paragraph in Expressive Fraunces & Instrument Serif */}
+            {/* Philosophy Paragraph in Darker Grotesque + Instrument Serif */}
             <p
               style={{
-                fontFamily: "'Fraunces', 'Bodoni Moda', Georgia, serif",
-                fontSize: 'clamp(14.5px, 1.35vw, 16px)',
+                fontFamily: "'Darker Grotesque', 'Bricolage Grotesque', sans-serif",
+                fontSize: 'clamp(17px, 1.5vw, 19px)',
+                fontWeight: 700,
                 color: '#CBD5E1',
-                lineHeight: 1.7,
-                letterSpacing: '0.01em',
-                margin: '0 0 22px',
+                lineHeight: 1.55,
+                letterSpacing: '0.015em',
+                margin: 0,
+                position: 'relative',
+                zIndex: 2,
               }}
             >
               I care about the tiny details, the edge cases everyone else forgets, and shipping work that genuinely makes someone&apos;s day better.{' '}
@@ -563,7 +862,7 @@ export default function HowVaibhavStory() {
                 style={{
                   fontFamily: "'Instrument Serif', 'Bodoni Moda', Georgia, serif",
                   fontStyle: 'italic',
-                  fontSize: '1.16em',
+                  fontSize: '1.2em',
                   color: '#FF7597',
                   fontWeight: 400,
                 }}
@@ -571,63 +870,6 @@ export default function HowVaibhavStory() {
                 (Yes, I will spend hours obsessing over acoustic button micro-haptics. No, my sanity hasn&apos;t returned, but your users&apos; subconscious will thank us.)
               </span>
             </p>
-
-            {/* Tactile Competency Chips with Creative Editorial Styling */}
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-              {[
-                { num: '01', label: 'UI & Interaction Design', color: '#CCFF00' },
-                { num: '02', label: 'Prototyping & Systems', color: '#10B981' },
-                { num: '03', label: 'User Research & Edge Cases', color: '#F43F5E' },
-                { num: '04', label: 'Motion & Micro-Haptics', color: '#00D2FF' },
-              ].map((chip, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    background: `linear-gradient(135deg, ${chip.color}14 0%, rgba(255,255,255,0.02) 100%)`,
-                    border: `1px solid ${chip.color}40`,
-                    borderRadius: '8px',
-                    padding: '5px 12px',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
-                    transition: 'all 0.2s ease',
-                  }}
-                >
-                  <span
-                    style={{
-                      fontFamily: "'Space Grotesk', monospace",
-                      fontSize: '8px',
-                      fontWeight: 900,
-                      color: chip.color,
-                      opacity: 0.7,
-                    }}
-                  >
-                    {chip.num}
-                  </span>
-                  <span
-                    style={{
-                      width: '4px',
-                      height: '4px',
-                      borderRadius: '50%',
-                      background: chip.color,
-                      boxShadow: `0 0 6px ${chip.color}`,
-                    }}
-                  />
-                  <span
-                    style={{
-                      fontFamily: "'Syne', 'Space Grotesk', sans-serif",
-                      fontSize: '11px',
-                      fontWeight: 800,
-                      color: '#F8FAFC',
-                      letterSpacing: '0.04em',
-                    }}
-                  >
-                    {chip.label}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
 
@@ -637,7 +879,6 @@ export default function HowVaibhavStory() {
             position: 'relative',
             marginTop: '56px',
             paddingTop: '36px',
-            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
           }}
         >
           {/* Ambient Studio Lighting Aura */}
@@ -777,16 +1018,25 @@ export default function HowVaibhavStory() {
             </div>
           </div>
 
-          {/* ── Floating Sculptural Instruments Dock (Open, Organic & Breathable) ── */}
+          {/* ── Floating Sculptural Instruments Dock (All 10 Tools Displayed in the Same Line) ── */}
           <div
+            className="tools-dock-row"
             style={{
               position: 'relative',
               zIndex: 2,
               display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              gap: 'clamp(12px, 1.6vw, 18px)',
-              padding: '10px 0 20px',
+              flexWrap: 'nowrap',
+              justifyContent: filteredTools.length < 8 ? 'center' : 'space-between',
+              alignItems: 'center',
+              gap: 'clamp(6px, 1.1vw, 14px)',
+              width: '100%',
+              boxSizing: 'border-box',
+              padding: '16px 4px 26px',
+              overflowX: 'auto',
+              overflowY: 'visible',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch',
             }}
           >
             {filteredTools.map((tool) => {
@@ -795,6 +1045,7 @@ export default function HowVaibhavStory() {
               return (
                 <div
                   key={tool.id}
+                  className="tool-cartridge"
                   onMouseEnter={() => {
                     setHoveredTool(tool.id);
                     try { soundFX.playHover(); } catch {}
@@ -802,9 +1053,11 @@ export default function HowVaibhavStory() {
                   onMouseLeave={() => setHoveredTool(null)}
                   style={{
                     position: 'relative',
-                    width: 'clamp(100px, 9.2vw, 118px)',
-                    height: 'clamp(116px, 10.8vw, 134px)',
-                    borderRadius: '24px',
+                    flex: '1 1 0px',
+                    minWidth: 'clamp(72px, 7.8vw, 102px)',
+                    maxWidth: '116px',
+                    height: 'clamp(108px, 9.6vw, 126px)',
+                    borderRadius: 'clamp(16px, 1.6vw, 22px)',
                     background: isHov
                       ? `radial-gradient(circle at 50% 35%, ${tool.color}25 0%, rgba(18, 24, 38, 0.95) 100%)`
                       : 'linear-gradient(155deg, rgba(255, 255, 255, 0.04) 0%, rgba(10, 14, 22, 0.65) 100%)',
@@ -822,24 +1075,26 @@ export default function HowVaibhavStory() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '12px',
-                    padding: '16px 8px 12px',
+                    gap: 'clamp(6px, 0.9vw, 10px)',
+                    padding: 'clamp(10px, 1.2vw, 14px) 4px clamp(8px, 1vw, 12px)',
                     cursor: 'pointer',
                     userSelect: 'none',
+                    boxSizing: 'border-box',
+                    flexShrink: 0,
                   }}
                 >
                   {/* Diffuse Color Glow Behind Icon */}
                   <div
                     style={{
                       position: 'absolute',
-                      width: '50px',
-                      height: '50px',
-                      top: '25%',
+                      width: 'clamp(36px, 3.8vw, 48px)',
+                      height: 'clamp(36px, 3.8vw, 48px)',
+                      top: '28%',
                       left: '50%',
                       transform: 'translate(-50%, -50%)',
                       borderRadius: '50%',
                       background: tool.color,
-                      filter: 'blur(22px)',
+                      filter: 'blur(20px)',
                       opacity: isHov ? 0.45 : 0,
                       transition: 'opacity 0.3s ease',
                       pointerEvents: 'none',
@@ -852,8 +1107,8 @@ export default function HowVaibhavStory() {
                     style={{
                       position: 'relative',
                       zIndex: 1,
-                      width: '52px',
-                      height: '52px',
+                      width: 'clamp(38px, 3.8vw, 48px)',
+                      height: 'clamp(38px, 3.8vw, 48px)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -872,15 +1127,18 @@ export default function HowVaibhavStory() {
                       zIndex: 1,
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '5px',
+                      justifyContent: 'center',
+                      gap: '4px',
+                      width: '100%',
                       maxWidth: '100%',
                       padding: '0 4px',
+                      boxSizing: 'border-box',
                     }}
                   >
                     <span
                       style={{
-                        width: '4px',
-                        height: '4px',
+                        width: '3.5px',
+                        height: '3.5px',
                         borderRadius: '50%',
                         background: isHov ? tool.color : 'rgba(255, 255, 255, 0.25)',
                         boxShadow: isHov ? `0 0 6px ${tool.color}` : 'none',
@@ -891,17 +1149,18 @@ export default function HowVaibhavStory() {
                     <span
                       style={{
                         fontFamily: "'Space Grotesk', system-ui, sans-serif",
-                        fontSize: '10.5px',
+                        fontSize: 'clamp(9.5px, 0.82vw, 11px)',
                         fontWeight: 800,
                         color: isHov ? '#FFFFFF' : '#94A3B8',
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
-                        letterSpacing: '-0.01em',
+                        letterSpacing: '-0.02em',
+                        textAlign: 'center',
                         transition: 'color 0.22s ease',
                       }}
                     >
-                      {tool.name}
+                      {tool.name.replace('Adobe ', '')}
                     </span>
                   </div>
                 </div>

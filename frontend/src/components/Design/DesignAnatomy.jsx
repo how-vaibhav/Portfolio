@@ -516,12 +516,7 @@ export default function DesignAnatomy() {
         width: '100%',
         minHeight: '880px',
         overflow: 'hidden',
-        backgroundColor: '#0A0B0E',
-        backgroundImage: `
-          linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)
-        `,
-        backgroundSize: '40px 40px',
+        background: 'transparent',
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         padding: '50px 0 70px',
         color: '#FFFFFF',
@@ -774,7 +769,8 @@ export default function DesignAnatomy() {
 
 
           {/* Letterform Cluster — Sculptural Editorial Didone Letterforms with Glowing Hover Accents */}
-          <div
+          <h1
+            aria-label="HowVaibhav — Graphic Design, Brand Architecture & Creative Archive"
             style={{
               display: 'inline-flex',
               alignItems: 'baseline',
@@ -786,6 +782,8 @@ export default function DesignAnatomy() {
               letterSpacing: HERO_FONT.tracking,
               position: 'relative',
               transition: 'all 0.25s ease',
+              margin: 0,
+              padding: 0,
             }}
           >
             {LETTERS.map((item, idx) => {
@@ -845,7 +843,7 @@ export default function DesignAnatomy() {
                 </span>
               );
             })}
-          </div>
+          </h1>
         </div>
 
         {/* ─── CARD 4: Bottom Left (O - Optical Balance & Orbit) ─── */}

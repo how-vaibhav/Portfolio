@@ -555,7 +555,7 @@ export default function MixedMediaAssembly() {
         position: 'relative',
         width: '100%',
         height: '380vh',
-        background: '#07090E',
+        background: 'transparent',
         color: '#FFFFFF',
       }}
     >
@@ -574,12 +574,7 @@ export default function MixedMediaAssembly() {
           padding: isMobile ? '10px 10px 14px' : '16px 24px 18px',
           overflow: 'hidden',
           boxSizing: 'border-box',
-          backgroundImage: `
-            radial-gradient(circle at 50% 50%, rgba(204, 255, 0, 0.08) 0%, rgba(0, 210, 255, 0.04) 45%, transparent 70%),
-            linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px)
-          `,
-          backgroundSize: '100% 100%, 40px 40px, 40px 40px',
+          background: 'radial-gradient(circle at 50% 50%, rgba(204, 255, 0, 0.08) 0%, rgba(0, 210, 255, 0.04) 45%, transparent 70%)',
         }}
       >
         {/* ── 1. TOP HEADER & HUD BAR ── */}
@@ -1052,7 +1047,7 @@ export default function MixedMediaAssembly() {
                       <div style={{ position: 'relative', width: '100%', height: 'calc(100% - 28px)', overflow: 'hidden' }}>
                         <img
                           src="/assets/text_image/artwork-a.jpg"
-                          alt="Hero Mixed Media Artwork"
+                          alt="Tactile Mixed Media Collage Artwork by Vaibhav"
                           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
                         />
                         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, transparent 65%, rgba(4, 6, 9, 0.7) 100%)' }} />
@@ -1222,7 +1217,7 @@ export default function MixedMediaAssembly() {
                     >
                       <img
                         src="/assets/text_image/artwork-v.jpg"
-                        alt="Secondary Artwork Fragment"
+                        alt="Experimental Graphic Design Fragment by Vaibhav"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
                       />
                       <div style={{ position: 'absolute', top: '4px', left: '4px', background: 'rgba(0,0,0,0.75)', color: '#FFB800', fontFamily: "'Space Grotesk', monospace", fontSize: '7px', fontWeight: 900, padding: '1px 4px', borderRadius: '2px' }}>
@@ -1246,7 +1241,7 @@ export default function MixedMediaAssembly() {
                     >
                       <img
                         src="/assets/text_image/artwork-o.jpg"
-                        alt="Aperture Shard"
+                        alt="Optical Graphic Shard and Vignette by Vaibhav"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
                       />
                       <div style={{ position: 'absolute', inset: 0, border: '1px dashed rgba(255,255,255,0.6)', borderRadius: '50%' }} />
@@ -1697,7 +1692,7 @@ export default function MixedMediaAssembly() {
             <div style={{ flex: '1.2', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.15)' }}>
               <img
                 src="/assets/text_image/artwork-a.jpg"
-                alt="Full Masterwork"
+                alt="HowVaibhav Masterwork Dadaist Assemblage by Vaibhav"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
             </div>

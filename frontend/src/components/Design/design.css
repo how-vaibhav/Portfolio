@@ -28,12 +28,25 @@
   font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   position: relative;
   overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Seamless Continuous Full-Page Matrix Grid (Infinite viewport-anchored grid with zero section seams) */
+.design-page-root::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  background-color: #07080B;
   background-image: 
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   background-size: 40px 40px;
-  background-position: -1px -1px;
-  -webkit-font-smoothing: antialiased;
+  background-position: 0 0;
+  transform: translateZ(0);
 }
 
 /* ── Primary Return Switch to DEV ─────────────────────────────────────── */

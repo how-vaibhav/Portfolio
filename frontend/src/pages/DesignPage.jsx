@@ -3,7 +3,6 @@ import { useModeTransition } from '../context/ModeTransitionContext';
 import DesignAnatomy from '../components/Design/DesignAnatomy';
 import HowVaibhavStory from '../components/Design/HowVaibhavStory';
 import ArtCirclesOrbit from '../components/Design/ArtCirclesOrbit';
-import ServicesCorkboard from '../components/Design/ServicesCorkboard';
 import MixedMediaAssembly from '../components/Design/MixedMediaAssembly';
 
 import { soundFX } from '../components/Design/soundFX';
@@ -14,8 +13,7 @@ import '../components/Design/design.css';
  * - Unified obsidian black grid theme.
  * - Interactive Brand Anatomy hero section with laser filaments and specimen cards.
  * - Tactile "What's Up" / HowVaibhav Story with Washi-Tape Polaroids & Ripped Paper chips.
- * - Art Circles Dual Rotational Orbit (20 Curated Exhibits: Explanation Orbit & Design Orbit).
- * - Tactile Services & Capabilities pinboard ("What I Can Help with:").
+ * - Art Circles Dual Rotational Orbit (35 Curated Exhibits: Explanation Orbit & Design Orbit).
  * - Handcrafted artistic doodles (electric bolts, vector bezier tools, golden ratio spirals, stars).
  * - Floating dock switch at bottom-right for instant one-click return to Dev & Resume.
  */
@@ -23,29 +21,77 @@ export default function DesignPage() {
   const { transitionTo } = useModeTransition();
   const [devBtnHovered, setDevBtnHovered] = useState(false);
 
-  // Set document title
+  // Dynamic SEO metadata management for route transition
   useEffect(() => {
-    document.title = 'HowVaibhav — Graphic Design & Brand Archive 2026';
+    const prevTitle = document.title;
+    document.title = 'HowVaibhav — Graphic Design, Brand Architecture & Creative Studio';
     window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Dynamic Meta Tags for Route SEO
+    const metaDesc = document.querySelector('meta[name="description"]');
+    const prevDesc = metaDesc?.getAttribute('content') || '';
+    if (metaDesc) {
+      metaDesc.setAttribute(
+        'content',
+        'Explore the graphic design, brand architecture, and tactile editorial systems of Vaibhav (howvaibhav) — featuring the 35-plate Kala Mandal exhibit and design anatomy.'
+      );
+    }
+
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    const prevCanonical = canonicalLink?.getAttribute('href') || 'https://www.howvaibhav.in/';
+    if (canonicalLink) {
+      canonicalLink.setAttribute('href', 'https://www.howvaibhav.in/design');
+    }
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const prevOgTitle = ogTitle?.getAttribute('content') || '';
+    if (ogTitle) {
+      ogTitle.setAttribute('content', 'HowVaibhav — Graphic Design & Brand Archive');
+    }
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    const prevOgUrl = ogUrl?.getAttribute('content') || '';
+    if (ogUrl) {
+      ogUrl.setAttribute('content', 'https://www.howvaibhav.in/design');
+    }
+
     return () => {
-      document.title = 'Vaibhav Tiwari — Software Developer & CS Portfolio';
+      document.title = prevTitle || 'Vaibhav | Full-Stack Developer & Designer — howvaibhav';
+      if (metaDesc && prevDesc) metaDesc.setAttribute('content', prevDesc);
+      if (canonicalLink) canonicalLink.setAttribute('href', prevCanonical);
+      if (ogTitle && prevOgTitle) ogTitle.setAttribute('content', prevOgTitle);
+      if (ogUrl && prevOgUrl) ogUrl.setAttribute('content', prevOgUrl);
     };
   }, []);
 
   return (
     <div className="design-page-root">
       <main style={{ position: 'relative', zIndex: 10 }}>
+        {/* Semantic H1 for SEO crawlers and assistive accessibility */}
+        <h1
+          style={{
+            position: 'absolute',
+            width: '1px',
+            height: '1px',
+            padding: 0,
+            margin: '-1px',
+            overflow: 'hidden',
+            clip: 'rect(0, 0, 0, 0)',
+            whiteSpace: 'nowrap',
+            border: 0,
+          }}
+        >
+          HowVaibhav — Graphic Design, Brand Architecture & Creative Studio Portfolio
+        </h1>
+
         {/* The Anatomy of HowVaibhav — Hero Section */}
         <DesignAnatomy />
 
         {/* The "What's Up" / Story of HowVaibhav — Washi-Tape Polaroids & Torn Paper Chips */}
         <HowVaibhavStory />
 
-        {/* ART CIRCLES — Dual Orbit Rotational Showcase (20 Exhibits: Explanation & Design) */}
+        {/* ART CIRCLES — Dual Orbit Rotational Showcase (35 Exhibits: Explanation & Design) */}
         <ArtCirclesOrbit />
-
-                {/* Services & Capabilities Anti-Gravity Pinboard ("What I Can Help with:") */}
-        <ServicesCorkboard />
 
         {/* ─── KINETIC MIXED-MEDIA ART ASSEMBLY (20 TACTILE PIECES CONVERGE ON SCROLL) ─── */}
         <MixedMediaAssembly />
