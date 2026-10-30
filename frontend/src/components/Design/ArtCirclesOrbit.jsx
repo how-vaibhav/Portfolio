@@ -27,7 +27,6 @@ export default function ArtCirclesOrbit() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [targetIndex, setTargetIndex] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [modalProject, setModalProject] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
@@ -85,7 +84,6 @@ export default function ArtCirclesOrbit() {
 
   // Intelligently cycle through projects in selected category according to each design
   const filterByCategory = useCallback((cat) => {
-    setSelectedCategory(cat);
     try { soundFX.playSnap(); } catch {}
     if (cat === 'ALL') {
       goToIndex(0);

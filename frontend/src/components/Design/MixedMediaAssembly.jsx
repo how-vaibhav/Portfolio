@@ -1844,7 +1844,9 @@ export default function MixedMediaAssembly() {
                       }}
                     >
                       <img
-                        src="/assets/vaibhav-hero-cutout.png"
+                        src="/assets/vaibhav-hero-cutout.webp"
+                        loading="lazy"
+                        decoding="async"
                         alt="Vaibhav Tiwari Artist Cutout"
                         style={{
                           width: '100%',

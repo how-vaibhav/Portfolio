@@ -143,7 +143,7 @@ export default function DevHero() {
             <span style={{
               width: 7, height: 7, borderRadius: '50%',
               background: '#080808', display: 'inline-block',
-              animation: 'devPulse 1.8s ease-in-out infinite',
+              animation: 'devPulseScale 1.8s ease-in-out infinite',
             }} />
             Creative Developer
           </motion.div>

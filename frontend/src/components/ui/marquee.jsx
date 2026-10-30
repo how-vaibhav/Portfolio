@@ -1,4 +1,3 @@
-import React from 'react';
 
 // Inject keyframes globally once
 const MARQUEE_STYLE_ID = 'magicui-marquee-styles';

@@ -9,7 +9,6 @@ import {
   Doodle_PrismRefractionFan,
   Doodle_ModernistStarCluster,
   Doodle_ChromaticEyedropper,
-  Doodle_HarmonicSineWave,
 } from './DesignArtisticDoodles';
 
 /**

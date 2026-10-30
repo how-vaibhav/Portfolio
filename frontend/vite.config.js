@@ -10,9 +10,14 @@ export default defineConfig({
   server: {
     port: 5173,
   },
+  esbuild: {
+    legalComments: 'none',
+  },
   build: {
     target: 'esnext',
     cssCodeSplit: true,
+    cssMinify: true,
+    assetsInlineLimit: 4096,
     chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {

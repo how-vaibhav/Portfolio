@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { motion } from 'motion/react';
 import { useModeTransition } from '../../context/ModeTransitionContext';
 import useResponsive from './useResponsive';
 import { soundFX } from '../Design/soundFX';
