@@ -39,7 +39,7 @@ export default function ArtCirclesOrbit() {
     const handleResize = () => {
       const w = window.innerWidth;
       setWindowWidth(w);
-      setIsMobile(w < 960);
+      setIsMobile(false);
     };
     handleResize();
     window.addEventListener('resize', handleResize);

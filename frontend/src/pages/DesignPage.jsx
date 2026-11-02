@@ -21,6 +21,39 @@ export default function DesignPage() {
   const { transitionTo } = useModeTransition();
   const [devBtnHovered, setDevBtnHovered] = useState(false);
 
+  // Auto-Desktop Mode: Force Desktop Mode on mobile phones/tablets for Design Mode
+  useEffect(() => {
+    const metaViewport = document.querySelector('meta[name="viewport"]');
+    const originalViewport = 'width=device-width, initial-scale=1.0';
+
+    const applyDesktopViewport = () => {
+      if (!metaViewport) return;
+      const screenW = window.screen ? Math.min(window.screen.width, window.screen.height) : window.innerWidth;
+      if (screenW < 1200) {
+        const scale = (screenW / 1280).toFixed(4);
+        metaViewport.setAttribute(
+          'content',
+          `width=1280, initial-scale=${scale}, minimum-scale=${scale}, maximum-scale=5.0, user-scalable=yes`
+        );
+      } else {
+        metaViewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+      }
+    };
+
+    applyDesktopViewport();
+    window.addEventListener('resize', applyDesktopViewport, { passive: true });
+    window.addEventListener('orientationchange', applyDesktopViewport, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', applyDesktopViewport);
+      window.removeEventListener('orientationchange', applyDesktopViewport);
+      if (metaViewport) {
+        metaViewport.setAttribute('content', originalViewport);
+      }
+    };
+  }, []);
+
+
   // Dynamic SEO metadata management for route transition
   useEffect(() => {
     const prevTitle = document.title;

@@ -507,8 +507,8 @@ export default function MixedMediaAssembly() {
     const handleResize = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      setWindowDimensions({ w, h });
-      setIsMobile(w < 900);
+      setWindowDimensions({ w: Math.max(w, 1280), h });
+      setIsMobile(false);
     };
     handleResize();
     window.addEventListener('resize', handleResize);

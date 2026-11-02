@@ -693,19 +693,9 @@ export default function DesignAnatomy() {
         }}
       >
         <style>{`
-          @media (min-width: 960px) {
-            .anatomy-desktop-stage { display: block !important; }
-            .anatomy-mobile-grid   { display: none !important; }
-          }
-          @media (max-width: 959px) {
-            .anatomy-section-root {
-              min-height: auto !important;
-              padding: 24px 0 32px !important;
-            }
-            .anatomy-desktop-stage { display: none !important; }
-            .anatomy-mobile-grid   { display: flex !important; }
-            .anatomy-laser-svg     { display: none !important; }
-          }
+          .anatomy-desktop-stage { display: block !important; }
+          .anatomy-mobile-grid   { display: none !important; }
+          .anatomy-laser-svg     { display: block !important; }
 
           @keyframes doodleFloatSlow {
             0%, 100% { transform: translateY(0px) rotate(var(--doodle-rot, 0deg)); }
